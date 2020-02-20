@@ -57,9 +57,11 @@
 	pageContext.setAttribute("c_page", c_page);
 %>
 
-<div id="body_div">
+<div id="line_div">
+ <div id="sub_logo">
 <h2>BEST°Ô½Ã¹°</h2>	
-<div id="board_div">	
+ </div> 
+ <div id="site_div">	
 
 <table cellspacing=1 width=700 border=0>
 	<tr>

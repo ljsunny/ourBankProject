@@ -67,6 +67,24 @@
 			value="com.ourbank.app.mapper.Email_Mapper"></property>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
+	<bean id="Review_BoardMapper"
+		class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.ourbank.app.mapper.ReviewBoard_Mapper"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="Invest_BoardMapper"
+		class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.ourbank.app.mapper.InvestBoard_Mapper"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="News_BoardMapper"
+		class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.ourbank.app.mapper.NewsBoard_Mapper"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
 	<bean id="MyPage_Mapper"
 		class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface"
@@ -91,6 +109,7 @@
 			value="com.ourbank.app.mapper.AdminPage_Mapper"></property>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
+	
 	<bean id="Free_boardMapper"
 		class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="com.ourbank.app.mapper.FreeBoard_Mapper"></property>
@@ -111,4 +130,17 @@
 		<property name="mapperInterface" value="com.ourbank.app.mapper.BestBoard_Mapper"></property>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
+	<bean id="Newnotice_Mapper"
+		class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.ourbank.app.mapper.NewnoticeBoard_Mapper"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="IntroductionBoard_Mapper"
+		class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.ourbank.app.mapper.IntroductionBoard_Mapper"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
 </beans>
