@@ -26,7 +26,7 @@ primary key (idx_num) enable
  select * from tlb_free_board;
  drop sequence free_seq_idnum;
  insert into tlb_free_board (id, idx_num) values ('ex_id', 1);
- 
+
  
  /*모임방 게시판*/
  create sequence meeting_seq_idnum minvalue 1 maxvalue 9999999999 increment by 1 start with 1 ;
