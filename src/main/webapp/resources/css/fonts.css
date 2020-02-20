@@ -71,11 +71,14 @@
 		
 		.icon-login:before				  { content: "\f090"; }
 		
-		.icon-group:before				  { content: "\f0c0"; }
+		.icon-subtitle:before			  { content: "\f0c2"; }
+		
+		.icon-group:before				  { content: "\f19c"; }
 		
 		.icon-Instagram:before			  { content: "\f16d"; }
 		
-		.icon-cart:before				  { content: "\f217"; }
+		
+		.icon-list:before			  	  { content: "\f2d1"; }
 		
 		
 		
