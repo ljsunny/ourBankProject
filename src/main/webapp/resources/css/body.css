@@ -1,17 +1,29 @@
 @charset "EUC-KR";
 	
-	#body_div{
-		margin-top:60px;
-		border-bottom: 1px solid gray;
+	{
+  margin: 0;
+	}
+
 	
+	
+	#line_div
+	{
+		
+		width:84.5%; 
+		float:right;
+		border-left: 1px solid #1B3280; 
+	}
+	
+	#sub_logo
+	{
+		padding-top: 60px;
+		padding-left: 550px;
 	}
 	
 	#board_div {
  		margin-left: 350px;
  		margin-top: 40px;
- 		margin-bottom: 40px;
- 		min-height:700px;
- 		height: auto;	
+ 		
  		
  	}
  	
@@ -19,26 +31,27 @@
  		width: 100px;
  	}
  	
- 	h2
- 	{
- 		text-align: center;
- 	}
  	
  	table 
  	{
 		width: 1000px; 
 	}
-	
+
 /************************************* 관련사이트 ******************************************/
 	#site_div
 	{
 		border-top: 1px solid #1B3280;	
 		margin-top: 50px;
+		padding-left: 193px;
+		
 	}
+	
 	
 	#list_div
 	{
-		margin-left: 300px; 
+		
+		padding-right: 60px;
+
 	}
 	
 	#subtitle
@@ -92,6 +105,10 @@
 		text-decoration: none;
 	}
 /****해외****/
+	#overseas_div
+	{
+		margin-left: 400px;
+	}
 
 	.tlb_ovsite
 	{
