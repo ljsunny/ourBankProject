@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,8 +44,56 @@ public class DepositProduct_Controller {
 		model.addAttribute("boardList", boardService.selectDepositList(Integer.parseInt(currentPage), 3));
 		model.addAttribute("last_page", Integer.parseInt(currentPage) + 9);
 		model.addAttribute("all_bank", boardService.selectAllBank());
+		model.addAttribute("bank_text", "선택하시오");
 		return "/board_product/deposit/depositList";
 	}
+	
+	@RequestMapping(value = "/depositByBank.do", method = RequestMethod.GET)
+	public String depositByBank(@RequestParam("current_page") String currentPage,
+								@RequestParam("bank") String kor_co_nm ,
+								Model model) {
+		
+		logger.info("depositByBank called");
+		logger.info("bank: "+kor_co_nm);
+		int total_cnt = new Integer(boardService.nDepositProduct(kor_co_nm));
+
+		int total_page = PageNumberingManager.getInstance().getTotalPage(total_cnt, 3);
+		int first_block = PageNumberingManager.getInstance().getFirstPageInBlock(Integer.parseInt(currentPage), 10);
+		int last_block = PageNumberingManager.getInstance().getLastPageInBlock(Integer.parseInt(currentPage), 10);
+
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("totalCnt", total_cnt);// 전체 글수
+		model.addAttribute("current_page", currentPage);
+		model.addAttribute("boardList", boardService.selectDepositByBank(Integer.parseInt(currentPage), 3 ,kor_co_nm));
+		model.addAttribute("last_page", Integer.parseInt(currentPage) + 9);
+		model.addAttribute("all_bank", boardService.selectAllBank());
+		model.addAttribute("bank_text", kor_co_nm);
+		return "/board_product/deposit/depositList";
+	}
+	
+	@RequestMapping(value="/depositSearch.do", method=RequestMethod.GET)
+	public String depositSearch(
+			@RequestParam("current_page") String currentPage,
+			@RequestParam("searchStr") String searchStr,
+			Model model) {
+		logger.info("depositSearch called");
+		logger.info("bank: "+searchStr);
+		int total_cnt = new Integer(boardService.nDepositSearched(searchStr));
+
+		int total_page = PageNumberingManager.getInstance().getTotalPage(total_cnt, 3);
+		int first_block = PageNumberingManager.getInstance().getFirstPageInBlock(Integer.parseInt(currentPage), 10);
+		int last_block = PageNumberingManager.getInstance().getLastPageInBlock(Integer.parseInt(currentPage), 10);
+
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("totalCnt", total_cnt);// 전체 글수
+		model.addAttribute("current_page", currentPage);
+		model.addAttribute("boardList", boardService.selectDepositSearched(Integer.parseInt(currentPage), 3 ,searchStr));
+		model.addAttribute("last_page", Integer.parseInt(currentPage) + 9);
+		model.addAttribute("all_bank", boardService.selectAllBank());
+		
+		return "/board_product/deposit/depositList";
+	}
+								
 
 	@RequestMapping(value = "/depositContent.do", method = RequestMethod.GET)
 	public String depositContent(@RequestParam("current_page") int currentPage,

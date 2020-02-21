@@ -2,22 +2,32 @@
 /*********************************************************************************/
 /* Product                  o                                                     */
 /*********************************************************************************/
+#product_list{
+	margin:20px 0 200px 0;
+}
 #product_name {
 	font-weight: bold;
 	text-decoration: none
 }
+#product_search {
+margin:6px 170px 6px auto; 
 
+}
+#product_search select{
+	padding:11px 10px 10px 15px;
+	margin-top: 2px;
+}
+#product_search option{
+	padding:2px;
+	
+}
+#product_search input{
+	padding:10px;
+}
 #product_table {
 	padding: 20px;
 	background-color: white;
 	border-bottom: 1px
-}
-
-#product_search {
-	padding-top: 20px;
-	padding-right: 40px;
-	width: 75%;
-	text-align: center;
 }
 
 #productContent {
@@ -243,4 +253,106 @@
 
 #clicked{
 	background-color: #cecece;
+}
+
+
+#login_form{
+	position:relative;
+	margin:auto;
+	text-align:center;
+	padding: 50px;
+	border: 1px;
+	max-width: 632px;
+}
+#login_form h1{
+	padding: 10px;
+}
+
+#login_form table{
+	border:1;
+	width: 40%;
+	margin-left: auto;
+	margin-right: auto;	
+}
+
+#login_form td{
+	padding:5px;
+}
+#login_form table input{
+	padding:10px;
+	
+}
+#login_form table .submit{
+	width:100%;
+	background-color: #2A70E8;
+	color: white;
+}
+
+#signup_form{
+	margin-top: 20px;
+	
+	position:relative;
+	min-width: 1450px;
+	
+}
+#signup_form .signup_in{
+	margin-left:100px;
+}
+#signup_form h1{
+	text-align: center;	
+}
+#signup_form table{
+	border:0;
+	border-top:2px solid #2A70E8;
+	width: 40%;
+	margin: 30px auto 50px auto;
+	
+
+}
+
+#signup_form table .button{
+	width:17%;
+	background-color: #2A70E8;
+	border:none;
+	color: white;
+}
+
+#signup_form td{
+	
+	padding: 10px;
+	
+}
+#signup_form li{
+	margin: 5px;
+}
+#signup_form table input{
+	margin-right:2px;
+	padding:10px;
+	size: 50px;
+}
+
+#signup_form .big{
+	size: 70px;
+}
+
+/*아이디 체크 */
+
+#idcheck_form{
+	text-align: center;
+    margin-top: 100px;
+}
+#idcheck_form .border{
+	border-top: 1px solid #2A70E8;
+	border-bottom: 1px solid #2A70E8;
+	margin: 0px 50px 10px 50px;
+	padding-top:15px;
+}
+#idcheck_form input{
+	padding:7px;
+}
+#idcheck_form .button{
+	
+	background-color: #2A70E8;
+	border:none;
+	color: white;
 }

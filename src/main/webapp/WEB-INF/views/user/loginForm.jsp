@@ -9,6 +9,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/product.css" >
 <title>로그인</title>
 <script language="javaScript" src="resources/js/script.js" charset="EUC-KR"></script>
 </head>
@@ -25,18 +26,18 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!-- *********************** 내용 ****************************  -->
 
 
-<div align="center" style="padding: 50px;">
-<h1 style="padding: 10px;">로그인</h1>
-<form name="form" method="post" onSubmit="return blankCheck();" action="loginPro.do">
-<table border="1" cellpadding="10" width="30%">
+<div id="login_form">
+<h1 >로그인</h1>
+<form  name="form" method="post" onSubmit="return blankCheck();" action="loginPro.do">
+<table>
 	<tr>
 	<td><input name="id" size="40" maxlength="50" placeholder="아이디를 입력해주세요" ></input></td>
-	<td colspan="2" align="center" rowspan="2">
-	<input type="submit" value="로그인"  width="30px"/></td>
 	</tr>
 	<tr>
 	<td><input type="password" name="passwd" size="40" maxlength="50" placeholder="비밀번호를 입력해주세요"></input></td>
 	</tr>
+	<tr><td align="center" rowspan="2">
+	<input class="submit" type="submit" value="로그인"  width="30px"/></td></tr>
 </table>
 </form>
 <c:if test="${noinfo==true}">

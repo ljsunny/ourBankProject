@@ -62,7 +62,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 				<tr>
 					<td>전화번호</td>
 					<td><input type="text"  size="17"  name="user_phone" 
-					placeholder="전화번호" /></td>
+					placeholder="000-0000-0000" /></td>
 				</tr>
 			</table>
 		</form>

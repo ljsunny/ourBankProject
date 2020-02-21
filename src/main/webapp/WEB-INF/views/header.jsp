@@ -109,7 +109,7 @@ String uid=(String)session.getAttribute("uid");
 	            </ul>
 	          </div>
 			</li>
-			<li><a href="#" accesskey="5" title="">MyPage</a>
+			<li><a href="myPage.do" accesskey="5" title="">MyPage</a>
 		  	  <div class="sub_menu"> 
 			    <ul>
 	              <li><a href="#">개인정보관리</a></li>

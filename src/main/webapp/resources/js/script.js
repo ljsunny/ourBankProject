@@ -5,13 +5,8 @@ function idCheck(id){
 		alert("아이디를 입력해 주세요");
 	}else{
 		url="idCheck.do?id="+id;
-		window.open(url,"get","width=300,height=150");
+		window.open(url,"get","width=500,height=300");
 	}
-}
-function returnID(){
-		document.regForm.id.value=null;
-		
-		document.regForm.id.focus();
 }
 
 function findAdress(){
@@ -29,6 +24,10 @@ function inputCheck() {
 		alert("아이디를 입력해 주세요");
 		regForm.id.focus();
 		
+		return false;
+	}
+	if(document.regForm.id_check.value!=1){
+		alert("아이디 확인을 해주세요");
 		return false;
 	}
 	if(document.regForm.passwd.value==""){

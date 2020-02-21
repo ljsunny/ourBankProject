@@ -8,6 +8,7 @@
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fonts.css" >
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/product.css" >
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://kit.fontawesome.com/9bbe6ae1b4.js" crossorigin="anonymous"></script>
 <meta charset="EUC-KR">
@@ -28,8 +29,25 @@ function after_paging(page){
 	var after_page=page+1;
 	location.href="savingList.do?current_page="+after_page;
 }
-
-
+function chageLangSelect(){
+	var bankSelect = document.getElementById("pro_bank");
+    
+    // select element에서 선택된 option의 value가 저장된다.
+    var selectValue = bankSelect.options[bankSelect.selectedIndex].value;
+ 
+    // select element에서 선택된 option의 text가 저장된다.
+    var selectText = bankSelect.options[bankSelect.selectedIndex].text;
+    alert(selectValue);
+   	en_bank= encodeURIComponent(selectValue);
+    location.href="savingByBank.do?current_page="+${current_page}+"&bank="+en_bank;
+    
+}
+function searchProduct(){
+	var searchStr=document.getElementById("searchStr");
+	var selectValue = searchStr.value;
+	var en_search= encodeURIComponent(selectValue);
+	location.href="savingSearch.do?current_page="+${current_page}+"&searchStr="+en_search;
+}
 </script>
 </head>
 <body>
@@ -51,16 +69,24 @@ function after_paging(page){
 	
 <!-- *********************** 내용 ****************************  -->
 <!-- 검색 -->
+<div id="product_list">
 <table id="product_search" >
 	<tr>
-	<td align="right">
-	<select name="bank">
+	<td>
+	<select id="pro_bank" name="bank" onchange="chageLangSelect()">
+	<option label="${bank_text}" value="${bank_text}" 
+			selected="selected" style="color: #fcfcfc">
 	<c:forEach var="all_bank" items="${all_bank}">
 		<option label="${all_bank.getKor_co_nm()}" value="${all_bank.getKor_co_nm()}"></option>
 	</c:forEach>
-	</select>
-	<input type="text" >
-	<input type="button" value="찾기" width="100px"></td>
+	</select></td>
+	<td>
+		<input type="text" id="searchStr" name="searchStr"  placeholder="검색어를 입력하세요">
+	</td>
+	<td>
+		<input  type="button" value="찾기" width="100px" onclick="searchProduct();">
+	</td>
+	</tr>
 	</tr>
 </table>
 <hr width="65%">
@@ -112,7 +138,9 @@ function after_paging(page){
 		</td>
 		</tr>
 	</table>
+
 	<hr width="65%">
+	</div>
 	<!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 
 	<jsp:include page="../../footer.jsp"></jsp:include>

@@ -8,32 +8,57 @@
 <html>
 <head>
 <meta charset="EUC-KR">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/product.css" >
 <title>ID 중복체크</title>
+
 <script type="text/javascript">
 function reject(){
-	window.opener.returnID();
-	document.getElementById("id").value="";
+	opener.document.getElementById("id").value="";
+}
+function id_reCheck(){
+	var id=document.getElementById("id").value;
+	if(id==""){
+		alert("아이디를 입력해 주세요");
+	}else{
+		url="idCheck.do?id="+id;
+		location.href=url;
+	}
+}
+function useId(){
+	opener.document.getElementById("id").value=document.getElementById("changed_id").value;
+	opener.document.getElementById("id_check").value=1;
+	self.close();
 }
 </script>
 </head>
-<body>
+<body onload="reject()">
 <c:set var="check" value="${check}" />
 <c:set var="id" value="${id}"/>
 
-	<div align="center" >
-	<b>${id}</b>
+	<div id="idcheck_form" >
 	<c:choose>
 		<c:when test="${check}">
-		는 사용 가능 합니다.
+		<div>
+		<div class="border">
+			<input id="changed_id" type="hidden" value="${id}">
+			<b>${id}</b> 는 사용 가능 합니다.<p>
+			<input class="button" type="button" value="ID사용하기" onclick="useId()"><p>
+		</div>
+			<a href="#" onclick="self.close();">닫기</a>
+		</div>
 		</c:when>
 		<c:otherwise >
-		
-		는 이미 존재하는 ID 입니다.
-		
+		<div >
+		<div class="border">
+			<b>${id}</b> 는 이미 존재하는 ID 입니다.<p>
+			<sf:input id="id" path="id"  maxlength="50" placeholder="아이디를 입력해주세요"></sf:input>
+			<input class="button" type="button" value="중복확인" onclick="id_reCheck()" >
+		</div>	
+		</div>
 		</c:otherwise>
 	</c:choose>
 	<p>
-	<a href="#" onclick="self.close();">닫기</a>
+	
 </div>
 </body>
 </html>

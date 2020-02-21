@@ -39,6 +39,51 @@ public class SavingProduct_Controller {
 		return "/board_product/saving/savingList";
 	}
 	
+	
+	@RequestMapping(value = "/savingByBank.do", method = RequestMethod.GET)
+	public String depositByBank(@RequestParam("current_page") String currentPage,
+								@RequestParam("bank") String kor_co_nm ,
+								Model model) {
+		
+		logger.info("depositByBank called");
+		logger.info("bank: "+kor_co_nm);
+		int total_cnt = new Integer(boardService.nSavingProduct(kor_co_nm));
+
+		int total_page = PageNumberingManager.getInstance().getTotalPage(total_cnt, 3);
+		int first_block = PageNumberingManager.getInstance().getFirstPageInBlock(Integer.parseInt(currentPage), 10);
+		int last_block = PageNumberingManager.getInstance().getLastPageInBlock(Integer.parseInt(currentPage), 10);
+
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("totalCnt", total_cnt);// 전체 글수
+		model.addAttribute("current_page", currentPage);
+		model.addAttribute("boardList", boardService.selectSavingByBank(Integer.parseInt(currentPage), 3 ,kor_co_nm));
+		model.addAttribute("last_page", Integer.parseInt(currentPage) + 9);
+		model.addAttribute("all_bank", boardService.selectAllBank());
+		model.addAttribute("bank_text", kor_co_nm);
+		return "/board_product/saving/savingList";
+	}
+	@RequestMapping(value="/savingSearch.do", method=RequestMethod.GET)
+	public String savingSearch(
+			@RequestParam("current_page") String currentPage,
+			@RequestParam("searchStr") String searchStr,
+			Model model) {
+		logger.info("savingSearch called");
+		logger.info("bank: "+searchStr);
+		int total_cnt = new Integer(boardService.nSavingSearched(searchStr));
+
+		int total_page = PageNumberingManager.getInstance().getTotalPage(total_cnt, 3);
+		int first_block = PageNumberingManager.getInstance().getFirstPageInBlock(Integer.parseInt(currentPage), 10);
+		int last_block = PageNumberingManager.getInstance().getLastPageInBlock(Integer.parseInt(currentPage), 10);
+
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("totalCnt", total_cnt);// 전체 글수
+		model.addAttribute("current_page", currentPage);
+		model.addAttribute("boardList", boardService.selectSavingSearched(Integer.parseInt(currentPage), 3 ,searchStr));
+		model.addAttribute("last_page", Integer.parseInt(currentPage) + 9);
+		model.addAttribute("all_bank", boardService.selectAllBank());
+		
+		return "/board_product/saving/savingList";
+	}
 
 	@RequestMapping(value = "/savingContent.do", method = RequestMethod.GET)
 	public String savingContent(@RequestParam("current_page") int currentPage,

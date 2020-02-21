@@ -31,5 +31,27 @@ public SavingBoard_Bean selectSavingContent(String fin_prdt_cd) {
 	System.out.println(saving_bean.getFin_co_subm_day());
 	return saving_bean;
 }
+//리스트에서 은행별로 정렬할때(셀렉트 태그)
+public int nSavingProduct(String kor_co_nm) {
+	return boardMapper.nSavingProductBank(kor_co_nm);
+}
+public ArrayList<SavingBoard_Bean> selectSavingByBank(int page,
+														int rowPerPage, 
+														String kor_co_nm){
+	ArrayList<SavingBoard_Bean> banklist=boardMapper.selectSavingByBank(page,rowPerPage,kor_co_nm);
+	System.out.println("서비스:"+banklist.size());
+	
+	return banklist;
 
+}//검색
+public int nSavingSearched(String searchStr) {
+	return boardMapper.nSavingSearched(searchStr);
+}
+
+public ArrayList<SavingBoard_Bean> selectSavingSearched(int page, int rowPerPage, String searchStr) {
+	ArrayList<SavingBoard_Bean> searchedlist = boardMapper.selectSearched(page, rowPerPage, searchStr);
+	System.out.println("서비스:" + searchedlist.size());
+
+	return searchedlist;
+}
 }
