@@ -1,6 +1,7 @@
 package com.ourbank.app.bean;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import javax.validation.constraints.NotBlank;
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 >>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003

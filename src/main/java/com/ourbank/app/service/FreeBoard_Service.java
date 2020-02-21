@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import com.ourbank.app.mapper.FreeBoard_Mapper;
 import com.ourbank.app.bean.FreeBoard_Bean;
 =======
