@@ -51,7 +51,7 @@ public class DebateBoard_Controller {
 	//글쓰기 폼으로
 	@RequestMapping(value = "/debate_show_write_fome.do", method = RequestMethod.GET)
 	public String debate_show_write_form(DebateBoard_Bean boardBean, Model model) {
-		logger.info("debate_show_write_form called");
+		logger.info("debate_write_form called");
 		
 		int ref=0;  //그룹(원글의 글번호 참조)
 		int step=0;  //그룹내 순서
@@ -68,11 +68,11 @@ public class DebateBoard_Controller {
 		model.addAttribute("ref", ref);
 		model.addAttribute("depth", depth);
 		model.addAttribute("boardBean", new FreeBoard_Bean());
-		return "board_community/debate/debate_writeBoard";
+		return "board_community/debate/debateWriteForm";
 	}
 	
 	//글쓰기처리 + 유효성검사
-	@RequestMapping(value="/debate_DoWriteBoard.do" , method = RequestMethod.POST)
+	@RequestMapping(value="/debate_write_form.do" , method = RequestMethod.POST)
 	public String DodebateWriteBoard(@ModelAttribute("boardBean") DebateBoard_Bean boardBean, 
 			 Model model) {
 		System.out.println("-----------------------------------------");
@@ -103,7 +103,6 @@ public class DebateBoard_Controller {
 		String id = "exId";
 		boardBean.setId(id);
 		logger.info(boardBean.getId());
-		boardService.insertBoard(boardBean);
 		
 		//본글인 경우
 		if(boardBean.getRe_idx()==0) {
@@ -130,7 +129,7 @@ public class DebateBoard_Controller {
 		model.addAttribute("boardList",boardService.getList(1, 10));
 	    System.out.println("ok");
 		 
-		return "redirect:debate_listSpecificPageWork.do"; 
+		return "redirect:debateList.do"; 
 	}
 	
 	//답글
@@ -151,7 +150,8 @@ public class DebateBoard_Controller {
 		logger.info("re_idx :"+boardBean.getRe_idx());
 		logger.info("subject :"+boardBean.getSubject());
 	
-		if(boardBean.getRef()==0) {
+		//ref=0인경우 (답글그룹)
+		if(boardBean.getDepth()==0) {
 			model.addAttribute("ref", boardBean.getIdx_num());
 			String re_subject = "Re:"+boardBean.getSubject()+"_답변";
 			logger.info("subject :"+re_subject);
@@ -170,31 +170,31 @@ public class DebateBoard_Controller {
 		model.addAttribute("depth", boardBean.getDepth());
 		model.addAttribute("boardBean", new FreeBoard_Bean());
 		
-		return "board_community/debate/debate_writeBoard";
+		return "board_community/debate/debateWriteForm";
 	} 
 
 	//리스트로
-	@RequestMapping(value = "/debate_listSpecificPageWork.do", method=RequestMethod.GET)
+	@RequestMapping(value = "/debateList.do", method=RequestMethod.GET)
 	public String debate_listSpecificPageWork(
 			@RequestParam("current_page") String pageForView, Model model) {
 		System.out.println("-------------------------------");
-		logger.info("debate_listSpecificPageWork called");
+		logger.info("debateList called");
 		logger.info("current_page=["+pageForView+"]");
 		model.addAttribute("totalCnt", new Integer(boardService.getTotalCnt()));
 		model.addAttribute("current_page", pageForView);
 		model.addAttribute("boardList", boardService.getList(Integer.parseInt(pageForView),10));
 		System.out.println("-------------------------------");
 		
-		return "board_community/debate/debate_listSpecificPage";
+		return "board_community/debate/debateListSpecificPage";
 	}
 	
 	//글보기
-	@RequestMapping(value="/debate_viewWork.do", method=RequestMethod.GET)
+	@RequestMapping(value="/debateView.do", method=RequestMethod.GET)
 	public String debate_viewWork(@RequestParam("idx_num") int idx_num,
 						   @RequestParam("current_page") String current_page,
 						   @RequestParam("searchStr") String searchStr,
 						   Model model) {
-		logger.info("debate_viewWork called");
+		logger.info("debateView called");
 		logger.info("idx_num=["+idx_num+"] current_page=["+current_page+"] "
 		+ "searchStr=["+searchStr+"]");
 			
@@ -214,7 +214,7 @@ public class DebateBoard_Controller {
 		logger.info(boardData.getFilename());
 		
 			
-		return "board_community/debate/debate_viewContent";
+		return "board_community/debate/debateViewMemo";
 	}
 	
 	//파일 다운로드
@@ -235,20 +235,20 @@ public class DebateBoard_Controller {
 	    }
 	
 	//글수정 페이지
-	@RequestMapping(value="debate_listSpecificPageWork_to_update.do",method=RequestMethod.GET)
+	@RequestMapping(value="debate_show_update_form.do",method=RequestMethod.GET)
 	public String debate_showUpdateForm(@RequestParam("idx_num") int idx_num,
 								 @RequestParam("current_page") String current_page,
 								 Model model) {
-		logger.info("debate_listSpecificPageWork_to_update called");
+		logger.info("debate_show_update_form called");
 		logger.info("idx_num="+idx_num);
 		model.addAttribute("idx_num", idx_num);
 		model.addAttribute("current_page", current_page);
 		model.addAttribute("boardData", boardService.getSpecificRow(idx_num));
 		
-		return "board_community/debate/debate_viewContentForUpdate";
+		return "board_community/debate/debateViewMemoForUpdate";
 	}
 	//글수정 처리
-	@RequestMapping(value="/debate_DoUpdateBoard.do", method=RequestMethod.POST)
+	@RequestMapping(value="/debate_update.do", method=RequestMethod.POST)
 	public String debate_Update(
 			@ModelAttribute("boardBean") DebateBoard_Bean boardBean,
 			@RequestParam("idx_num") int idx_num,
@@ -292,7 +292,7 @@ public class DebateBoard_Controller {
 		model.addAttribute("boardData", boardService.getSpecificRow(idx_num));
 		model.addAttribute("filename", boardBean.getFilename());
 		
-		return "board_community/debate/debate_viewContent";
+		return "board_community/debate/debateViewMemo";
 	}
 	
 	//글 삭제
@@ -308,26 +308,26 @@ public class DebateBoard_Controller {
 		model.addAttribute("current_page", current_page);
 		model.addAttribute("boardList",boardService.getList(current_page, 10));
 		
-		return "redirect:debate_listSpecificPageWork.do";
+		return "redirect:debateList.do";
 	}
 	
 	//글검색
-	@RequestMapping(value="/debate_searchWithSubject.do", method=RequestMethod.POST)
+	@RequestMapping(value="/debatesearch.do", method=RequestMethod.POST)
 	public String searchWithSubject (@RequestParam("searchStr") String searchStr, 
 									Model model) {
 		
 		
-		return debate_listSearchedSpecificPageWork(1, searchStr,model);
+		return debate_searchedList(1, searchStr,model);
 	}
 
 	//검색한 페이지로 이동
-	@RequestMapping(value="/debate_listSearchedSpecificPageWork.do",method = RequestMethod.GET)
-	public String debate_listSearchedSpecificPageWork(
+	@RequestMapping(value="/debateSearchedList.do",method = RequestMethod.GET)
+	public String debate_searchedList(
 			@RequestParam("pageForView") int pageForView,
 			@RequestParam("searchStr") String searchStr,
 			Model model
 			) {
-		logger.info("debate_listSearchedSpecificPageWork called");
+		logger.info("debateSearchedList called");
 		logger.info("pageForView=["+pageForView+"]");
 		logger.info("searchStr=["+searchStr+"]");
 		
@@ -336,6 +336,6 @@ public class DebateBoard_Controller {
 		model.addAttribute("pageForView", pageForView);
 		model.addAttribute("searchStr", searchStr);
 
-		return "board_community/debate/debate_listSearchedPage";
+		return "board_community/debate/debateListSearchedPage";
 	}
 }

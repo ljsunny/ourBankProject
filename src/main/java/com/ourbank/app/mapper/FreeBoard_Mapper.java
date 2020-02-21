@@ -118,22 +118,26 @@ public interface FreeBoard_Mapper {
 	
 	////////////////////답변형 게시판/////////////////////////////
 	//idx_num값을 업데이트 합니다.
-	final String UPDATE_RE_WRITE="update tlb_free_board set ref=#{idx_num} where idx_num=#{idx_num}";
+	final String UPDATE_RE_WRITE=
+			"update tlb_free_board set ref=#{idx_num} where idx_num=#{idx_num}";
 	@Select(UPDATE_RE_WRITE)
 	void updateRewrite(@Param("idx_num") int idx_num);
 	
 	//가장 최근글을 가져옵니다.
-	final String RECENT_ID="select max(idx_num) from tlb_free_board";
+	final String RECENT_ID=
+			"select max(idx_num) from tlb_free_board";
 	@Select(RECENT_ID)
 	int recentID();
 
 	// 아이디로 id, ref,step,depth,subject를 출력합니다.
-	final String SELECT_STAIR_BOARD="select idx_num, ref, step, depth, subject from tlb_free_board where idx_num=#{idx_num}";
+	final String SELECT_STAIR_BOARD=
+			"select idx_num, ref, step, depth, subject from tlb_free_board where idx_num=#{idx_num}";
 	@Select(SELECT_STAIR_BOARD)
 	FreeBoard_Bean stairBoard(@Param("idx_num") int idx_num);
 	
 	//그룹 step 을 증가시키고 현재 스탭보다 큰 애들 다 +1해줍니다.
-	final String UPDATE_GROUP_STEP="update tlb_free_board set step=step+1 where ref=#{ref} and step>#{step}";
+	final String UPDATE_GROUP_STEP=
+			"update tlb_free_board set step=step+1 where ref=#{ref} and step>#{step}";
 	@Update(UPDATE_GROUP_STEP)
 	void updateGroupStep(@Param("ref") int ref, @Param("step") int step);
 	

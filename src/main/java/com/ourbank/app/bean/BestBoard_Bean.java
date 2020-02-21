@@ -12,14 +12,27 @@ public class BestBoard_Bean {
 	private int best_idx;
 	private String subject;
 	private String content;
-	
 	private String created_date;
 	private int hits;
+	private int dept;
 	private String filename;
 	private long filesize;
 	private MultipartFile file;
+	private int depth;
 	
 
+	public int getDepth() {
+		return depth;
+	}
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
+	public int getDept() {
+		return dept;
+	}
+	public void setDept(int dept) {
+		this.dept = dept;
+	}
 	public String getCategory() {
 		return category;
 	}

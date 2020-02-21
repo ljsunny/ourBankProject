@@ -17,14 +17,15 @@ public interface BestBoard_Mapper {
 	
 	//글 목록
 	final String BEST_SELECT =
-			"select * from (select category, category_num, best_idx, id, subject, content, created_date, hits, filename, " 
-					+"ceil(rownum / #{rowsPerPage}) as page " 
-					+"from ((select * from TLB_FREE_BOARD) "
-					+"union "
-					+"(select * from tlb_meeting_board) "
-					+"union "
-					+"(select * from tlb_debate_board)) where rownum <=10 and hits is not null  order by hits desc) "
-					+"where page=#{page}";
+			"select * from (select category, category_num, best_idx, id, subject, content, created_date, hits, depth, " 
+					+"filename, ceil(rownum / 10) as page from "
+					+"((select category, category_num, best_idx, id, subject, content, created_date, hits, filename, depth from review_board) union "
+					+"(select category, category_num, best_idx, id, subject, content, created_date, hits, filename, depth from tlb_free_board) union "
+					+"(select category, category_num, best_idx, id, subject, content, created_date, hits, filename, depth  from tlb_meeting_board) union " 
+					+"(select category, category_num, best_idx, id, subject, content, created_date, hits, filename, depth from tlb_debate_board) union "
+					+"(select category, category_num, best_idx, id, subject, content, created_date, hits, filename, depth from invest_board)) " 
+				+"where rownum <=20 and hits is not null and depth=0 order by hits desc) "
+				+"where page=1";
 	@Select(BEST_SELECT)
 	@Results(value = {
 			@Result(property = "category", column = "category"),
@@ -35,6 +36,7 @@ public interface BestBoard_Mapper {
 			@Result(property = "content", column = "content"),
 			@Result(property = "created_date", column = "created_date"),
 			@Result(property = "hits", column = "hits"), 
+			@Result(property = "depth", column = "depth"),
 			@Result(property = "filename", column = "filename")
 	})
 	ArrayList<BestBoard_Bean>getList(@Param("page") int page,@Param("rowsPerPage") int rowsPerPage);
@@ -59,10 +61,12 @@ public interface BestBoard_Mapper {
 	
 	//글보기-글보기에 뿌릴 bean 가져오기: + category 가져오기
 	final String SELECT_BY_ID=
-			"select category, category_num, best_idx, id, subject, content, created_date, hits, filename from ("
-					+"(select * from TLB_free_BOARD) union " 
-					+"(select * from tlb_meeting_board) union "
-					+"(select * from tlb_debate_board)) "
+			"select * from ("
+					+"(select category, category_num, best_idx, id, subject, content, created_date, hits, filename from review_board) union "
+					+"(select category, category_num, best_idx, id, subject, content, created_date, hits, filename from TLB_free_BOARD) union " 
+					+"(select category, category_num, best_idx, id, subject, content, created_date, hits, filename from tlb_meeting_board) union "
+					+"(select category, category_num, best_idx, id, subject, content, created_date, hits, filename from tlb_debate_board) union "
+					+"(select category, category_num, best_idx, id, subject, content, created_date, hits, filename from invest_board)) "
 					+"where best_idx=#{best_idx}";
 	@Select(SELECT_BY_ID)
 	//				output

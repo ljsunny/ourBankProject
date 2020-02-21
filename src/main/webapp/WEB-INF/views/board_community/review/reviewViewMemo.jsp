@@ -18,6 +18,7 @@
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fonts.css" >
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/body.css" >
 <title>review</title>
 <%
 	String searchString=(String) (pageContext.getAttribute("searchString"));
@@ -40,6 +41,10 @@ function boarddelete(){
 	location.href='reviewDeleteSpecificRow.do?idx=${idx}&current_page=${current_page}';	
 }
 
+function boardrewrite(){
+	location.href='review_show_rewrite_form.do?idx=${idx}&current_page=${current_page}';
+}
+
 function download(){
 	var param="<%=filename%>";
 	en_filename=encodeURI(param);
@@ -54,22 +59,27 @@ function download(){
 	
 <!-- *********************** 사이드 메뉴 ****************************  -->	
 	
+	   <div id="body_div">
 	<div id="side_menu">
-		<h4><a href="#">커뮤니티</a></h4>
+		<h4><a href="/app/reviewList.do?current_page=1">커뮤니티</a></h4>
 		<div id="side_div">
 			<ul id="side_submenu">
-				<li>- <a href="reviewList.do?current_page=1"> 리뷰게시판 </a></li>
-				<li>- <a href="freeList.do?current_page=1"> 자유게시판 </a></li>
-				<li>- <a href="meetList.do?current_page=1"> 모임방 </a></li>
-				<li>- <a href="debateList.do?current_page=1"> 토론방 </a></li>
-				<li>- <a href="investList.do?current_page=1"> 재테크 노하우 </a></li>
-				<li>- <a href="#"> BEST 게시물 </a></li>
+				<li>- <a href="/app/reviewList.do?current_page=1"> 리 뷰</a></li>
+				<li>- <a href="/app/freeList.do?current_page=1"> 자유게시판</a></li>
+				<li>- <a href="/app/meetingList.do?current_page=1"> 모임방</a></li>
+				<li>- <a href="/app/debateList.do?current_page=1"> 토론방</a></li>
+				<li>- <a href="/app/investList.do?current_page=1"> 제태크노하우</a></li>
+				<li>- <a href="/app/bestList.do?current_page=1"> BEST게시물</a></li>
 			</ul>
 		</div>
 	</div>
 	
 <!-- *********************** 내용 ****************************  -->	
-	
+<div id="line_div">
+	<div id="sub_logo">
+		<h2>리뷰 게시판</h2>
+    </div> 
+ <div id="site_div">	
 <table cellspacing="0" cellpadding="5" border="1" width="600"  >
 		<tr>
 			<td><b>제목</b></td>
@@ -78,14 +88,35 @@ function download(){
 			<td><c:out value="${boardData.getHits()}" /></td>
 		</tr>
 		<tr>
-			<td><b>이름</b></td>
+			<td><b>아이디</b></td>
 			<td><c:out value="${boardData.getId()}" /></td>
 			<td><b>작성일</b></td>
 			<td><c:out value="${boardData.getCreated_date()}"></c:out></td>
 		</tr>
 		<tr>
+			<td><b>은행명</b></td>
+			<td><c:out value="${boardData.getBanks()}" /></td>
+			<td><b>상품명</b></td>
+			<td><c:out value="${boardData.getRe_productname()}"></c:out></td>
+			
+		</tr>
+		<c:if test="${boardData.getDepth()==0}"> <!-- 원글이면 -->
+		<tr>
+			<td><b>만족도</b></td>
+			<td><c:out value="${boardData.getSatisfaction() }" /></td>
+		</tr>
+		</c:if>
+		
+		<tr>
 			<td><b>내용</b></td>
-			<td  colspan="3" height="400" ><c:out value="${boardData.getContent()}" /></td>
+			<td  colspan="3" height="400" >
+			<c:if test="${boardData.getDepth()==0}">
+			<c:out value="[${boardData.getReview_case()}]"/><br><br>
+			</c:if>
+			<c:if test="${boardData.getDepth()!=0}">
+			<c:out value="[${boardData.getReview_case()}_답글]"/><br><br>
+			<c:out value="${boardData.getContent()}" /></td>
+			</c:if>
 		</tr>
 		<tr>
 			<td><b>파일첨부</b></td>
@@ -101,15 +132,17 @@ function download(){
 	<td>
 		<input type="button" value="수정" onclick="javascript:boardmodify()">
 		<input type="button" value="목록" onclick="javascript:boardlist()">
-		<!-- 관리자만 작성할 수 있음 -->
-		<input type="button" value="답글" onclick="javascript:boardanswer()">
+		<input type="button" value="답글" onclick="javascript:boardrewrite()">
 		<input type="button" value="삭제" onclick="javascript:boarddelete()">
 	</td>
 	</tr>
 
 </table>
-</html>
-	
+
+</div>
+</div>
+</div>	
+
 
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 

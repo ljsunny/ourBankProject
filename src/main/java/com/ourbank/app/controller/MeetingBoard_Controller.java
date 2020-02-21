@@ -49,7 +49,7 @@ public class MeetingBoard_Controller {
 			LoggerFactory.getLogger(MeetingBoard_Controller.class); 
 	
 	//글쓰기 폼으로
-	@RequestMapping(value = "/meeting_show_write_fome.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/meeting_show_write_form.do", method = RequestMethod.GET)
 	public String meeting_show_write_form(MeetingBoard_Bean boardBean, Model model) {
 		logger.info("meeting_show_write_form called");
 		
@@ -68,15 +68,15 @@ public class MeetingBoard_Controller {
 		model.addAttribute("ref", ref);
 		model.addAttribute("depth", depth);
 		model.addAttribute("boardBean", new FreeBoard_Bean());
-		return "board_community/meeting/meeting_writeBoard";
+		return "board_community/meeting/meetingWriteForm";
 	}
 	
 	//글쓰기처리 + 유효성검사
-	@RequestMapping(value="/meeting_DoWriteBoard.do" , method = RequestMethod.POST)
+	@RequestMapping(value="/meeting_write_form.do" , method = RequestMethod.POST)
 	public String DomeetingWriteBoard(@ModelAttribute("boardBean") MeetingBoard_Bean boardBean, 
 			 Model model) {
 		System.out.println("-----------------------------------------");
-		logger.info("free_DoWriteBoard.do called");
+		logger.info("fre_write_form called");
 		
 		MultipartFile file=boardBean.getFile();
 
@@ -129,7 +129,7 @@ public class MeetingBoard_Controller {
 		model.addAttribute("boardList",boardService.getList(1, 10));
 	    System.out.println("ok");
 		 
-		return "redirect:meeting_listSpecificPageWork.do"; 
+		return "redirect:meetingList.do"; 
 	}
 	
 	//답글
@@ -151,7 +151,7 @@ public class MeetingBoard_Controller {
 		logger.info("subject :"+boardBean.getSubject());
 	
 		//ref=0인경우 (답글그룹)
-		if(boardBean.getRef()==0) {
+		if(boardBean.getDepth()==0) {
 			model.addAttribute("ref", boardBean.getIdx_num());
 			String re_subject = "Re:"+boardBean.getSubject()+"_답변";
 			logger.info("subject :"+re_subject);
@@ -170,31 +170,31 @@ public class MeetingBoard_Controller {
 		model.addAttribute("depth", boardBean.getDepth());
 		model.addAttribute("boardBean", new FreeBoard_Bean());
 		
-		return "board_community/meeting/meeting_writeBoard";
+		return "board_community/meeting/meetingWriteForm";
 	} 
 	
 	//리스트로
-	@RequestMapping(value = "/meeting_listSpecificPageWork.do", method=RequestMethod.GET)
+	@RequestMapping(value = "/meetingList.do", method=RequestMethod.GET)
 	public String meeting_listSpecificPageWork(
 			@RequestParam("current_page") String pageForView, Model model) {
 		System.out.println("-------------------------------");
-		logger.info("meeting_listSpecificPageWork called");
+		logger.info("meetingList called");
 		logger.info("current_page=["+pageForView+"]");
 		model.addAttribute("totalCnt", new Integer(boardService.getTotalCnt()));
 		model.addAttribute("current_page", pageForView);
 		model.addAttribute("boardList", boardService.getList(Integer.parseInt(pageForView),10));
 		System.out.println("-------------------------------");
 		
-		return "board_community/meeting/meeting_listSpecificPage";
+		return "board_community/meeting/meetingListSpecificPage";
 	}
 	
 	//글보기
-	@RequestMapping(value="/meeting_viewWork.do", method=RequestMethod.GET)
+	@RequestMapping(value="/meetingView.do", method=RequestMethod.GET)
 	public String meeting_viewWork(@RequestParam("idx_num") int idx_num,
 						   @RequestParam("current_page") String current_page,
 						   @RequestParam("searchStr") String searchStr,
 						   Model model) {
-		logger.info("meeting_viewWork called");
+		logger.info("meetingView.do called");
 		logger.info("idx_num=["+idx_num+"] current_page=["+current_page+"] "
 		+ "searchStr=["+searchStr+"]");
 			
@@ -214,7 +214,7 @@ public class MeetingBoard_Controller {
 		logger.info(boardData.getFilename());
 		
 			
-		return "board_community/meeting/meeting_viewContent";
+		return "board_community/meeting/meetingViewMemo";
 	}
 	
 	//파일 다운로드
@@ -236,20 +236,20 @@ public class MeetingBoard_Controller {
 	
 
 	//글수정 페이지
-	@RequestMapping(value="meeting_listSpecificPageWork_to_update.do",method=RequestMethod.GET)
+	@RequestMapping(value="meeting_show_update_form.do",method=RequestMethod.GET)
 	public String meeting_showUpdateForm(@RequestParam("idx_num") int idx_num,
 								 @RequestParam("current_page") String current_page,
 								 Model model) {
-		logger.info("meeting_listSpecificPageWork_to_update called");
+		logger.info("meeting_show_update_form called");
 		logger.info("idx_num="+idx_num);
 		model.addAttribute("idx_num", idx_num);
 		model.addAttribute("current_page", current_page);
 		model.addAttribute("boardData", boardService.getSpecificRow(idx_num));
 		
-		return "board_community/meeting/meeting_viewContentForUpdate";
+		return "board_community/meeting/meetingViewMemoForUpdate";
 	}
 	//글수정 처리
-	@RequestMapping(value="/meeting_DoUpdateBoard.do", method=RequestMethod.POST)
+	@RequestMapping(value="/meeting_update.do", method=RequestMethod.POST)
 	public String meeting_Update(
 			@ModelAttribute("boardBean") MeetingBoard_Bean boardBean,
 			@RequestParam("idx_num") int idx_num,
@@ -293,7 +293,7 @@ public class MeetingBoard_Controller {
 		model.addAttribute("boardData", boardService.getSpecificRow(idx_num));
 		model.addAttribute("filename", boardBean.getFilename());
 		
-		return "board_community/meeting/meeting_viewContent";
+		return "board_community/meeting/meetingViewMemo";
 	}
 	
 	//글 삭제
@@ -309,26 +309,26 @@ public class MeetingBoard_Controller {
 		model.addAttribute("current_page", current_page);
 		model.addAttribute("boardList",boardService.getList(current_page, 10));
 		
-		return "redirect:meeting_listSpecificPageWork.do";
+		return "redirect:meetingList.do";
 	}
 	
 	//글검색
-	@RequestMapping(value="/meeting_searchWithSubject.do", method=RequestMethod.POST)
+	@RequestMapping(value="/meetingsearch.do", method=RequestMethod.POST)
 	public String searchWithSubject (@RequestParam("searchStr") String searchStr, 
 									Model model) {
 		
 		
-		return meeting_listSearchedSpecificPageWork(1, searchStr,model);
+		return meeting_searchedList(1, searchStr,model);
 	}
 
 	//검색한 페이지로 이동
-	@RequestMapping(value="/meeting_listSearchedSpecificPageWork.do",method = RequestMethod.GET)
-	public String meeting_listSearchedSpecificPageWork(
+	@RequestMapping(value="/meetingSearchedList.do",method = RequestMethod.GET)
+	public String meeting_searchedList(
 			@RequestParam("pageForView") int pageForView,
 			@RequestParam("searchStr") String searchStr,
 			Model model
 			) {
-		logger.info("meeting_listSearchedSpecificPageWork called");
+		logger.info("meetingSearchedList called");
 		logger.info("pageForView=["+pageForView+"]");
 		logger.info("searchStr=["+searchStr+"]");
 		
@@ -337,7 +337,7 @@ public class MeetingBoard_Controller {
 		model.addAttribute("pageForView", pageForView);
 		model.addAttribute("searchStr", searchStr);
 
-		return "board_community/meeting/meeting_listSearchedPage";
+		return "board_community/meeting/meetingListSearchedPage";
 	}
 	
 }

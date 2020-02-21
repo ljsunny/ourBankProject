@@ -29,7 +29,7 @@
 %>
 <script  language="javascript">
 function boardlist(){
-		location.href='best_listSpecificPageWork.do?current_page=${current_page}';
+		location.href='bestList.do?current_page=${current_page}';
 }
 
 function download(){
@@ -42,43 +42,47 @@ function download(){
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 <jsp:include page="../../header.jsp"></jsp:include>
 <!-- *********************** 사이드 메뉴 ****************************  -->	
-	
+	   <div id="body_div">
 	<div id="side_menu">
-		<h4><a href="#">커뮤니티</a></h4>
+		<h4><a href="/app/reviewList.do?current_page=1">커뮤니티</a></h4>
 		<div id="side_div">
 			<ul id="side_submenu">
-				<li>- <a href="/app/review_listSpecificPageWork.do?current_page=1"> 리 뷰</a></li>
-				<li>- <a href="/app/free_listSpecificPageWork.do?current_page=1"> 자유게시판</a></li>
-				<li>- <a href="/app/meeting_listSpecificPageWork.do?current_page=1"> 모임방</a></li>
-				<li>- <a href="/app/debate_listSpecificPageWork.do?current_page=1"> 토론방</a></li>
-				<li>- <a href="/app/_listSpecificPageWork.do?current_page=1"> 제태크노하우</a></li>
-				<li>- <a href="/app/best_listSpecificPageWork.do?current_page=1"> BEST게시물</a></li>
+				<li>- <a href="/app/reviewList.do?current_page=1"> 리 뷰</a></li>
+				<li>- <a href="/app/freeList.do?current_page=1"> 자유게시판</a></li>
+				<li>- <a href="/app/meetingList.do?current_page=1"> 모임방</a></li>
+				<li>- <a href="/app/debateList.do?current_page=1"> 토론방</a></li>
+				<li>- <a href="/app/investList.do?current_page=1"> 제태크노하우</a></li>
+				<li>- <a href="/app/bestList.do?current_page=1"> BEST게시물</a></li>
 			</ul>
 		</div>
 	</div>
 	
 <!-- *********************** 내용 ****************************  -->	
 
-<div id="body_div">
+<div id="line_div">
+ <div id="sub_logo">
 <h2>BEST게시물</h2>	
-<div id="board_div">
+</div>
+<div id="site_div">
 
-<table cellspacing="0" cellpadding="5" border="1" width="500">
+<table cellspacing="0" cellpadding="5" border="1" width="600" >
 	
 	<tr>
-		<td><b>조회수</b></td><td><c:out value="${boardData.getHits()}"/></td>
-	</tr>
+			<td><b>제목</b></td>
+			<td><c:out value="${boardData.getSubject()}" /></td>
+			<td><b>조회수</b></td>
+			<td><c:out value="${boardData.getHits()}" /></td>
+		</tr>
+		<tr>
+			<td><b>ID</b></td>
+			<td><c:out value="${boardData.getId()}" /></td>
+			<td><b>작성일</b></td>
+			<td><c:out value="${boardData.getCreated_date()}"></c:out></td>
+		</tr>
 	<tr>
-		<td><b>작성일</b></td><td><c:out value="${boardData.getCreated_date()}"/></td>
-	</tr>
-	<tr>
-		<td><b>아이디</b></td><td><c:out value="${boardData.getId()}"/></td>
-	</tr>
-	<tr>
-		<td><b>제목</b></td><td><c:out value="[${board.getCategory()}게시판]  ${boardData.getSubject()}"/></td>
-	</tr>
-	<tr>
-		<td><b>내용</b></td><td><c:out value="${boardData.getContent()}"/></td>
+		<td><b>내용</b></td>
+		<td  colspan="3" height="400" >
+		<c:out value="${boardData.getContent()}"/></td>
 	</tr>
 	<tr>
 		<td>파일첨부</td>
@@ -96,6 +100,8 @@ function download(){
 	</tr>
 
 </table>
+</div>
+</div>
 </div>
 </div>
 

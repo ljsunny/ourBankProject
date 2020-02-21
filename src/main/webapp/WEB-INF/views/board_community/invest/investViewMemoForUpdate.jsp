@@ -7,6 +7,11 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" >
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fonts.css" >
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/body.css" >
 <script language="javascript">
 	function writeCheck(){
 		var form=document.modifyform;
@@ -35,21 +40,28 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 	
 <!-- *********************** 사이드 메뉴 ****************************  -->	
 	
+	   <div id="body_div">
 	<div id="side_menu">
-		<h4><a href="#">커뮤니티</a></h4>
+		<h4><a href="/app/reviewList.do?current_page=1">커뮤니티</a></h4>
 		<div id="side_div">
 			<ul id="side_submenu">
-				<li>- <a href="reviewList.do?current_page=1"> 리뷰게시판 </a></li>
-				<li>- <a href="freeList.do?current_page=1"> 자유게시판 </a></li>
-				<li>- <a href="meetList.do?current_page=1"> 모임방 </a></li>
-				<li>- <a href="debateList.do?current_page=1"> 토론방 </a></li>
-				<li>- <a href="investList.do?current_page=1"> 재테크 노하우 </a></li>
-				<li>- <a href="#"> BEST 게시물 </a></li>
+				<li>- <a href="/app/reviewList.do?current_page=1"> 리 뷰</a></li>
+				<li>- <a href="/app/freeList.do?current_page=1"> 자유게시판</a></li>
+				<li>- <a href="/app/meetingList.do?current_page=1"> 모임방</a></li>
+				<li>- <a href="/app/debateList.do?current_page=1"> 토론방</a></li>
+				<li>- <a href="/app/investList.do?current_page=1"> 제태크노하우</a></li>
+				<li>- <a href="/app/bestList.do?current_page=1"> BEST게시물</a></li>
 			</ul>
 		</div>
 	</div>
 	
 <!-- *********************** 내용 ****************************  -->
+
+<div id="line_div">
+ <div id="sub_logo">
+<h2>제태크 노하우</h2>	
+ </div> 
+ <div id="site_div">
 <c:url var="updateUrl" value="/invest_update.do"/>
 <sf:form modelAttribute="boardData" method="POST" action="${updateUrl}" enctype="multipart/form-data">
 	<table width="400" border="1" cellspacing="0" cellpadding="5">
@@ -62,11 +74,19 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 		</tr>
 		<tr>
 			<td><b>카테고리</b></td>
-			<td><sf:select path="category">
-				<sf:option value="signup" label="성공사례"/>
-				<sf:option value="savings" label="실패살{"/>
-				<sf:option value="etc" label="기타"/>
-			</sf:select></td>
+			<td>
+			<c:if test="${boardData.getDepth()==0}">
+					<sf:select path="invest_case">
+					<sf:option value="성공사례" label="성공사례"/>
+					<sf:option value="실패사례" label="실패사례"/>
+					<sf:option value="기타" label="기타"/>
+					</sf:select>
+				</c:if>
+				<c:if test="${boardData.getDepth()==1}">
+					[<c:out value="${boardData.getInvest_case()}" />]
+					<sf:hidden path="invest_case"/>
+				</c:if>
+			</td>
 		</tr>
 		<tr>
 			<td><b>내용</b></td>
@@ -88,7 +108,9 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 		</tr>
 	</table>
 </sf:form>
-
+</div>
+</div>
+</div>
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 
 	<jsp:include page="../../footer.jsp"></jsp:include>

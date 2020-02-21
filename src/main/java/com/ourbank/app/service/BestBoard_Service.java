@@ -20,6 +20,11 @@ public class BestBoard_Service {
 	}
 	
 	//조회수 올리기
+	//리뷰게시판
+	public void updateReviewHits(int hits, int best_idx) {
+		System.out.println("조회수 올라감");
+		this.boardMapper.updateFreeHits(hits, best_idx);
+	}
 	//자유게시판 
 	public void updateFreeHits(int hits, int best_idx) {
 		System.out.println("조회수 올라감");
@@ -35,6 +40,11 @@ public class BestBoard_Service {
 		System.out.println("조회수 올라감");
 		this.boardMapper.updateDebateHits(hits, best_idx);
 	}
+	//제테크노하우게시판 
+	public void updateInvestHits(int hits, int best_idx) {
+		System.out.println("조회수 올라감");
+		this.boardMapper.updateDebateHits(hits, best_idx);
+	}
 	
 	
 	//글보기에 뿌릴 bean
@@ -42,10 +52,7 @@ public class BestBoard_Service {
 		return this.boardMapper.getSpecificRow(best_idx);
 	}
 	
-	//글판단 카테고리 
-	//public BestBoard_Bean getCategoryNum(int category) {
-	//	return this.boardMapper.getCategoryNum(category);
-	//}
+	
 	
 	
 	

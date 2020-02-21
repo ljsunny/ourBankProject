@@ -21,17 +21,18 @@
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fonts.css" >
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/body.css" >
 <meta http-equiv="Content-Type" content="text/html" ; charset="EUC-KR">
 <title>invest</title>
 <script>
 function totallist(){
 	location.href='investList.do?current_page=1';
 }
-function signuplist(){
-	location.href='investSignUpList.do?current_page=1';
+function successlist(){
+	location.href='investSuccessList.do?current_page=1';
 }
-function savingslist(){
-	location.href='investSavingsList.do?current_page=1';
+function faillist(){
+	location.href='investFailList.do?current_page=1';
 }
 function etclist(){
 	location.href='investEtcList.do?current_page=1';
@@ -43,35 +44,41 @@ function etclist(){
 	
 <!-- *********************** 사이드 메뉴 ****************************  -->	
 	
+	   <div id="body_div">
 	<div id="side_menu">
-		<h4><a href="#">커뮤니티</a></h4>
+		<h4><a href="/app/reviewList.do?current_page=1">커뮤니티</a></h4>
 		<div id="side_div">
 			<ul id="side_submenu">
-				<li>- <a href="reviewList.do?current_page=1"> 리뷰게시판 </a></li>
-				<li>- <a href="freeList.do?current_page=1"> 자유게시판 </a></li>
-				<li>- <a href="meetList.do?current_page=1"> 모임방 </a></li>
-				<li>- <a href="debateList.do?current_page=1"> 토론방 </a></li>
-				<li>- <a href="investList.do?current_page=1"> 재테크 노하우 </a></li>
-				<li>- <a href="#"> BEST 게시물 </a></li>
+				<li>- <a href="/app/reviewList.do?current_page=1"> 리 뷰</a></li>
+				<li>- <a href="/app/freeList.do?current_page=1"> 자유게시판</a></li>
+				<li>- <a href="/app/meetingList.do?current_page=1"> 모임방</a></li>
+				<li>- <a href="/app/debateList.do?current_page=1"> 토론방</a></li>
+				<li>- <a href="/app/investList.do?current_page=1"> 제태크노하우</a></li>
+				<li>- <a href="/app/bestList.do?current_page=1"> BEST게시물</a></li>
 			</ul>
 		</div>
 	</div>
 	
 <!-- *********************** 내용 ****************************  -->
-<div>
+
 <c:set var="current_page" value="${current_page}" />
 <c:set var="total_cnt" value="${totalCnt}" />
 <%
 	int c_page = Integer.parseInt((String) (pageContext.getAttribute("current_page")));
 	pageContext.setAttribute("c_page", c_page);
 %>
+<div id="line_div">
+ <div id="sub_logo">
+<h2>제태크 노하우</h2>	
+ </div> 
+ <div id="site_div">
 <table width="700">
 	<tr>
 		<td>
 				<div style="float: left; width: 40%; padding:10px;" >
 					<button type="button" onclick="javascript:totallist()">전체</button>
-					<button type="button" onclick="javascript:signuplist()">성공사례</button>
-					<button type="button" onclick="javascript:savingslist()">실패사례</button>
+					<button type="button" onclick="javascript:successlist()">성공사례</button>
+					<button type="button" onclick="javascript:faillist()">실패사례</button>
 					<button type="button" onclick="javascript:etclist()">기타</button>
 				</div>
 				<div style="float: right; width: 50%; vertical-align: center">
@@ -154,7 +161,9 @@ function etclist(){
 	</tr>
 </table>
 <%-- </c:if> --%>
-</div>	
+</div>
+</div>
+</div>
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 
 	<jsp:include page="../../footer.jsp"></jsp:include>

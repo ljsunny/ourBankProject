@@ -8,7 +8,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@page session="false"%>
-<%@page import="com.ourbank.app.bean.FreeBoard_Bean"%>
+<%@page import="com.ourbank.app.bean.MeetingBoard_Bean"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Properties"%>
 <%@page import="java.io.IOException"%>
@@ -26,23 +26,24 @@
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/script.js"></script>
 <meta http-equiv="Content-Type" content="text/html" ; charset="EUC-KR">
-<title>자유게시판 글목록</title>
+<title>모임방게시판 글목록</title>
 </head>
 
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 <jsp:include page="../../header.jsp"></jsp:include>
 <!-- *********************** 사이드 메뉴 ****************************  -->	
 	
+<div id="body_div">
 	<div id="side_menu">
-		<h4><a href="#">커뮤니티</a></h4>
+		<h4><a href="/app/reviewList.do?current_page=1">커뮤니티</a></h4>
 		<div id="side_div">
 			<ul id="side_submenu">
-				<li>- <a href="/app/review_listSpecificPageWork.do?current_page=1"> 리 뷰</a></li>
-				<li>- <a href="/app/free_listSpecificPageWork.do?current_page=1"> 자유게시판</a></li>
-				<li>- <a href="/app/meeting_listSpecificPageWork.do?current_page=1"> 모임방</a></li>
-				<li>- <a href="/app/debate_listSpecificPageWork.do?current_page=1"> 토론방</a></li>
-				<li>- <a href="/app/_listSpecificPageWork.do?current_page=1"> 제태크노하우</a></li>
-				<li>- <a href="/app/best_listSpecificPageWork.do?current_page=1"> BEST게시물</a></li>
+				<li>- <a href="/app/reviewList.do?current_page=1"> 리 뷰</a></li>
+				<li>- <a href="/app/freeList.do?current_page=1"> 자유게시판</a></li>
+				<li>- <a href="/app/meetingList.do?current_page=1"> 모임방</a></li>
+				<li>- <a href="/app/debateList.do?current_page=1"> 토론방</a></li>
+				<li>- <a href="/app/investList.do?current_page=1"> 제태크노하우</a></li>
+				<li>- <a href="/app/bestList.do?current_page=1"> BEST게시물</a></li>
 			</ul>
 		</div>
 	</div>
@@ -54,16 +55,18 @@
 	pageContext.setAttribute("c_page", c_page);
 %>
 
-<div id="body_div">
-<h2>자유게시판</h2>	
-<div id="board_div">	
+<div id="line_div">
+	<div id="sub_logo">
+		<h2>모임방 게시판</h2>
+    </div> 
+ <div id="site_div">
 
 <table width="700">
 <tr>
 <td>
-	<form name="searchf" method=post action="free_searchWithSubject.do" id="searchf" >
+	<form name=searchf method=post action="meetingsearch.do" id="searchf">
 		<p align="right">
-			<input type="text" id="searchStr" size="40" maxlenght="50" >
+			<input type="text" id="searchStr" size="50" maxlenght="50">
 			<input type="submit" value="글찾기" id="search">
 		</p>
 	</form>
@@ -95,7 +98,7 @@
 			<td width="320">
 				<p align="center">
 					<a
-						href="free_viewWork.do?idx_num=${board.getIdx_num()}
+						href="meetingView.do?idx_num=${board.getIdx_num()}
 			&current_page=<c:out value="${current_page}"/>
 			&searchStr=None"
 						title="${board.getContent()}"> <c:out
@@ -124,7 +127,7 @@
 <table cellspacing="1" width="700" border="1">
 	<tr>
 		<td><c:forEach var="i" begin="1" end="${t_pages}">
-				<a href="free_listSpecificPageWork.do?current_page=${i}"> [ <c:if
+				<a href="meetingList.do?current_page=${i}"> [ <c:if
 						test="${i==c_page}">
 						<b>
 					</c:if> ${i} <c:if test="${i==c_page}">
@@ -137,13 +140,13 @@
 <table width="700">
 	<tr>
 		<td><input type="button" value="글쓰기"
-			onclick="window.location='free_show_write_fome.do'"></td>
+			onclick="window.location='meeting_show_write_form.do'"></td>
 		
 	</tr>
 </table>
 </div>
 </div>
-
+</div>
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 
 	<jsp:include page="../../footer.jsp"></jsp:include>

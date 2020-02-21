@@ -18,37 +18,40 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
 <script language="javascript">
 	function boardlist(){
-		location.href='/OurBank/debate_listSpecificPageWork?current_page=${current_page}';
+		location.href='/OurBank/meetingList?current_page=${current_page}';
 	}
 </script>
-<title>토론방게시판 글수정</title>
+<title>모임방게시판 글수정</title>
 </head>
 
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 <jsp:include page="../../header.jsp"></jsp:include>
 <!-- *********************** 사이드 메뉴 ****************************  -->	
 	
+<div id="body_div">
 	<div id="side_menu">
-		<h4><a href="#">커뮤니티</a></h4>
+		<h4><a href="/app/reviewList.do?current_page=1">커뮤니티</a></h4>
 		<div id="side_div">
 			<ul id="side_submenu">
-				<li>- <a href="/app/review_listSpecificPageWork.do?current_page=1"> 리 뷰</a></li>
-				<li>- <a href="/app/free_listSpecificPageWork.do?current_page=1"> 자유게시판</a></li>
-				<li>- <a href="/app/meeting_listSpecificPageWork.do?current_page=1"> 모임방</a></li>
-				<li>- <a href="/app/debate_listSpecificPageWork.do?current_page=1"> 토론방</a></li>
-				<li>- <a href="/app/_listSpecificPageWork.do?current_page=1"> 제태크노하우</a></li>
-				<li>- <a href="/app/best_listSpecificPageWork.do?current_page=1"> BEST게시물</a></li>
+				<li>- <a href="/app/reviewList.do?current_page=1"> 리 뷰</a></li>
+				<li>- <a href="/app/freeList.do?current_page=1"> 자유게시판</a></li>
+				<li>- <a href="/app/meetingList.do?current_page=1"> 모임방</a></li>
+				<li>- <a href="/app/debateList.do?current_page=1"> 토론방</a></li>
+				<li>- <a href="/app/investList.do?current_page=1"> 제태크노하우</a></li>
+				<li>- <a href="/app/bestList.do?current_page=1"> BEST게시물</a></li>
 			</ul>
 		</div>
 	</div>
 	
 <!-- *********************** 내용 ****************************  -->
 
-<div id="body_div">
-<h2>토론방게시판</h2>	
-<div id="board_div">
+<div id="line_div">
+	<div id="sub_logo">
+		<h2>모임방 게시판</h2>
+    </div> 
+ <div id="site_div">	
 
-<c:url var="updateUrl" value="/debate_DoUpdateBoard.do"/>
+<c:url var="updateUrl" value="/meeting_update.do"/>
 <sf:form modelAttribute="boardData" method="POST" action="${updateUrl}" enctype="multipart/form-data" id="form" >
 	<table class="board" width="400" border="1" cellspacing="0" cellpadding="5">
 		<input type="hidden" name="idx_num" value="${idx_num}">
@@ -89,7 +92,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 </sf:form>
 </div>
 </div>
-
+</div>
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 
 	<jsp:include page="../../footer.jsp"></jsp:include>

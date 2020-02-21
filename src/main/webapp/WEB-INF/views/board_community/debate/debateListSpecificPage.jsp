@@ -32,17 +32,17 @@
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 <jsp:include page="../../header.jsp"></jsp:include>
 <!-- *********************** 사이드 메뉴 ****************************  -->	
-	
+<div id="body_div">
 	<div id="side_menu">
-		<h4><a href="#">커뮤니티</a></h4>
+		<h4><a href="/app/reviewList.do?current_page=1">커뮤니티</a></h4>
 		<div id="side_div">
 			<ul id="side_submenu">
-				<li>- <a href="/app/review_listSpecificPageWork.do?current_page=1"> 리 뷰</a></li>
-				<li>- <a href="/app/free_listSpecificPageWork.do?current_page=1"> 자유게시판</a></li>
-				<li>- <a href="/app/meeting_listSpecificPageWork.do?current_page=1"> 모임방</a></li>
-				<li>- <a href="/app/debate_listSpecificPageWork.do?current_page=1"> 토론방</a></li>
-				<li>- <a href="/app/_listSpecificPageWork.do?current_page=1"> 제태크노하우</a></li>
-				<li>- <a href="/app/best_listSpecificPageWork.do?current_page=1"> BEST게시물</a></li>
+				<li>- <a href="/app/reviewList.do?current_page=1"> 리 뷰</a></li>
+				<li>- <a href="/app/freeList.do?current_page=1"> 자유게시판</a></li>
+				<li>- <a href="/app/meetingList.do?current_page=1"> 모임방</a></li>
+				<li>- <a href="/app/debateList.do?current_page=1"> 토론방</a></li>
+				<li>- <a href="/app/investList.do?current_page=1"> 제태크노하우</a></li>
+				<li>- <a href="/app/bestList.do?current_page=1"> BEST게시물</a></li>
 			</ul>
 		</div>
 	</div>
@@ -54,14 +54,16 @@
 	pageContext.setAttribute("c_page", c_page);
 %>
 
-<div id="body_div">
+<div id="line_div">
+ <div id="sub_logo">
 <h2>토론방게시판</h2>	
-<div id="board_div">	
+ </div> 
+ <div id="site_div">		
 
 <table width="700">
 <tr>
 <td>
-	<form name="searchf" method=post action="debate_searchWithSubject.do" id="searchf" >
+	<form name="searchf" method=post action="debatesearch..do" id="searchf" >
 		<p align="right">
 			<input type="text" id="searchStr" size="50" maxlenght="50">
 			<input type="submit" value="글찾기" id="search">
@@ -95,7 +97,7 @@
 			<td width="320">
 				<p align="center">
 					<a
-						href="debate_viewWork.do?idx_num=${board.getIdx_num()}
+						href="debateView.do?idx_num=${board.getIdx_num()}
 			&current_page=<c:out value="${current_page}"/>
 			&searchStr=None"
 						title="${board.getContent()}"> <c:out
@@ -124,7 +126,7 @@
 <table cellspacing="1" width="700" border="1">
 	<tr>
 		<td><c:forEach var="i" begin="1" end="${t_pages}">
-				<a href="debate_listSpecificPageWork.do?current_page=${i}"> [ <c:if
+				<a href="debateList.do?current_page=${i}"> [ <c:if
 						test="${i==c_page}">
 						<b>
 					</c:if> ${i} <c:if test="${i==c_page}">
@@ -143,7 +145,7 @@
 </table>
 </div>
 </div>
-
+</div>
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 
 	<jsp:include page="../../footer.jsp"></jsp:include>

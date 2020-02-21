@@ -11,6 +11,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fonts.css" >
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/body.css" >
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 
 <title>invest</title>
@@ -29,38 +30,69 @@ function boardlist(){
 	
 <!-- *********************** 사이드 메뉴 ****************************  -->	
 	
+   <div id="body_div">
 	<div id="side_menu">
-		<h4><a href="#">커뮤니티</a></h4>
+		<h4><a href="/app/reviewList.do?current_page=1">커뮤니티</a></h4>
 		<div id="side_div">
 			<ul id="side_submenu">
-				<li>- <a href="reviewList.do?current_page=1"> 리뷰게시판 </a></li>
-				<li>- <a href="freeList.do?current_page=1"> 자유게시판 </a></li>
-				<li>- <a href="meetList.do?current_page=1"> 모임방 </a></li>
-				<li>- <a href="debateList.do?current_page=1"> 토론방 </a></li>
-				<li>- <a href="investList.do?current_page=1"> 재테크 노하우 </a></li>
-				<li>- <a href="#"> BEST 게시물 </a></li>
+				<li>- <a href="/app/reviewList.do?current_page=1"> 리 뷰</a></li>
+				<li>- <a href="/app/freeList.do?current_page=1"> 자유게시판</a></li>
+				<li>- <a href="/app/meetingList.do?current_page=1"> 모임방</a></li>
+				<li>- <a href="/app/debateList.do?current_page=1"> 토론방</a></li>
+				<li>- <a href="/app/investList.do?current_page=1"> 제태크노하우</a></li>
+				<li>- <a href="/app/bestList.do?current_page=1"> BEST게시물</a></li>
 			</ul>
 		</div>
 	</div>
-	
 <!-- *********************** 내용 ****************************  -->
+
+<div id="line_div">
+ <div id="sub_logo">
+<h2>제태크 노하우</h2>	
+ </div> 
+ <div id="site_div">
+<table width="700">
 <c:url var="insertUrl" value="/invest_write_form.do" />	
-<sf:form modelAttribute="boardBean" commandName="boardBean" enctype="multipart/form-data" method="POST" action="${insertUrl}" >
+<sf:form modelAttribute="boardBean" commandName="boardBean" enctype="multipart/form-data" 
+	method="POST" action="${insertUrl}" >
+	
+	<sf:hidden path="ref" value="${ref}"/>
+	<sf:hidden path="step" value="${step}"/>
+	<sf:hidden path="depth" value="${depth}"/>
+	<sf:hidden path="re_idx" value="${re_idx}"/>
 	<sf:hidden path="idx" value="${id_x}"/>
 
 	<table width="400" border="1" cellspacing="0" cellpadding="5">
 		<tr>
 			<td><b>제목</b></td>
-			<td><sf:input path="subject" size="50" maxlength="50"  value="[재테크]"/><br /> 
+			<td><c:if test="${re_idx==0}">
+			<sf:input path="subject" size="50" maxlength="50"  value="[재테크노하우]"/><br /> 
+			</c:if>
+			<c:if test="${re_idx==1}">
+			<sf:input path="subject" size="50" maxlength="50" value="${subject }" />
+			</c:if><br />
 			<sf:errors path="subject" cssClass="error" /></td>
 		</tr>
 		<tr>
+			<th><b>아아디</b></th>
+		 <td><sf:input path="id" value="${id}" size="50" cssStyle="width:450px;"/></td>
+		</tr>
+		<tr>
+			
 			<td><b>카테고리</b></td>
-			<td><sf:select path="category">
-				<sf:option value="signup" label="성공사례"/>
-				<sf:option value="savings" label="실패사례"/>
-				<sf:option value="etc" label="기타"/>
-			</sf:select></td>
+			<td>
+				<c:if test="${re_idx==0}">
+					<sf:select path="invest_case">
+					<sf:option value="성공사례" label="성공사례"/>
+					<sf:option value="실패사례" label="실패사례"/>
+					<sf:option value="기타" label="기타"/>
+					</sf:select>
+				</c:if>
+				<c:if test="${re_idx==1}">
+					<c:out value="${invest_case}"></c:out>
+				</c:if>
+			
+			</td>
 		</tr>
 		<tr>
 			<td><b>내용</b></td>
@@ -79,7 +111,9 @@ function boardlist(){
 		</tr>
 	</table>
 </sf:form>
-	
+</div>
+</div>
+</div>	
 	
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 

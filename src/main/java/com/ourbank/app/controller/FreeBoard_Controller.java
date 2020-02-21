@@ -54,7 +54,7 @@ public class FreeBoard_Controller {
 	//글쓰기 폼으로
 	@RequestMapping(value = "/free_show_write_fome.do", method = RequestMethod.GET)
 	public String free_show_write_form(FreeBoard_Bean boardBean, Model model) {
-		logger.info("free_show_write_form called");
+		logger.info("free_write_form called");
 		
 		int ref=0;  //그룹(원글의 글번호 참조)
 		int step=0;  //그룹내 순서
@@ -71,11 +71,11 @@ public class FreeBoard_Controller {
 		model.addAttribute("ref", ref);
 		model.addAttribute("depth", depth);
 		model.addAttribute("boardBean", new FreeBoard_Bean());
-		return "board_community/free/free_writeBoard";
+		return "board_community/free/freeWriteForm";
 	}
 	
 	//글쓰기처리
-	@RequestMapping(value="/free_DoWriteBoard.do" , method = RequestMethod.POST)
+	@RequestMapping(value="/free_write_form.do" , method = RequestMethod.POST)
 	public String DofreeWriteBoard(@ModelAttribute("boardBean") FreeBoard_Bean boardBean, 
 			Model model) {
 		System.out.println("-----------------------------------------");
@@ -132,7 +132,7 @@ public class FreeBoard_Controller {
 		  model.addAttribute("current_page", "1");
 		  model.addAttribute("boardList",boardService.getList(1, 10));
 		  System.out.println("ok");
-		return "redirect:free_listSpecificPageWork.do"; 
+		return "redirect:freeList.do"; 
 	}
 	
 	//답글
@@ -156,7 +156,7 @@ public class FreeBoard_Controller {
 		
 		
 		//ref=0인경우 (답글그룹)
-		if(boardBean.getRef()==0) {
+		if(boardBean.getDepth()==0) {
 			model.addAttribute("ref", boardBean.getIdx_num());
 			String re_subject = "Re:"+boardBean.getSubject()+"_답변";
 			logger.info("subject :"+re_subject);
@@ -174,31 +174,31 @@ public class FreeBoard_Controller {
 		model.addAttribute("depth", boardBean.getDepth());
 		model.addAttribute("boardBean", new FreeBoard_Bean());
 		
-		return "board_community/free/free_writeBoard";
+		return "board_community/free/freeWriteForm";
 	} 
 	
 	//리스트로
-	@RequestMapping(value = "/free_listSpecificPageWork.do", method=RequestMethod.GET)
+	@RequestMapping(value = "/freeList.do", method=RequestMethod.GET)
 	public String free_listSpecificPageWork(
 			@RequestParam("current_page") String pageForView, Model model) {
 		System.out.println("-------------------------------");
-		logger.info("free_listSpecificPageWork called");
+		logger.info("freeList called");
 		logger.info("current_page=["+pageForView+"]");
 		model.addAttribute("totalCnt", new Integer(boardService.getTotalCnt()));
 		model.addAttribute("current_page", pageForView);
 		model.addAttribute("boardList", boardService.getList(Integer.parseInt(pageForView),10));
 		System.out.println("-------------------------------");
 		
-		return "board_community/free/free_listSpecificPage";
+		return "board_community/free/freeListSpecificPage";
 	}
 	
 	//글보기
-	@RequestMapping(value="/free_viewWork.do", method=RequestMethod.GET)
+	@RequestMapping(value="/freeView.do", method=RequestMethod.GET)
 	public String free_viewWork(@RequestParam("idx_num") int idx_num,
 						   @RequestParam("current_page") String current_page,
 						   @RequestParam("searchStr") String searchStr,
 						   Model model) {
-		logger.info("free_viewWork called");
+		logger.info("freeView called");
 		logger.info("idx_num=["+idx_num+"] current_page=["+current_page+"] "
 		+ "searchStr=["+searchStr+"]");
 			
@@ -218,7 +218,7 @@ public class FreeBoard_Controller {
 		logger.info(boardData.getFilename());
 		
 			
-		return "board_community/free/free_viewContent";
+		return "board_community/free/freeViewMemo";
 	}
 	
 	//파일 다운로드
@@ -239,20 +239,20 @@ public class FreeBoard_Controller {
 	    }
 
 	//글수정 페이지
-	@RequestMapping(value="free_listSpecificPageWork_to_update.do",method=RequestMethod.GET)
+	@RequestMapping(value="free_show_update_form.do",method=RequestMethod.GET)
 	public String free_showUpdateForm(@RequestParam("idx_num") int idx_num,
 								 @RequestParam("current_page") String current_page,
 								 Model model) {
-		logger.info("free_listSpecificPageWork_to_update called");
+		logger.info("free_show_update_form called");
 		logger.info("idx_num="+idx_num);
 		model.addAttribute("idx_num", idx_num);
 		model.addAttribute("current_page", current_page);
 		model.addAttribute("boardData", boardService.getSpecificRow(idx_num));
 		
-		return "board_community/free/free_viewContentForUpdate";
+		return "board_community/free/freeViewMemoForUpdate";
 	}
 	//글수정 처리
-	@RequestMapping(value="/free_DoUpdateBoard.do", method=RequestMethod.POST)
+	@RequestMapping(value="/free_update.do", method=RequestMethod.POST)
 	public String free_Update(
 			@ModelAttribute("boardBean")  FreeBoard_Bean boardBean,
 			@RequestParam("idx_num") int idx_num,
@@ -278,6 +278,7 @@ public class FreeBoard_Controller {
 				e.printStackTrace();
 			}
 		}
+		
 		//세션에서 얻어와야함
 		String id="exId";
 		boardBean.setId(id);
@@ -296,7 +297,7 @@ public class FreeBoard_Controller {
 		model.addAttribute("boardData", boardService.getSpecificRow(idx_num));
 		model.addAttribute("filename", boardBean.getFilename());
 		
-		return "board_community/free/free_viewContent";
+		return "board_community/free/freeViewMemo";
 	}
 	
 	//글 삭제
@@ -312,27 +313,27 @@ public class FreeBoard_Controller {
 		model.addAttribute("current_page", current_page);
 		model.addAttribute("boardList",boardService.getList(current_page, 10));
 		
-		return "redirect:free_listSpecificPageWork.do";
+		return "redirect:freeList.do";
 	}
 	
 	//글검색
-	@RequestMapping(value="/free_searchWithSubject.do", method=RequestMethod.POST)
-	public String free_searchWithSubject (@RequestParam("searchStr") String searchStr, 
+	@RequestMapping(value="/freesearch.do", method=RequestMethod.POST)
+	public String freesearch (@RequestParam("searchStr") String searchStr, 
 									Model model) {
-		logger.info("free_searchWithSubject.do called");
+		logger.info("freesearch.do called");
 		
 		
-		return free_listSearchedSpecificPageWork(1, searchStr,model);
+		return free_searchedList(1, searchStr,model);
 	}
 
 	//검색한 페이지로 이동
-	@RequestMapping(value="/free_listSearchedSpecificPageWork.do",method = RequestMethod.GET)
-	public String free_listSearchedSpecificPageWork(
+	@RequestMapping(value="/freeSearchedList.do",method = RequestMethod.GET)
+	public String free_searchedList(
 			@RequestParam("pageForView") int pageForView,
 			@RequestParam("searchStr") String searchStr,
 			Model model
 			) {
-		logger.info("free_listSearchedSpecificPageWork called");
+		logger.info("freeSearchedList called");
 		logger.info("pageForView=["+pageForView+"]");
 		logger.info("searchStr=["+searchStr+"]");
 		
@@ -341,8 +342,10 @@ public class FreeBoard_Controller {
 		model.addAttribute("pageForView", pageForView);
 		model.addAttribute("searchStr", searchStr);
 
-		return "board_community/free/free_listSearchedPage";
+		return "board_community/free/freeListSearchedPage";
 	}
+	
+	
 	
 		
 }

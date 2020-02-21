@@ -34,13 +34,13 @@
 function boardlist(){
 	var s="<%=searchString%>";
 	if(s=="None")
-		location.href='debate_listSpecificPageWork.do?current_page=${current_page}';
+		location.href='debateList.do?current_page=${current_page}';
 	else
-		location.href='debate_listSearchedSpecificPageWork.do?pageForView=${current_page}&searchStr=${searchStr}';	
+		location.href='debatesearch.do?pageForView=${current_page}&searchStr=${searchStr}';	
 }
 
 function boardmodify(){
-	location.href='debate_listSpecificPageWork_to_update.do?idx_num=${idx_num}&current_page=${current_page}';
+	location.href='debate_show_update_form.do?idx_num=${idx_num}&current_page=${current_page}';
 }
 
 function boarddelete(){
@@ -61,25 +61,28 @@ function download(){
 <jsp:include page="../../header.jsp"></jsp:include>
 <!-- *********************** 사이드 메뉴 ****************************  -->	
 	
+<div id="body_div">
 	<div id="side_menu">
-		<h4><a href="#">커뮤니티</a></h4>
+		<h4><a href="/app/reviewList.do?current_page=1">커뮤니티</a></h4>
 		<div id="side_div">
 			<ul id="side_submenu">
-				<li>- <a href="/app/review_listSpecificPageWork.do?current_page=1"> 리 뷰</a></li>
-				<li>- <a href="/app/free_listSpecificPageWork.do?current_page=1"> 자유게시판</a></li>
-				<li>- <a href="/app/meeting_listSpecificPageWork.do?current_page=1"> 모임방</a></li>
-				<li>- <a href="/app/debate_listSpecificPageWork.do?current_page=1"> 토론방</a></li>
-				<li>- <a href="/app/_listSpecificPageWork.do?current_page=1"> 제태크노하우</a></li>
-				<li>- <a href="/app/best_listSpecificPageWork.do?current_page=1"> BEST게시물</a></li>
+				<li>- <a href="/app/reviewList.do?current_page=1"> 리 뷰</a></li>
+				<li>- <a href="/app/freeList.do?current_page=1"> 자유게시판</a></li>
+				<li>- <a href="/app/meetingList.do?current_page=1"> 모임방</a></li>
+				<li>- <a href="/app/debateList.do?current_page=1"> 토론방</a></li>
+				<li>- <a href="/app/investList.do?current_page=1"> 제태크노하우</a></li>
+				<li>- <a href="/app/bestList.do?current_page=1"> BEST게시물</a></li>
 			</ul>
 		</div>
 	</div>
 	
 <!-- *********************** 내용 ****************************  -->	
 
-<div id="body_div">
+<div id="line_div">
+ <div id="sub_logo">
 <h2>토론방게시판</h2>	
-<div id="board_div">
+ </div> 
+ <div id="site_div">	
 
 <input type="hidden" value="${boardData.getFilename()}">
 <table cellspacing="0" cellpadding="5" border="1" width="500">
@@ -120,7 +123,7 @@ function download(){
 </table>
 </div>
 </div>
-
+ </div> 
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 
 	<jsp:include page="../../footer.jsp"></jsp:include>

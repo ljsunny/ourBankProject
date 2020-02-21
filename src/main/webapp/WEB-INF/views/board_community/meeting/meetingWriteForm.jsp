@@ -10,6 +10,8 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <head>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fonts.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/body.css" >
@@ -19,11 +21,15 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>모임방게시판 글쓰기</title>
 
-<style type="text/css">
+<script type="text/javascript">
  
+	 // 작성 취소
+	function boardlist(){
+		location.href='meetingList.do?current_page=1';
+	
+</script>
 
-</style>
-<c:url var="insertUrl" value="/meeting_DoWriteBoard.do" />
+<c:url var="insertUrl" value="/meeting_write_form.do" />
 </head>
 
 
@@ -31,24 +37,27 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 <jsp:include page="../../header.jsp"></jsp:include>
 <!-- *********************** 사이드 메뉴 ****************************  -->		 
+	<div id="body_div">
 	<div id="side_menu">
-		<h4><a href="#">커뮤니티</a></h4>
+		<h4><a href="/app/reviewList.do?current_page=1">커뮤니티</a></h4>
 		<div id="side_div">
 			<ul id="side_submenu">
-				<li>- <a href="/app/review_listSpecificPageWork.do?current_page=1"> 리 뷰</a></li>
-				<li>- <a href="/app/free_listSpecificPageWork.do?current_page=1"> 자유게시판</a></li>
-				<li>- <a href="/app/meeting_listSpecificPageWork.do?current_page=1"> 모임방</a></li>
-				<li>- <a href="/app/debate_listSpecificPageWork.do?current_page=1"> 토론방</a></li>
-				<li>- <a href="/app/_listSpecificPageWork.do?current_page=1"> 제태크노하우</a></li>
-				<li>- <a href="/app/best_listSpecificPageWork.do?current_page=1"> BEST게시물</a></li>
+				<li>- <a href="/app/reviewList.do?current_page=1"> 리 뷰</a></li>
+				<li>- <a href="/app/freeList.do?current_page=1"> 자유게시판</a></li>
+				<li>- <a href="/app/meetingList.do?current_page=1"> 모임방</a></li>
+				<li>- <a href="/app/debateList.do?current_page=1"> 토론방</a></li>
+				<li>- <a href="/app/investList.do?current_page=1"> 제태크노하우</a></li>
+				<li>- <a href="/app/bestList.do?current_page=1"> BEST게시물</a></li>
 			</ul>
 		</div>
 	</div>
 <!-- *********************** 내용 ****************************  -->	
 
-<div id="body_div">
-<h2>모임방 게시판</h2>
-<div id="board_div">
+<div id="line_div">
+	<div id="sub_logo">
+		<h2>모임방 게시판</h2>
+    </div> 
+ <div id="site_div">	
 
 <sf:form modelAttribute="boardBean" commandName="boardBean" id="form" 
 	method="POST" action="${insertUrl}" enctype="multipart/form-data"  >
@@ -64,7 +73,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 		<tr>
 			<th><b>제 목</b></th>
 			<td><c:if test="${re_idx==0}">
-				<sf:input path="subject" size="50" maxlength="50" id="subject"/>
+				<sf:input path="subject" size="50" maxlength="50" id="subject" value="[모임게시판]"/>
 				</c:if>
 				<c:if test="${re_idx==1}">
 				<sf:input path="subject" size="50" maxlength="50" value="${subject }" />
@@ -94,7 +103,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 </sf:form>
 </div>
 </div>
-
+</div>
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 
 	<jsp:include page="../../footer.jsp"></jsp:include>

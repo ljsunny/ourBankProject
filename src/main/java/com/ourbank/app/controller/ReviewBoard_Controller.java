@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import com.ourbank.app.bean.ReviewBoard_Bean;
 import com.ourbank.app.service.ReviewBoard_Service;
 
@@ -41,19 +40,30 @@ public class ReviewBoard_Controller {
 	public String showWriteForm(Model model) {
 		logger.info("show_write_form called!!");
 		
-		int id=0;
+		int ref=0;  //그룹(원글의 글번호 참조)
+		int step=0;  //그룹내 순서
+		int depth=0; //계층
+		int re_idx=0;
+		logger.info("ref:"+ref+" step: "+step+"depth: "+depth+" "+"re_idx: "+re_idx);
+
+		//임시로 넣어둠
+		String id = "exId";
 		
 		model.addAttribute("id", id);
+		model.addAttribute("re_idx", re_idx);
+		model.addAttribute("step", step);
+		model.addAttribute("ref", ref);
+		model.addAttribute("depth", depth);
 		model.addAttribute("boardBean", new ReviewBoard_Bean());
 		return "board_community/review/reviewWriteForm";
 		
 	}
-	//글쓰기
+	//글쓰기 처리
 	@RequestMapping(value="/review_write_form.do", method=RequestMethod.POST)
 	public String DoreviewWriteBoard(@ModelAttribute("boardBean") @Valid ReviewBoard_Bean boardBean,
 			BindingResult bindingResult,
 			Model model) {
-		System.out.println(boardBean.toString());
+		logger.info("review_write_form called!!");
 		MultipartFile file=boardBean.getFile();
 		
 		//유효성 검사
@@ -77,19 +87,45 @@ public class ReviewBoard_Controller {
 			
 			try {
 				byte[] fileData=file.getBytes();
-				FileOutputStream output=new FileOutputStream("C:\\eclipse_ourBank\\OurBank\\src\\main\\resources\\files\\"+fileName);
+				FileOutputStream output=new FileOutputStream("C:\\mystudy\\myspring\\OurBank3_1\\src\\main\\webapp\\resources\\files\\"+fileName);
 				output.write(fileData);
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		String id="admin";
+		
+		String id = "exId";
 		boardBean.setId(id);
-		logger.info(boardBean.getCategory()+" "+
+		logger.info(boardBean.getReview_case()+" "+
 					boardBean.getId()+" "+
 					boardBean.getContent()+" "+
+					boardBean.getRe_idx()+" "+
 					boardBean.getSubject());
-		boardService.insertBoard(boardBean);
+		
+		//본글인 경우
+		if(boardBean.getRe_idx()==0) {
+			boardService.insertBoard(boardBean);
+			int recent_id=boardService.recentID(); //가장최근값가져옴
+			logger.info("reid :"+recent_id);
+			boardService.updateRewrite(recent_id);
+			System.out.println("본글작성");
+		}
+		else {//답글인 경우
+			int ref=boardBean.getRef();
+			System.out.println("답글: ref :"+ref);
+			boardBean.setRef(ref); //원글의 글번호로 묶음
+			boardService.updateGroupStep(ref, boardBean.getStep());
+			boardBean.setStep(boardBean.getStep()+1);
+			boardBean.setDepth(boardBean.getDepth()+1);
+			boardBean.setRe_idx(0);
+			boardBean.setSatisfaction(boardService.Satisfaction(ref)); //답글 - 원글의 일부 값들  넣기
+			boardBean.setBanks(boardService.Banks(ref));
+			boardBean.setRe_productname(boardService.Re_productname(ref));
+			boardBean.setReview_case(boardService.ReviewCase(ref)); //원글의 항목 값
+			logger.info("Reviewcase: " + boardService.ReviewCase(ref));
+			boardService.insertBoard(boardBean);
+			System.out.println("답글작성");
+		} 
 		
 		model.addAttribute("totalCnt", new Integer(boardService.getTotalCnt()));
 		model.addAttribute("current_page", 1);
@@ -97,9 +133,59 @@ public class ReviewBoard_Controller {
 		return "redirect:reviewList.do";
 	}
 	
-	//리스트 뿌리기
+	////답글
+	@RequestMapping(value = "/review_show_rewrite_form.do", method = RequestMethod.GET)
+	public String review_show_rewrite_from(
+			@RequestParam("idx") String idx,
+			@RequestParam("current_page") String current_page, 
+			Model model) {
+		logger.info("invest_how_rewrite_form called!!");
+		
+		//해당 idx_num에 대한 정보 
+		ReviewBoard_Bean boardBean= boardService.stairBoard(Integer.parseInt(idx));
+		
+		logger.info("idx :"+boardBean.getIdx());
+		logger.info("ref :"+boardBean.getRef()); //그룹(원글의 글번호 참조)
+		logger.info("step :"+boardBean.getStep()); //그룹내부순서
+		logger.info("depth"+boardBean.getDepth()); //계층
+		boardBean.setRe_idx(1); //답글
+		logger.info("re_idx :"+boardBean.getRe_idx());
+		logger.info("subject :"+boardBean.getSubject());
+		
+		
+		//ref=0인경우 (답글그룹)  제목
+		if(boardBean.getRef()==0) {
+			logger.info("ref=0답글");
+			model.addAttribute("ref", boardBean.getIdx());
+			String re_subject = "Re:"+boardBean.getSubject()+"_답변";
+			logger.info("subject :"+re_subject);
+			model.addAttribute("subject", re_subject);
+		}
+		else {
+			logger.info("ref=1답답글");
+			model.addAttribute("ref", boardBean.getRef());
+			String re_subject = "Re:"+boardBean.getSubject();
+			logger.info("subject :"+re_subject);
+			model.addAttribute("subject", re_subject);
+			boardBean.setReview_case(boardService.ReviewCase(boardBean.getRef()));
+			model.addAttribute("review_case", boardBean.getReview_case());
+			logger.info("review_case:"+model.addAttribute("review_case", boardBean.getReview_case()));
+		}
+		
+		model.addAttribute("review_case", boardBean.getReview_case());
+		logger.info("invset :"+boardBean.getReview_case());
+		model.addAttribute("idx", idx);
+		model.addAttribute("re_idx", boardBean.getRe_idx());
+		model.addAttribute("step", boardBean.getStep());
+		model.addAttribute("depth", boardBean.getDepth());
+		model.addAttribute("boardBean", new ReviewBoard_Bean());
+		
+		return "board_community/review/reviewWriteForm";
+	} 
+	
+	//전체리뷰리스트 뿌리기
 	@RequestMapping(value="/reviewList.do", method=RequestMethod.GET)
-	public String reviewList(
+	public String investList(
 			@RequestParam("current_page") String pageForView, Model model
 			) {
 		logger.info("reviewList called !!");
@@ -114,9 +200,9 @@ public class ReviewBoard_Controller {
 			@RequestParam("current_page") String pageForView, Model model
 			) {
 		logger.info("review signup List called !!");
-		model.addAttribute("totalCnt", new Integer(boardService.getSignUpCnt()));//회원가입 글수
+		model.addAttribute("totalCnt", new Integer(boardService.getSignUpCnt()));
 		model.addAttribute("current_page",pageForView);
-		model.addAttribute("boardList", boardService.getSignUpList(Integer.parseInt(pageForView), 10)); //리스트뿌릴 ArrayList 받아와서 저장
+		model.addAttribute("boardList", boardService.getSignUpList(Integer.parseInt(pageForView), 10)); 
 		return "board_community/review/reviewListSpecificPage";
 	}
 	//적금리뷰 리스트 뿌리기
@@ -125,7 +211,7 @@ public class ReviewBoard_Controller {
 			@RequestParam("current_page") String pageForView, Model model
 			) {
 		logger.info("review saving List called !!");
-		model.addAttribute("totalCnt", new Integer(boardService.getSavingsCnt()));//회원가입 글수
+		model.addAttribute("totalCnt", new Integer(boardService.getSavingsCnt()));
 		model.addAttribute("current_page",pageForView);
 		model.addAttribute("boardList", boardService.getSavingsList(Integer.parseInt(pageForView), 10)); //리스트뿌릴 ArrayList 받아와서 저장
 		return "board_community/review/reviewListSpecificPage";
@@ -153,9 +239,9 @@ public class ReviewBoard_Controller {
 				+ "searchStr=["+searchStr+"]");
 		ReviewBoard_Bean boardData=boardService.getSpecificRow(idx);
 		logger.info(boardData.getContent());
+		//조회수 증가
 		boardService.updateHits(boardData.getHits(), boardData.getIdx());
 		model.addAttribute("hits", boardData.getHits());
-		logger.info(boardData.getCategory());
 		
 		model.addAttribute("idx", idx);
 		model.addAttribute("current_page", current_page);
