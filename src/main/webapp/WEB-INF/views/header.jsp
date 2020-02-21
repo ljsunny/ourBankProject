@@ -28,23 +28,34 @@
 		theform.submit();
 	}
 </script>
+<%
+String uid=(String)session.getAttribute("uid");
 
+%>
 <div id="logo">
 	<h1><a href="#" class="icon icon-group"><span>OurBank</span></a></h1>
 	
 	<div id="search">
 	 <ul class="member">
-			 <li><a href="#" class="icon icon-login"><span>로그인</span></a></li>
-			 <li><a href="#" class="icon icon-join"><span>회원가입</span></a></li>
-	 </ul>
+				<c:if test="${uid==null}">
+					<li><a href="loginForm.do" class="icon icon-login"><span>로그인</span></a></li>
+					<li><a href="signUp.do" class="icon icon-join"><span>회원가입</span></a></li>
+				</c:if>
+
+				<c:if test="${uid !=null}">
+					<i class="icon icon-join"></i></i> 
+					<c:out value="${uid}"></c:out>님의 방문을 환영합니다.
+					<a href="logOut.do">로그아웃</a>
+				 </c:if>
+			</ul>
 	 <ul class="contact">
 			 <li><form action="" method=post name="sform">
 		 	   <input type=text name=search size=25>
 			   <input type=button value="검 색" class="bnt_search" onclick="send(this.form);">
 			 </form></li>
-			 <li><a href="#" class="icon icon-facebook"><span>Facebook</span></a></li>
-			 <li><a href="#" class="icon icon-Instagram"><span>Instagram</span></a></li>
-			 <li><a href="#" class="icon icon-twitter"><span>Twitter</span></a></li>
+			 <li><a href="https://www.facebook.com/" class="icon icon-facebook"><span>Facebook</span></a></li>
+			 <li><a href="https://www.instagram.com/?hl=ko" class="icon icon-Instagram"><span>Instagram</span></a></li>
+			 <li><a href="https://twitter.com/?lang=ko" class="icon icon-twitter"><span>Twitter</span></a></li>
 	 </ul>
 	</div>
 </div>
@@ -61,11 +72,11 @@
 	            </ul>
 	          </div> 
 	        </li>
-			<li><a href="#" accesskey="2" title="">상품소개</a>
+			<li><a href="depositList.do?current_page=1" accesskey="2" title="">상품소개</a>
 			  <div class="sub_menu"> 
 			    <ul>
-	              <li><a href="#">예금</a></li>
-	              <li><a href="#">적금</a></li>
+	              <li><a href="depositList.do?current_page=1">예금</a></li>
+	              <li><a href="savingList.do?current_page=1">적금</a></li>
 	            </ul>
 	          </div>
 	        </li>
