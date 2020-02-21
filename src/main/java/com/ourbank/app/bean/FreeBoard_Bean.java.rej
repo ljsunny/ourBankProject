@@ -1,0 +1,15 @@
+diff a/src/main/java/com/ourbank/app/bean/FreeBoard_Bean.java b/src/main/java/com/ourbank/app/bean/FreeBoard_Bean.java	(rejected hunks)
+@@ -170,4 +170,13 @@
+ 	
+ 	
+ 
++=======
++	@Override
++	public String toString() {
++		return "FreeBoard_Bean [idx=" + idx + ", id=" + id + ", subject=" + subject + ", content=" + content
++				+ ", created_date=" + created_date + ", hits=" + hits + ", category=" + category + ", filename="
++				+ filename + ", filesize=" + filesize + ", file=" + file + "]";
++	}
++	
++>>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+ }

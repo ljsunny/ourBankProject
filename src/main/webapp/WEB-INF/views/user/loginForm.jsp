@@ -19,7 +19,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!-- *********************** 사이드 메뉴 ****************************  -->	
 	
 	<div id="side_menu">
-		<h4><a href="#">로그인</a></h4>
+		<h4><a href="loginForm.do">로그인</a></h4>
 	</div>
 	
 <!-- *********************** 내용 ****************************  -->

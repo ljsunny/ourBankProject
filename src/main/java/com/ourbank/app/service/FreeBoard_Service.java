@@ -5,19 +5,8 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 import com.ourbank.app.mapper.FreeBoard_Mapper;
 import com.ourbank.app.bean.FreeBoard_Bean;
-=======
-import com.ourbank.app.bean.FAQBoard_Bean;
-import com.ourbank.app.bean.FreeBoard_Bean;
-import com.ourbank.app.mapper.FreeBoard_Mapper;
->>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
-=======
-import com.ourbank.app.mapper.FreeBoard_Mapper;
-import com.ourbank.app.bean.FreeBoard_Bean;
->>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 
 @Component
 public class FreeBoard_Service {
@@ -26,29 +15,10 @@ public class FreeBoard_Service {
 	
 	//글입력 처리
 	public void insertBoard(FreeBoard_Bean boardBean) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 		boardMapper.insertBoard(boardBean);
 	}
 	
 	//전체글 수
-<<<<<<< HEAD
-=======
-		boardMapper.insertBoard(boardBean);	
-		};
-
-	// 조회수 올리기
-	public void updateHits(int hits, int idx) {
-		System.out.println("조회수 올라감");
-		this.boardMapper.updateHits(hits, idx);
-	}
-
-	//전체글수
->>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
-=======
->>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 	public int getTotalCnt() {
 		int nCnt=0;
 		nCnt=this.boardMapper.getTotalCnt();
@@ -56,10 +26,6 @@ public class FreeBoard_Service {
 	}
 
 	//인덱스, 제목, 작성자, 날짜, 내용, 조회수  arraylist 얻어옴
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 	public ArrayList<FreeBoard_Bean> getList(int nStartPage, int list_num) {
 		return this.boardMapper.getList(nStartPage, list_num);
 	}
@@ -86,69 +52,12 @@ public class FreeBoard_Service {
 		this.boardMapper.deleteSpecificRow(idx_num);
 	}
 	
-<<<<<<< HEAD
-=======
-	public ArrayList<FreeBoard_Bean> getList(int nStartPage, int list_num){
-		return this.boardMapper.getList(nStartPage, list_num);
-	}
-	//회원가입 글수
-	public int getSignUpCnt() {
-		int nCnt=0;
-		nCnt=this.boardMapper.getSignUpCnt();
-		return nCnt;
-	}
-	//회원가입 arraylist
-	public ArrayList<FreeBoard_Bean> getSignUpList(int nStartPage, int list_num){
-		return this.boardMapper.getSignUpList(nStartPage, list_num);
-	}
-	//예적금
-	public int getSavingsCnt() {
-		int nCnt=0;
-		nCnt=this.boardMapper.getSavingsCnt();
-		return nCnt;
-	}
-	//예적금 arraylist
-	public ArrayList<FreeBoard_Bean> getSavingsList(int nStartPage, int list_num){
-		return this.boardMapper.getSavingsList(nStartPage, list_num);
-	}
-	//기타
-	public int getEtcCnt() {
-		int nCnt=0;
-		nCnt=this.boardMapper.getEtcCnt();
-		return nCnt;
-	}
-	//기타 arraylist
-	public ArrayList<FreeBoard_Bean> getEtcList(int nStartPage, int list_num){
-		return this.boardMapper.getEtcList(nStartPage, list_num);
-	}
-	
-	//글보기에 뿌릴 bean
-	public FreeBoard_Bean getSpecificRow(int idx) {
-		return this.boardMapper.getSpecificRow(idx);//-getSpecificRow(@Param("id") String id): return id, subject, name, created_date, mail, memo, hits
-	}
-	
-	//글 수정하기
-	public void updateBoard(FreeBoard_Bean boardBean) {
-		boardMapper.updateBoard(boardBean.getIdx(), boardBean.getSubject(), 
-				boardBean.getCategory(), boardBean.getContent());
-	}
-	//글삭제하기
-	public void deleteRow(int idx) {
-		this.boardMapper.deleteSpecificRow(idx);
-	}
->>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
-=======
->>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 	//검색한 글 수
 	public int getTotalCntBySubject(String search) {
 		int nCnt=0;
 		nCnt=this.boardMapper.getTotalCntBySubject(search);
 		return nCnt;
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 	
 	//검색하기 -> ArrayList로 목록
 	public ArrayList<FreeBoard_Bean> getSearchedList(int nStartPage, int list_num, String strSearchThis){
@@ -175,14 +84,4 @@ public class FreeBoard_Service {
 	/*public FreeBoard_Bean getIdname(int idx_num) {
 		return this.boardMapper.getIdname(idx_num);*/
 	
-<<<<<<< HEAD
-=======
-	//검색하기 => ArrayList 로 목록 
-	public ArrayList<FreeBoard_Bean> getSearchedList(int nStartPage, int list_num, String strSearchThis){
-		return this.boardMapper.getSearchedList(nStartPage, list_num, strSearchThis);
-	}
-
->>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
-=======
->>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 }

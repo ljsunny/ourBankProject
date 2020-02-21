@@ -53,11 +53,11 @@
 <div id="header">
 	<div id="menu" class="container">
 		<ul>
-			<li><a href="#" accesskey="1" title="">공지사항</a>
+			<li><a href="introductionList.do?current_page=1" accesskey="1" title="">공지사항</a>
 			  <div class="sub_menu"> 
 			    <ul>
-	              <li><a href="#">사이트소개</a></li>
-	              <li><a href="#">새 소식</a></li>
+	              <li><a href="introductionList.do?current_page=1">사이트소개</a></li>
+	              <li><a href="newnoticeList.do?current_page=1">새 소식</a></li>
 	            </ul>
 	          </div> 
 	        </li>
@@ -69,28 +69,28 @@
 	            </ul>
 	          </div>
 	        </li>
-			<li><a href="#" accesskey="3" title="">커뮤니티</a>
+			<li><a href="reviewList.do?current_page=1" accesskey="3" title="">커뮤니티</a>
 			  <div class="sub_menu"> 
 				<ul id="side_submenu">
-				 <li>- <a href="/app/review_listSpecificPageWork.do?current_page=1"> 리 뷰</a></li>
+				 <li>- <a href="reviewList.do?current_page=1"> 리 뷰</a></li>
 				 <li>- <a href="/app/free_listSpecificPageWork.do?current_page=1"> 자유게시판</a></li>
 				 <li>- <a href="/app/meeting_listSpecificPageWork.do?current_page=1"> 모임방</a></li>
 				 <li>- <a href="/app/debate_listSpecificPageWork.do?current_page=1"> 토론방</a></li>
-				 <li>- <a href="/app/meeting_listSpecificPageWork.do?current_page=1"> 제태크노하우</a></li>
-				 <li>- <a href="/app/meeting_listSpecificPageWork.do?current_page=1"> BEST게시물</a></li>
+				 <li>- <a href="investList.do?current_page=1"> 제태크노하우</a></li>
+				 <li>- <a href="best_listSpecificPageWork.do?current_page=1"> BEST게시물</a></li>
 				</ul>
 	          </div>
 	        </li>
 			<li><a href="#" accesskey="4" title="">고객센터</a>
 			  <div class="sub_menu"> 
 			    <ul>
-	              <li><a href="#">자주하는 질문</a></li>
-	              <li><a href="#">QnA</a></li>
+	              <li><a href="faqList.do?current_page=1">자주하는 질문</a></li>
+	              <li><a href="qnaList.do?current_page=1">QnA</a></li>
 	              <li><a href="#">Contact-email</a></li>
 	            </ul>
 	          </div>
 	        </li>
-			<li><a href="#" accesskey="5" title="">관련사이트</a>
+			<li><a href="/app/domestic_site_show.do" accesskey="5" title="">관련사이트</a>
 			  <div class="sub_menu"> 
 			    <ul>
 	              <li><a href="/app/domestic_site_show.do">국내관련사이트</a></li>
@@ -108,11 +108,11 @@
 	            </ul>
 	          </div>
 			</li>
-			<li><a href="#" accesskey="5" title="">뉴스와정보</a>
+			<li><a href="newsList.do?current_page=1" accesskey="5" title="">뉴스와정보</a>
 			  <div class="sub_menu"> 
 			    <ul>
-	              <li><a href="#">금융회사정보</a></li>
-	              <li><a href="#">관련뉴스</a></li>
+	              <li><a href="financeCompanyList.do?current_page=1">금융회사정보</a></li>
+	              <li><a href="relatedNewsList.do?current_page=1">관련뉴스</a></li>
 	            </ul>
 	          </div>
 			</li>
