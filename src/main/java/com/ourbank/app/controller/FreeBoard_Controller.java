@@ -1,6 +1,9 @@
 package com.ourbank.app.controller;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -30,6 +33,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestHeader;
+<<<<<<< HEAD
 =======
 
 import java.io.File;
@@ -51,6 +55,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,10 +64,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import com.ourbank.app.bean.FreeBoard_Bean;
 import com.ourbank.app.service.FreeBoard_Service;
 =======
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+import com.ourbank.app.bean.FreeBoard_Bean;
+import com.ourbank.app.service.FreeBoard_Service;
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 
 import com.ourbank.app.bean.FreeBoard_Bean;
 import com.ourbank.app.service.FreeBoard_Service;
@@ -69,6 +80,9 @@ import com.ourbank.app.service.FreeBoard_Service;
 @Controller
 public class FreeBoard_Controller {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 	
 	@Autowired
 	FreeBoard_Service boardService;
@@ -113,6 +127,7 @@ public class FreeBoard_Controller {
 		if(file!=null) {
 			String fileName=file.getOriginalFilename();
 			long fileSize= file.getSize();
+<<<<<<< HEAD
 =======
 	@Autowired
 	private FreeBoard_Service boardService;
@@ -154,6 +169,8 @@ public class FreeBoard_Controller {
 			String fileName=file.getOriginalFilename();
 			long fileSize=file.getSize();
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 			boardBean.setFilename(fileName);
 			boardBean.setFilesize(fileSize);
 			logger.info(boardBean.getFilename());
@@ -162,18 +179,27 @@ public class FreeBoard_Controller {
 			try {
 				byte[] fileData=file.getBytes();
 <<<<<<< HEAD
+<<<<<<< HEAD
 				FileOutputStream output=
 						new FileOutputStream("C:\\Users\\user\\Desktop\\OurBank\\src\\main\\webapp\\resources\\files\\"+fileName);
 			
 =======
 				FileOutputStream output=new FileOutputStream("C:\\eclipse_ourBank\\OurBank\\src\\main\\resources\\files\\"+fileName);
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+				FileOutputStream output=
+						new FileOutputStream("C:\\Users\\user\\Desktop\\OurBank\\src\\main\\webapp\\resources\\files\\"+fileName);
+			
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 				output.write(fileData);
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 		
 		String id = "exId";
 		boardBean.setId(id);
@@ -328,6 +354,7 @@ public class FreeBoard_Controller {
 	public String free_Update(
 			@ModelAttribute("boardBean")  FreeBoard_Bean boardBean,
 			@RequestParam("idx_num") int idx_num,
+<<<<<<< HEAD
 =======
 		String id="admin";
 		boardBean.setId(id);
@@ -448,11 +475,14 @@ public class FreeBoard_Controller {
 			BindingResult bindingResult,
 			@RequestParam("idx") int idx,
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 			@RequestParam("current_page") String current_page,
 			Model model) {
 		System.out.println(boardBean.toString());
 		MultipartFile file=boardBean.getFile();
 		
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 		//유효성 검사
@@ -466,6 +496,8 @@ public class FreeBoard_Controller {
 		}
 		
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 		//파일 처리
 		if(file!=null) {
 			String fileName=file.getOriginalFilename();
@@ -478,16 +510,21 @@ public class FreeBoard_Controller {
 			try {
 				byte[] fileData=file.getBytes();
 <<<<<<< HEAD
+<<<<<<< HEAD
 				FileOutputStream output=new FileOutputStream("C:\\Users\\user\\Desktop\\OurBank\\src\\main\\webapp\\resources\\files\\"+fileName);
 =======
 				FileOutputStream output=new FileOutputStream("C:\\eclipse_ourBank\\OurBank\\src\\main\\resources\\files\\"+fileName);
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+				FileOutputStream output=new FileOutputStream("C:\\Users\\user\\Desktop\\OurBank\\src\\main\\webapp\\resources\\files\\"+fileName);
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 				output.write(fileData);
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		//세션에서 얻어와야함
+<<<<<<< HEAD
 <<<<<<< HEAD
 		String id="exId";
 		boardBean.setId(id);
@@ -519,6 +556,9 @@ public class FreeBoard_Controller {
 		boardService.deleteRow(idx_num);
 =======
 		String id="admin";
+=======
+		String id="exId";
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 		boardBean.setId(id);
 		logger.info(boardBean.getCategory()+" "+
 					boardBean.getId()+" "+
@@ -544,15 +584,22 @@ public class FreeBoard_Controller {
 	public String deleteSpecificRow(@RequestParam("idx") int idx,
 									@RequestParam("current_page") int current_page,
 									Model model) {
+<<<<<<< HEAD
 		logger.info("DeleteSpecificRow called!!");
 		logger.info("memo_id=["+idx+"]  current_page=["+current_page+"]");
 		boardService.deleteRow(idx);
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+		logger.info("free_DeleteSpecificRow called!!");
+		logger.info("idx_num=["+idx_num+"]  current_page=["+current_page+"]");
+		boardService.deleteRow(idx_num);
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 		//다시 페이지를 조회한다.
 		model.addAttribute("totalCnt", new Integer(boardService.getTotalCnt()));
 		model.addAttribute("current_page", current_page);
 		model.addAttribute("boardList",boardService.getList(current_page, 10));
 		
+<<<<<<< HEAD
 <<<<<<< HEAD
 		return "redirect:free_listSpecificPageWork.do";
 	}
@@ -572,6 +619,9 @@ public class FreeBoard_Controller {
 	public String free_listSearchedSpecificPageWork(
 =======
 		return "redirect:freeList.do";
+=======
+		return "redirect:free_listSpecificPageWork.do";
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 	}
 	
 	//글검색
@@ -584,18 +634,27 @@ public class FreeBoard_Controller {
 	}
 
 	//검색한 페이지로 이동
+<<<<<<< HEAD
 	@RequestMapping(value="/freeSearchedList.do",method = RequestMethod.GET)
 	public String searchedList(
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+	@RequestMapping(value="/free_listSearchedSpecificPageWork.do",method = RequestMethod.GET)
+	public String free_listSearchedSpecificPageWork(
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 			@RequestParam("pageForView") int pageForView,
 			@RequestParam("searchStr") String searchStr,
 			Model model
 			) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		logger.info("free_listSearchedSpecificPageWork called");
 =======
 		logger.info("listSearchedSpecificPageWork called");
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+		logger.info("free_listSearchedSpecificPageWork called");
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 		logger.info("pageForView=["+pageForView+"]");
 		logger.info("searchStr=["+searchStr+"]");
 		
@@ -605,13 +664,19 @@ public class FreeBoard_Controller {
 		model.addAttribute("searchStr", searchStr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 		return "board_community/free/free_listSearchedPage";
 	}
 	
 		
+<<<<<<< HEAD
 =======
 		return "board_community/free/freeListSearchedPage";
 	}
 
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 }

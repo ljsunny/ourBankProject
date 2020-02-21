@@ -1,14 +1,20 @@
 package com.ourbank.app.bean;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import javax.validation.constraints.NotBlank;
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 
 @Repository
 public class FreeBoard_Bean {
@@ -42,6 +48,7 @@ public class FreeBoard_Bean {
 	}
 	public void setCategory_num(int category_num) {
 		this.category_num = category_num;
+<<<<<<< HEAD
 =======
 @Repository
 public class FreeBoard_Bean {
@@ -72,6 +79,8 @@ public class FreeBoard_Bean {
 	public void setIdx(int idx) {
 		this.idx = idx;
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 	}
 	public String getId() {
 		return id;
@@ -80,14 +89,20 @@ public class FreeBoard_Bean {
 		this.id = id;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 	public int getIdx_num() {
 		return idx_num;
 	}
 	public void setIdx_num(int idx_num) {
 		this.idx_num = idx_num;
 	}
+<<<<<<< HEAD
 =======
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 	public String getSubject() {
 		return subject;
 	}
@@ -113,6 +128,7 @@ public class FreeBoard_Bean {
 		this.hits = hits;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	public String getCategory() {
 		return category;
@@ -121,6 +137,8 @@ public class FreeBoard_Bean {
 		this.category = category;
 	}
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 	public String getFilename() {
 		return filename;
 	}
@@ -134,6 +152,9 @@ public class FreeBoard_Bean {
 		this.filesize = filesize;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 	public MultipartFile getFile() {
 		return file;
 	}
@@ -170,6 +191,7 @@ public class FreeBoard_Bean {
 	
 	
 
+<<<<<<< HEAD
 =======
 	@Override
 	public String toString() {
@@ -179,4 +201,6 @@ public class FreeBoard_Bean {
 	}
 	
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 }

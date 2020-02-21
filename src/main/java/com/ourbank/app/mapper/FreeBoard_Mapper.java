@@ -1,6 +1,9 @@
 package com.ourbank.app.mapper;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Delete;
@@ -10,12 +13,15 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+<<<<<<< HEAD
 =======
 
 import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.*;
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 import org.springframework.stereotype.Repository;
 
 import com.ourbank.app.bean.FreeBoard_Bean;
@@ -23,6 +29,9 @@ import com.ourbank.app.bean.FreeBoard_Bean;
 @Repository
 public interface FreeBoard_Mapper {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 	
 	//글 입력 처리
 	final String INSERT=
@@ -150,6 +159,7 @@ public interface FreeBoard_Mapper {
 	
 
 
+<<<<<<< HEAD
 =======
 	//글입력처리
 		final String INSERT="insert into free_board(id_x, id, subject, created_date, category, content, filename, filesize)"
@@ -301,3 +311,5 @@ public interface FreeBoard_Mapper {
 		
 }
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003

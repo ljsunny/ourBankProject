@@ -73,26 +73,12 @@
 			value="com.ourbank.app.mapper.ReviewBoard_Mapper"></property>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
-	<bean id="Free_BoardMapper"
-		class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface"
-			value="com.ourbank.app.mapper.FreeBoard_Mapper"></property>
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
-	<bean id="Meet_BoardMapper"
-		class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface"
-			value="com.ourbank.app.mapper.MeetBoard_Mapper"></property>
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
 	<bean id="Invest_BoardMapper"
 		class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface"
 			value="com.ourbank.app.mapper.InvestBoard_Mapper"></property>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
-	
-	
 	<bean id="News_BoardMapper"
 		class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface"
@@ -124,6 +110,10 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 	<bean id="Free_boardMapper"
 		class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="com.ourbank.app.mapper.FreeBoard_Mapper"></property>
@@ -142,6 +132,7 @@
 	<bean id="Best_boardMapper"
 		class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="com.ourbank.app.mapper.BestBoard_Mapper"></property>
+<<<<<<< HEAD
 =======
 	<bean id="Introduction_Mapper"
 		class="org.mybatis.spring.mapper.MapperFactoryBean">
@@ -154,6 +145,21 @@
 		<property name="mapperInterface"
 			value="com.ourbank.app.mapper.NewnoticeBoard_Mapper"></property>
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
+	<bean id="Newnotice_Mapper"
+		class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.ourbank.app.mapper.NewnoticeBoard_Mapper"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="IntroductionBoard_Mapper"
+		class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.ourbank.app.mapper.IntroductionBoard_Mapper"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
 </beans>

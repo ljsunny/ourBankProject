@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import com.ourbank.app.mapper.FreeBoard_Mapper;
 import com.ourbank.app.bean.FreeBoard_Bean;
 =======
@@ -13,6 +14,10 @@ import com.ourbank.app.bean.FAQBoard_Bean;
 import com.ourbank.app.bean.FreeBoard_Bean;
 import com.ourbank.app.mapper.FreeBoard_Mapper;
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+import com.ourbank.app.mapper.FreeBoard_Mapper;
+import com.ourbank.app.bean.FreeBoard_Bean;
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 
 @Component
 public class FreeBoard_Service {
@@ -22,10 +27,14 @@ public class FreeBoard_Service {
 	//글입력 처리
 	public void insertBoard(FreeBoard_Bean boardBean) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 		boardMapper.insertBoard(boardBean);
 	}
 	
 	//전체글 수
+<<<<<<< HEAD
 =======
 		boardMapper.insertBoard(boardBean);	
 		};
@@ -38,6 +47,8 @@ public class FreeBoard_Service {
 
 	//전체글수
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 	public int getTotalCnt() {
 		int nCnt=0;
 		nCnt=this.boardMapper.getTotalCnt();
@@ -46,6 +57,9 @@ public class FreeBoard_Service {
 
 	//인덱스, 제목, 작성자, 날짜, 내용, 조회수  arraylist 얻어옴
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 	public ArrayList<FreeBoard_Bean> getList(int nStartPage, int list_num) {
 		return this.boardMapper.getList(nStartPage, list_num);
 	}
@@ -72,6 +86,7 @@ public class FreeBoard_Service {
 		this.boardMapper.deleteSpecificRow(idx_num);
 	}
 	
+<<<<<<< HEAD
 =======
 	public ArrayList<FreeBoard_Bean> getList(int nStartPage, int list_num){
 		return this.boardMapper.getList(nStartPage, list_num);
@@ -122,6 +137,8 @@ public class FreeBoard_Service {
 		this.boardMapper.deleteSpecificRow(idx);
 	}
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 	//검색한 글 수
 	public int getTotalCntBySubject(String search) {
 		int nCnt=0;
@@ -129,6 +146,9 @@ public class FreeBoard_Service {
 		return nCnt;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 	
 	//검색하기 -> ArrayList로 목록
 	public ArrayList<FreeBoard_Bean> getSearchedList(int nStartPage, int list_num, String strSearchThis){
@@ -155,6 +175,7 @@ public class FreeBoard_Service {
 	/*public FreeBoard_Bean getIdname(int idx_num) {
 		return this.boardMapper.getIdname(idx_num);*/
 	
+<<<<<<< HEAD
 =======
 	//검색하기 => ArrayList 로 목록 
 	public ArrayList<FreeBoard_Bean> getSearchedList(int nStartPage, int list_num, String strSearchThis){
@@ -162,4 +183,6 @@ public class FreeBoard_Service {
 	}
 
 >>>>>>> f468c823fb38f81388f1f0cd521a2d8766679c8d
+=======
+>>>>>>> 029abcd43ddfc8ce09fdf531da8e2117ef4a1003
 }
