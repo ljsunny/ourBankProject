@@ -8,6 +8,14 @@ public class UserBoard_Bean {
 	String user_email;
 	String user_phone;
 	String user_address;
+	String salt;
+	
+	public String getSalt() {
+		return salt;
+	}
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
 	public String getId() {
 		return id;
 	}

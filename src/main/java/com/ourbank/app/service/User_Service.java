@@ -23,7 +23,9 @@ public class User_Service {
 		}
 		return true;//아이디가 존재하지 않을 경우
 	}
-	
+	public String selectSort(String id) {
+		return boardmapper.selectSort(id);
+	}
 	public boolean CheckIDandPassword(String id, String passwd) {
 		int passwdOK=boardmapper.selectCheckIdPasswd(id, passwd);
 		if(passwdOK==0) {//일치하는 패스워드가 존재하지 않는 경우
@@ -42,6 +44,7 @@ public class User_Service {
 		return boardmapper.selectCheckFindPasswd(id, user_name, user_birth, user_phone);
 	}
 	
+	//비밀번호 바꾸기
 	public void changePasswd(String passwd, String id) {
 		this.boardmapper.updatePasswd(passwd, id);
 	}

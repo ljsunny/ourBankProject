@@ -21,3 +21,7 @@ primary key (id_x) enable
  select * from newnotice_board;
 
  delete from newnotice_board where id_x=23;
+ 
+ select substr(subject,7,16), to_char(created_date,'YYYY-MM-DD HH24:MI') created_date  
+ from (select * from newnotice_board order by created_date desc)
+ where rownum<5; 

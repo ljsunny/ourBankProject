@@ -33,7 +33,7 @@ String uid=(String)session.getAttribute("uid");
 
 %>
 <div id="logo">
-	<h1><a href="#" class="icon icon-group"><span>OurBank</span></a></h1>
+	<h1><a href="index.do" class="icon icon-group"><span>OurBank</span></a></h1>
 	
 	<div id="search">
 	 <ul class="member">

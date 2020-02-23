@@ -41,7 +41,9 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 </table>
 </form>
 <c:if test="${noinfo==true}">
-	<p > 아이디/비밀번호를 확인해 주세요 </p>
+	<div align="center">
+	<p> 아이디/비밀번호를 확인해 주세요 </p>
+	</div>
 </c:if>
 <a href="findId.do">아이디</a> / <a href="findPasswd.do" style="padding-right: 10px"> 비밀번호 찾기</a>| 
 <a  href="signUp.do" style="padding-left: 10px">회원가입</a>

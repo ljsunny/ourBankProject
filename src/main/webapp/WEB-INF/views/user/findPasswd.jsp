@@ -11,6 +11,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fonts.css" >
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/product.css" >
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>비밀번호 변경</title>
 <script language="javaScript" src="resources/js/script.js" charset="ECU-KR"></script>
@@ -29,34 +30,35 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
 <c:set var="ck" value="${ck}"></c:set>
 
+
+<div id="find">
 <c:if test="${ck==1||ck==0}">
-<div align="center">
-		<table width="35%">
+		<table class="top">
 		<tr>
 		<td>
-			<div style="float: left;">
+			<div class="left">
 				<h1>비밀번호 찾기</h1>
 			</div>
-			<div style="float: right; margin-top:25px">
+			<div class="right">
 				<a href="findId.do">아이디 찾기  </a>| <a href="signUp.do">회원가입</a>
 			</div>
 			</td>
 			</tr>
 		</table>
-		<hr width="500px"/>
-	<form style="width: 30%;" method="post" action="findPasswdCheck.do">
-			<table >
+		<hr />
+	<form method="post" action="findPasswdCheck.do">
+			<table class="id_form">
 				<tr>
 					<td>아이디</td>
-					<td><input type="text"  size="17" name="id"
+					<td><input type="text" name="id"
 						placeholder="아이디" /></td>
 					<td rowspan="4">
-					<input type="submit" value="비밀번호 찾기" style="width:100px; height:90px;" >
+					<input class="btn2" type="submit" value="비밀번호 찾기" >
 					</td>	
 				</tr>
 				<tr>
 					<td>이름</td>
-					<td><input type="text"  size="17" name="user_name"
+					<td><input type="text"  name="user_name"
 						placeholder="이름" /></td>	
 				</tr>
 				<tr>
@@ -65,46 +67,46 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 				</tr>
 				<tr>
 					<td>전화번호</td>
-					<td><input type="text"  size="17"  name="user_phone" 
+					<td><input type="text"   name="user_phone" 
 					placeholder="전화번호" placeholder="000-0000-0000"  /></td>
 				</tr>
 			</table>
 		</form>
-</div>
 
-<hr width="500px"/>
+
+<hr />
 <c:if test="${ck==1}">
-<div align="center">
+<div class="info">
 	일치하는 정보가 없습니다.
 </div>
-<hr width="500px"/>
+<hr/>
 </c:if>
 </c:if>
 <c:if test="${ck==2}">
-<div align="center">
-		<table width="35%">
+<div class="find">
+		<table class="top">
 		<tr>
 		<td>
-			<div style="float: left;">
+			<div class="left">
 				<h1>비밀번호 재설정</h1>
 			</div>
-			<div style="float: right; margin-top:25px">
+			<div class="right">
 				<a href="findId.do">아이디 찾기  </a>| <a href="signUp.do">회원가입</a>
 			</div>
 			</td>
 			</tr>
 		</table>
-		<hr width="700px"/>
-	<form name="regForm" style="width: 30%;" method="post" 
+		<hr />
+	<form name="regForm"  method="post" 
 	action="changePasswdCheck.do" onsubmit="return equalPasswd();">
-	<c:set var="id" value="${id}"></c:set>
-			<table >
+	<input name="id" type="hidden" value="${id}">
+			<table class="id_form">
 				<tr>
 					<td>새로운 비밀번호</td>
 					<td><input type="password"  size="17" name="passwd"
 						placeholder="새로운 비밀번호 확인" /></td>
-					<td rowspan="4">
-					<input type="submit" value="비밀번호 변경" style="width:100px; height:60px;" >
+					<td rowspan="2">
+					<input type="submit" value="비밀번호 변경" class="btn3" >
 					</td>	
 				</tr>
 				<tr>
@@ -116,6 +118,8 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 		</form>
 </div>
 </c:if>
+</div>
+
 
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 

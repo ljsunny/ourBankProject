@@ -12,9 +12,9 @@ import com.ourbank.app.bean.UserBoard_Bean;
 @Repository
 public interface User_Mapper {
 	final String INSERT="insert into tlb_user_board (id, passwd, user_name,"
-			+ " user_birth, user_phone,  user_address, user_email, admin)"
+			+ " user_birth, user_phone,  user_address, user_email, salt, admin)"
 			+ " values ( #{id}, #{passwd},#{user_name},#{user_birth}, "
-			+ " #{user_phone}, #{user_address}, #{user_email},0 )";
+			+ " #{user_phone}, #{user_address}, #{user_email},#{salt}, 0 )";
 	
 	@Insert(INSERT)
 	void insert(UserBoard_Bean boardbean);
@@ -30,6 +30,10 @@ public interface User_Mapper {
 	
 	@Select(SELECT_CHECK_ID_PASSWD)
 	int selectCheckIdPasswd(@Param("id") String id, @Param("passwd") String passwd) ;
+	//소트 값가져오기
+	final String SELECT_SORT="select salt from tlb_user_board where id=#{id}";
+	@Select(SELECT_SORT)
+	String selectSort(@Param("id") String id);
 	
 	// 이름, 전화번호, 생일이 맞는 아이디 찾아옴
 	final String SELECT_CHECK_FIND_ID="select id from tlb_user_board "

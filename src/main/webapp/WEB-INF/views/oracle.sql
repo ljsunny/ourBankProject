@@ -84,7 +84,7 @@ union
 
 	
 
-select * from (select category, best_idx, id, subject, content, created_date, hits, filename, 
+ select * from (select category, category_num,best_idx, id, subject, content, created_date, hits, filename, 
 					ceil(rownum / 10) as page 
 					from ((select * from TLB_FREE_BOARD) 
 					union 

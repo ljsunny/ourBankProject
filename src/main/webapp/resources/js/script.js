@@ -35,6 +35,11 @@ function inputCheck() {
 		document.regForm.passwd.focus();
 		return false;
 	}
+	if(document.regForm.passwd.value.length<9){
+		alert("비밀번호를 8자 이상 입력해주세요");
+		document.regForm.passwd.focus();
+		return false;
+	}
 	if(document.regForm.ck_passwd.value==""){
 		alert("비밀번호 확인을 입력해 주세요");
 		document.regForm.ck_passwd.focus();

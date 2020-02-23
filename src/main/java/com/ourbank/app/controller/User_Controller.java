@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import com.ourbank.app.bean.UserBoard_Bean;
 
 import com.ourbank.app.service.User_Service;
+import com.ourbank.app.SHA256Util;
 
 @Controller
 public class User_Controller {
@@ -53,7 +54,15 @@ public class User_Controller {
 	// 회원가입 ing
 	@RequestMapping(value = "/doSignUp.do", method = RequestMethod.POST)
 	public String doSignUp(UserBoard_Bean boardBean, Model model) {
-
+		//비밀번호를 해시 암호화하여 저장
+		SHA256Util sha256=new SHA256Util();
+		String salt = sha256.generateSalt();
+		System.out.println(salt);
+		String pwd=boardBean.getPasswd();
+		String new_pwd=sha256.getEncrypt(pwd, salt);
+		boardBean.setPasswd(new_pwd);
+		boardBean.setSalt(salt);
+		
 		boardService.insert(boardBean);
 
 		return "redirect:loginForm.do";
@@ -89,16 +98,19 @@ public class User_Controller {
 		
 		//두번째 if 찾은 id에 password 맞는지 확인 맞으면 home창 , 없으면 false 창 반환
 		logger.info("loginPro2 called");
-		boolean checkpasswd=boardService.CheckIDandPassword(id, passwd);
-		if(checkpasswd==false) {
+		//소트와 비밀번호와 비교할 sort, hash_passwd 가져오기
+		String salt=boardService.selectSort(id);
+		String re_pass=SHA256Util.getEncrypt(passwd, salt);
+		boolean checkpasswd=boardService.CheckIDandPassword(id, re_pass);
+		if(checkpasswd==false) {//비밀번호가 틀린경우
 			model.addAttribute("check", checkpasswd);
 			model.addAttribute("noinfo", true);
-			return "redirect:loginForm.do";
+			return "/user/loginForm";
 		}
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("uid", id);
-		return "writeboard";
+		return "redirect:index.do";
 	}
 	
 	//로그아웃
@@ -132,6 +144,7 @@ public class User_Controller {
 		model.addAttribute("user_id", user_id);
 		return "user/findId";
 	}
+	//비밀번호 찾는 창으로
 	@RequestMapping(value="/findPasswd.do", method=RequestMethod.GET)
 	public String findPassword(Model model) {
 		model.addAttribute("ck", 0);
@@ -146,10 +159,11 @@ public class User_Controller {
 			@RequestParam("user_phone") String user_phone,
 			Model model) {
 		int ck=boardService.checkFindPasswd(id, user_name, user_birth, user_phone);
-		if(ck==0) {
+		if(ck==0) {//정보가 틀릴때
 			model.addAttribute("ck", 1);
 			return "user/findPasswd";
 		}
+		//정보가 맞을때
 		model.addAttribute("ck", 2);
 		model.addAttribute("id", id);
 		return "user/findPasswd";
@@ -157,11 +171,16 @@ public class User_Controller {
 	
 	//비밀번호 변경
 	@RequestMapping(value="/changePasswdCheck.do" , method = RequestMethod.POST)
-	public String changePasswdCheck(@Param("passwd") String passwd,
+	public String changePasswdCheck(
+			@Param("passwd") String passwd,
 			@Param("id") String id,
 			Model model) {
-		
+		System.out.println(id);
+		String salt=boardService.selectSort(id);
+		String re_pass=SHA256Util.getEncrypt(passwd, salt);
+		boardService.changePasswd(re_pass, id);
 		return "user/passwdChanged";
+		
 	}
 	
 	
