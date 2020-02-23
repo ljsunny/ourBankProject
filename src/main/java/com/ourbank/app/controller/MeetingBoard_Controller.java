@@ -313,17 +313,17 @@ public class MeetingBoard_Controller {
 	}
 	
 	//글검색
-	@RequestMapping(value="/meetingsearch.do", method=RequestMethod.POST)
+	@RequestMapping(value="/meetingSearch.do", method=RequestMethod.POST)
 	public String searchWithSubject (@RequestParam("searchStr") String searchStr, 
 									Model model) {
 		
 		
-		return meeting_searchedList(1, searchStr,model);
+		return searchedList(1, searchStr,model);
 	}
 
 	//검색한 페이지로 이동
 	@RequestMapping(value="/meetingSearchedList.do",method = RequestMethod.GET)
-	public String meeting_searchedList(
+	public String searchedList(
 			@RequestParam("pageForView") int pageForView,
 			@RequestParam("searchStr") String searchStr,
 			Model model

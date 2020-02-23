@@ -312,17 +312,17 @@ public class DebateBoard_Controller {
 	}
 	
 	//글검색
-	@RequestMapping(value="/debatesearch.do", method=RequestMethod.POST)
+	@RequestMapping(value="/debateSearch.do", method=RequestMethod.POST)
 	public String searchWithSubject (@RequestParam("searchStr") String searchStr, 
 									Model model) {
 		
-		
-		return debate_searchedList(1, searchStr,model);
+		logger.info("글검색");
+		return searchedList(1, searchStr,model);
 	}
 
 	//검색한 페이지로 이동
 	@RequestMapping(value="/debateSearchedList.do",method = RequestMethod.GET)
-	public String debate_searchedList(
+	public String searchedList(
 			@RequestParam("pageForView") int pageForView,
 			@RequestParam("searchStr") String searchStr,
 			Model model

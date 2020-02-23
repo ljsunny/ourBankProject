@@ -317,18 +317,18 @@ public class FreeBoard_Controller {
 	}
 	
 	//글검색
-	@RequestMapping(value="/freesearch.do", method=RequestMethod.POST)
+	@RequestMapping(value="/freeSearch.do", method=RequestMethod.POST)
 	public String freesearch (@RequestParam("searchStr") String searchStr, 
 									Model model) {
-		logger.info("freesearch.do called");
+		logger.info("freeSearch.do called");
 		
 		
-		return free_searchedList(1, searchStr,model);
+		return searchedList(1, searchStr,model);
 	}
 
 	//검색한 페이지로 이동
 	@RequestMapping(value="/freeSearchedList.do",method = RequestMethod.GET)
-	public String free_searchedList(
+	public String searchedList(
 			@RequestParam("pageForView") int pageForView,
 			@RequestParam("searchStr") String searchStr,
 			Model model

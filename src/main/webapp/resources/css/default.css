@@ -41,10 +41,7 @@
 		list-style: none;
 	}
 	
-	p
-	{
-		line-height: 180%;
-	}
+	
 	
 	strong
 	{
@@ -237,6 +234,7 @@
 		padding-left: 3em;
 		font-weight: 900;
 		font-size: 2.5em;
+		font-family: "타이포입체";
 	}
 	
 	#logo h1 a
@@ -292,10 +290,10 @@
 	{
 		background: #2A70E8;
 		position: absolute;
-		top: 240px;
+		top: 225px;
 		box-sizing: border-box;
 		z-index: 100;
-		width: 190px;
+		width: 175px;
 		opacity: 0;
 		visibility: hidden;
 	}

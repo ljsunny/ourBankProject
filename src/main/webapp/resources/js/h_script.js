@@ -1,40 +1,55 @@
-
+// À¯È¿¼º °Ë»ç
 
 
 jQuery(function (){ 
 	jQuery('#save').click(function() { 
 		var subject = jQuery('#form #subject').val(); 
-		if (subject == '') { alert('ì œëª©ì„ ì…ë ¥í•˜ì„¸ìš”'); 
+		if (subject == '') { alert('Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä'); 
+		return false; 
+		}
+		var subject = jQuery('#form #subject').val(); 
+		if (subject == '[¸®ºä°Ô½ÃÆÇ]') { alert('Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä'); 
+		return false; 
+		}
+		var subject = jQuery('#form #subject').val(); 
+		if (subject == '[ÀÚÀ¯°Ô½ÃÆÇ]') { alert('Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä'); 
+		return false; 
+		}
+		var subject = jQuery('#form #subject').val(); 
+		if (subject == '[¸ğÀÓ°Ô½ÃÆÇ]') { alert('Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä'); 
+		return false; 
+		}
+		var subject = jQuery('#form #subject').val(); 
+		if (subject == '[Åä·Ğ°Ô½ÃÆÇ]') { alert('Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä'); 
+		return false; 
+		}
+		var subject = jQuery('#form #subject').val(); 
+		if (subject == '[Á¦ÅÂÅ©³ëÇÏ¿ì]') { alert('Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä'); 
+		return false; 
+		}
+		var content = jQuery('#form #banks').val(); 
+		if (content == '') { alert('ÀºÇà¸íÀ» ÀÔ·ÂÇÏ¼¼¿ä'); 
+		return false; 
+		}
+		var content = jQuery('#form #re_productname').val(); 
+		if (content == '') { alert('»óÇ°¸íÀ» ÀÔ·ÂÇÏ¼¼¿ä'); 
 		return false; 
 		}
 		var content = jQuery('#form #content').val(); 
-		if (content == '') { alert('ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”'); 
+		if (content == '') { alert('³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä'); 
 		return false; 
 		}
+		
 		jQuery('#save').submit(); 
 	}); 
 		
 	jQuery('#search').click(function() { 
 		var searchStr = jQuery('#searchf #searchStr').val(); 
-		if (searchStr == '') { alert('ê²€ìƒ‰ì–´ë¥¼ ì…ë ¥í•˜ì„¸ìš”'); 
+		if (searchStr == '') { alert('°Ë»ö¾î¸¦ ÀÔ·ÂÇÏ¼¼¿ä'); 
 		return false; 
 		}
-		jQuery('#search').submit(); 
+		jQuery('#find').submit(); 
 		}); 
+		
+		
 	}); 
-
-
-
-
-
-
-
-/*function checkAll() {
-        if (!checkSubject(form.subject.value)) {
-            return false;
-        } else if (!checkContent(form.content.value)) {
-            return false;
-        }
-        return true;
-    }
-*/

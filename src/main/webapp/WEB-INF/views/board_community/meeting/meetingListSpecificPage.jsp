@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/body.css" >
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> 
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/script.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/h_script.js"></script>
 <meta http-equiv="Content-Type" content="text/html" ; charset="EUC-KR">
 <title>모임방게시판 글목록</title>
 </head>
@@ -42,7 +42,7 @@
 				<li>- <a href="/app/freeList.do?current_page=1"> 자유게시판</a></li>
 				<li>- <a href="/app/meetingList.do?current_page=1"> 모임방</a></li>
 				<li>- <a href="/app/debateList.do?current_page=1"> 토론방</a></li>
-				<li>- <a href="/app/investList.do?current_page=1"> 제태크노하우</a></li>
+				<li>- <a href="/app/investList.do?current_page=1"> 재테크노하우</a></li>
 				<li>- <a href="/app/bestList.do?current_page=1"> BEST게시물</a></li>
 			</ul>
 		</div>
@@ -53,69 +53,90 @@
 <%
 	int c_page = Integer.parseInt((String) (pageContext.getAttribute("current_page")));
 	pageContext.setAttribute("c_page", c_page);
+	HttpSession session=request.getSession();
+	String id=(String) session.getAttribute("id");
 %>
+<c:set var="id" value="<%=id%>"/>
+<script type="text/javascript">
+	//리스트 _ 제목링크 누를 시 
+	function boardView_idCheck() {
+		var loginUser = "${id}";
+		if(!loginUser) {
+			alert('로그인 후 이용 가능합니다.');
+			return location.href = "loginForm.do";		
+		}else{
+		
+		}
+	}
+</script>
 
 <div id="line_div">
 	<div id="sub_logo">
 		<h2>모임방 게시판</h2>
     </div> 
  <div id="site_div">
-
-<table width="700">
-<tr>
-<td>
-	<form name=searchf method=post action="meetingsearch.do" id="searchf">
-		<p align="right">
-			<input type="text" id="searchStr" size="50" maxlenght="50">
-			<input type="submit" value="글찾기" id="search">
-		</p>
-	</form>
-		</td>
-</tr>
-</table>
+	<div class="comunity_top_menu" >
+	<div style="float: right; width: 50%; vertical-align: center;">
+					<form name=searchf method=post action="meetingSearch.do" id="searchf">
+						<input type="text" name="searchStr" size="30" maxlenght="50">
+						<input type="submit" value="글찾기">
+					</form>
+		</div>
+	</div>
+<div style="margin-top: 50px; font-weight: bold;">	
 <table cellspacing=1 width=700 border=0>
 	<tr>
 		<td>총 게시물수: <c:out value="${totalCnt}" /></td>
 		<td><p align="right">
 				페이지:
 				<c:out value="${current_page}" />
-			</p></td>
-	</tr>
-
-</table>
-
-<table cellspacing=1 width=700 border=1>
-	<tr>
-		<td width="50"><p align="center">글번호</td>
-		<td width="320"><p align="center">제목</td>
-		<td width="100"><p align="center">아이디</td>
-		<td width="100"><p align="center">등록일</td>
-		<td width="100"><p align="center">조회수</td>
-	</tr>
-	<c:forEach var="board" items="${boardList}">
-		<tr>
-			<td width="50"><p align="center">${board.getIdx_num()}</p></td>
-			<td width="320">
-				<p align="center">
-					<a
-						href="meetingView.do?idx_num=${board.getIdx_num()}
-			&current_page=<c:out value="${current_page}"/>
-			&searchStr=None"
-						title="${board.getContent()}"> <c:out
-							value="${board.getSubject()}" /></a>
-				</p>
 			</td>
-			<td width="100"><p align="center">
+	</tr>
+</table>
+</div>
+
+<table cellspacing=1 width=700>
+	<thead>
+	<tr>
+		<td width="50" class="tlb_board_top">글번호</td>
+		<td width="320" class="tlb_board_top">제목</td>
+		<td width="100" class="tlb_board_top">아이디</td>
+		<td width="100" class="tlb_board_top">등록일</td>
+		<td width="100" class="tlb_board_top">조회수</td>
+	</tr> <thead>
+	<tbody>
+	<c:forEach var="board" items="${boardList}">
+		<tr class="tlb_board_bottom">
+			<td width="50">${board.getIdx_num()}</td>	
+			<td width="320">
+				
+				<!-- 로그인 o -->
+					<c:if test="${id == null }"> <!--   (사용시 ${id != null }로바꾸기!!-->
+					<a href="meetingView.do?idx_num=${board.getIdx_num()}
+						&current_page=<c:out value="${current_page}"/>&searchStr=None"
+						title="${board.getContent()}"> <c:out value="${board.getSubject()}" /></a>
+						</c:if>
+						
+				<!-- 로그인 x -->
+				<c:if test="${id !=null}"><!--  Id없음 -->
+				<a onclick="boardView_idCheck(this.href);return false;" onkeypress="this.onclick;"
+						href="meetingView.do" > <c:out value="${board.getSubject()}" /></a>
+					</c:if>
+				
+			</td>
+			<td width="100">
 				<c:out value="${board.getId() }"/>
-				</p></td>
-			<td width="100"><p align="center">
+				</td>
+			<td width="100">
 					<c:out value="${board.getCreated_date()}" />
-				</p></td>
-			<td width="100"><p align="center">
+				</td>
+			<td width="100">
 					<c:out value="${board.getHits()}" />
-				</p></td>
+				</td>
 		</tr>
 	</c:forEach>
+	</tbody>
+	</table>
 	<%
 		int rowsPerPage = 10;
 		int total_cnt = ((Integer) (pageContext.getAttribute("total_cnt"))).intValue();
@@ -123,8 +144,9 @@
 		int total_pages = PageNumberingManager.getInstance().getTotalPage(total_cnt, rowsPerPage);
 		pageContext.setAttribute("t_pages", total_pages);
 	%>
-</table>
-<table cellspacing="1" width="700" border="1">
+
+<div style="margin-top: 50px; font-weight: bold;">
+<table cellspacing="1" width="700" class="page">
 	<tr>
 		<td><c:forEach var="i" begin="1" end="${t_pages}">
 				<a href="meetingList.do?current_page=${i}"> [ <c:if
@@ -137,13 +159,14 @@
 			</c:forEach></td>
 	</tr>
 </table>
-<table width="700">
-	<tr>
-		<td><input type="button" value="글쓰기"
-			onclick="window.location='meeting_show_write_form.do'"></td>
-		
-	</tr>
-</table>
+</div>
+<!-- 로그인 안 할 시 '글쓰기' 안 됨  (사용시 ${id != null }로바꾸기!! -->
+<c:if test="${id==null}">
+	<div>
+		<input type="button" value="글쓰기" class="bnt_comu"
+			onclick="window.location='meeting_show_write_form.do'" ></td>	
+	</div>
+</c:if>
 </div>
 </div>
 </div>

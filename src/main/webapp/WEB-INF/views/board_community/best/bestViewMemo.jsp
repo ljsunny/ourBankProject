@@ -51,7 +51,7 @@ function download(){
 				<li>- <a href="/app/freeList.do?current_page=1"> 자유게시판</a></li>
 				<li>- <a href="/app/meetingList.do?current_page=1"> 모임방</a></li>
 				<li>- <a href="/app/debateList.do?current_page=1"> 토론방</a></li>
-				<li>- <a href="/app/investList.do?current_page=1"> 제태크노하우</a></li>
+				<li>- <a href="/app/investList.do?current_page=1"> 재테크노하우</a></li>
 				<li>- <a href="/app/bestList.do?current_page=1"> BEST게시물</a></li>
 			</ul>
 		</div>
@@ -62,49 +62,45 @@ function download(){
 <div id="line_div">
  <div id="sub_logo">
 <h2>BEST게시물</h2>	
-</div>
-<div id="site_div">
-
-<table cellspacing="0" cellpadding="5" border="1" width="600" >
-	
+    </div> 
+ <div id="site_div">	
+<table  class="tlb_board">
 	<tr>
-			<td><b>제목</b></td>
+			<td style="background-color: #f2f2f2"><b>제목</b></td>
 			<td><c:out value="${boardData.getSubject()}" /></td>
-			<td><b>조회수</b></td>
+			<td style="background-color: #f2f2f2"><b>조회수</b></td>
 			<td><c:out value="${boardData.getHits()}" /></td>
-		</tr>
-		<tr>
-			<td><b>ID</b></td>
+	</tr>
+	<tr>
+			<td style="background-color: #f2f2f2"><b>아이디</b></td>
 			<td><c:out value="${boardData.getId()}" /></td>
-			<td><b>작성일</b></td>
+			<td style="background-color: #f2f2f2"><b>작성일</b></td>
 			<td><c:out value="${boardData.getCreated_date()}"></c:out></td>
-		</tr>
+	</tr>
 	<tr>
-		<td><b>내용</b></td>
-		<td  colspan="3" height="400" >
+		<td style="background-color: #f2f2f2"><b>내용</b></td>
+		<td  colspan="3" height="300" style="text-align: left; padding-left: 15px;">
 		<c:out value="${boardData.getContent()}"/></td>
+		</td>
 	</tr>
 	<tr>
-		<td>파일첨부</td>
-		<td><input type="button"
-		onclick="download()" 
-		value="${boardData.getFilename()}"/></td>
-	</tr>
+			<td style="background-color: #f2f2f2"><b>파일첨부</b></td>
+			<td colspan="3" style="text-align: left; padding-left: 15px; ">
+			<input type="button" onclick="download()"
+			value="${boardData.getFilename()}">
+			</td>
+		</tr>
 </table>
 
-<table cellspacing="0" cellpadding="0" border="0" width="500">
-	<tr>
-	<td>
-		<input type="button" value="목록" onclick="javascript:boardlist()">
-	</td>
-	</tr>
-
-</table>
+<div class="div_board_bnt">
+		<input type="button" value="수 정" onclick="javascript:boardmodify()" class="bnt_view">
+		<input type="button" value="목 록" onclick="javascript:boardlist()" class="bnt_view">
+		<input type="button" value="답 글" onclick="javascript:boardrewrite()" class="bnt_view">
+		<input type="button" value="삭 제" onclick="javascript:boarddelete()" class="bnt_view">
+	</div>
 </div>
 </div>
-</div>
-</div>
-
+ </div> 
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 
 	<jsp:include page="../../footer.jsp"></jsp:include>

@@ -20,6 +20,7 @@
 
 <html>
 <head>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" >
@@ -55,7 +56,23 @@
 <%
 	int c_page = Integer.parseInt((String) (pageContext.getAttribute("current_page")));
 	pageContext.setAttribute("c_page", c_page);
+	
+	HttpSession session=request.getSession();
+	String id=(String) session.getAttribute("id");
 %>
+<c:set var="id" value="<%=id%>"/>
+<script type="text/javascript">
+	//리스트 _ 제목링크 누를 시 
+	function boardView_idCheck() {
+		var loginUser = "${id}";
+		if(!loginUser) {
+			alert('로그인 후 이용 가능합니다.');
+			return location.href = "loginForm.do";		
+		}else{
+		
+		}
+	}
+</script>
 
 <div id="line_div">
  <div id="sub_logo">
@@ -63,53 +80,62 @@
  </div> 
  <div id="site_div">	
 
-<table cellspacing=1 width=700 border=0>
+<div style="margin-top: 50px; font-weight: bold;">
+<table cellspacing=1 width=700 >
 	<tr>
 		<td><p align="right">
 				페이지:
 				<c:out value="${current_page}" />
-			</p></td>
+			</td>
 	</tr>
 </table>
-
-<table cellspacing=1 width=700 border=1>
+</div>
+<table cellspacing=1 >
+	<thead>
 	<tr>
-		<td width="50"><p align="center">글번호</td>
-		<td width="320"><p align="center">제목</td>
-		<td width="100"><p align="center">아이디</td>
-		<td width="100"><p align="center">등록일</td>
-		<td width="100"><p align="center">조회수</td>
-	</tr>
-	
+		<td width="50" class="tlb_board_top">글번호</td>
+		<td width="320" class="tlb_board_top">제목</td>
+		<td width="100" class="tlb_board_top">아이디</td>
+		<td width="100" class="tlb_board_top">등록일</td>
+		<td width="100" class="tlb_board_top">조회수</td>
+	</tr> </thead>
+	<tbody>
 
 	<c:set var="count" value="0" />
 	 <c:forEach var="board" items="${boardList}">
 	   <c:set var="count" value="${count+1}"/>
 
-		<tr>
-			<td width="50"><p align="center">${count}</p></td>
+		<tr class="tlb_board_bottom">
+			<td width="50">${count}</td>
 			<td width="320">
-				<p align="center">
-					<a
-						href="bestView.do?best_idx=${board.getBest_idx()}
-			&current_page=<c:out value="${current_page}"/>
-			&category_num=<c:out value="${board.getCategory_num() }"/>"
-						title="${board.getContent()}"> <c:out
-							value="  ${board.getSubject()}" /></a>
-				</p>
+				
+					<!-- 로그인 o -->
+					<c:if test="${id != null }"> <!--   (사용시 ${id != null }로바꾸기!!-->
+					<a href="bestView.do?best_idx=${board.getBest_idx()}&current_page=<c:out value="${current_page}"/>
+						&category_num=<c:out value="${board.getCategory_num() }"/>"
+						title="${board.getContent()}"> <c:out value="  ${board.getSubject()}" /></a>
+					</c:if>
+						
+					<!-- 로그인 x -->
+					<c:if test="${id ==null}">
+					<a onclick="boardView_idCheck(this.href);return false;" onkeypress="this.onclick;"
+						href="bestView.do" > <c:out value="${board.getSubject()}" /></a>
+					</c:if>
+				
 			</td>
-			<td width="100"><p align="center">
+			<td width="100">
 				<c:out value="${board.getId()}"/>
-				</p></td>
-			<td width="100"><p align="center">
+				</td>
+			<td width="100">
 					<c:out value="${board.getCreated_date()}" />
-				</p></td>
-			<td width="100"><p align="center">
+				</td>
+			<td width="100">
 					<c:out value="${board.getHits()}" />
-				</p></td>
+				</td>
 		</tr>
 	</c:forEach>
-
+	</tbody>
+	</table>
 
 	<%
 		int rowsPerPage = 10;
@@ -117,8 +143,8 @@
 		int total_pages = PageNumberingManager.getInstance().getTotalPage(20, rowsPerPage);
 		pageContext.setAttribute("t_pages", total_pages); 
 	%>
-</table>
-<table cellspacing="1" width="700" border="1">
+<div style="margin-top: 50px; font-weight: bold;">
+<table cellspacing="1" width="700" class="page">
 	<tr>
 		<td><c:forEach var="i" begin="1" end="${t_pages}">
 				<a href="bestList.do?current_page=${i}"> [ <c:if
@@ -131,7 +157,7 @@
 			</c:forEach></td>
 	</tr>
 </table>
-
+</div>
 </div>
 </div>
 </div>

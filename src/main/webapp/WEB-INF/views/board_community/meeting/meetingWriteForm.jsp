@@ -8,6 +8,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
 <html> 
 <head>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
@@ -17,22 +18,20 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/body.css" >
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> 
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/script.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/h_script.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>모임방게시판 글쓰기</title>
 
 <script type="text/javascript">
  
-	 // 작성 취소
-	function boardlist(){
-		location.href='meetingList.do?current_page=1';
+// 작성 취소
+function boardlist(){
+	location.href='meetingList.do?current_page=1';
+ }
 	
 </script>
 
-<c:url var="insertUrl" value="/meeting_write_form.do" />
 </head>
-
-
 
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 <jsp:include page="../../header.jsp"></jsp:include>
@@ -46,7 +45,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 				<li>- <a href="/app/freeList.do?current_page=1"> 자유게시판</a></li>
 				<li>- <a href="/app/meetingList.do?current_page=1"> 모임방</a></li>
 				<li>- <a href="/app/debateList.do?current_page=1"> 토론방</a></li>
-				<li>- <a href="/app/investList.do?current_page=1"> 제태크노하우</a></li>
+				<li>- <a href="/app/investList.do?current_page=1"> 재테크노하우</a></li>
 				<li>- <a href="/app/bestList.do?current_page=1"> BEST게시물</a></li>
 			</ul>
 		</div>
@@ -58,7 +57,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 		<h2>모임방 게시판</h2>
     </div> 
  <div id="site_div">	
-
+<c:url var="insertUrl" value="/meeting_write_form.do" />
 <sf:form modelAttribute="boardBean" commandName="boardBean" id="form" 
 	method="POST" action="${insertUrl}" enctype="multipart/form-data"  >
 
@@ -69,10 +68,11 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 	<sf:hidden path="re_idx" value="${re_idx}"/>
 	
 
-	<table id="tt" width="400" border="1" cellspacing="0" cellpadding="5">
+	<table class="tlb_board">
 		<tr>
-			<th><b>제 목</b></th>
-			<td><c:if test="${re_idx==0}">
+			<td style="background-color: #f2f2f2"><b>제목</b></td>
+			<td style="float: left; margin-left: 10px;">
+			<c:if test="${re_idx==0}">
 				<sf:input path="subject" size="50" maxlength="50" id="subject" value="[모임게시판]"/>
 				</c:if>
 				<c:if test="${re_idx==1}">
@@ -81,29 +81,30 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 				<sf:errors path="subject" cssClass="error" /></td>
 		</tr>
 		<tr>
-			<td><b>아아디</b></td>
-		 <td><sf:input path="id" value="${id}" size="50"/></td>
+			<th style="background-color: #f2f2f2"><b>아아디</b></th>
+			 <td style="float: left; margin-left: 10px;">
+			 <sf:input path="id" value="${id}" size="50" cssStyle="width:450px;"/></td>
 		</tr>
 		<tr>
-			<td><b>내 용</b></td>
+			<td style="background-color: #f2f2f2"><b>내용</b></td>
 			<td><sf:textarea path="content" size="200" id="content"
-					cssStyle="width:350px;height:100px;" maxlength="200" /><br /> 
-					<sf:errors path="content" cssClass="error" /></td>
+					Style="width:550px;height:250px; margin-left: 10px;" maxlength="200" /><br /> 
+				<sf:errors path="content" cssClass="error" /></td>
 		</tr>
 		<tr>
-			<td><b>파 일</b></td>
-			<td><input type="file" name="file"></td>
-		</tr>
-		<tr>
-			<td><input type="submit" value="등록" id="save" /></td>
+			<td style="background-color: #f2f2f2"><b>파일</b></td>
+			<td style="float: left; margin-left: 10px;">
+			<input type="file" name="file"></td>
 		</tr>
 	</table>
-
-
+	<div class="div_board_bnt">
+				<input type="submit" value="재등록" id="save" class="bnt_view"/>
+				<input type="button" value="목록" onclick="javascript:boardlist()" class="bnt_view"/>
+		</div>
 </sf:form>
 </div>
 </div>
-</div>
+</div>	
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 
 	<jsp:include page="../../footer.jsp"></jsp:include>

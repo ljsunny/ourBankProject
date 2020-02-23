@@ -16,7 +16,7 @@
 <%@page import="com.ourbank.app.PageNumberingManager"%>
 <html>
 <head>
-
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" >
@@ -36,8 +36,20 @@
 	int total_pages=PageNumberingManager.getInstance().getTotalPage(total_cnt, rowsPerPage);
 	//el로 꺼내쓸 수 있는 방법
 	pageContext.setAttribute("t_pages", total_pages);
+	HttpSession session=request.getSession();
+	String id=(String) session.getAttribute("id");
 %>
-
+<c:set var="id" value="<%=id%>"/>
+<script type="text/javascript">
+	//리스트 _ 제목링크 누를 시 
+	function boardView_idCheck() {
+		var loginUser = "${id}";
+		if(!loginUser) {
+			alert('로그인 후 이용 가능합니다.');
+			return location.href = "loginForm.do";		
+		}
+	}
+</script>
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 <jsp:include page="../../header.jsp"></jsp:include>
 <!-- *********************** 사이드 메뉴 ****************************  -->	
@@ -50,7 +62,7 @@
 				<li>- <a href="/app/freeList.do?current_page=1"> 자유게시판</a></li>
 				<li>- <a href="/app/meetingList.do?current_page=1"> 모임방</a></li>
 				<li>- <a href="/app/debateList.do?current_page=1"> 토론방</a></li>
-				<li>- <a href="/app/investList.do?current_page=1"> 제태크노하우</a></li>
+				<li>- <a href="/app/investList.do?current_page=1"> 재테크노하우</a></li>
 				<li>- <a href="/app/bestList.do?current_page=1"> BEST게시물</a></li>
 			</ul>
 		</div>
@@ -63,36 +75,52 @@
  </div> 
  <div id="site_div">
 
-<table cellspacing="1" width="700" border="0">
+<div style="margin-top: 50px; font-weight: bold;">
+<table cellspacing=1 width=700>
 	<tr>
-		<td>총 게시물:<c:out value="${totalCnt}"/></td>
+		<td>총 게시물수: <c:out value="${totalCnt}" /></td>
 		<td><p align=right>페이지:<c:out value="${t_pages}"/></p></td>
 	</tr>
 </table>
-<table cellspacing="1" width="700" border="1">
+</div>
+
+<table cellspacing=1 width=700 >
+	<thead>
 	<tr>
-		<td width="50"><p align="center">글번호</td>
-		<td width="320"><p align="center">제목</td>
-		<td width="100"><p align="center">아이디</td>
-		<td width="100"><p align="center">등록일</td>
-		<td width="100"><p align="center">조회수</td>
-	</tr>
+		<td width="50" class="tlb_board_top">글번호</td>
+		<td width="320" class="tlb_board_top">제 목</td>
+		<td width="100" class="tlb_board_top">아이디</td>
+		<td width="100" class="tlb_board_top">등록일</td>
+		<td width="100" class="tlb_board_top">조회수</td>
+	</tr> </thead>
+	<tbody>
 	<c:forEach var="board" items="${searchedList}">
-		<tr>
-			<td width="50"><p align="center">${board.getIdx_num()}</p></td>
+		<tr class="tlb_board_bottom">
+			<td width="50">${board.getIdx_num()}</td>
 			<td width="320">
-				<p align="center">
+				
+				<!-- 로그인 o -->
+				<c:if test="${id == null }"> <!--   (사용시 ${id != null }로바꾸기!!-->
 				<a href="freeView.do?idx_num=${board.getIdx_num()}&current_page=${pageForView}&searchStr=${searchStr}" 
-				title="${board.getContent()}">${board.getSubject()}</a>
-				</p>
+					title="${board.getContent()}">${board.getSubject()}</a>
+				</c:if>
+				
+				<!-- 로그인 x -->
+				<c:if test="${id !=null}">
+				<a onclick="boardView_idCheck(this.href);return false;" onkeypress="this.onclick;"
+					href="freeView.do" > <c:out value="${board.getSubject()}" /></a>
+				</c:if>
 			</td>
-			<td width="100"><p align="center">${board.getId()}</p></td>
-			<td width="100"><p align="center">${board.getCreated_date()}</p></td>
-			<td width="100"><p align="center">${board.getHits()}</td>
+			<td width="100">${board.getId()}</td>
+			<td width="100">${board.getCreated_date()}</td>
+			<td width="100">${board.getHits()}</td>
 		</tr>
 	</c:forEach>
-</table>
-<table cellspacing="1" width="700" border="1">
+</tbody>
+	</table>
+	
+<div style="margin-top: 50px; font-weight: bold;">
+<table cellspacing="1" width="700" class="page">
 	<tr>
 		<td>
 		<c:forEach var="i" begin="1" end="${t_pages}">
@@ -107,13 +135,14 @@
 		</td>
 	</tr>
 </table>
-<table width="700">
-	<tr>
-		<td><input type="button" value="전체 목록으로 돌아가기"
-		onclick="window.location='free_listSpecificPageWork.do?current_page=1'"></td>
+</div>
+
+<div>
+	<input type="button" value="전체 목록으로 돌아가기" class="bnt_comu"
+	onclick="window.location='freeList.do?current_page=1'">
 	
-	</tr>
-</table>
+	</div>
+
 </div>
 </div>
 </div>
