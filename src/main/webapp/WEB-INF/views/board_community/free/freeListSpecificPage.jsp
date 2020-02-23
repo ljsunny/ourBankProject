@@ -123,7 +123,7 @@ function etclist(){
 </table>
 <table cellspacing=1 width=700 border=0>
 
-	
+<% 	
 	HttpSession session=request.getSession();
 	String id=(String) session.getAttribute("id");
 %>

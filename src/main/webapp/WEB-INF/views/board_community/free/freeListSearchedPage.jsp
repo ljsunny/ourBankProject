@@ -110,6 +110,7 @@
 	</c:forEach>
 </table>
 <table cellspacing="1" width="700" border="1">
+<%
 	HttpSession session=request.getSession();
 	String id=(String) session.getAttribute("id");
 %>
