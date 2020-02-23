@@ -1,3 +1,4 @@
+/* 예금 테이블 */
 create table tlb_deposit_board(
 	dcls_month varchar2(10),
  	fin_co_no  varchar2(10) not null,
@@ -25,7 +26,7 @@ drop table tlb_deposit_board;
 select * from tlb_saving_board;
 select * from TLB_DEPOSIT_BOARD;
 
------------------------saving
+/* 적금 테이블 */
 
 create table tlb_saving_board(
 	dcls_month varchar2(10),
@@ -54,6 +55,7 @@ create table tlb_saving_board(
 );
 drop table tlb_saving_board;
 
+/* 은행 테이블 */
 create table tlb_bank_board(
  	fin_co_no  varchar2(10) not null,
  	kor_co_nm varchar2(100) not null,

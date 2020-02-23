@@ -1,5 +1,3 @@
-
-<%@page import="com.ourbank.app.PageNumberingManager"%>
 <%@ page language="java"
 	import="java.util.*,java.sql.*,javax.servlet.http.*"
 	contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
@@ -15,11 +13,6 @@
 <%@page import="java.util.Properties"%>
 <%@page import="java.io.IOException"%>
 <%@page import="java.io.FileInputStream"%>
-
-
-<html>
-<head>
-
 <%@page import="com.ourbank.app.PageNumberingManager"%>
 <html>
 <head>
@@ -28,32 +21,6 @@
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fonts.css" >
-
-<meta charset="EUC-KR">
-<title>free</title>
-</head>
-
-<!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
-	<jsp:include page="../../header.jsp"></jsp:include>
-	
-<!-- *********************** 사이드 메뉴 ****************************  -->	
-	
-	<div id="side_menu">
-		<h4><a href="#">커뮤니티</a></h4>
-		<div id="side_div">
-			<ul id="side_submenu">
-				<li>- <a href="reviewList.do?current_page=1"> 리뷰게시판 </a></li>
-				<li>- <a href="freeList.do?current_page=1"> 자유게시판 </a></li>
-				<li>- <a href="meetList.do?current_page=1"> 모임방 </a></li>
-				<li>- <a href="debateList.do?current_page=1"> 토론방 </a></li>
-				<li>- <a href="investList.do?current_page=1"> 재테크 노하우 </a></li>
-				<li>- <a href="#"> BEST 게시물 </a></li>
-			</ul>
-		</div>
-	</div>
-	
-<!-- *********************** 내용 ****************************  -->
-
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/body.css" >
 <meta charset="EUC-KR">
 <title>자유게시판 목록</title>
@@ -69,48 +36,6 @@
 	int total_pages=PageNumberingManager.getInstance().getTotalPage(total_cnt, rowsPerPage);
 	//el로 꺼내쓸 수 있는 방법
 	pageContext.setAttribute("t_pages", total_pages);
-
-%>
-
-<table cellspacing="1" width="700" border="0">
-	<tr>
-		<td>총 게시물:<c:out value="${totalCnt}"/></td>
-		<td><p align=right>페이지:<c:out value="${t_pages}"/></p></td>
-	</tr>
-</table>
-<table cellspacing="1" width="700" border="1">
-	<tr>
-		<td width="50"><p align="center">번호</td>
-		<td width="100"><p align="center">아이디</td>
-		<td width="320"><p align="center">제목</td>
-		<td width="100"><p align="center">등록일</td>
-		<td width="100"><p align="center">조회수</td>
-	</tr>
-	<c:forEach var="board" items="${searchedList}">
-		<tr>
-			<td width="40"><p align="center">${board.getIdx()}</p></td>
-			<td width="100"><p align="center">${board.getId()}</p></td>
-			<td width="320">
-				<p align="center">
-					<a
-						href="freeView.do?idx=${board.getIdx()}
-							&current_page=<c:out value="${current_page}"/>
-							&searchStr=None"
-						title="${board.getContent()}"> <c:out
-							value="${board.getSubject()}" /></a>
-				</p>
-			</td>
-			<td width="100"><p align="center">
-					<c:out value="${board.getCreated_date()}" />
-				</p></td>
-			<td width="100"><p align="center">
-					<c:out value="${board.getHits()}" />
-				</p></td>
-		</tr>
-	</c:forEach>
-</table>
-<table cellspacing="1" width="700" border="1">
-<%
 	HttpSession session=request.getSession();
 	String id=(String) session.getAttribute("id");
 %>
@@ -210,14 +135,6 @@
 		</td>
 	</tr>
 </table>
-
-<table width="700">
-	<tr>
-		<td><input type="button" value="전체 목록으로 돌아가기"
-		onclick="window.location='freeList.do?current_page=1'"></td>
-	</tr>
-</table>
-
 </div>
 
 <div>
@@ -232,6 +149,5 @@
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 
 	<jsp:include page="../../footer.jsp"></jsp:include>
-
 
 </html>
