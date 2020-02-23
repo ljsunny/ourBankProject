@@ -143,8 +143,8 @@ public interface MeetingBaord_Mapper {
 	@Select(RECENT_ID)
 	int recentID();
 
-	// 아이디로 id, ref,step,depth를 출력합니다.
-	final String SELECT_STAIR_BOARD="select idx_num, ref, step, depth from tlb_meeting_board where idx_num=#{idx_num}";
+	// 아이디로 id, ref,step,subject를 출력합니다.
+	final String SELECT_STAIR_BOARD="select idx_num, ref, step, depth, subject from tlb_meeting_board where idx_num=#{idx_num}";
 		
 	@Select(SELECT_STAIR_BOARD)
 	MeetingBoard_Bean stairBoard(@Param("idx_num") int idx_num);

@@ -29,7 +29,7 @@ public class Best_Controller {
 	private static final Logger logger = LoggerFactory.getLogger(Best_Controller.class);
 	
 	//Best리스트 이동
-	@RequestMapping(value = "/best_listSpecificPageWork.do", method=RequestMethod.GET)
+	@RequestMapping(value = "/bestList.do", method=RequestMethod.GET)
 	public String free_listSpecificPageWork(
 			@RequestParam("current_page") String pageForView, 
 			Model model) {
@@ -40,11 +40,11 @@ public class Best_Controller {
 		model.addAttribute("boardList", boardService.getList(Integer.parseInt(pageForView),10));
 		System.out.println("-------------------------------");
 		
-		return "board_community/best/best_listSpecificPage";
+		return "board_community/best/bestListSpecificPage";
 	}
 	
 	//글보기
-	@RequestMapping(value="/best_viewWork.do", method=RequestMethod.GET)
+	@RequestMapping(value="/bestView.do", method=RequestMethod.GET)
 	public String best_viewWork(@RequestParam("best_idx") int best_idx,
 							@RequestParam("category_num") int category_num,
 						    @RequestParam("current_page") String current_page,
@@ -61,7 +61,7 @@ public class Best_Controller {
 		//조회수 증가
 		switch (boardData.getCategory_num()) {
 		case 1: 
-			boardService.updateFreeHits(boardData.getHits(),boardData.getBest_idx());
+			boardService.updateReviewHits(boardData.getHits(),boardData.getBest_idx());
 			boardData.setHits(boardService.getSpecificRow(best_idx).getHits());
 			break;
 		case 2:
@@ -72,7 +72,15 @@ public class Best_Controller {
 			boardService.updateDebateHits(boardData.getHits(),boardData.getBest_idx());
 			boardData.setHits(boardService.getSpecificRow(best_idx).getHits());
 			break;
-
+		case 4:
+			boardService.updateDebateHits(boardData.getHits(),boardData.getBest_idx());
+			boardData.setHits(boardService.getSpecificRow(best_idx).getHits());
+			break;
+		case 5:
+			boardService.updateInvestHits(boardData.getHits(),boardData.getBest_idx());
+			boardData.setHits(boardService.getSpecificRow(best_idx).getHits());
+			break;
+			
 		default:
 			break;
 		}		
@@ -84,7 +92,7 @@ public class Best_Controller {
 		logger.info(boardData.getFilename());
 		
 			
-		return "board_community/best/best_viewContent";
+		return "board_community/best/bestViewMemo";
 	}
 	
 	//파일 다운로드

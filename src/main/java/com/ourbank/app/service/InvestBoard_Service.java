@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.ourbank.app.bean.FAQBoard_Bean;
 import com.ourbank.app.bean.InvestBoard_Bean;
 import com.ourbank.app.mapper.InvestBoard_Mapper;
 
@@ -36,25 +35,28 @@ public class InvestBoard_Service {
 	public ArrayList<InvestBoard_Bean> getList(int nStartPage, int list_num){
 		return this.boardMapper.getList(nStartPage, list_num);
 	}
-	//회원가입 글수
-	public int getSignUpCnt() {
+	
+	//항목별 글목록
+	//성공사례 글 수
+	public int getSuccessCnt() {
 		int nCnt=0;
-		nCnt=this.boardMapper.getSignUpCnt();
+		nCnt=this.boardMapper.getSuccessCnt();
 		return nCnt;
 	}
-	//회원가입 arraylist
-	public ArrayList<InvestBoard_Bean> getSignUpList(int nStartPage, int list_num){
-		return this.boardMapper.getSignUpList(nStartPage, list_num);
+	//성공사례arraylist
+	public ArrayList<InvestBoard_Bean> getSuccessList(int nStartPage, int list_num){
+		return this.boardMapper.getSuccessList(nStartPage, list_num);
 	}
-	//예적금
-	public int getSavingsCnt() {
+	
+	//실폐사례
+	public int getFailCnt() {
 		int nCnt=0;
-		nCnt=this.boardMapper.getSavingsCnt();
+		nCnt=this.boardMapper.getFailCnt();
 		return nCnt;
 	}
-	//예적금 arraylist
-	public ArrayList<InvestBoard_Bean> getSavingsList(int nStartPage, int list_num){
-		return this.boardMapper.getSavingsList(nStartPage, list_num);
+	//실폐사례 arraylist
+	public ArrayList<InvestBoard_Bean> getFailList(int nStartPage, int list_num){
+		return this.boardMapper.getFailList(nStartPage, list_num);
 	}
 	//기타
 	public int getEtcCnt() {
@@ -75,7 +77,7 @@ public class InvestBoard_Service {
 	//글 수정하기
 	public void updateBoard(InvestBoard_Bean boardBean) {
 		boardMapper.updateBoard(boardBean.getIdx(), boardBean.getSubject(), 
-				boardBean.getCategory(), boardBean.getContent());
+				boardBean.getInvest_case(), boardBean.getContent());
 	}
 	//글삭제하기
 	public void deleteRow(int idx) {
@@ -91,5 +93,28 @@ public class InvestBoard_Service {
 	public ArrayList<InvestBoard_Bean> getSearchedList(int nStartPage, int list_num, String strSearchThis){
 		return this.boardMapper.getSearchedList(nStartPage, list_num, strSearchThis);
 	}
+	
+	//답글
+	public void updateRewrite(int idx) {
+		boardMapper.updateRewrite(idx);
+	}
+	public int recentID() {
+		int recent_id=0;
+		recent_id=this.boardMapper.recentID();
+		return recent_id;
+	}
+	public InvestBoard_Bean stairBoard(int idx) {
+		return this.boardMapper.stairBoard(idx);
+	}
+	
+	public void updateGroupStep(int ref, int step) {
+		this.boardMapper.updateGroupStep(ref, step);
+	}
+
+	//선택힝목 가져오기
+	public String InvestCase(int ref) {
+		return this.boardMapper.InvestCase(ref);
+	}
+	
 
 }

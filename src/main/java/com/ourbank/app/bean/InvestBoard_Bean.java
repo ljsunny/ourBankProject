@@ -7,21 +7,38 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Repository
 public class InvestBoard_Bean {
-	int idx;
-	String id;
+	private String category;
+	private int category_num;
+	private int idx;
+	private String id;
 	@NotBlank(message="작성자를 입력해주세요")
-	String subject;
+	private String subject;
 	@NotBlank(message="내용을 입력해주세요")
-	String content;
-	String created_date;
-	int hits;
-	String category;
-	String filename;
-	long filesize;
+	private String content;
+	private String created_date;
+	private int hits;
+	private String invest_case;
+	private String filename;
+	private long filesize;
+	private MultipartFile file;
+	private int re_idx;
+	private int ref;
+	private int step;
+	private int depth;
 	
-	MultipartFile file;
 	
-	
+	public int getCategory_num() {
+		return category_num;
+	}
+	public void setCategory_num(int category_num) {
+		this.category_num = category_num;
+	}
+	public String getInvest_case() {
+		return invest_case;
+	}
+	public void setInvest_case(String invest_case) {
+		this.invest_case = invest_case;
+	}
 	public MultipartFile getFile() {
 		return file;
 	}
@@ -87,6 +104,31 @@ public class InvestBoard_Bean {
 		return "Investboard_Bean [idx=" + idx + ", id=" + id + ", subject=" + subject + ", content=" + content
 				+ ", created_date=" + created_date + ", hits=" + hits + ", category=" + category + ", filename="
 				+ filename + ", filesize=" + filesize + ", file=" + file + "]";
+	}
+	
+	public int getRe_idx() {
+		return re_idx;
+	}
+	public void setRe_idx(int re_idx) {
+		this.re_idx = re_idx;
+	}
+	public int getRef() {
+		return ref;
+	}
+	public void setRef(int ref) {
+		this.ref = ref;
+	}
+	public int getStep() {
+		return step;
+	}
+	public void setStep(int step) {
+		this.step = step;
+	}
+	public int getDepth() {
+		return depth;
+	}
+	public void setDepth(int depth) {
+		this.depth = depth;
 	}
 	
 }

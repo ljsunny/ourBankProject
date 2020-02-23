@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.ourbank.app.bean.FAQBoard_Bean;
+
 import com.ourbank.app.bean.ReviewBoard_Bean;
 import com.ourbank.app.mapper.ReviewBoard_Mapper;
 
@@ -32,7 +32,7 @@ public class ReviewBoard_Service {
 		return nCnt;
 	}
 
-	//인덱스, 제목, 작성자, 날짜, 내용, 조회수  arraylist 얻어옴
+	//List에 뿌릴 arraylist 얻어옴
 	public ArrayList<ReviewBoard_Bean> getList(int nStartPage, int list_num){
 		return this.boardMapper.getList(nStartPage, list_num);
 	}
@@ -75,7 +75,8 @@ public class ReviewBoard_Service {
 	//글 수정하기
 	public void updateBoard(ReviewBoard_Bean boardBean) {
 		boardMapper.updateBoard(boardBean.getIdx(), boardBean.getSubject(), 
-				boardBean.getCategory(), boardBean.getContent());
+				boardBean.getReview_case(), boardBean.getContent(),
+				boardBean.getSatisfaction(), boardBean.getBanks(), boardBean.getRe_productname());
 	}
 	//글삭제하기
 	public void deleteRow(int idx) {
@@ -91,5 +92,41 @@ public class ReviewBoard_Service {
 	public ArrayList<ReviewBoard_Bean> getSearchedList(int nStartPage, int list_num, String strSearchThis){
 		return this.boardMapper.getSearchedList(nStartPage, list_num, strSearchThis);
 	}
+	
+	//답글
+	public void updateRewrite(int idx) {
+		boardMapper.updateRewrite(idx);
+	}
+	public int recentID() {
+		int recent_id=0;
+		recent_id=this.boardMapper.recentID();
+		return recent_id;
+	}
+	public ReviewBoard_Bean stairBoard(int idx) {
+		return this.boardMapper.stairBoard(idx);
+	}
+	public void updateGroupStep(int ref, int step) {
+		this.boardMapper.updateGroupStep(ref, step);
+	}
+	
+	// 선택힝목 가져오기
+	public String ReviewCase(int ref) {
+		return this.boardMapper.ReviewCase(ref);
+	}
+	
+	//댓글-원글의 일부 값 넣기
+	public String Satisfaction(int ref) {
+		return this.boardMapper.Satisfaction(ref);
+	}
+	
+	public String Banks(int ref) {
+		return this.boardMapper.Banks(ref);
+	}
+	
+	public String Re_productname(int ref) {
+		return this.boardMapper.Re_productname(ref);
+	}
+
+	
 
 }

@@ -80,8 +80,5 @@ public class FreeBoard_Service {
 		this.boardMapper.updateGroupStep(ref, step);
 	}
 	
-	//아이디 가져오기
-	/*public FreeBoard_Bean getIdname(int idx_num) {
-		return this.boardMapper.getIdname(idx_num);*/
 	
 }

@@ -13,6 +13,7 @@ body {
 	
 }
 
+
 h1, h2, h3 {
 	margin: 0;
 	padding: 0;
@@ -32,6 +33,56 @@ p {
 }
 
 strong {
+
+    	margin: 0;
+	}
+	
+	{
+ 	 margin: 0;
+	}
+	
+	body
+	{
+		margin: 0px;
+		padding: 0px;
+		background:#FFF;
+		font-family: 'Source Sans Pro', sans-serif;
+		font-size: 12pt;
+		font-weight: 400;
+		color: #4E4D4D;
+		min-height: 100%;
+	}
+	
+	
+	h1, h2, h3
+	{
+		margin: 0;
+		padding: 0;
+	}
+	
+	p, ol, ul
+	{
+		margin-top: 0;
+	}
+	
+	ol, ul
+	{
+		padding: 0;
+		list-style: none;
+	}
+	
+	
+	
+	strong
+	{
+	}
+	
+	a
+	{
+		text-decoration: none;
+		color: #383838;
+	}
+
 	
 }
 
@@ -178,10 +229,29 @@ ul.contact li a:before {
 /*********************************************************************************/
 /* Logo                         o                                                  */
 /*********************************************************************************/
+
 #logo {
 	padding: 2em 0em 1em 0em;
 	background: #FFF;
 	text-transform: uppercase;
+
+
+	#logo
+	{
+		padding: 2em 0em 1em 0em;
+		background: #FFF;
+		text-transform: uppercase;
+	}
+
+	#logo h1
+	{
+		text-align: left;
+		padding-left: 3em;
+		font-weight: 900;
+		font-size: 2.5em;
+		font-family: "타이포입체";
+	}
+
 	
 }
 
@@ -217,6 +287,7 @@ ul.contact li a:before {
 	list-style: none;
 	line-height: normal;
 	text-align: center;
+
 
 }
 
@@ -254,6 +325,56 @@ ul.contact li a:before {
 	background-color: #81BEF7;
 	border-radius: 30px;
 }
+
+	#menu ul
+	{
+		margin: 0;
+		padding: 18px 0px 18px 0px;
+		list-style: none;
+		line-height: normal;
+		text-align: center;
+	}
+	
+	#menu li
+	{
+		display: inline-block;
+	}
+	
+	#menu a
+	{
+		display: block;
+		padding: 0.5em 2em;
+		letter-spacing: 1px;
+		text-decoration: none;
+		font-size: 1em;
+		font-weight: 700;
+		color: #FFF;
+	}
+	
+	#menu ul li .sub_menu
+	{
+		background: #2A70E8;
+		position: absolute;
+		top: 225px;
+		box-sizing: border-box;
+		z-index: 100;
+		width: 175px;
+		opacity: 0;
+		visibility: hidden;
+	}
+	
+	#menu ul li:hover .sub_menu
+	{
+		opacity:1;
+		visibility:visible;
+	}
+	
+	#menu ul li:hover .sub_menu ul li:hover a
+	{
+		background-color: #81BEF7;
+		border-radius: 30px; 
+	}
+
 
 /*********************************************************************************/
 /* Banner                                                                        */

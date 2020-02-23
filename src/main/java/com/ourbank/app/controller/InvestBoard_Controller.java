@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import com.ourbank.app.bean.InvestBoard_Bean;
 import com.ourbank.app.service.InvestBoard_Service;
 
@@ -41,9 +40,20 @@ public class InvestBoard_Controller {
 	public String showWriteForm(Model model) {
 		logger.info("show_write_form called!!");
 		
-		int id=0;
+		int ref=0;  //그룹(원글의 글번호 참조)
+		int step=0;  //그룹내 순서
+		int depth=0; //계층
+		int re_idx=0;
+		logger.info("ref:"+ref+" step: "+step+"depth: "+depth+" "+"re_idx: "+re_idx);
+
+		//임시로 넣어둠
+		String id = "exId";
 		
 		model.addAttribute("id", id);
+		model.addAttribute("re_idx", re_idx);
+		model.addAttribute("step", step);
+		model.addAttribute("ref", ref);
+		model.addAttribute("depth", depth);
 		model.addAttribute("boardBean", new InvestBoard_Bean());
 		return "board_community/invest/investWriteForm";
 		
@@ -77,25 +87,91 @@ public class InvestBoard_Controller {
 			
 			try {
 				byte[] fileData=file.getBytes();
-				FileOutputStream output=new FileOutputStream("C:\\eclipse_ourBank\\OurBank\\src\\main\\resources\\files\\"+fileName);
+				FileOutputStream output=new FileOutputStream("C:\\mystudy\\myspring\\OurBank3_1\\src\\main\\webapp\\resources\\files\\"+fileName);
 				output.write(fileData);
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		String id="admin";
+		
+		String id = "exId";
 		boardBean.setId(id);
-		logger.info(boardBean.getCategory()+" "+
+		logger.info(
 					boardBean.getId()+" "+
 					boardBean.getContent()+" "+
 					boardBean.getSubject());
-		boardService.insertBoard(boardBean);
+		
+		//본글인 경우
+		if(boardBean.getRe_idx()==0) {
+			boardService.insertBoard(boardBean);
+			int recent_id=boardService.recentID(); //가장최근값가져옴
+			logger.info("reid :"+recent_id);
+			boardService.updateRewrite(recent_id);
+			System.out.println("본글작성");
+		}
+		else {//답글인 경우
+			int ref=boardBean.getRef();
+			System.out.println("ref"+ref);
+			boardBean.setRef(ref); //원글의 글번호로 묶음
+			boardService.updateGroupStep(ref, boardBean.getStep());
+			boardBean.setStep(boardBean.getStep()+1);
+			boardBean.setDepth(boardBean.getDepth()+1);
+			boardBean.setRe_idx(0);
+			boardBean.setInvest_case(boardService.InvestCase(ref));//항목 
+			logger.info("case: " + boardService.InvestCase(ref));
+			boardService.insertBoard(boardBean);
+			System.out.println("답글작성");
+		} 
 		
 		model.addAttribute("totalCnt", new Integer(boardService.getTotalCnt()));
 		model.addAttribute("current_page", 1);
 		model.addAttribute("boardList", boardService.getList(1, 10));
 		return "redirect:investList.do";
 	}
+	
+	//답글
+	@RequestMapping(value = "/invest_show_rewrite_form.do", method = RequestMethod.GET)
+	public String free_show_rewrite_from(
+			@RequestParam("idx") String idx,
+			@RequestParam("current_page") String current_page, 
+			Model model) {
+		logger.info("invest_how_rewrite_form called!!");
+		
+		//해당 idx_num에 대한 정보 
+		InvestBoard_Bean boardBean= boardService.stairBoard(Integer.parseInt(idx));
+		
+		logger.info("idx :"+boardBean.getIdx());
+		logger.info("ref :"+boardBean.getRef()); //그룹(원글의 글번호 참조)
+		logger.info("step :"+boardBean.getStep()); //그룹내부순서
+		logger.info("depth"+boardBean.getDepth()); //계층
+		boardBean.setRe_idx(1); //답글
+		logger.info("re_idx :"+boardBean.getRe_idx());
+		logger.info("subject :"+boardBean.getSubject());
+		
+		
+		//ref=0인경우 (답글그룹)
+		if(boardBean.getRef()==0) {
+			model.addAttribute("ref", boardBean.getIdx());
+			String re_subject = "Re:"+boardBean.getSubject()+"_답변";
+			logger.info("subject :"+re_subject);
+			model.addAttribute("subject", re_subject);
+		}
+		else {
+			model.addAttribute("ref", boardBean.getRef());
+			String re_subject = "Re:"+boardBean.getSubject();
+			logger.info("subject :"+re_subject);
+			model.addAttribute("subject", re_subject);
+		}
+		logger.info("invset :"+boardBean.getInvest_case());
+		model.addAttribute("idx", idx);
+		model.addAttribute("re_idx", boardBean.getRe_idx());
+		model.addAttribute("step", boardBean.getStep());
+		model.addAttribute("depth", boardBean.getDepth());
+		model.addAttribute("invest_case", boardBean.getInvest_case());
+		model.addAttribute("boardBean", new InvestBoard_Bean());
+		
+		return "board_community/invest/investWriteForm";
+	} 
 	
 	//리스트 뿌리기
 	@RequestMapping(value="/investList.do", method=RequestMethod.GET)
@@ -108,26 +184,26 @@ public class InvestBoard_Controller {
 		model.addAttribute("boardList", boardService.getList(Integer.parseInt(pageForView), 10)); //리스트뿌릴 ArrayList 받아와서 저장
 		return "board_community/invest/investListSpecificPage";
 	}
-	//회원가입 리스트 뿌리기
-	@RequestMapping(value="/investSignUpList.do", method=RequestMethod.GET)
+	//성공사례 리스트 뿌리기
+	@RequestMapping(value="/investSuccessList.do", method=RequestMethod.GET)
 	public String investSignUpList(
 			@RequestParam("current_page") String pageForView, Model model
 			) {
-		logger.info("invest signup List called !!");
-		model.addAttribute("totalCnt", new Integer(boardService.getSignUpCnt()));//회원가입 글수
+		logger.info("invest Success List called !!");
+		model.addAttribute("totalCnt", new Integer(boardService.getSuccessCnt()));
 		model.addAttribute("current_page",pageForView);
-		model.addAttribute("boardList", boardService.getSignUpList(Integer.parseInt(pageForView), 10)); //리스트뿌릴 ArrayList 받아와서 저장
+		model.addAttribute("boardList", boardService.getSuccessList(Integer.parseInt(pageForView), 10)); 
 		return "board_community/invest/investListSpecificPage";
 	}
-	//예적금 리스트 뿌리기
-	@RequestMapping(value="/investSavingsList.do", method=RequestMethod.GET)
+	//실패사례 리스트 뿌리기
+	@RequestMapping(value="/investFailList.do", method=RequestMethod.GET)
 	public String investSavingList(
 			@RequestParam("current_page") String pageForView, Model model
 			) {
-		logger.info("invest saving List called !!");
-		model.addAttribute("totalCnt", new Integer(boardService.getSavingsCnt()));//회원가입 글수
+		logger.info("invest Fail List called !!");
+		model.addAttribute("totalCnt", new Integer(boardService.getFailCnt()));
 		model.addAttribute("current_page",pageForView);
-		model.addAttribute("boardList", boardService.getSavingsList(Integer.parseInt(pageForView), 10)); //리스트뿌릴 ArrayList 받아와서 저장
+		model.addAttribute("boardList", boardService.getFailList(Integer.parseInt(pageForView), 10)); 
 		return "board_community/invest/investListSpecificPage";
 	}
 	//기타 리스트 뿌리기
@@ -157,6 +233,8 @@ public class InvestBoard_Controller {
 		model.addAttribute("hits", boardData.getHits());
 		logger.info(boardData.getCategory());
 		
+		logger.info("dept: "+boardData.getDepth());
+		logger.info("invest: "+boardData.getInvest_case());
 		model.addAttribute("idx", idx);
 		model.addAttribute("current_page", current_page);
 		model.addAttribute("searchStr", searchStr);
@@ -251,6 +329,7 @@ public class InvestBoard_Controller {
 		model.addAttribute("searchStr", "None");
 		model.addAttribute("boardData", boardService.getSpecificRow(idx));
 		model.addAttribute("filename", boardBean.getFilename());
+		model.addAttribute("invest_case", boardBean.getInvest_case());
 		
 		return "board_community/invest/investViewMemo";
 	}
