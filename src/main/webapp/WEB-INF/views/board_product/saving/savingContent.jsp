@@ -92,7 +92,7 @@
 		</div>
 		<!-- *********************** 내용 ****************************  -->
 
-		<div id="list_div">
+		<div id="product_warp"">
 			<div id="productContent">
 				<sapn>금융회사 최종제출일:${submitDay}</span> <b><h2>${savingBean.getFin_prdt_nm()}</h2></b>
 				<dl class="product-info1">

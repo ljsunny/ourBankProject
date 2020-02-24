@@ -28,11 +28,16 @@ public interface MainPage_Mapper {
 	final String BEST_HITS_COMMUNITY=
 			"select * from (select category, category_num, best_idx, id, subject, to_char(created_date,'YYYY-MM-DD') created_date, hits " 
 					+" from ("
-					+ "(select * from TLB_FREE_BOARD) "
-					+" union "
-					+" (select * from tlb_meeting_board) "
-					+" union "
-					+" (select * from tlb_debate_board) ) where rownum <=5 and hits is not null order by hits desc) ";
+					+"	(select category, category_num, best_idx, id, subject, to_char(created_date,'YYYY-MM-DD') created_date, hits from review_board) "
+					+"union " 
+					+	"(select category, category_num, best_idx, id, subject, to_char(created_date,'YYYY-MM-DD') created_date, hits from tlb_free_board) "
+					+"union "
+					+	"(select category, category_num, best_idx, id, subject, to_char(created_date,'YYYY-MM-DD') created_date, hits from tlb_meeting_board) "
+					+"union "
+					+	"(select category, category_num, best_idx, id, subject, to_char(created_date,'YYYY-MM-DD') created_date, hits from tlb_debate_board) "
+					+"union "
+					+	"(select category, category_num, best_idx, id, subject, to_char(created_date,'YYYY-MM-DD') created_date, hits from invest_board)) "
+					+"where rownum <=5 and hits is not null order by hits desc) ";
 	@Select(BEST_HITS_COMMUNITY)
 	@Results(value = {
 			@Result(property = "category",column = "category"),
