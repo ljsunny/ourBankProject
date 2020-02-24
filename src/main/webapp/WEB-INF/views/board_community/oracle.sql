@@ -151,13 +151,20 @@ drop table invest_board;
 
 
 create view myboardview as select * from (
-					(select board_idx, id, subject, content, created_date, hits, filename, filesize from review_board) union
-					(select board_idx, id, subject, content, created_date, hits, filename, filesize from TLB_free_BOARD) union 
-					(select board_idx, id, subject, content, created_date, hits, filename, filesize from tlb_meeting_board) union 
-					(select board_idx, id, subject, content, created_date, hits, filename, filesize from tlb_debate_board) union
-					(select board_idx, id, subject, content, created_date, hits, filename, filesize from invest_board) union
-					(select board_idx, id, subject, content, created_date, hits, filename, filesize from qna_board)
+					(select board_idx, id, subject, content, created_date, hits, filename, filesize, category_num from review_board) union
+					(select board_idx, id, subject, content, created_date, hits, filename, filesize, category_num from TLB_free_BOARD) union 
+					(select board_idx, id, subject, content, created_date, hits, filename, filesize, category_num from tlb_meeting_board) union 
+					(select board_idx, id, subject, content, created_date, hits, filename, filesize, category_num from tlb_debate_board) union
+					(select board_idx, id, subject, content, created_date, hits, filename, filesize, category_num from invest_board) union
+					(select board_idx, id, subject, content, created_date, hits, filename, filesize, category_num from qna_board)
 					) ;
 
 			drop view myboardview;		
 select * from myboardview;
+
+select  board_idx, id, subject, content, created_date, hits, filename from myboardview where id = 'user01' order by created_date desc;
+
+select * from  board_idx, id, subject, content, created_date, hits, filename, 
+ceil(rownum / 10) as page from (select  * from myboardview where id = 'user01' order by created_date desc))
+ where page=1;
+

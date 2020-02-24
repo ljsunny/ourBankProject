@@ -2,12 +2,13 @@
 
 create table tlb_user_board(
 	id varchar2(50) not null,
- 	passwd varchar2(50) not null,
+ 	passwd varchar2(200) not null,
  	user_name varchar2(50) not null,
  	user_birth varchar2(50) not null,
  	user_email varchar2(50) not null,
  	user_phone varchar2(50) not null,
  	user_address varchar2(1000) ,
+ 	salt varchar2(50) not null, 
 	admin char(1) check(admin in('0','1')),
 	primary key(id) enable
 );

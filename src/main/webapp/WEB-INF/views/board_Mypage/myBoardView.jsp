@@ -27,11 +27,11 @@
 	
 <div id="body_div">
 	<div id="side_menu">
-		<h4>My Page</a></h4>
+		<h4><a href="/app/myInfo.do">My Page</a></h4>
 		<div id="side_div">
 			<ul id="side_submenu">
 				<li>- <a href="#"> 개인정보관리 </a></li>
-				<li>- <a href="myBoardList.do"> 내가 작성한 글 </a></li>
+				<li>- <a href="myBoardList.do?current_page=1"> 내가 작성한 글 </a></li>
 				<li>- <a href="#"> 가입한 상품 조회 </a></li>
 				<li>- <a href="#"> 관심상품 </a></li>
 			</ul>
@@ -52,20 +52,9 @@
 %>
 <script  language="javascript">
 function boardlist(){
-		location.href='myBoardView.do?current_page=${current_page}';
+		location.href='myBoardList.do?current_page=${current_page}';
 }
 
-function boardmodify(){
-	location.href='myBoardUpdateform.do?board_idx=${board_idx}&current_page=${current_page}';
-}
-
-function boarddelete(){
-	if(confirm('정말 삭제하시겠습니까?')==true){
-	location.href='myBoardDelete.do?board_idx=${board_idx}&current_page=${current_page}';
-	}else {
-		return;
-	}
-}
 
 function download(){
 	var param="<%=filename%>";
@@ -77,7 +66,7 @@ function download(){
 
 	<div id="line_div">
  	 <div id="sub_logo">
-		<h2>내가 쓴 글</h2>	
+		<h2>내가 작성한 글</h2>	
 	</div> 
 	<div id="site_div">	
 <table  class="tlb_board">
@@ -109,9 +98,7 @@ function download(){
 </table>
 
 <div class="div_board_bnt">
-		<input type="button" value="수 정" onclick="javascript:boardmodify()" class="bnt_view">
 		<input type="button" value="목 록" onclick="javascript:boardlist()" class="bnt_view">
-		<input type="button" value="삭 제" onclick="javascript:boarddelete()" class="bnt_view">
 	</div>
 </div>
 </div>
