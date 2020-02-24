@@ -7,10 +7,12 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html> 
 <head>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fonts.css" >
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/body.css" >
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <script language="javaScript" src="resources/js/script.js" charset="ECU-KR"></script>
 <title>회원가입</title>
@@ -25,13 +27,18 @@ String uid=(String)session.getAttribute("uid");
 	
 <!-- *********************** 사이드 메뉴 ****************************  -->	
 	
+	<div id="body_div">
 	<div id="side_menu">
 		<h4><a href="#">회원가입</a></h4>
 	</div>
 	
+	
 <!-- *********************** 내용 ****************************  -->
-
+<div id="line_div">
+ <div id="sub_logo">
 <h1>회원가입</h1>
+</div> 
+ <div id="site_div">
 <sf:form  commandName="boardBean"  name="regForm" method="POST" 
 action="doSignUp.do" onsubmit="return inputCheck()">
 	<table cellspacing="0" cellpadding="5" border="1" width="600">
@@ -92,7 +99,9 @@ action="doSignUp.do" onsubmit="return inputCheck()">
 		</tr>
 	</table>
 </sf:form>
-
+</div>
+</div>
+</div>
 	<!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 
 	<jsp:include page="../footer.jsp"></jsp:include>

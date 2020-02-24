@@ -34,7 +34,7 @@
 	
 	<div id="search">
 	 <ul class="member">
-			 <li><a href="#" class="icon icon-login"><span>로그인</span></a></li>
+			 <li><a href="loginForm.do" class="icon icon-login"><span>로그인</span></a></li>
 			 <li><a href="#" class="icon icon-join"><span>회원가입</span></a></li>
 	 </ul>
 	 <ul class="contact">
@@ -72,12 +72,12 @@
 			<li><a href="#" accesskey="3" title="">커뮤니티</a>
 			  <div class="sub_menu"> 
 				<ul id="side_submenu">
-				 <li>- <a href="/app/review_listSpecificPageWork.do?current_page=1"> 리 뷰</a></li>
-				 <li>- <a href="/app/free_listSpecificPageWork.do?current_page=1"> 자유게시판</a></li>
-				 <li>- <a href="/app/meeting_listSpecificPageWork.do?current_page=1"> 모임방</a></li>
-				 <li>- <a href="/app/debate_listSpecificPageWork.do?current_page=1"> 토론방</a></li>
-				 <li>- <a href="/app/meeting_listSpecificPageWork.do?current_page=1"> 제태크노하우</a></li>
-				 <li>- <a href="/app/meeting_listSpecificPageWork.do?current_page=1"> BEST게시물</a></li>
+				 <li>- <a href="/app/reviewList.do?current_page=1"> 리 뷰</a></li>
+				<li>- <a href="/app/freeList.do?current_page=1"> 자유게시판</a></li>
+				<li>- <a href="/app/meetingList.do?current_page=1"> 모임방</a></li>
+				<li>- <a href="/app/debateList.do?current_page=1"> 토론방</a></li>
+				<li>- <a href="/app/investList.do?current_page=1"> 재테크노하우</a></li>
+				<li>- <a href="/app/bestList.do?current_page=1"> BEST게시물</a></li>
 				</ul>
 	          </div>
 	        </li>

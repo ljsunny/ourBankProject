@@ -17,6 +17,9 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 function goToMyInfo(){
 	location.href='myInfo.do';
 }
+function goToMyBoard() {
+	location.href='myBoardList.do';
+}
 </script>
 </head>
 <body>
@@ -44,9 +47,11 @@ function goToMyInfo(){
 			<td><input type="button" value="개인정보관리"
 				 style="width:200px;height:160px;"
 				 onclick="goToMyInfo()"></td>
+				 
 				 <!-- 커뮤니티 게시판이 모두 완성되면 만들기 -->
 			<td><input type="button" value="내가 작성한 글"
-				 style="width:200px;height:160px;"></td>
+				 style="width:200px;height:160px;"
+				 onclick="goToMyBoard()"></td>
 		</tr>
 		<tr>
 			<!-- 상품 게시판이 완성되면 만들기 -->

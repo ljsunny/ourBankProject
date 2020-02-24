@@ -1,5 +1,6 @@
 package com.ourbank.app.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -12,11 +13,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ourbank.app.bean.FreeBoard_Bean;
 import com.ourbank.app.bean.UserBoard_Bean;
 import com.ourbank.app.service.MyPage_Service;
 
@@ -104,5 +108,60 @@ public String deleteId(
 	return "writeboard";
 }
 
+	//내가 작성한글 -리스트 
+	@RequestMapping(value = "/myBoardList.do", method = RequestMethod.GET)
+	public String myBoardList(HttpServletRequest request, 
+							@RequestParam("current_page") String pageForView, Model model) {
+		HttpSession session = request.getSession();
+		String uid = (String)session.getAttribute("uid");
+		
+		logger.info("best_listSpecificPageWork called");
+		logger.info("current_page=["+pageForView+"]");
+		model.addAttribute("current_page", pageForView);
+		model.addAttribute("boardList", boardService.getUserBoardList(uid, Integer.parseInt(pageForView),10));	
+		model.addAttribute("uid",uid);
+	
+		return "board_Mypage/myBoardList";
+	
+	}
+	//내가작성한 글 - 글보기
+	@RequestMapping(value = "/myBoardView.do", method = RequestMethod.GET)
+	public String myBoardView(@RequestParam("board_idx") int board_idx,
+							  @RequestParam("current_page") String current_page,
+						      Model model) {
+		logger.info("myBoardView called");
+		
+		FreeBoard_Bean boardData = boardService.getSpecificRow(board_idx);
+		logger.info(boardData.getContent());
+		logger.info("hits: "+boardData.getHits());
+		
+		model.addAttribute("board_idx", board_idx);
+		model.addAttribute("current_page", current_page);
+		model.addAttribute("boardData", boardData);
+		model.addAttribute("filename", boardData.getFilename());
+		
+		return "board_Mypage/myBoardView";
+	}
+
+	//파일 다운로드
+	@RequestMapping(value = "/my_download.do", method=RequestMethod.GET)
+	@ResponseBody
+	public byte[] free_downProcess(HttpServletResponse response, @RequestParam String filename) 
+			   throws IOException{
+		System.out.println("다운로드");
+		String fn2=new String(filename);
+		System.out.println(fn2);
+	    File file = new File("C:\\Users\\user\\Desktop\\OurBank\\src\\main\\webapp\\resources\\files\\" + filename);
+	    byte[] bytes = FileCopyUtils.copyToByteArray(file);
+	    String fn = new String(file.getName().getBytes(),"iso_8859_1");
+	      
+	    response.setHeader("Content-Disposition", "attachment;filename=\"" + fn + "\"");
+	    response.setContentLength(bytes.length);
+	    return bytes;
+	    }
+	
+	//내가쓴 글 - 글 수정
+	
+	//내가쓴 글 - 글 삭제
 
 }
