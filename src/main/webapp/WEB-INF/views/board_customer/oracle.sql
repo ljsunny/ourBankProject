@@ -25,6 +25,7 @@ create sequence qna_seq minvalue 1 maxvalue 9999999999 increment by 1 start with
 -- 0이면 본글 1이면 답글
  
 create table qna_board (
+	board_idx number(10,0) not null,
  	id_x number(10,0) not null,
  	id varchar2(20) not null,
  	subject varchar2(50),

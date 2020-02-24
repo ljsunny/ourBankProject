@@ -20,7 +20,7 @@ public interface FreeBoard_Mapper {
 	final String INSERT=
 			"insert into tlb_free_board("
 			+ "board_idx, best_idx, idx_num, id, subject, content, created_date, filename, filesize, step, ref, depth)"
-			+ " values (board_seq_idx, best_seq_idx.nextval, free_seq_idnum.nextval, #{id}, #{subject}, #{content}, SYSDATE, #{filename}, #{filesize}, #{step}, #{ref}, #{depth})";
+			+ " values (board_seq_idx.nextval, best_seq_idx.nextval, free_seq_idnum.nextval, #{id}, #{subject}, #{content}, SYSDATE, #{filename}, #{filesize}, #{step}, #{ref}, #{depth})";
 	@Insert(INSERT)
 	void insertBoard(FreeBoard_Bean boardBean);
 	

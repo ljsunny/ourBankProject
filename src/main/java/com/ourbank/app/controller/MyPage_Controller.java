@@ -1,6 +1,7 @@
 package com.ourbank.app.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ourbank.app.bean.FreeBoard_Bean;
 import com.ourbank.app.bean.UserBoard_Bean;
@@ -160,8 +162,71 @@ public String deleteId(
 	    return bytes;
 	    }
 	
-	//내가쓴 글 - 글 수정
+	//내가쓴 글 - 글 수정페이지
+	@RequestMapping(value = "myBoardUpdateform", method = RequestMethod.GET)
+	public String myBoardUpdateView(@RequestParam("board_idx") int board_idx,
+				 @RequestParam("current_page") String current_page,
+				 Model model) {
+		logger.info("free_show_update_form called");
+		logger.info("board_idx="+board_idx);
+		model.addAttribute("board_idx", board_idx);
+		model.addAttribute("current_page", current_page);
+		model.addAttribute("boardData", boardService.getSpecificRow(board_idx));
+		
+		return "board_Mypage/myBoardViewUpdate";
+	}
 	
-	//내가쓴 글 - 글 삭제
+	/*
+	//내가쓴 글 - 글수정 처리
+	@RequestMapping(value="/myBoard_update.do", method=RequestMethod.POST)
+	public String free_Update(
+			@ModelAttribute("boardBean")  FreeBoard_Bean boardBean,
+			@RequestParam("idx_num") int idx_num,  HttpServletRequest request, 
+			@RequestParam("current_page") String current_page,
+			Model model) {
+		System.out.println(boardBean.toString());
+		MultipartFile file=boardBean.getFile();
+		
+		//파일 처리
+		if(file!=null) {
+			String fileName=file.getOriginalFilename();
+			long fileSize=file.getSize();
+			boardBean.setFilename(fileName);
+			boardBean.setFilesize(fileSize);
+			logger.info(boardBean.getFilename());
+			logger.info(boardBean.getFilesize()+"");
+			
+			try {
+				byte[] fileData=file.getBytes();
+				FileOutputStream output=new FileOutputStream("C:\\Users\\user\\Desktop\\OurBank\\src\\main\\webapp\\resources\\files\\"+fileName);
+				output.write(fileData);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		//세션에서 얻어와야함
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("uid");
+		boardBean.setId(id);
+		logger.info(boardBean.getId()+" "+
+					boardBean.getContent()+" "+
+					boardBean.getSubject());
+		
+		boardBean.seBboard_idx(board_idx);
+		
+		boardService.updateBoard(boardBean);
+		boardBean=boardService.getSpecificRow(idx_num);
+		
+		model.addAttribute("idx_num", idx_num);
+		model.addAttribute("current_page", current_page);
+		model.addAttribute("searchStr", "None");
+		model.addAttribute("boardData", boardService.getSpecificRow(idx_num));
+		model.addAttribute("filename", boardBean.getFilename());
+		
+		return "board_community/free/freeViewMemo";
+	}
+	
+	//내가쓴 글 - 글 삭제*/
 
 }

@@ -143,51 +143,21 @@ drop table invest_board;
  
  delete invest_board 
  
- update invest_board set invest_case = #{'¼º°ø»ç·Ê', jdbc
  
  
  
  /***************************************/
  
 
- select * from (
-	(select subject, id, created_date, hits from review_board) 
-union 
-	(select subject, id, created_date, hits from tlb_free_board)
-union
-	(select subject, id, created_date, hits from tlb_meeting_board)
-union
-	(select subject, id, created_date, hits from tlb_debate_board)
-union
-	(select subject, id, created_date, hits from invest_board));
 
-select category, category_num, best_idx, id, subject, content, created_date, hits, filename	
+create view myboardview as select * from (
+					(select board_idx, id, subject, content, created_date, hits, filename from review_board) union
+					(select board_idx, id, subject, content, created_date, hits, filename from TLB_free_BOARD) union 
+					(select board_idx, id, subject, content, created_date, hits, filename from tlb_meeting_board) union 
+					(select board_idx, id, subject, content, created_date, hits, filename from tlb_debate_board) union
+					(select board_idx, id, subject, content, created_date, hits, filename from invest_board) union
+					(select board_idx, id, subject, content, created_date, hits, filename from qna_board)
+					) ;
 
-select * from (select category, category_num, best_idx, id, subject, content, created_date, hits, depth,
-				filename, ceil(rownum / 10) as page from 
-				((select category, category_num, best_idx, id, subject, content, created_date, hits, filename, depth from review_board) union 
-				(select category, category_num, best_idx, id, subject, content, created_date, hits, filename, depth from tlb_free_board) union
-				(select category, category_num, best_idx, id, subject, content, created_date, hits, filename, depth from tlb_meeting_board) union 
-				(select category, category_num, best_idx, id, subject, content, created_date, hits, filename, depth from tlb_debate_board) union 
-				(select category, category_num, best_idx, id, subject, content, created_date, hits, filename, depth from invest_board)) 
-			where rownum <=10 and hits is not null and depth=0 order by hits desc) 
-			where page=1;
-					union 
-					(select * from tlb_debate_board)) where rownum <=10 and hits is not null  order by hits desc) 
-					where page=1;
-					
-select * from (
-					(select category, category_num, best_idx, id, subject, content, created_date, hits, filename from review_board) union
-					(select category, category_num, best_idx, id, subject, content, created_date, hits, filename from TLB_free_BOARD) union 
-					(select category, category_num, best_idx, id, subject, content, created_date, hits, filename from tlb_meeting_board) union 
-					(select category, category_num, best_idx, id, subject, content, created_date, hits, filename from tlb_debate_board) union
-					(select category, category_num, best_idx, id, subject, content, created_date, hits, filename from invest_board)) 
-					where best_idx=43;
-					
-
-update ((select idx_num, hits from tlb_meeting_board) union 
-	(select idx_num, hits from tlb_free_board)) set hits=3
-	where idx_num=7;
-	
-
-
+			drop view myboardview;		
+select * from myboardview;

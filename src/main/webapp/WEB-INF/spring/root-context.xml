@@ -131,11 +131,6 @@
 		<property name="mapperInterface" value="com.ourbank.app.mapper.MeetingBaord_Mapper"></property>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
-	<bean id="Meet_boardMapper"
-		class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.ourbank.app.mapper.MeetBoard_Mapper"></property>
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
 	<bean id="Debate_boardMapper"
 		class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="com.ourbank.app.mapper.DebateBoard_Mapper"></property>

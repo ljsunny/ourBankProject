@@ -74,9 +74,11 @@
 	}
 </script>
 
-<div id="body_div">
+	<div id="line_div">
+ <div id="sub_logo">
 <h2>BEST°Ô½Ã¹°</h2>	
-<div id="board_div">	
+  </div> 
+ <div id="site_div">	
 
 <div style="margin-top: 50px; font-weight: bold;">
 <table cellspacing=1 width=700 >
