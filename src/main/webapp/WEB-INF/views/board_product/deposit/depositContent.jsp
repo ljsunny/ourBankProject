@@ -9,12 +9,10 @@
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900"
 	rel="stylesheet" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/default.css">
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/fonts.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/body.css">
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/product.css">
 <meta charset="EUC-KR">
@@ -92,7 +90,7 @@
 		</div>
 		<!-- *********************** 내용 ****************************  -->
 
-		<div id="list_div">
+		<div id="product_warp">
 			<div id="productContent">
 				<sapn>금융회사 최종제출일:${submitDay}</span> <b><h2>${depositBean.getFin_prdt_nm()}</h2></b>
 				<dl class="product-info1">

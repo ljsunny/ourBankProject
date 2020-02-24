@@ -45,7 +45,7 @@ function deleteId(){
 	
 	
 <!-- *********************** ³»¿ë ****************************  -->
-<div style="padding: 10px;">
+<div id="my_wrap">
 	<table border="1" cellpadding="10px" >
 		<tr>
 		<td>
