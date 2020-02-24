@@ -40,10 +40,38 @@ public FreeBoard_Bean getSpecificRow(int board_idx) {
 	return this.boardMapper.getSpecificRow(board_idx);
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////
 	
+//가입한 예금 은행 선택
+public ArrayList<DepositBoard_Bean> getDepositBank() {
+	return this.boardMapper.selectDepositBank();
+}
+//가입한 은행에 맞는 상품 검색
+public ArrayList<DepositBoard_Bean> getDepositProduct() {
+	return this.boardMapper.selectDepositProduct();
+}
+//상품코드에 일치하는 데이터 가져오기
+public DepositBoard_Bean getOneDeposit(String fin_prdt_cd) {
+	return this.boardMapper.selectOneDeposit(fin_prdt_cd);
+}
+//가입한 상품 view에 넣기
+public void insertMyDeposit(DepositBoard_Bean depositBean) {
+	System.out.println(depositBean.getId());
+	boardMapper.insertMyDeposit(depositBean.getId(),
+								depositBean.getFin_co_no(),
+								depositBean.getKor_co_nm(),
+								depositBean.getFin_prdt_cd(),
+								depositBean.getFin_prdt_nm());
+}
+public int selectCntMYProduct(String id) {
+	return this.boardMapper.selectCntMyProduct(id);
+}
 
-
-
+//가입상품 리스트 출력
+public ArrayList<DepositBoard_Bean> selectAllProduct(String id,int current_page, int pageforList){
+	return this.boardMapper.selectAllProduct(id,current_page,pageforList);
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 }

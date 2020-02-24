@@ -58,7 +58,7 @@ function etclist(){
 <!-- *********************** ³»¿ë ****************************  -->
 <div>
 <c:set var="current_page" value="${current_page}" />
-<c:set var="total_cnt" value="${totalCnt}" />
+<c:set var="total_cnt" value="${totalCnt}"/>
 
 <%
 	int c_page = Integer.parseInt((String) (pageContext.getAttribute("current_page")));

@@ -1,8 +1,11 @@
 package com.ourbank.app.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ourbank.app.bean.DepositBoard_Bean;
 import com.ourbank.app.bean.UserBoard_Bean;
 import com.ourbank.app.mapper.User_Mapper;
 
@@ -48,6 +51,8 @@ public class User_Service {
 	public void changePasswd(String passwd, String id) {
 		this.boardmapper.updatePasswd(passwd, id);
 	}
+	
+
 	
 
 }

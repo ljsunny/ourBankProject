@@ -534,6 +534,54 @@
 }
 
 /*********************************************************************************/
+/* Welcome                   o                                                    */
+/*********************************************************************************/
+#welcome{
+	margin:60px 300px 600px 300px;
+	min-width: 1000px;
+}
+#welcome hr{
+	width: 500px;
+	border: 2px solid #2A70E8;
+}
+#welcome h1{
+	text-align: center;
+	padding: 20px;
+	margin-bottom: 30px;
+}
+#welcome h2{
+	display: table-caption;
+	text-align: center;
+	padding-bottom: 5px;
+}
+#welcome .main1{
+	position:absolute;
+	margin: 30px auto 0px 340px;
+	min-width: 944px;
+}
+
+#welcome .main1 .btn{
+	width: 120px;
+	height: 60x;
+	background-color: #2A70E8;
+	padding:10px;
+	margin:10px;
+	color: white;
+	border: 0;
+}
+#welcome .main .area1{
+	display:table-cell;
+}
+#welcome select{
+	margin-right: 2px;
+	padding: 10px;
+	width: 100%;
+	height: 50px;
+}
+#welcome .main .area2{
+	display:table-cell;	
+}
+/*********************************************************************************/
 /* MyPage                   o                                                    */
 /*********************************************************************************/
 
@@ -543,4 +591,57 @@
 #my_wrap .mybtn{
 	width:200px;
 	height:160px;
+}
+
+/*********************************************************************************/
+/* MyProduct                  o                                                    */
+/*********************************************************************************/
+
+#my_product{
+	margin:60px 300px 600px 300px;
+	min-width: 1000px;
+}
+#my_product h2{
+	display: table-caption;
+	text-align: center;
+	padding-bottom: 5px;
+}
+#my_product hr{
+	width: 500px;
+	border: 2px solid #2A70E8;
+}
+#my_product .main{
+	display:table;
+	margin: 30px auto 0px auto;
+}
+#my_product .btn-group .button {
+  background-color: #2A70E8; /* Blue */
+  border: 1px solid #2A70E8;
+  color: white;
+  padding: 30px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  float: left;
+}
+
+#my_product  .btn-group .button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+#my_product.btn-group .button:hover {
+  background-color: #1558c8;
+}
+#my_product .main .area-cell{
+	display:inline-block;
+	width:30%;
+	height:100px;
+	margin: 30px auto 50px auto;
+}
+
+#my_product .main .wrap{
+	margin-top: 130px;
+	margin-left: 50px;
 }

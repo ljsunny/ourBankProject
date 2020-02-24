@@ -56,32 +56,27 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <table cellspacing=1 width=700 >
 	<thead>
 	<tr>
-		<td width="50" class="tlb_board_top">글번호</td>
-		<td width="320" class="tlb_board_top">제목</td>
-		<td width="100" class="tlb_board_top">아이디</td>
-		<td width="100" class="tlb_board_top">등록일</td>
-		<td width="100" class="tlb_board_top">조회수</td>
+		<td width="320" class="tlb_board_top">예금/적금</td>
+		<td width="320" class="tlb_board_top">은행</td>
+		<td width="100" class="tlb_board_top">상품명</td>
 	</tr> </thead>
 	<tbody>
 	<c:set var="count" value="0" />
+	<c:set var="total_cnt" value="${totalCnt}"/>
 	<c:forEach var="board" items="${boardList}">
 	<c:set var="count" value="${count+1}"/>
 		<tr class="tlb_board_bottom">
 			<td width="50">${count}</td>
 			<td width="320">
-				
-					<a href="myBoardView.do?board_idx=${board.getBoard_idx()}&current_page=<c:out value="${current_page}"/>"> 
-					<c:out value="${board.getSubject()}" /></a>
+				<%-- <a href="myBoardView.do?board_idx=${board.getBoard_idx()}&current_page=<c:out value="${current_page}"/>">  --%>
+				${board.getDep_or_sav()} <!-- </a> -->
 					
 			</td>
 			<td width="100">
-				<c:out value="${board.getId()}"/>
+				${board.getKor_co_nm()}
 				</td>
 			<td width="100">
-					<c:out value="${board.getCreated_date()}" />
-				</td>
-			<td width="100">
-					<c:out value="${board.getHits()}" />
+				${board.getFin_prdt_nm()}
 				</td>
 		</tr>
 		</c:forEach>
@@ -99,7 +94,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <table cellspacing="1" width="700" class="page">
 	<tr>
 		<td><c:forEach var="i" begin="1" end="${t_pages}">
-				<a href="freeList.do?current_page=${i}"> [ <c:if
+				<a href="myProductList.do?current_page=${i}"> [ <c:if
 						test="${i==c_page}">
 						<b>
 					</c:if> ${i} <c:if test="${i==c_page}">
@@ -109,6 +104,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 			</c:forEach></td>
 	</tr>
 </table>
+<button onclick="location.href='myProductDetail.do'">가입한 상품 추가</button>
 </div>
 
 </div>

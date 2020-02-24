@@ -70,3 +70,25 @@ create table tlb_bank_board(
 ----show db 
 select * from tlb_saving_board;
 select * from TLB_DEPOSIT_BOARD;
+
+
+select fin_co_no, kor_co_nm, fin_prdt_nm,fin_prdt_cd
+from TLB_DEPOSIT_BOARD order by fin_co_no asc;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ourbank.app.bean.DepositBoard_Bean;
 import com.ourbank.app.bean.FreeBoard_Bean;
 import com.ourbank.app.bean.UserBoard_Bean;
 import com.ourbank.app.service.MyPage_Service;
@@ -175,7 +177,57 @@ public String deleteId(
 		
 		return "board_Mypage/myBoardViewUpdate";
 	}
+/////////////////////////////////////////////////////////////////////////////////////////////////
+	//가입상품
+	@RequestMapping(value="/myProductDetail.do", method =RequestMethod.GET )
+	public String myProductDetail( Model model) {
+		ArrayList<DepositBoard_Bean> depositBankBean=boardService.getDepositBank();
+		ArrayList<DepositBoard_Bean> depositProductBean=boardService.getDepositProduct();
+		
+		
+		
+		model.addAttribute("de_bank_bean", depositBankBean);
+		model.addAttribute("de_product_bean", depositProductBean);
+		
+		//담을 빈빈
+		model.addAttribute("depositBean", new DepositBoard_Bean());
+		
+		return "/board_Mypage/myProduct";
+	}
 	
+	@RequestMapping(value="/myProduct.do", method =RequestMethod.POST)
+	public String myProduct(HttpServletRequest request,
+							String fin_prdt_cd, 
+							Model model) {
+		HttpSession session = request.getSession();
+		String uid = (String)session.getAttribute("uid");
+		if(uid==null) {
+			return "redirect:loginForm.do";
+		}
+		logger.info(fin_prdt_cd);
+		String fpn_array[]=fin_prdt_cd.split(",");
+		for(int i=0; i<fpn_array.length;i++) {
+			System.out.println(fpn_array[i]);
+			DepositBoard_Bean depositBean=boardService.getOneDeposit(fpn_array[i]);
+			depositBean.setId(uid);
+			//유저아이디 상품은행 상품은행코드 상품코드 상품이름 예금/적금insert 하기
+			boardService.insertMyDeposit(depositBean);
+		}
+		
+		return "redirect:myProductList.do";
+	}
+	@RequestMapping(value = "/myProductList.do",method = RequestMethod.GET)
+	public String myProductList(HttpServletRequest request,Model model) {
+		HttpSession session = request.getSession();
+		String uid = (String)session.getAttribute("uid");
+		
+		model.addAttribute("totalCnt",boardService.selectCntMYProduct(uid));
+		model.addAttribute("current_page", 1);
+		model.addAttribute("boardList", boardService.selectAllProduct(uid, 1, 10));	
+		model.addAttribute("uid",uid);
+		return "/board_Mypage/myProductList";
+	}
+/////////////////////////////////////////////////////////////////////////////////////////////////
 	/*
 	//내가쓴 글 - 글수정 처리
 	@RequestMapping(value="/myBoard_update.do", method=RequestMethod.POST)

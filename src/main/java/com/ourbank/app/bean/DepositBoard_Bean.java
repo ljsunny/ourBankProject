@@ -26,6 +26,32 @@ public class DepositBoard_Bean {
 	String intr_rate2; //최고 우대금리
 	String homp_url; //홈페이지 주소
 	
+	//내 상품 view 용 /////////////////////////////////////////////
+	String id;
+	int service_num;
+	String dep_or_sav;
+	
+	
+	
+	
+	public int getService_num() {
+		return service_num;
+	}
+	public void setService_num(int service_num) {
+		this.service_num = service_num;
+	}
+	public String getDep_or_sav() {
+		return dep_or_sav;
+	}
+	public void setDep_or_sav(String dep_or_sav) {
+		this.dep_or_sav = dep_or_sav;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getHomp_url() {
 		return homp_url;
 	}

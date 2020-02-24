@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.ourbank.app.bean.DepositBoard_Bean;
 import com.ourbank.app.bean.UserBoard_Bean;
 
 import com.ourbank.app.service.User_Service;
@@ -65,7 +68,13 @@ public class User_Controller {
 		
 		boardService.insert(boardBean);
 
-		return "redirect:loginForm.do";
+		return "redirect:welcome.do";
+	}
+	//환영합니다 + 가입한 상품받기
+	@RequestMapping(value="/welcome.do",method = RequestMethod.GET )
+	public String welcome(Model model) {
+		
+		return "/user/welcome";
 	}
 
 	// 로그인창 보여줌

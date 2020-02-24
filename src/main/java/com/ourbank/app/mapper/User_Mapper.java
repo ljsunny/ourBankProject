@@ -1,5 +1,7 @@
 package com.ourbank.app.mapper;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -7,6 +9,7 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ourbank.app.bean.DepositBoard_Bean;
 import com.ourbank.app.bean.UserBoard_Bean;
 
 @Repository
@@ -61,6 +64,8 @@ public interface User_Mapper {
 	@Update(UPDATE_PASSWD)
 	void updatePasswd(@Param("passwd") String passwd, 
 					  @Param("id") String id);
+	
+
 	
 	
 }

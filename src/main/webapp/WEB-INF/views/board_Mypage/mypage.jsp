@@ -20,6 +20,9 @@ function goToMyInfo(){
 function goToMyBoard() {
 	location.href='myBoardList.do';
 }
+function goToMyProduct(){
+	location.href='myProductList.do';
+}
 </script>
 </head>
 <body>
@@ -56,7 +59,7 @@ function goToMyBoard() {
 		<tr>
 			<!-- 상품 게시판이 완성되면 만들기 -->
 			<td><input type="button" value="가입한 상품 조회"
-				 class="mybtn"></td>
+				 class="mybtn" onclick="goToMyProduct()"></td>
 			<td><input type="button" value="관심상품"
 				  class="mybtn"></td>
 		</tr>
