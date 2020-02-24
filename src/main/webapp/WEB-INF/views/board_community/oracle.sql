@@ -2,9 +2,12 @@
 create sequence best_seq_idx minvalue 1 maxvalue 9999999999 increment by 1 start with 1 ;
 drop sequence best_seq_idx;
 
+/* 전체게시판 마다 전체 글번호 부여해주기--> 나의 글보기에서 전체 조회가능 */
+create sequence board_seq_idx minvalue 1 maxvalue 9999999999 increment by 1 start with 1 ;
 /*리뷰 게시판*/
 create sequence review_seq minvalue 1 maxvalue 9999999999 increment by 1 start with 1 ;
 create table review_board (
+	board_idx number(10,0) not null,
 	category varchar2(20) default '리뷰',
     category_num number(10,0) default 1,
     best_idx number(10,0) not null,
@@ -37,6 +40,7 @@ primary key (id_x) enable
 /* 자유게시판 */
 create sequence free_seq_idnum minvalue 1 maxvalue 9999999999 increment by 1 start with 1 ;
  create table tlb_free_board (
+ board_idx number(10,0) not null,
     category varchar2(20) default '자유',
     category_num number(10,0) default 2,
  	best_idx number(10,0) not null,
@@ -63,6 +67,7 @@ primary key (idx_num) enable
  /*모임 게시판*/
  create sequence meeting_seq_idnum minvalue 1 maxvalue 9999999999 increment by 1 start with 1 ;
  create table tlb_meeting_board (
+ board_idx number(10,0) not null,
  	category varchar2(20) default '모임',
  	category_num number(10,0) default 3,
  	best_idx number(10,0) not null,
@@ -87,6 +92,7 @@ primary key (idx_num) enable
    /*토론 게시판*/
  create sequence debate_seq_idnum minvalue 1 maxvalue 9999999999 increment by 1 start with 1 ;
  create table tlb_debate_board (
+ board_idx number(10,0) not null,
  	category varchar2(20) default '토론',
  	category_num number(10,0) default 4,
  	best_idx number(10,0) not null,
@@ -111,6 +117,7 @@ primary key (idx_num) enable
  /*제태크 노하우 게시판*/
   create sequence invest_seq minvalue 1 maxvalue 9999999999 increment by 1 start with 1 ;
   create table invest_board (
+  board_idx number(10,0) not null,
  	category varchar2(20) default '제테크노하우',
  	category_num number(10,0) default 5,
  	best_idx number(10,0) not null,
@@ -144,17 +151,15 @@ drop table invest_board;
  
 
  select * from (
-	(select id from review_board) 
+	(select subject, id, created_date, hits from review_board) 
 union 
-	(select id from tlb_free_board)
+	(select subject, id, created_date, hits from tlb_free_board)
 union
-	(select id from tlb_meeting_board)
+	(select subject, id, created_date, hits from tlb_meeting_board)
 union
-	(select id from tlb_debate_board)
+	(select subject, id, created_date, hits from tlb_debate_board)
 union
-	(select id from invest_board)
-union
-	(select id from tlb_user_board));
+	(select subject, id, created_date, hits from invest_board));
 
 select category, category_num, best_idx, id, subject, content, created_date, hits, filename	
 
@@ -180,6 +185,9 @@ select * from (
 					where best_idx=43;
 					
 
+update ((select idx_num, hits from tlb_meeting_board) union 
+	(select idx_num, hits from tlb_free_board)) set hits=3
+	where idx_num=7;
 	
 
 

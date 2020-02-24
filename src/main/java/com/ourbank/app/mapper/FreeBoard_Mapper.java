@@ -19,8 +19,8 @@ public interface FreeBoard_Mapper {
 	//글 입력 처리
 	final String INSERT=
 			"insert into tlb_free_board("
-			+ "best_idx, idx_num, id, subject, content, created_date, filename, filesize, step, ref, depth)"
-			+ " values (best_seq_idx.nextval, free_seq_idnum.nextval, #{id}, #{subject}, #{content}, SYSDATE, #{filename}, #{filesize}, #{step}, #{ref}, #{depth})";
+			+ "board_idx, best_idx, idx_num, id, subject, content, created_date, filename, filesize, step, ref, depth)"
+			+ " values (board_seq_idx, best_seq_idx.nextval, free_seq_idnum.nextval, #{id}, #{subject}, #{content}, SYSDATE, #{filename}, #{filesize}, #{step}, #{ref}, #{depth})";
 	@Insert(INSERT)
 	void insertBoard(FreeBoard_Bean boardBean);
 	
@@ -58,7 +58,8 @@ public interface FreeBoard_Mapper {
 	
 	
 	//글보기-글보기에 뿌릴 bean 가져오기: idx_num, subject, id, created_date, content, hits, filename
-	final String SELECT_BY_ID="select idx_num, subject, id, created_date, content, hits, filename"
+	final String SELECT_BY_ID=
+			"select idx_num, subject, id, created_date, content, hits, filename"
 			+ " from tlb_free_board where idx_num=#{idx_num}";
 	@Select(SELECT_BY_ID)
 	//				output

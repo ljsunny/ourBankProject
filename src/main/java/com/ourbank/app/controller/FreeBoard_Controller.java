@@ -38,8 +38,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ourbank.app.bean.FreeBoard_Bean;
 import com.ourbank.app.service.FreeBoard_Service;
 
-import com.ourbank.app.bean.FreeBoard_Bean;
-import com.ourbank.app.service.FreeBoard_Service;
 
 @Controller
 public class FreeBoard_Controller {
@@ -207,7 +205,7 @@ public class FreeBoard_Controller {
 		logger.info("hits: "+boardData.getHits());
 		//조회수 증가
 		boardService.updateHits(boardData.getHits(),boardData.getIdx_num());
-		boardData.setHits(boardService.getSpecificRow(idx_num).getHits());;		
+		boardData.setHits(boardService.getSpecificRow(idx_num).getHits());		
 			
 		model.addAttribute("idx_num", idx_num);
 		model.addAttribute("current_page", current_page);

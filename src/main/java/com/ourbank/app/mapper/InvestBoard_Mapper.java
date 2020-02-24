@@ -12,9 +12,9 @@ import com.ourbank.app.bean.InvestBoard_Bean;
 public interface InvestBoard_Mapper {
 	//글입력처리
 		final String INSERT=
-				"insert into invest_board(best_idx, id_x, id, subject, created_date, invest_case, "
+				"insert into invest_board(board_idx, best_idx, id_x, id, subject, created_date, invest_case, "
 				+"content, filename, filesize, step, ref, depth) "
-				+"values (best_seq_idx.nextval, invest_seq.nextval,#{id},#{subject},SYSDATE, #{invest_case}, " 
+				+"values (board_seq_idx, best_seq_idx.nextval, invest_seq.nextval,#{id},#{subject},SYSDATE, #{invest_case}, " 
 				+"#{content},#{filename},#{filesize}, #{step}, #{ref}, #{depth})";	
 		@Insert(INSERT)
 		void insertBoard(InvestBoard_Bean boardBean);

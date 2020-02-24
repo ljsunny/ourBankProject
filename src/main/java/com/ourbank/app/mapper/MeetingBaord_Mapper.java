@@ -21,8 +21,8 @@ public interface MeetingBaord_Mapper {
 	//글 입력 처리
 	final String INSERT=
 			"insert into tlb_meeting_board("
-			+ "best_idx, idx_num, id, subject, content, created_date, filename, filesize, step, ref, depth)"
-			+ " values (best_seq_idx.nextval, meeting_seq_idnum.nextval, #{id}, #{subject}, #{content}, SYSDATE, #{filename}, #{filesize}, #{step}, #{ref}, #{depth})";
+			+ "board_idx, best_idx, idx_num, id, subject, content, created_date, filename, filesize, step, ref, depth)"
+			+ " values (board_seq_idx, best_seq_idx.nextval, meeting_seq_idnum.nextval, #{id}, #{subject}, #{content}, SYSDATE, #{filename}, #{filesize}, #{step}, #{ref}, #{depth})";
 	@Insert(INSERT)
 	void insertBoard(MeetingBoard_Bean boardBean);
 	

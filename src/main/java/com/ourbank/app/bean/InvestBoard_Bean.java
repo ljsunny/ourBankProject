@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Repository
 public class InvestBoard_Bean {
+	private int board_idx; //게시판 전체 글 번호
 	private String category;
 	private int category_num;
 	private int idx;
@@ -26,7 +27,12 @@ public class InvestBoard_Bean {
 	private int step;
 	private int depth;
 	
-	
+	public int getBoard_idx() {
+		return board_idx;
+	}
+	public void setBoard_idx(int board_idx) {
+		this.board_idx = board_idx;
+	}
 	public int getCategory_num() {
 		return category_num;
 	}
