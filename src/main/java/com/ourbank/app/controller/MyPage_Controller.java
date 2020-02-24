@@ -119,6 +119,7 @@ public String deleteId(
 		
 		logger.info("best_listSpecificPageWork called");
 		logger.info("current_page=["+pageForView+"]");
+		model.addAttribute("totalCnt", new Integer(boardService.getTotalCnt()));
 		model.addAttribute("current_page", pageForView);
 		model.addAttribute("boardList", boardService.getUserBoardList(uid, Integer.parseInt(pageForView),10));	
 		model.addAttribute("uid",uid);
@@ -176,12 +177,12 @@ public String deleteId(
 		return "board_Mypage/myBoardViewUpdate";
 	}
 	
-	/*
+	
 	//내가쓴 글 - 글수정 처리
 	@RequestMapping(value="/myBoard_update.do", method=RequestMethod.POST)
 	public String free_Update(
 			@ModelAttribute("boardBean")  FreeBoard_Bean boardBean,
-			@RequestParam("idx_num") int idx_num,  HttpServletRequest request, 
+			@RequestParam("board_idx") int board_idx,  HttpServletRequest request, 
 			@RequestParam("current_page") String current_page,
 			Model model) {
 		System.out.println(boardBean.toString());
@@ -213,20 +214,40 @@ public String deleteId(
 					boardBean.getContent()+" "+
 					boardBean.getSubject());
 		
-		boardBean.seBboard_idx(board_idx);
+		boardBean.setBoard_idx(board_idx);
 		
 		boardService.updateBoard(boardBean);
-		boardBean=boardService.getSpecificRow(idx_num);
+		boardBean=boardService.getSpecificRow(board_idx);
 		
-		model.addAttribute("idx_num", idx_num);
+		model.addAttribute("board_idx", board_idx);
 		model.addAttribute("current_page", current_page);
 		model.addAttribute("searchStr", "None");
-		model.addAttribute("boardData", boardService.getSpecificRow(idx_num));
+		model.addAttribute("boardData", boardService.getSpecificRow(board_idx));
 		model.addAttribute("filename", boardBean.getFilename());
 		
-		return "board_community/free/freeViewMemo";
+		return "board_Mypage/myBoardView";
 	}
 	
-	//내가쓴 글 - 글 삭제*/
+	//내가쓴 글 - 글 삭제
+	@RequestMapping(value="/myBoardDelete.do", method=RequestMethod.GET)
+	public String deleteSpecificRow(HttpServletRequest request, 
+									@RequestParam("board_idx") int board_idx,
+									@RequestParam("current_page") int current_page,
+									Model model) {
+		logger.info("myBoardDelete called!!");
+		logger.info("idx_num=["+board_idx+"]  current_page=["+current_page+"]");
+		
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("uid");
+		
+		boardService.deleteRow(board_idx);
+		//다시 페이지를 조회한다.
+		model.addAttribute("totalCnt", new Integer(boardService.getTotalCnt()));
+		model.addAttribute("current_page", current_page);
+		model.addAttribute("boardList",boardService.getUserBoardList(id,current_page, 10));
+		
+		return "redirect:myBoardList.do";
+	}
+	
 
 }

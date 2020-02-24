@@ -56,12 +56,12 @@ function boardlist(){
 }
 
 function boardmodify(){
-	location.href='myBoardDelete.do?board_idx=${board_idx}&current_page=${current_page}';
+	location.href='myBoardUpdateform.do?board_idx=${board_idx}&current_page=${current_page}';
 }
 
 function boarddelete(){
 	if(confirm('정말 삭제하시겠습니까?')==true){
-		location.href='myBoardDelete.do?board_idx=${board_idx}&current_page=${current_page}';
+	location.href='myBoardDelete.do?board_idx=${board_idx}&current_page=${current_page}';
 	}else {
 		return;
 	}

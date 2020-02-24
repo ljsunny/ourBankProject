@@ -48,7 +48,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!-- *********************** 내용 ****************************  -->
 <div id="line_div">
 	<div id="sub_logo">
-		<h2>리뷰 게시판</h2>
+		<h2>QnA</h2>
     </div> 
  <div id="site_div">	
 

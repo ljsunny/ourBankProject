@@ -151,12 +151,12 @@ drop table invest_board;
 
 
 create view myboardview as select * from (
-					(select board_idx, id, subject, content, created_date, hits, filename from review_board) union
-					(select board_idx, id, subject, content, created_date, hits, filename from TLB_free_BOARD) union 
-					(select board_idx, id, subject, content, created_date, hits, filename from tlb_meeting_board) union 
-					(select board_idx, id, subject, content, created_date, hits, filename from tlb_debate_board) union
-					(select board_idx, id, subject, content, created_date, hits, filename from invest_board) union
-					(select board_idx, id, subject, content, created_date, hits, filename from qna_board)
+					(select board_idx, id, subject, content, created_date, hits, filename, filesize from review_board) union
+					(select board_idx, id, subject, content, created_date, hits, filename, filesize from TLB_free_BOARD) union 
+					(select board_idx, id, subject, content, created_date, hits, filename, filesize from tlb_meeting_board) union 
+					(select board_idx, id, subject, content, created_date, hits, filename, filesize from tlb_debate_board) union
+					(select board_idx, id, subject, content, created_date, hits, filename, filesize from invest_board) union
+					(select board_idx, id, subject, content, created_date, hits, filename, filesize from qna_board)
 					) ;
 
 			drop view myboardview;		

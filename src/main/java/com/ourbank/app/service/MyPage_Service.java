@@ -40,6 +40,27 @@ public FreeBoard_Bean getSpecificRow(int board_idx) {
 	return this.boardMapper.getSpecificRow(board_idx);
 }
 
+//내가쓴글 - 글 수정
+public void updateBoard(FreeBoard_Bean boardBean) {
+	boardMapper.updateBoard(boardBean.getBoard_idx(), boardBean.getSubject(),
+			boardBean.getContent(), boardBean.getFilename(), boardBean.getFilesize());
+	
+}
+
+//전체글 수
+public int getTotalCnt() {
+	int nCnt=0;
+	nCnt=this.boardMapper.getTotalCnt();
+	return nCnt;
+	}
+
+//내가쓴글 - 글 삭제
+public void deleteRow(int board_idx) {
+	this.boardMapper.deleteSpecificRow(board_idx);
+	}
+
+
+
 	
 
 

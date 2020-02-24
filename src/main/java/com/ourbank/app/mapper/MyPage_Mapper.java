@@ -82,6 +82,26 @@ public interface MyPage_Mapper {
 	})
 	FreeBoard_Bean getSpecificRow(@Param("board_idx") int board_idx);
 	
+	//내가쓴 글 - 글수정
+	final String MYBOARD_UPDATE =
+			"update myboardview set subject = #{subject}, content=#{content}, "
+			+"filename=#{filename}, filesize=#{filesize} where board_idx=#{board_idx}";
+	@Update(MYBOARD_UPDATE)
+	void updateBoard(@Param("board_idx") int board_idx, @Param("subject") String subject,
+			@Param("content") String content, @Param("filename") String filename, 
+			@Param("filesize") long filesize);
+	
+	//전체글 수
+	final String SELECT_CNT_ALL =
+			"select count(1) from myboardview where id=#{id}";
+	@Select(SELECT_CNT_ALL)
+	int getTotalCnt();
+	
+	//내가쓴 글 - 삭제
+	final String DELETE_MYBOARD =
+			"delete from myboardview where board_idx=#{board_idx}";
+	void deleteSpecificRow(@Param("board_idx") int board_idx);
+	
 	
 	
 	

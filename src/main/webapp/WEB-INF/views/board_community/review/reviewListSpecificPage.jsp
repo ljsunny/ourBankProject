@@ -198,7 +198,7 @@ String id=(String) session.getAttribute("id");
 <c:if test="${id==null}">
 	<div>
 			<input type="button" value="±Û¾²±â" class="bnt_comu"
-			onclick="window.location='review_show_write_form.do'"></td>
+			onclick="window.location='review_show_write_form.do'">
 	</div>
 </c:if>
 </div>

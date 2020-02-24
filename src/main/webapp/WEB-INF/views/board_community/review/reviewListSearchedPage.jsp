@@ -100,7 +100,6 @@
 	<c:forEach var="board" items="${searchedList}">
 		<tr class="tlb_board_bottom">
 			<td width="40">${board.getIdx()}</td>
-			<td width="100">${board.getId()}</td>
 			<td width="320">
 				<!-- 로그인 o -->
 				<c:if test="${id == null }"> <!--   (사용시 ${id != null }로바꾸기!!-->
@@ -115,6 +114,7 @@
 					href="reviewView.do" > <c:out value="${board.getSubject()}" /></a>
 				</c:if>
 			</td>
+			<td width="100">${board.getId()}</td>
 			<td width="100">
 					<c:out value="${board.getCreated_date()}" />
 				</td>
@@ -151,4 +151,9 @@
 </div>
 </div>
 
+
+<!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
+
+	<jsp:include page="../../footer.jsp"></jsp:include>
+	
 </html>
