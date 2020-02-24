@@ -14,7 +14,7 @@ public interface InvestBoard_Mapper {
 		final String INSERT=
 				"insert into invest_board(board_idx, best_idx, id_x, id, subject, created_date, invest_case, "
 				+"content, filename, filesize, step, ref, depth) "
-				+"values (board_seq_idx, best_seq_idx.nextval, invest_seq.nextval,#{id},#{subject},SYSDATE, #{invest_case}, " 
+				+"values (board_seq_idx.nextval, best_seq_idx.nextval, invest_seq.nextval,#{id},#{subject},SYSDATE, #{invest_case}, " 
 				+"#{content},#{filename},#{filesize}, #{step}, #{ref}, #{depth})";	
 		@Insert(INSERT)
 		void insertBoard(InvestBoard_Bean boardBean);

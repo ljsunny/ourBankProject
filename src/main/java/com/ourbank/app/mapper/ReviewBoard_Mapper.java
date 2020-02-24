@@ -14,7 +14,7 @@ public interface ReviewBoard_Mapper {
 		final String INSERT=
 				"insert into review_board(board_idx, best_idx, id_x, id, subject, created_date, review_case, "
 				+"content, filename, filesize, step, ref, depth, satisfaction, banks, re_productname) "
-				+"values (board_seq_idx, best_seq_idx.nextval, invest_seq.nextval,#{id},#{subject},SYSDATE, #{review_case}, " 
+				+"values (board_seq_idx.nextval, best_seq_idx.nextval, invest_seq.nextval,#{id},#{subject},SYSDATE, #{review_case}, " 
 				+"#{content},#{filename},#{filesize}, #{step}, #{ref}, #{depth}, #{satisfaction}, #{banks}, #{re_productname})";		
 		@Insert(INSERT)
 		void insertBoard(ReviewBoard_Bean boardBean);

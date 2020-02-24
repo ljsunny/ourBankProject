@@ -20,7 +20,7 @@ public interface DebateBoard_Mapper {
 	final String INSERT=
 			"insert into tlb_debate_board("
 			+ "board_idx, best_idx, idx_num, id, subject, content, created_date, filename, filesize, step, ref, depth)"
-			+ " values (board_seq_idx, best_seq_idx.nextval, debate_seq_idnum.nextval, #{id}, #{subject}, #{content}, SYSDATE, #{filename}, #{filesize}, #{step}, #{ref}, #{depth})";
+			+ " values (board_seq_idx.nextval, best_seq_idx.nextval, debate_seq_idnum.nextval, #{id}, #{subject}, #{content}, SYSDATE, #{filename}, #{filesize}, #{step}, #{ref}, #{depth})";
 	@Insert(INSERT)
 	void insertBoard(DebateBoard_Bean boardBean);
 	

@@ -19,10 +19,10 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
 <script language="javascript">
 	function boardlist(){
-		location.href='/app/freeList.do?current_page=${current_page}';
+		location.href='/app/myBoardList.do?current_page=${current_page}';
 	}
 </script>
-<title>자유게시판 글수정</title>
+<title>글수정</title>
 </head>
 
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
@@ -31,15 +31,13 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 	
 <div id="body_div">
 	<div id="side_menu">
-		<h4><a href="/app/reviewList.do?current_page=1">커뮤니티</a></h4>
+		<h4>My Page</a></h4>
 		<div id="side_div">
 			<ul id="side_submenu">
-				<li>- <a href="/app/reviewList.do?current_page=1"> 리 뷰</a></li>
-				<li>- <a href="/app/freeList.do?current_page=1"> 자유게시판</a></li>
-				<li>- <a href="/app/meetingList.do?current_page=1"> 모임방</a></li>
-				<li>- <a href="/app/debateList.do?current_page=1"> 토론방</a></li>
-				<li>- <a href="/app/investList.do?current_page=1"> 재테크노하우</a></li>
-				<li>- <a href="/app/bestList.do?current_page=1"> BEST게시물</a></li>
+				<li>- <a href="#"> 개인정보관리 </a></li>
+				<li>- <a href="myBoardList.do"> 내가 작성한 글 </a></li>
+				<li>- <a href="#"> 가입한 상품 조회 </a></li>
+				<li>- <a href="#"> 관심상품 </a></li>
 			</ul>
 		</div>
 	</div>
@@ -48,14 +46,14 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
 <div id="line_div">
  		<div id="sub_logo">
-<h2>자유게시판</h2>	
+<h2>내가 쓴 글</h2>	
   </div> 
  <div id="site_div">	
 
-<c:url var="updateUrl" value="/free_update.do"/>
+<c:url var="updateUrl" value="/myboard_update.do"/>
 <sf:form modelAttribute="boardData" method="POST" action="${updateUrl}" enctype="multipart/form-data" id="form" >
 		<table class="tlb_board">
-		<input type="hidden" name="idx_num" value="${idx_num}">
+		<input type="hidden" name="board_idx" value="${board_idx}">
 		<input type="hidden" name="current_page" value="${current_page}">
 		
 		<tr>
