@@ -143,13 +143,23 @@ drop table invest_board;
  
  delete invest_board 
  
- 
- 
- 
  /***************************************/
  
+ /* Best 게시판 View */
+ create view best_boardView as select * from (
+ 					(select category, category_num, best_idx, id, subject, content, created_date, hits, filename, depth from review_board) union
+ 					(select category, category_num, best_idx, id, subject, content, created_date, hits, filename, depth from tlb_free_board) union 
+ 					(select category, category_num, best_idx, id, subject, content, created_date, hits, filename, depth  from tlb_meeting_board) union 
+ 					(select category, category_num, best_idx, id, subject, content, created_date, hits, filename, depth from tlb_debate_board) union 
+ 					(select category, category_num, best_idx, id, subject, content, created_date, hits, filename, depth from invest_board)
+ 					);
+ drop view best_boardView ;	
+ 
+ select * from best_boardView where rownum <=5 and hits is not null order by hits desc;
+ select category, category_num, best_idx, id, subject, created_date, hits, 
+ from best_boardView where rownum <=5 and hits is not null order by hits desc;
 
-
+/* 내가 작성한 글 게시판 View */
 create view myboardview as select * from (
 					(select board_idx, id, subject, content, created_date, hits, filename, filesize, category_num from review_board) union
 					(select board_idx, id, subject, content, created_date, hits, filename, filesize, category_num from TLB_free_BOARD) union 
@@ -158,13 +168,43 @@ create view myboardview as select * from (
 					(select board_idx, id, subject, content, created_date, hits, filename, filesize, category_num from invest_board) union
 					(select board_idx, id, subject, content, created_date, hits, filename, filesize, category_num from qna_board)
 					) ;
+					
 
-			drop view myboardview;		
+drop view myboardview;		
 select * from myboardview;
 
-select  board_idx, id, subject, content, created_date, hits, filename from myboardview where id = 'user01' order by created_date desc;
 
-select * from  board_idx, id, subject, content, created_date, hits, filename, 
-ceil(rownum / 10) as page from (select  * from myboardview where id = 'user01' order by created_date desc))
- where page=1;
+/* 검색용 전체 게시판 View */
+ /*category_num 기준*/
+ 리뷰게시판 1 자유게시판 2 모임게시판 3 토론게시판 4 재테크노하우 5
+ QnA 6 FAQ 7 관련뉴스 8 공시사항 9
+ create view View_Full_Board as select * from (
+					(select board_idx, category_num, id, subject, content, created_date, hits, filename, filesize from review_board) union
+					(select board_idx, category_num, id, subject, content, created_date, hits, filename, filesize from TLB_free_BOARD) union 
+					(select board_idx, category_num, id, subject, content, created_date, hits, filename, filesize from tlb_meeting_board) union 
+					(select board_idx, category_num, id, subject, content, created_date, hits, filename, filesize from tlb_debate_board) union
+					(select board_idx, category_num, id, subject, content, created_date, hits, filename, filesize from invest_board) union
+					(select board_idx, category_num, id, subject, content, created_date, hits, filename, filesize from qna_board) union
+					(select board_idx, category_num, id, subject, content, created_date, hits, filename, filesize from faq_board) union
+					(select board_idx, category_num, id, subject, content, created_date, hits, filename, filesize from news_board) union
+					(select board_idx, category_num, id, subject, content, created_date, hits, filename, filesize from newnotice_board)
+					) ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -3,6 +3,8 @@ create sequence newnotice_seq minvalue 1 maxvalue 9999999999 increment by 1 star
 -- 0이면 본글 1이면 답글
  
 create table newnotice_board (
+board_idx number(10,0) not null, /*전체글 구별*/
+	category_num number(10,0) default 9, /*전체 게시판별 구분*/
  	id_x number(10,0) not null,
  	id varchar2(20) not null,
  	subject varchar2(50),

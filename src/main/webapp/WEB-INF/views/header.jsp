@@ -50,8 +50,8 @@ String uid=(String)session.getAttribute("uid");
 			</ul>
 	 <ul class="contact">
 			 <li><form action="indexSearch.do" method=post name="sform">
-		 	   <input type=text name=search size=25>
-			   <input type=button value="검 색" class="bnt_search" onclick="send(this.form);">
+		 	   <input type=text name=searchStr size=25>
+			   <input type=submit value="검 색" class="bnt_search" onclick="send(this.form);">
 			 </form></li>
 			 <li><a href="https://www.facebook.com/" class="icon icon-facebook"><span>Facebook</span></a></li>
 			 <li><a href="https://www.instagram.com/?hl=ko" class="icon icon-Instagram"><span>Instagram</span></a></li>
@@ -97,7 +97,7 @@ String uid=(String)session.getAttribute("uid");
 			    <ul>
 	              <li><a href="faqList.do?current_page=1">자주하는 질문</a></li>
 	              <li><a href="qnaList.do?current_page=1">QnA</a></li>
-	              <li><a href="#">Contact-email</a></li>
+	              <li><a href="email.do">Contact-email</a></li>
 	            </ul>
 	          </div>
 	        </li>

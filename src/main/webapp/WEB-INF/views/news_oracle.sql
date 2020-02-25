@@ -1,6 +1,8 @@
 create sequence news_seq minvalue 1 maxvalue 9999999999 increment by 1 start with 1 ;
  
 create table news_board (
+	board_idx number(10,0) not null, /*전체글 구별*/
+	category_num number(10,0) default 8, /*전체 게시판별 구분*/
  	id_x number(10,0) not null,
  	id varchar2(20) not null,
  	subject varchar2(50),
