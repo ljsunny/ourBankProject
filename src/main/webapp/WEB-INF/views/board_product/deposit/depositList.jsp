@@ -1,3 +1,4 @@
+<%@page import="com.ourbank.app.PageNumberingManager"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 
@@ -54,7 +55,7 @@ function myWant(count){
 	var pc="prdt_cd"+count;
 	var prdt_cd=document.getElementById(pc).value;
 	
-	location.href='myWant.do?current_page=1&fin_prdt_cd='+prdt_cd;
+	location.href='myWant.do?current_page=1&dep_or_sav=0&fin_prdt_cd='+prdt_cd;
 }
 </script>
 </head>
@@ -120,43 +121,47 @@ function myWant(count){
 				<c:set var="prdt_cd" value="prdt_cd"/>
 				<input id="${prdt_cd}${status.count}" type="hidden" value="${boardList.getFin_prdt_cd()}">
 				<td><span onclick="myWant(${status.count})">
-				<img src="${pageContext.request.contextPath}/resources/images/cart.png" 
-				width="30" height="30" ></span>&nbsp;&nbsp;&nbsp;</td>
-				<td><button><a href="${boardList.getHomp_url()}" target="blank">가입하기</a></button>
+					<img src="${pageContext.request.contextPath}/resources/images/cart.png" 
+					width="30" height="30" ></span>&nbsp;&nbsp;&nbsp;</td>
+				<td><button>
+					<a href="${boardList.getHomp_url()}" target="blank">가입하기</a>
+					</button>
 				</td>
 			</tr>
 		</c:forEach>
 	</table>
 	<hr width="65%">
 	<!-- 페이징 -->
-	<table align="center">
-		<tr>
-		<td>
-			<input type="button" value="<<" onclick="paging(1)"/>
-		</td>
-		<td>
-			<c:if test="${current_page>1}">
-			<input type="button" value="<" onclick="pre_paging(${current_page})"/>
-			</c:if>
-		</td>
-		<td>
-		<c:forEach var="i" begin="${current_page}" end="${last_page}">
-			<c:if test="${i<total_page}">
-				<input type="button" value="${i}" onclick="paging(${i})"/>
-			</c:if>
-		</c:forEach>
-		</td>
-		<td>
-			<c:if test="${current_page<total_page-1}">
-			<input type="button" value=">" onclick="after_paging(${current_page})"/>
-		
-			</c:if>
-		</td>
-		<td>
-			<input type="button" value=">>" onclick="paging(${total_page-1})"/>
-		</td>
-		</tr>
-	</table>
+	<c:set var="total_cnt" value="${totalCnt}"></c:set>
+	<c:set var="total_page" value="${total_page}"></c:set>
+		<%
+			int rowsPerPage = 10;
+			int total_cnt = ((Integer) (pageContext.getAttribute("total_cnt"))).intValue();
+
+			int total_pages = ((Integer) (pageContext.getAttribute("total_page"))).intValue();;
+			pageContext.setAttribute("t_pages", total_pages);
+		%>
+
+<div style="margin-top: 50px; font-weight: bold;">
+<table align="center" cellspacing="1" width="700" class="page">
+	<tr>
+
+		<td><c:forEach var="i" begin="1" end="${t_pages}">
+				<a href="depositList.do?current_page=${i}"> <button>
+					<c:if test="${i==c_page}">
+						<b>
+					</c:if> 
+					${i} 
+					<c:if test="${i==c_page}">
+						<b>
+					</c:if> </button>
+				</a>
+			</c:forEach></td>
+	</tr>
+</table>
+
+</div>
+
 	<hr width="65%">
 	</div>
 	<!-- *********************** 게시판 글쓰기 폼 ****************************  -->	

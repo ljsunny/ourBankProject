@@ -22,18 +22,15 @@ public class SavingProduct_Controller {
 	private static final Logger logger = LoggerFactory.getLogger(SavingProduct_Controller.class);
 	
 	@RequestMapping(value = "/savingList.do", method = RequestMethod.GET)
-	public String depositList(@RequestParam("current_page") String currentPage, Model model) {
+	public String depositList(@RequestParam("current_page") int currentPage, Model model) {
 		int total_cnt = new Integer(boardService.nSavingProduct());
 
 		int total_page = PageNumberingManager.getInstance().getTotalPage(total_cnt, 3);
-		int first_block = PageNumberingManager.getInstance().getFirstPageInBlock(Integer.parseInt(currentPage), 10);
-		int last_block = PageNumberingManager.getInstance().getLastPageInBlock(Integer.parseInt(currentPage), 10);
 
 		model.addAttribute("total_page", total_page);
 		model.addAttribute("totalCnt", total_cnt);// 전체 글수
 		model.addAttribute("current_page", currentPage);
-		model.addAttribute("boardList", boardService.selectSavingList(Integer.parseInt(currentPage), 3));
-		model.addAttribute("last_page", Integer.parseInt(currentPage) + 9);
+		model.addAttribute("boardList", boardService.selectSavingList(currentPage, 3));
 		model.addAttribute("all_bank", boardService.selectAllBank());
 
 		return "/board_product/saving/savingList";

@@ -22,6 +22,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <title>아워뱅크::내금융상품</title>
 <script type="text/javascript">
 function productdelete(count){
+	//count: 해당 리스트의 몇번째 요소인가
 	var id=document.getElementById("uid").value;
 	var pc="prdt_cd"+count;
 	var fin_co_cd=document.getElementById(pc).value;
@@ -133,7 +134,8 @@ function productdelete(count){
 				<a href="myProductList.do?current_page=${i}"> [ <c:if
 						test="${i==c_page}">
 						<b>
-					</c:if> ${i} <c:if test="${i==c_page}">
+					</c:if> ${i} 
+					<c:if test="${i==c_page}">
 						<b>
 					</c:if> ]
 				</a>

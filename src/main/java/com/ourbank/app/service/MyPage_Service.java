@@ -123,6 +123,14 @@ public void insertMyWant(String fin_prdt_cd,DepositBoard_Bean depositBean, Strin
 			depositBean.getFin_prdt_nm(),
 			dep_or_sav);
 }
+public void insertMyWant(String fin_prdt_cd,SavingBoard_Bean savingBean, String dep_or_sav) {
+	boardMapper.insertMyWant(fin_prdt_cd,
+			savingBean.getFin_co_no(),
+			savingBean.getKor_co_nm(),
+			savingBean.getFin_prdt_cd(),
+			savingBean.getFin_prdt_nm(),
+			dep_or_sav);
+}
 
 //모든 원하는 상품 수
 public int selectCntWant(String id) {

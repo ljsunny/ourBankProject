@@ -26,9 +26,7 @@ function wantdelete(count){
 	var id=document.getElementById("uid").value;
 	
 	var pc="prdt_cd"+count;
-	alert(pc);
 	var fin_co_cd=document.getElementById(pc).value;
-	alert(fin_co_cd);
 	if(confirm('정말 삭제하시겠습니까?')==true){
 		location.href='deleteMyWant.do?id='+id+'&fin_prdt_cd='+fin_co_cd;
 	}else {
@@ -134,6 +132,7 @@ function wantdelete(count){
 <div style="margin-top: 50px; font-weight: bold;">
 <table cellspacing="1" width="700" class="page">
 	<tr>
+
 		<td><c:forEach var="i" begin="1" end="${t_pages}">
 				<a href="myProductList.do?current_page=${i}"> [ <c:if
 						test="${i==c_page}">

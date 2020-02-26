@@ -292,16 +292,29 @@ public String deleteId(
 						HttpServletRequest request,
 						HttpServletResponse response,
 						@Param("current_page") int current_page,
+						@Param("dep_or_sav") String dep_or_sav,
 						@Param("fin_prdt_cd") String fin_prdt_cd,
 						Model model) {
 		HttpSession session=request.getSession();
 		String id=(String) session.getAttribute("uid");
-		String dep_or_sav="예금";
+		
+		//관심상품에 이미 상품이 존재하는지 확인
 		if(boardService.selectWantExist(id, fin_prdt_cd)==0) {
-		logger.info(fin_prdt_cd);
-		DepositBoard_Bean depositBean=boardService.getOneDeposit(fin_prdt_cd);
-		System.out.println(depositBean.getFin_prdt_cd());
-		boardService.insertMyWant(id,depositBean,dep_or_sav);
+		
+		if(dep_or_sav=="0") {
+			dep_or_sav="예금";
+			logger.info(fin_prdt_cd);
+			DepositBoard_Bean depositBean=boardService.getOneDeposit(fin_prdt_cd);
+			System.out.println(depositBean.getFin_prdt_cd());
+			boardService.insertMyWant(id,depositBean,dep_or_sav);
+		}else {
+			dep_or_sav="적금";
+			SavingBoard_Bean savingBean=boardService.getOneSaving(fin_prdt_cd);
+			System.out.println(savingBean.getFin_prdt_cd());
+			boardService.insertMyWant(id,savingBean,dep_or_sav);
+		}
+		
+	
 		}else {
 			PrintWriter out;
 			try {
@@ -314,8 +327,7 @@ public String deleteId(
 				e.printStackTrace();
 			}
 		}
-		
-		
+			
 		return myWantList(request,1,model);
 	
 	}
@@ -330,7 +342,6 @@ public String deleteId(
 		model.addAttribute("uid",uid);
 		model.addAttribute("totalCnt",boardService.selectCntWant(uid));
 		model.addAttribute("current_page", current_page);
-		//current_page 수정하기!!!
 		model.addAttribute("boardList",boardService.selectWantList(uid, current_page, 10));
 		return "/board_Mypage/myWant";
 	}
@@ -342,7 +353,9 @@ public String deleteId(
 			Model model) {
 		HttpSession session = request.getSession();
 		String uid = (String)session.getAttribute("uid");
+		//삭제
 		boardService.deleteWant(uid, fin_prdt_cd);
+		model.addAttribute("current_page", 1);
 		return "redirect:myWantList.do";
 	}
 /////////////////////////////////////////////////////////////////////////////////////////////////
