@@ -17,10 +17,12 @@
 
 <html>
 <head>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fonts.css" >
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/body.css" >
 <meta charset="EUC-KR">
 <title>QnA</title>
 
@@ -32,6 +34,7 @@
 	
 <!-- *********************** 사이드 메뉴 ****************************  -->	
 	
+	<div id="body_div">
 	<div id="side_menu">
 		<h4><a href="#">고객센터</a></h4>
 		<div id="side_div">
@@ -57,45 +60,57 @@
 	HttpSession session = request.getSession();
 	String uid=(String) session.getAttribute("uid"); 
 %>
-
+<div id="line_div">
+	<div id="sub_logo">
+		<h2>QnA</h2>
+    </div> 
+ <div id="site_div">
+ 
+ <div style="margin-top: 50px; font-weight: bold;">
 <table cellspacing="1" width="700" border="0">
 	<tr>
 		<td>총 게시물:<c:out value="${totalCnt}"/></td>
-		<td><p align=right>페이지:<c:out value="${t_pages}"/></p></td>
+		<td><p align=right>페이지:<c:out value="${t_pages}"/></td>
 	</tr>
 </table>
-<table cellspacing="1" width="700" border="1">
+</div>
+
+<table cellspacing=1 width=700 >
+	<thead>
 	<tr>
-		<td width="50"><p align="center">번호</td>
-		<td width="100"><p align="center">아이디</td>
-		<td width="320"><p align="center">제목</td>
-		<td width="100"><p align="center">등록일</td>
-		<td width="100"><p align="center">조회수</td>
-	</tr>
+		<td width="50" class="tlb_board_top">글번호</td>
+		<td width="320" class="tlb_board_top">제 목</td>
+		<td width="100" class="tlb_board_top">아이디</td>
+		<td width="100" class="tlb_board_top">등록일</td>
+		<td width="100" class="tlb_board_top">조회수</td>
+	</tr> </thead>
+	<tbody>
 	<c:forEach var="board" items="${searchedList}">
-		<tr>
-			<td width="40"><p align="center">${board.getIdx()}</p></td>
-			<td width="100"><p align="center">${board.getId()}</p></td>
+		<tr class="tlb_board_bottom">
+			<td width="40">${board.getIdx()}</td>
 			<td width="320">
-				<p align="center">
+				
 					<a
 						href="qnaView.do?idx=${board.getIdx()}
 							&current_page=<c:out value="${current_page}"/>
 							&searchStr=None"
 						title="${board.getContent()}"> <c:out
 							value="${board.getSubject()}" /></a>
-				</p>
+				
 			</td>
-			<td width="100"><p align="center">
+			<td width="100">${board.getId()}</td>
+			<td width="100">
 					<c:out value="${board.getCreated_date()}" />
-				</p></td>
-			<td width="100"><p align="center">
+				</td>
+			<td width="100">
 					<c:out value="${board.getHits()}" />
-				</p></td>
+				</td>
 		</tr>
-	</c:forEach>
+	</c:forEach> </tbody>
 </table>
-<table cellspacing="1" width="700" border="1">
+
+<div style="margin-top: 50px; font-weight: bold;">
+<table cellspacing="1" width="700" class="page">
 	<tr>
 		<td>
 		<c:forEach var="i" begin="1" end="${t_pages}">
@@ -110,12 +125,21 @@
 		</td>
 	</tr>
 </table>
-<table width="700">
-	<tr>
-		<td><input type="button" value="전체 목록으로 돌아가기"
-		onclick="window.location='qnaList.do?current_page=1'"></td>
-	</tr>
-</table>
+</div>
+
+<div>
+		<input type="button" value="전체 목록으로 돌아가기" class="bnt_comu"
+		onclick="window.location='qnaList.do?current_page=1'">
+	
+</div>
+</div>
+</div>
+</div>
 
 
+
+<!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
+
+	<jsp:include page="../../footer.jsp"></jsp:include>
+	
 </html>

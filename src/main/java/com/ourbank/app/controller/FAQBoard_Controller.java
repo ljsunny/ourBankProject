@@ -45,7 +45,7 @@ public class FAQBoard_Controller {
 		logger.info("show_write_form called!!");
 		
 		int id=0;
-		
+
 		model.addAttribute("id", id);
 		model.addAttribute("boardBean", new FAQBoard_Bean());
 		return "board_customer/faq/faqWriteForm";

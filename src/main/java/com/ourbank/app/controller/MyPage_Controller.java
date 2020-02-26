@@ -326,7 +326,7 @@ public String deleteId(
 		//관심상품에 이미 상품이 존재하는지 확인
 		if(boardService.selectWantExist(id, fin_prdt_cd)==0) {
 		
-		if(dep_or_sav=="0") {
+		if(dep_or_sav.equals("0")) {
 			dep_or_sav="예금";
 			logger.info(fin_prdt_cd);
 			DepositBoard_Bean depositBean=boardService.getOneDeposit(fin_prdt_cd);
