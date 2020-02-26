@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ourbank.app.bean.BestBoard_Bean;
+import com.ourbank.app.bean.DepositBoard_Bean;
 import com.ourbank.app.bean.FreeBoard_Bean;
 import com.ourbank.app.bean.NewnoticeBoard_Bean;
 import com.ourbank.app.mapper.MainPage_Mapper;
@@ -25,6 +26,10 @@ public class MainPage_Service {
 	public ArrayList<BestBoard_Bean> selectBest(){
 		return this.boardMapper.selectBest();
 	}
+	
+	public DepositBoard_Bean bestDeposit() {
+	      return this.boardMapper.bestDeposit();
+	   }
 
 	///////////////////////////////////////////////////////////////////////
 	//검색한 글 수

@@ -4,93 +4,124 @@
 /* Home                  o                                                     */
 /*********************************************************************************/
 #home {
-	min-width: 1400px;
-	margin-bottom: 300px;
+   min-width: 1400px;
+   margin-bottom: 300px;
 }
 
 #home .row1 {
-	margin: 70px auto 50px auto;
-	display: table;
+   margin: 70px auto 50px auto;
+   display: table;
 }
 
 #home .row2 {
-	display: table;
-	margin: 70px auto 50px auto;
+   display: table;
+   margin: 70px auto 50px auto;
 }
 
 #home .row1 .area1 {
-	display: block;
-	float: left;
-	margin-right: 50px; width : 340px;
-	height: 350px;
-	border: 2px solid #2A70E8;
-	width: 340px;
-	padding: 10px;
+   display: block;
+   float: left;
+   margin-right: 50px; width : 340px;
+   height: 350px;
+   border: 2px solid #2A70E8;
+   width: 340px;
+   padding: 10px;
 }
 #home .row1 .area1:hover{
-	box-shadow: 1px 1px 20px #ddd;
+   box-shadow: 1px 1px 20px #ddd;
 }
 #home .row1 .area2 {
-	display: block;
-	float: left; width : 340px;
-	height: 350px;
-	border: 2px solid #2A70E8;
-	width: 340px;
-	padding: 10px;
+   display: block;
+   float: left; width : 340px;
+   height: 350px;
+   border: 2px solid #2A70E8;
+   width: 340px;
+   padding: 10px;
 }
 #home .row1 .area2:hover{
-	box-shadow: 1px 1px 20px #ddd;
+   box-shadow: 1px 1px 20px #ddd;
 }
 #home .row1 .area2 p{
-	padding: 10px;
+   padding: 10px;
+}
+#home .row2{
+   
 }
 #home .row2 .area3 {
-	display: block;
-	float: left;
-	width: 340px;
-	height: 250px;
-	border: 2px solid #2A70E8;
-	margin-right: 40px;
-	padding: 10px;
+   background-color: #fff;
+   display: block;
+   float: left;
+   width: 340px;
+   height: 250px;
+   border: 2px solid #2A70E8;
+   margin-right: 40px;
+   padding: 10px;
 }
 #home .row2 .area3:hover{
-	box-shadow: 1px 1px 20px #ddd;
+   box-shadow: 1px 1px 20px #ddd;
 }
 #home .row2 .area3 iframe {
-	margin-left: 20px;
-	margin-top: 10px;
+   margin-left: 20px;
+   margin-top: 10px;
 }
 
 #home .row2 .area4 {
-	display: block;
-	float: left;
-	width: 340px;
-	height: 250px;
-	border: 2px solid #2A70E8;
-	margin-right: 40px;
-	padding: 10px;
+   background-color: #fff;
+   display: block;
+   float: left;
+   width: 340px;
+   height: 250px;
+   border: 2px solid #2A70E8;
+   
+   padding: 10px;
 }
 #home .row2 .area4:hover{
-	box-shadow: 1px 1px 20px #ddd;
+   box-shadow: 1px 1px 20px #ddd;
 }
 #home .row2 .area4 .book {
-	margin: 10px 60px 20px 60px;
+   margin: 10px 60px 20px 60px;
     padding: 30px;
-	
+   
 }
 #home .row2 .area4 .book span{
-	color:#2A70E8;
+   color:#2A70E8;
 }
 #home .row2 .area5 {
-	display: block;
-	float: left;
-	width: 340px;
-	height: 250px;
-	border: 2px solid #2A70E8;
-	padding: 10px;
+   background-color: #fff;
+   display: block;
+   float: left;
+   width: 340px;
+   height: 250px;
+   margin-right: 40px;
+   border: 2px solid #2A70E8;
+   padding: 10px;
 }
 #home .row2 .area5:hover{
-	box-shadow: 1px 1px 20px #ddd;
+   box-shadow: 1px 1px 20px #ddd;
+}
+#home .row2 .area5 .best_product{
+   margin: 50px auto 10px 0px;
+   
+}
+#home .row2 .area5 .best_product span{
+   color:#dbdbdb;
+}
+#home .row2 .area5 .best_product i{
+   float:left;
+   margin-top:15px;
+   margin-right: 15px;
+}
+#home .row2 .area5 .best_product .info{
+   margin-bottom:5px;
+   float:left;
+   font-weight: bold;
+}
+#home .row2 .area5 .best_product .info h1{
+   color: #EC5942;
+   text-align: center;
+}
+#home h3{
+   
 }
 /*********************************************************************************/
 /* Product                  o                                                     */
@@ -98,431 +129,431 @@
 /* Product List                 o                                                 */
 /*********************************************************************************/
 #product_list {
-	margin: 20px 0 200px 0;
+   margin: 20px 0 200px 0;
 }
 
 #product_name {
-	font-weight: bold;
-	text-decoration: none
+   font-weight: bold;
+   text-decoration: none
 }
 
 #product_search {
-	margin: 6px 170px 6px auto;
+   margin: 6px 170px 6px auto;
 }
 
 #product_search select {
-	padding: 11px 10px 10px 15px;
-	margin-top: 2px;
+   padding: 11px 10px 10px 15px;
+   margin-top: 2px;
 }
 
 #product_search option {
-	padding: 2px;
+   padding: 2px;
 }
 
 #product_search input {
-	padding: 10px;
+   padding: 10px;
 }
 
 #product_table {
-	padding: 20px;
-	background-color: white;
-	border-bottom: 1px
+   padding: 20px;
+   background-color: white;
+   border-bottom: 1px
 }
 /*********************************************************************************/
 /* Product  Content                o                                             */
 /*********************************************************************************/
 #product_warp{
-	margin: 40px auto 300px 230px;
-	padding:20px;
+   margin: 40px auto 300px 230px;
+   padding:20px;
 }
 #productContent {
-	position: relative;
-	padding: 25px;
-	margin: 0 180px 0 50px;
-	border: 2px solid #2A70E8;
-	background-color: white;
-	min-width: 611px;
+   position: relative;
+   padding: 25px;
+   margin: 0 180px 0 50px;
+   border: 2px solid #2A70E8;
+   background-color: white;
+   min-width: 611px;
 }
 
 #productContent h2 {
-	text-align: left;
+   text-align: left;
 }
 
 #productContent .product-info1 {
-	position: absolute;
-	top: 10px;
-	right: 25px;
+   position: absolute;
+   top: 10px;
+   right: 25px;
 }
 
 #productContent .product-info2 dl {
-	text-align: left;
+   text-align: left;
 }
 
 #productContent .product-info1 dd {
-	margin-inline-start: 0px;
-	font-family: 'Source Sans Pro', sans-serif;
-	font-size: 12pt;
-	font-weight: 400;
+   margin-inline-start: 0px;
+   font-family: 'Source Sans Pro', sans-serif;
+   font-size: 12pt;
+   font-weight: 400;
 }
 
 #productContent .product-info2 {
-	display: table;
-	width: 100%;
-	margin-top: 20px;
+   display: table;
+   width: 100%;
+   margin-top: 20px;
 }
 
 #productContent .product-info2 .img1 {
-	display: table-cell;
-	padding-left: 150px;
-	vertical-align: top !important;
-	position: relative;
-	text-align: left;
-	width: 190px;
+   display: table-cell;
+   padding-left: 150px;
+   vertical-align: top !important;
+   position: relative;
+   text-align: left;
+   width: 190px;
 }
 
 #productContent .product-info2 dl.img1 img {
-	position: absolute;
-	width: 50px;
-	height: 50px;
-	top: 0px;
-	left: 80px;
+   position: absolute;
+   width: 50px;
+   height: 50px;
+   top: 0px;
+   left: 80px;
 }
 
 #productContent .product-info2 dt {
-	position: block;
-	font-size: 14px;
-	margin: 5px 0px 0px 0px;
-	padding: 0px;
+   position: block;
+   font-size: 14px;
+   margin: 5px 0px 0px 0px;
+   padding: 0px;
 }
 
 #productContent .product-info2 dd {
-	margin-inline-start: 0px;
-	font-size: 14px;
+   margin-inline-start: 0px;
+   font-size: 14px;
 }
 
 #productContent .product-info2 .img2 {
-	display: table-cell;
-	padding-left: 70px;
-	vertical-align: top !important;
-	position: relative;
-	text-align: left;
-	width: 180px;
+   display: table-cell;
+   padding-left: 70px;
+   vertical-align: top !important;
+   position: relative;
+   text-align: left;
+   width: 180px;
 }
 
 #productContent .product-info2 .img2 img {
-	position: absolute;
-	width: 50px;
-	height: 50px;
-	top: 0px;
-	left: 0px;
+   position: absolute;
+   width: 50px;
+   height: 50px;
+   top: 0px;
+   left: 0px;
 }
 
 #productContent .product-info2 .img3 {
-	display: table-cell;
-	padding-left: 75px;
-	vertical-align: top !important;
-	position: relative;
-	text-align: left;
-	width: 180px;
+   display: table-cell;
+   padding-left: 75px;
+   vertical-align: top !important;
+   position: relative;
+   text-align: left;
+   width: 180px;
 }
 
 #productContent .product-info2 .img3 img {
-	position: absolute;
-	width: 50px;
-	height: 50px;
-	top: 0px;
-	left: 10px;
-	padding: 1px;
+   position: absolute;
+   width: 50px;
+   height: 50px;
+   top: 0px;
+   left: 10px;
+   padding: 1px;
 }
 
 #productContent .product-info2 dd span {
-	margin-inline-start: 0px;
-	font-size: 25px;
-	color: red;
+   margin-inline-start: 0px;
+   font-size: 25px;
+   color: red;
 }
 
 #productContent .product-info3 {
-	text-align: center;
-	margin-top: 20px;
-	margin-right: 30px;
+   text-align: center;
+   margin-top: 20px;
+   margin-right: 30px;
 }
 
 #productContent input {
-	margin: 0px 10px;
-	background-color: #2A70E8;
-	color: white;
-	border: 0;
-	padding: 5px 15px;
-	outline: 0;
+   margin: 0px 10px;
+   background-color: #2A70E8;
+   color: white;
+   border: 0;
+   padding: 5px 15px;
+   outline: 0;
 }
 
 #productContent2 {
-	position: relative;
-	padding: 25px;
-	margin: 0 180px 30px 50px;
-	border: 2px solid #e6e6e6;
-	border-top: none;
-	background-color: #f2f2f2;
-	min-width: 611px;
+   position: relative;
+   padding: 25px;
+   margin: 0 180px 30px 50px;
+   border: 2px solid #e6e6e6;
+   border-top: none;
+   background-color: #f2f2f2;
+   min-width: 611px;
 }
 
 #productContent2 .product-info-group {
-	display: table;
-	margin-left: 100px;
+   display: table;
+   margin-left: 100px;
 }
 
 #productContent2 .product-info-group .product-info4 {
-	display: table-cell;
-	max-width: 600px;
-	background-color: #F2F2F2;
+   display: table-cell;
+   max-width: 600px;
+   background-color: #F2F2F2;
 }
 
 #productContent2 .product-info-group .product-info4 dt {
-	font-weight: bold;
+   font-weight: bold;
 }
 
 #productContent2 .product-info-group .product-info5 {
-	display: table-cell;
-	max-width: 600px;
-	background-color: #F2F2F2;
-	padding-left: 40px;
+   display: table-cell;
+   max-width: 600px;
+   background-color: #F2F2F2;
+   padding-left: 40px;
 }
 
 #productContent2 .product-info-group .product-info5 dt {
-	font-weight: bold;
+   font-weight: bold;
 }
 
 #productContent2 .product-info6 {
-	margin-left: 20px;
-	background-color: #F2F2F2;
+   margin-left: 20px;
+   background-color: #F2F2F2;
 }
 
 #productContent2 .product-info6 input {
-	width: 50px;
+   width: 50px;
 }
 
 #productContent2 .product-info6 .input1 {
-	width: 100px;
+   width: 100px;
 }
 
 #productContent2 .product-info6 .input2 {
-	width: 200px;
-	height: 50px;
-	text-align: center;
-	font-weight: bold;
-	font-size: inherit;
-	border: none;
-	background: none;
+   width: 200px;
+   height: 50px;
+   text-align: center;
+   font-weight: bold;
+   font-size: inherit;
+   border: none;
+   background: none;
 }
 
 #productContent2 .product-info6 .button1 {
-	margin: 0px 10px;
-	background-color: #2A70E8;
-	color: white;
-	border: 0;
-	padding: 5px 15px;
+   margin: 0px 10px;
+   background-color: #2A70E8;
+   color: white;
+   border: 0;
+   padding: 5px 15px;
 }
 
 #productContet3 {
-	position: relative;
-	padding: 0 50px 0 0;
-	margin: 0 180px 0px 50px;
-	border: 2px solid #e6e6e6;
-	border-bottom: none;
-	background-color: #cecece;
-	min-width: 611px;
+   position: relative;
+   padding: 0 50px 0 0;
+   margin: 0 180px 0px 50px;
+   border: 2px solid #e6e6e6;
+   border-bottom: none;
+   background-color: #cecece;
+   min-width: 611px;
 }
 
 #productContet3 .product_button {
-	height: 100%;
+   height: 100%;
 }
 
 #productContet3 .product_button input {
-	margin: 0;
-	border-width: 0;
-	padding: 5px 15px;
-	outline: 0;
-	width: 200px;
-	font-size: 16px;
-	font-weight: bold;
+   margin: 0;
+   border-width: 0;
+   padding: 5px 15px;
+   outline: 0;
+   width: 200px;
+   font-size: 16px;
+   font-weight: bold;
 }
 
 #clicked {
-	background-color: #cecece;
+   background-color: #cecece;
 }
 /*********************************************************************************/
 /* login                 o                                                       */
 /*********************************************************************************/
 #login_form {
-	position: relative;
-	margin: auto;
-	text-align: center;
-	padding: 50px;
-	border: 1px;
-	max-width: 632px;
+   position: relative;
+   margin: auto;
+   text-align: center;
+   padding: 50px;
+   border: 1px;
+   max-width: 632px;
 }
 
 #login_form h1 {
-	padding: 10px;
+   padding: 10px;
 }
 
 #login_form table {
-	border: 1;
-	width: 40%;
-	margin-left: auto;
-	margin-right: auto;
+   border: 1;
+   width: 40%;
+   margin-left: auto;
+   margin-right: auto;
 }
 
 #login_form td {
-	padding: 5px;
+   padding: 5px;
 }
 
 #login_form table input {
-	padding: 10px;
+   padding: 10px;
 }
 
 #login_form table .submit {
-	width: 100%;
-	background-color: #2A70E8;
-	color: white;
+   width: 100%;
+   background-color: #2A70E8;
+   color: white;
 }
 
 /*********************************************************************************/
 /* Sign Up                  o                                                     */
 /*********************************************************************************/
 #signup_form {
-	margin-top: 20px;
-	margin-bottom: 250px;
-	position: relative;
-	min-width: 1450px;
+   margin-top: 20px;
+   margin-bottom: 250px;
+   position: relative;
+   min-width: 1450px;
 }
 
 #signup_form .signup_in {
-	margin-left: 100px;
+   margin-left: 100px;
 }
 
 #signup_form h1 {
-	text-align: center;
+   text-align: center;
 }
 
 #signup_form table {
-	border: 0;
-	border-top: 2px solid #2A70E8;
-	width: 40%;
-	margin: 30px auto 50px auto;
+   border: 0;
+   border-top: 2px solid #2A70E8;
+   width: 40%;
+   margin: 30px auto 50px auto;
 }
 
 #signup_form table .button {
-	width: 20%;
-	background-color: #2A70E8;
-	border: none;
-	color: white;
+   width: 20%;
+   background-color: #2A70E8;
+   border: none;
+   color: white;
 }
 
 #signup_form td {
-	padding: 10px;
+   padding: 10px;
 }
 
 #signup_form li {
-	margin: 5px;
+   margin: 5px;
 }
 
 #signup_form table input {
-	margin-right: 2px;
-	padding: 10px;
-	width: 70%;
+   margin-right: 2px;
+   padding: 10px;
+   width: 70%;
 }
 
 #signup_form .big {
-	size: 70px;
+   size: 70px;
 }
 
 /*********************************************************************************/
 /* ID check                  o                                                     */
 /*********************************************************************************/
 #idcheck_form {
-	text-align: center;
-	margin-top: 100px;
+   text-align: center;
+   margin-top: 100px;
 }
 
 #idcheck_form .border {
-	border-top: 1px solid #2A70E8;
-	border-bottom: 1px solid #2A70E8;
-	margin: 0px 50px 10px 50px;
-	padding-top: 15px;
+   border-top: 1px solid #2A70E8;
+   border-bottom: 1px solid #2A70E8;
+   margin: 0px 50px 10px 50px;
+   padding-top: 15px;
 }
 
 #idcheck_form input {
-	padding: 7px;
+   padding: 7px;
 }
 
 #idcheck_form .button {
-	background-color: #2A70E8;
-	border: none;
-	color: white;
+   background-color: #2A70E8;
+   border: none;
+   color: white;
 }
 
 /*********************************************************************************/
 /* find ID                   o                                                     */
 /*********************************************************************************/
 #find {
-	margin: 50px auto 100px auto;
+   margin: 50px auto 100px auto;
 }
 
 #find .top {
-	margin-left: auto;
-	margin-right: auto;
+   margin-left: auto;
+   margin-right: auto;
 }
 
 #find .id_form {
-	width: 30%;
-	margin-left: auto;
-	margin-right: auto;
+   width: 30%;
+   margin-left: auto;
+   margin-right: auto;
 }
 
 #find .top .left {
-	float: left;
+   float: left;
 }
 
 #find .top .right {
-	float: right;
-	margin-left: 50px;
-	margin-top: 20px;
+   float: right;
+   margin-left: 50px;
+   margin-top: 20px;
 }
 
 #find hr {
-	width: 500px;
-	border: 2px solid #2A70E8;
+   width: 500px;
+   border: 2px solid #2A70E8;
 }
 
 #find .id_form input {
-	width: 90%;
-	padding: 7px;
+   width: 90%;
+   padding: 7px;
 }
 
 #find .id_form .btn1 {
-	width: 90px;
-	height: 114.8px;
-	background-color: #2A70E8;
-	color: white;
-	border: 0;
+   width: 90px;
+   height: 114.8px;
+   background-color: #2A70E8;
+   color: white;
+   border: 0;
 }
 
 #find .id_form .btn2 {
-	width: 100px;
-	height: 153px;
-	background-color: #2A70E8;
-	color: white;
-	border: 0;
+   width: 100px;
+   height: 153px;
+   background-color: #2A70E8;
+   color: white;
+   border: 0;
 }
 
 #find .info {
-	text-align: center;
-	padding: 10px 0px 10px 0px;
+   text-align: center;
+   padding: 10px 0px 10px 0px;
 }
 
 #find .info p {
-	color: red;
+   color: red;
 }
 #find .id_form .btn3 {
     width: 100px;
@@ -534,13 +565,145 @@
 }
 
 /*********************************************************************************/
+/* Welcome                   o                                                    */
+/*********************************************************************************/
+#welcome{
+   margin:60px 300px 600px 300px;
+   min-width: 1000px;
+}
+#welcome hr{
+   width: 500px;
+   border: 2px solid #2A70E8;
+}
+#welcome h1{
+   text-align: center;
+   padding: 20px;
+   margin-bottom: 30px;
+}
+#welcome h2{
+   display: table-caption;
+   text-align: center;
+   padding-bottom: 5px;
+}
+#welcome .main1{
+   position:absolute;
+   margin: 30px auto 0px 430px;
+   min-width: 944px;
+}
+
+#welcome .main1 .btn{
+   width: 120px;
+   height: 60x;
+   background-color: #2A70E8;
+   padding:10px;
+   margin:10px;
+   color: white;
+   border: 0;
+}
+#welcome .main .area1{
+   display:table-cell;
+}
+#welcome select{
+   margin-right: 2px;
+   padding: 10px;
+   width: 100%;
+   height: 50px;
+}
+#welcome .main .area2{
+   display:table-cell;   
+}
+/*********************************************************************************/
 /* MyPage                   o                                                    */
 /*********************************************************************************/
 
 #my_wrap{
-	margin:30px auto 300px auto;
+   position:relative;
+   margin: 30px auto 300px 500px;
 }
 #my_wrap .mybtn{
-	width:200px;
-	height:160px;
+   width:200px;
+   height:160px;
+}
+
+#my_wrap2{
+   margin: 30px 300px;
+   margin-bottom:50px;
+   padding-left:20px;
+    padding-bottom: 100px;
+}
+/*********************************************************************************/
+/* MyProduct                  o                                                    */
+/*********************************************************************************/
+
+#my_product{
+   margin:30px 50px 300px 300px;
+}
+#my_product .btn{
+   width: 770px;
+   height: 70px;
+   margin: 30px 0 0 0;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #2A70E8;
+   color:white;
+    border:0;
+}
+#my_product .btn_btn{
+   width: 60px;
+   height: 50x;
+   border:2px 2px 2px 2px;
+   border-color: #2A70E8;
+   border-bottom-color: white;
+   background-color: white;
+   margin-top: 30px;
+}
+#my_product .btn:hover{
+   background-color:#134fb3;
+   color: #fcfcfc; 
+}
+#my_product hr{
+   float:left;
+   margin-top:0;
+   margin-right:700px;
+   margin-bottom:20px;
+   width: 500px;
+   border: 2px solid #2A70E8;
+}
+#clicked2{
+   background-color: #2A70E8;
+   color: white;
+}
+/*********************************************************************************/
+/* MyProductList                  o                                                    */
+/*********************************************************************************/
+#my_list_wrap{
+   margin: 0 50px 0 150px;
+}
+
+#my_list_wrap .mybtn{
+   margin-left: 300px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #2A70E8;
+   color:white;
+    border:0;
+}
+#my_list_wrap .mybtn2 {
+    margin-left: 500px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #2A70E8;
+    color: white;
+    border: 0;
+}
+#my_list_wrap .mi_back
+{
+   color: #E8AB2A;
+}
+#error{
+   margin-top: 80px;
+}
+#error p{
+   font-size: 100px; 
+   text-align: center;
 }

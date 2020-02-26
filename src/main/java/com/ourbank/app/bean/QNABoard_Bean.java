@@ -22,8 +22,28 @@ public class QNABoard_Bean {
 	
 	MultipartFile file;
 	
+	private int category_num;
+	private int board_idx; //게시판 전체 글 번호
 	
 	
+	public int getCategory_num() {
+		return category_num;
+	}
+
+
+	public void setCategory_num(int category_num) {
+		this.category_num = category_num;
+	}
+
+
+	public int getBoard_idx() {
+		return board_idx;
+	}
+
+
+	public void setBoard_idx(int board_idx) {
+		this.board_idx = board_idx;
+	}
 	public int getReply() {
 		return reply;
 	}

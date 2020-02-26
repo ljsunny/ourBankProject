@@ -11,8 +11,8 @@ import com.ourbank.app.bean.NewnoticeBoard_Bean;
 @Repository
 public interface NewnoticeBoard_Mapper {
 	//글입력처리
-		final String INSERT="insert into newnotice_board(id_x, id, subject, created_date, category, content, filename, filesize)"
-				+ " values(newnotice_seq.nextval,#{id},#{subject},SYSDATE, #{category},#{content},#{filename},#{filesize})";
+		final String INSERT="insert into newnotice_board(board_idx, id_x, category_num, id, subject, created_date, category, content, filename, filesize)"
+				+ " values(board_seq_idx.nextval, newnotice_seq.nextval,#{category_num}, #{id},#{subject},SYSDATE, #{category},#{content},#{filename},#{filesize})";
 		
 		@Insert(INSERT)
 		void insertBoard(NewnoticeBoard_Bean boardBean);

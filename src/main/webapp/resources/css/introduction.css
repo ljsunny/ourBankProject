@@ -1,0 +1,253 @@
+@charset "EUC-KR";
+   
+   {
+        margin: 0;
+        
+   }
+   
+
+   
+   
+   #line_div
+   {
+      
+      width:84.5%; 
+      float:right;
+      border-left: 1px solid #1B3280; 
+   }
+   
+   #sub_logo
+   {
+      padding-top: 60px;
+      padding-left: 550px;
+      font-family: 'Noto Sans KR', sans-serif;
+   }
+   
+
+/************************************* 사이트소개 ******************************************/
+   #site_div
+   {
+      width:80%;
+      border-top: 1px solid #1B3280;   
+      margin-top: 100px;
+      padding-left: 100px;
+      padding-bottom:300px;
+      margin-bottom: 100px;
+      
+   }
+   
+   
+   #list_div
+   {
+      
+      padding-right: 60px;
+
+   }
+   
+   #subtitle
+   {
+      margin-top: 50px;
+      background-color: #FFF;
+      border-radius: 0px;
+   }
+   
+   .sub_subtitle
+   {
+       background:no-repeat left 3px;
+       padding-left: 10px;
+       margin: 10px 0px 10px -10px;
+       color: #d4591c;
+   }
+   
+   .sitelist_area *
+   {
+      line-height: 1.6;
+   }
+   
+   .sitelist_area 
+   {
+        overflow: hidden;
+       padding-left: 20px;
+       padding-bottom: 10px;
+       margin-bottom: 20px;
+       border-bottom: 1px dashed #c4c4c4;
+   }
+   
+   .sitelist_area ul 
+   {
+       overflow: hidden;
+       padding-bottom: 10px;
+       float: left;
+       width: 990px;
+       margin-left: 20px;
+   }
+   
+   .sitelist_area ul li 
+   {
+      float: left;
+       padding: 0 10px;
+       text-align: left;
+       width: 200px;
+   }
+   
+   .sitelist_area ul li a
+   {
+      text-decoration: none;
+   }
+/****해외****/
+   #overseas_div
+   {
+      margin-left: 400px;
+   }
+
+   .tlb_ovsite
+   {
+      clear: both;
+       width: 100%;
+       border-top: 1px solid #0390d9;
+       border-bottom: 1px solid #0390d9 !important;
+       margin: 0 0 5px 0;
+   }
+   
+   table.tlb_ovsite tbody td 
+   {
+      border-left: 1px solid #dadada;
+       border-bottom: 1px solid #dadada;
+       padding: 10px;
+       text-align: center;
+       word-break: keep-all;
+   }
+   
+   table.tlb_ovsite th
+   {
+      border-bottom: 1px solid #0078ac;
+      border-left:  1px solid #0078ac;
+      background-color: #81BEF7;
+   }
+   
+
+   
+   
+   
+   table, th, td {
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+}
+   
+      table.tlb_ovsite tbody th.first 
+      {
+       background: #fff;
+       border: none;
+       border-top: 1px solid #dadada;
+       padding: 5px;
+       text-align: center;
+      }
+   
+   
+   .tr_site
+   {
+      background: #f9f9f9;
+       border-left: 1px solid #dadada;
+         border-top: 1px solid #dadada;
+         padding: 7px 5px;
+       text-align: center;
+       vertical-align: middle;
+       font-weight: normal;
+   }
+   
+   .tr_site th
+   {
+          border-top: 1px solid #0390d9 !important;
+   }
+   
+   .tr_site td, .tr_site th
+   {
+      border-top: 1px solid #0390d9 !important;
+   }
+   
+   
+   .sitelist_area table tbody tr td a
+   {
+      text-decoration: none;
+   }
+
+/******************************* [ 커뮤니티 ] ****************************/
+
+   .comunity_top_menu 
+   {
+      margin-top: 50px; 
+   }
+   
+   .bnt_comu
+   {
+      border-radius: 5px;
+      background-color: #81BEF7;
+      color: white;
+      font-weight: bold;
+      padding: 4px 10px 4px 10px;
+      margin: 2px;
+      font-size: 13px;
+      font-family: 'Nanum Gothic', sans-serif;
+   }
+   
+   .tlb_board_top
+   {
+      background-color: #f2f2f2;
+      font-weight: bold;
+      text-align: center;
+      padding: 10px 0 10px 0; 
+      border-top: 2px solid #585858;
+   }
+   
+   tbody tr
+   {
+      border-bottom: 1px solid #BDBDBD;
+      
+   
+   }
+   
+   page
+   {
+      text-align: center;
+      font-weight: bold;
+   }
+   
+   .tlb_board_bottom td
+   {
+       text-align: center;
+      padding: 10px 0 10px 0;
+   }
+/************/   
+   .tlb_board
+   {
+      margin: 70px 0 0 40px;   
+      border-top: 2px solid #585858;
+      width: 850px;
+      border-bottom: 2px solid #585858; 
+   }
+   
+   .tlb_board tr td
+   {
+      text-align: center;
+      padding: 7px 0 7px 0;
+   }
+  
+   .div_board_bnt
+   {
+      margin: 18px 0 0 40px;
+   }
+
+   .bnt_view
+   {
+      border-radius: 3px;
+      background-color: #555555;
+      color: #FFF;
+      font-weight: bold;
+      border: 1px solid #bdbdbd;
+      margin-right: 2px; 
+      padding: 3px 5px 3px 5px;
+      
+   }
+
+/*******/

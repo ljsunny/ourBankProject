@@ -3,7 +3,7 @@ create sequence newnotice_seq minvalue 1 maxvalue 9999999999 increment by 1 star
 -- 0이면 본글 1이면 답글
  
 create table newnotice_board (
-board_idx number(10,0) not null, /*전체글 구별*/
+	board_idx number(10,0) not null, /*전체글 구별*/
 	category_num number(10,0) default 9, /*전체 게시판별 구분*/
  	id_x number(10,0) not null,
  	id varchar2(20) not null,
@@ -15,6 +15,7 @@ board_idx number(10,0) not null, /*전체글 구별*/
  	category char(10) default 'signup' check (category in ('signup','savings', 'etc')),
  	filename varchar2(50) default null,
  	filesize number default null,
+
 primary key (id_x) enable
  ) ;
  

@@ -17,10 +17,16 @@
 
 <html>
 <head>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fonts.css" >
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/body.css" >
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> 
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/h_script.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <meta charset="EUC-KR">
 <title>newnotice</title>
 </head>
@@ -30,6 +36,7 @@
 	
 <!-- *********************** 사이드 메뉴 ****************************  -->	
 	
+	<div id="body_div">
 	<div id="side_menu">
 		<h4><a href="introductionList.do?current_page=1">공지사항</a></h4>
 		<div id="side_div">
@@ -42,6 +49,12 @@
 	</div>
 	
 <!-- *********************** 내용 ****************************  -->
+<div id="line_div">
+ <div id="sub_logo">
+<h2>New Notice</h2>	
+ </div> 
+ <div id="site_div">
+ 
 <c:set var="total_cnt" value="${totalCnt}"/>
 <c:set var="searchString" value="${searchStr}"/>
 <c:set var="pageForView" value="${pageForView}"/>
@@ -54,44 +67,55 @@
 	pageContext.setAttribute("t_pages", total_pages);
 %>
 
-<table cellspacing="1" width="700" border="0">
+<div style="margin-top: 50px; font-weight: bold;">
+<table cellspacing=1 width=700>
 	<tr>
-		<td>총 게시물:<c:out value="${totalCnt}"/></td>
-		<td><p align=right>페이지:<c:out value="${t_pages}"/></p></td>
+		<td>총 게시물수: <c:out value="${totalCnt}" /></td>
+		<td><p align="right">
+				페이지:
+				<c:out value="${current_page}" />
+			</p></td>
 	</tr>
+
 </table>
-<table cellspacing="1" width="700" border="1">
+</div>
+
+<table cellspacing=1  >
+	<thead>
 	<tr>
-		<td width="50"><p align="center">번호</td>
-		<td width="100"><p align="center">아이디</td>
-		<td width="320"><p align="center">제목</td>
-		<td width="100"><p align="center">등록일</td>
-		<td width="100"><p align="center">조회수</td>
-	</tr>
+		<td width="50" class="tlb_board_top">글번호</td>
+		<td width="320" class="tlb_board_top">제목</td>
+		<td width="100" class="tlb_board_top">아이디</td>
+		<td width="100" class="tlb_board_top">등록일</td>
+		<td width="100" class="tlb_board_top">조회수</td>
+	</tr> </thead>
+	<tbody>
 	<c:forEach var="board" items="${searchedList}">
-		<tr>
-			<td width="40"><p align="center">${board.getIdx()}</p></td>
-			<td width="100"><p align="center">${board.getId()}</p></td>
+		<tr class="tlb_board_bottom">
+			<td width="50">${board.getIdx()}</td>
 			<td width="320">
-				<p align="center">
+				
 					<a
 						href="newnoticeView.do?idx=${board.getIdx()}
 							&current_page=<c:out value="${current_page}"/>
 							&searchStr=None"
 						title="${board.getContent()}"> <c:out
 							value="${board.getSubject()}" /></a>
-				</p>
+				
 			</td>
-			<td width="100"><p align="center">
+			<td width="100">${board.getId()}</td>
+			<td width="100">
 					<c:out value="${board.getCreated_date()}" />
-				</p></td>
-			<td width="100"><p align="center">
+				</td>
+			<td width="100">
 					<c:out value="${board.getHits()}" />
-				</p></td>
-		</tr>
-	</c:forEach>
-</table>
-<table cellspacing="1" width="700" border="1">
+				</td>
+		</c:forEach>
+	</tbody>
+	</table>
+	
+<div style="margin-top: 50px; font-weight: bold;">
+<table cellspacing="1" width="700" class="page">
 	<tr>
 		<td>
 		<c:forEach var="i" begin="1" end="${t_pages}">
@@ -106,12 +130,18 @@
 		</td>
 	</tr>
 </table>
-<table width="700">
-	<tr>
-		<td><input type="button" value="전체 목록으로 돌아가기"
-		onclick="window.location='newnoticeList.do?current_page=1'"></td>
-	</tr>
-</table>
+</div>
+	<div>
+		<input type="button" value="전체 목록으로 돌아가기" class="bnt_comu"
+		onclick="window.location='newnoticeList.do?current_page=1'">
+	</div>
+</div>
+</div>
+</div>
 
 
+<!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
+
+	<jsp:include page="../../footer.jsp"></jsp:include>
+	
 </html>

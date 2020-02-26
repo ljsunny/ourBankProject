@@ -11,8 +11,8 @@ import com.ourbank.app.bean.NewsBoard_Bean;
 @Repository
 public interface NewsBoard_Mapper {
 	//글입력처리
-		final String INSERT="insert into news_board(id_x, id, subject, created_date, category, content, filename, filesize)"
-				+ " values(news_seq.nextval,#{id},#{subject},SYSDATE, #{category},#{content},#{filename},#{filesize})";
+		final String INSERT="insert into news_board(board_idx, id_x, category_num, id, subject, created_date, category, content, filename, filesize)"
+				+ " values(board_seq_idx.nextval, news_seq.nextval,#{category_num}, #{id},#{subject},SYSDATE, #{category},#{content},#{filename},#{filesize})";
 		
 		@Insert(INSERT)
 		void insertBoard(NewsBoard_Bean boardBean);

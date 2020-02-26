@@ -72,10 +72,10 @@ String uid=(String)session.getAttribute("uid");
 <div id="header">
 	<div id="menu" class="container">
 		<ul>
-			<li><a href="introductionList.do?current_page=1" accesskey="1" title="">공지사항</a>
+			<li><a href="introduction_show.do" accesskey="1" title="">공지사항</a>
 			  <div class="sub_menu"> 
 			    <ul>
-	              <li><a href="introductionList.do?current_page=1">사이트소개</a></li>
+	              <li><a href="introduction_show.do">사이트소개</a></li>
 	              <li><a href="newnoticeList.do?current_page=1">새 소식</a></li>
 	            </ul>
 	          </div> 
@@ -126,8 +126,8 @@ String uid=(String)session.getAttribute("uid");
 			<li><a href="myPage.do" accesskey="5" title="">MyPage</a>
 		  	  <div class="sub_menu"> 
 			    <ul>
-	              <li><a href="#">개인정보관리</a></li>
-	              <li><a href="#">내가 작성한 글</a></li>
+	              <li><a href="myInfo.do">개인정보관리</a></li>
+	              <li><a href="myBoardList.do?current_page=1">내가 작성한 글</a></li>
 	              <li><a href="#">가입상품</a></li>
 	              <li><a href="#">관심상품</a></li>
 	            </ul>

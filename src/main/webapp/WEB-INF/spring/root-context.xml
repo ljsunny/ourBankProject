@@ -88,12 +88,6 @@
 			value="com.ourbank.app.mapper.MyPage_Mapper"></property>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
-	<bean id="Introduction_Mapper"
-		class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface"
-			value="com.ourbank.app.mapper.IntroductionBoard_Mapper"></property>
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
 	<bean id="Invest_Mapper"
 		class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface"

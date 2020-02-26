@@ -43,4 +43,12 @@ primary key (id_x) enable
  ) ;
  
  drop table qna_board;
+ 
+ create view commuboardview as select * from (
+	(select category, category_num, best_idx, id, subject,created_date, hits, filename from review_board) union
+	(select category, category_num, best_idx, id, subject,created_date, hits, filename from TLB_free_BOARD) union 
+	(select category, category_num, best_idx, id, subject,created_date, hits, filename from tlb_meeting_board) union 
+	(select category, category_num, best_idx, id, subject,created_date, hits, filename from tlb_debate_board) union
+	(select category, category_num, best_idx, id, subject,created_date, hits, filename from invest_board)
+);
   
