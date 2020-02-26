@@ -59,7 +59,7 @@
 	//el로 꺼내쓸 수 있는 방법
 	pageContext.setAttribute("t_pages", total_pages);
 	HttpSession session=request.getSession();
-	String id=(String) session.getAttribute("id");
+	String id=(String) session.getAttribute("uid");
 %>
 <c:set var="id" value="<%=id%>"/>
 <script type="text/javascript">
@@ -100,21 +100,21 @@
 	<c:forEach var="board" items="${searchedList}">
 		<tr class="tlb_board_bottom">
 			<td width="40">${board.getIdx()}</td>
-			<td width="100">${board.getId()}</td>
 			<td width="320">
 				<!-- 로그인 o -->
-				<c:if test="${id == null }"> <!--   (사용시 ${id != null }로바꾸기!!-->
+				<c:if test="${id != null }"> <!--   (사용시 ${id != null }로바꾸기!!-->
 					<a href="reviewView.do?idx=${board.getIdx()}
 							&current_page=<c:out value="${current_page}"/>&searchStr=None"
 						title="${board.getContent()}"> <c:out value="${board.getSubject()}" /></a>
 					</c:if>
 				
 				<!-- 로그인 x -->
-				<c:if test="${id !=null}">
+				<c:if test="${id ==null}">
 				<a onclick="boardView_idCheck(this.href);return false;" onkeypress="this.onclick;"
 					href="reviewView.do" > <c:out value="${board.getSubject()}" /></a>
 				</c:if>
 			</td>
+			<td width="100">${board.getId()}</td>
 			<td width="100">
 					<c:out value="${board.getCreated_date()}" />
 				</td>
@@ -151,4 +151,9 @@
 </div>
 </div>
 
+
+<!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
+
+	<jsp:include page="../../footer.jsp"></jsp:include>
+	
 </html>

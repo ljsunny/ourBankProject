@@ -31,7 +31,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 	
 <div id="body_div">
 	<div id="side_menu">
-		<h4>My Page</a></h4>
+		<h4><a>My Page</a></h4>
 		<div id="side_div">
 			<ul id="side_submenu">
 				<li>- <a href="#"> 개인정보관리 </a></li>

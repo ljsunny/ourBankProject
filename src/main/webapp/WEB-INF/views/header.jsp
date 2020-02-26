@@ -49,7 +49,7 @@ String uid=(String)session.getAttribute("uid");
 				 </c:if>
 			</ul>
 	 <ul class="contact">
-			 <li><form action="" method=post name="sform">
+			 <li><form action="indexSearch.do" method=post name="sform">
 		 	   <input type=text name=search size=25>
 			   <input type=button value="°Ë »ö" class="bnt_search" onclick="send(this.form);">
 			 </form></li>

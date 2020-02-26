@@ -53,6 +53,7 @@
 <%
 	String searchString=(String) (pageContext.getAttribute("searchString"));
 	String filename=(String) (pageContext.getAttribute("filename"));
+	String uid=(String)session.getAttribute("uid");
 %>
 <script  language="javascript">
 function boardlist(){
@@ -116,10 +117,12 @@ function download(){
 </table>
 
 <div class="div_board_bnt">
-		<input type="button" value="수 정" onclick="javascript:boardmodify()" class="bnt_view">
 		<input type="button" value="목 록" onclick="javascript:boardlist()" class="bnt_view">
 		<input type="button" value="답 글" onclick="javascript:boardrewrite()" class="bnt_view">
+		<c:if test="${boardData.getId()==uid}">
+		<input type="button" value="수 정" onclick="javascript:boardmodify()" class="bnt_view">
 		<input type="button" value="삭 제" onclick="javascript:boarddelete()" class="bnt_view">
+		</c:if>
 	</div>
 </div>
 </div>

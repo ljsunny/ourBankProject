@@ -66,7 +66,7 @@ public String myPage(
 	
 	return "/board_Mypage/mypage";
 }
-////////////////수정//////////////////////////////////////////////////////////////////
+
 @RequestMapping(value = "/myInfo.do", method = RequestMethod.GET)
 public String myInfo(
 		HttpServletRequest request,
@@ -118,23 +118,29 @@ public String deleteId(
 	session.invalidate();
 	return "index.do";
 }
-/////////////////////////////////////////////////////////////////////////////////
 
 
-	//내가 작성한글 -리스트 
+//내가 작성한글 -리스트 
 	@RequestMapping(value = "/myBoardList.do", method = RequestMethod.GET)
-	public String myBoardList(HttpServletRequest request, 
-							@RequestParam("current_page") String pageForView, Model model) {
-		HttpSession session = request.getSession();
-		String uid = (String)session.getAttribute("uid");
+	public String myBoardList(HttpServletRequest request,
+							@RequestParam("current_page") String pageForView, 
+							Model model) {
 		
+		HttpSession session=request.getSession();
+		String uid=(String)session.getAttribute("uid");
+			
 		logger.info("best_listSpecificPageWork called");
 		logger.info("current_page=["+pageForView+"]");
+		
+		
+		model.addAttribute("totalCnt", new Integer(boardService.getTotalCnt(uid)));
+		logger.info("totalCnt: " + new Integer(boardService.getTotalCnt(uid)));
 		model.addAttribute("current_page", pageForView);
+		logger.info("pageForView: "+pageForView);
 		model.addAttribute("boardList", boardService.getUserBoardList(uid, Integer.parseInt(pageForView),10));	
-		model.addAttribute("uid",uid);
-	
-		return "board_Mypage/myBoardList";
+		model.addAttribute("id",uid);
+		
+		return "/board_Mypage/myBoardList";
 	
 	}
 	//내가작성한 글 - 글보기
@@ -148,12 +154,44 @@ public String deleteId(
 		logger.info(boardData.getContent());
 		logger.info("hits: "+boardData.getHits());
 		
+		//조회수 증가
+		switch (boardData.getCategory_num()) {
+		case 1: 
+			boardService.updateReviewHits(boardData.getHits(),boardData.getBoard_idx());
+			boardData.setHits(boardService.getSpecificRow(board_idx).getHits());
+			break;
+		case 2:
+			boardService.updateFreeHits(boardData.getHits(),boardData.getBoard_idx());
+			boardData.setHits(boardService.getSpecificRow(board_idx).getHits());
+			break;
+		case 3:
+			boardService.updateMeetingHits(boardData.getHits(),boardData.getBoard_idx());
+			boardData.setHits(boardService.getSpecificRow(board_idx).getHits());
+			break;
+		case 4:
+			boardService.updateDebateHits(boardData.getHits(),boardData.getBoard_idx());
+			boardData.setHits(boardService.getSpecificRow(board_idx).getHits());
+			break;
+		case 5:
+			boardService.updateInvestHits(boardData.getHits(),boardData.getBoard_idx());
+			boardData.setHits(boardService.getSpecificRow(board_idx).getHits());
+			break;
+		case 6:
+			boardService.updateQnaHits(boardData.getHits(),boardData.getBoard_idx());
+			boardData.setHits(boardService.getSpecificRow(board_idx).getHits());
+			break;
+			
+		default:
+			break;
+		}		
+				
+		
 		model.addAttribute("board_idx", board_idx);
 		model.addAttribute("current_page", current_page);
 		model.addAttribute("boardData", boardData);
 		model.addAttribute("filename", boardData.getFilename());
 		
-		return "board_Mypage/myBoardView";
+		return "/board_Mypage/myBoardView";
 	}
 
 	//파일 다운로드
@@ -172,21 +210,8 @@ public String deleteId(
 	    response.setContentLength(bytes.length);
 	    return bytes;
 	    }
-	
-	//내가쓴 글 - 글 수정페이지
-	@RequestMapping(value = "myBoardUpdateform", method = RequestMethod.GET)
-	public String myBoardUpdateView(@RequestParam("board_idx") int board_idx,
-				 @RequestParam("current_page") String current_page,
-				 Model model) {
-		logger.info("free_show_update_form called");
-		logger.info("board_idx="+board_idx);
-		model.addAttribute("board_idx", board_idx);
-		model.addAttribute("current_page", current_page);
-		model.addAttribute("boardData", boardService.getSpecificRow(board_idx));
-		
-		return "board_Mypage/myBoardViewUpdate";
-	}
-/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 	//가입상품
 	@RequestMapping(value="/myProductDetail.do", method =RequestMethod.GET )
 	public String myProductDetail(@RequestParam("ck") int ck, Model model) {
@@ -358,58 +383,7 @@ public String deleteId(
 		model.addAttribute("current_page", 1);
 		return "redirect:myWantList.do";
 	}
-/////////////////////////////////////////////////////////////////////////////////////////////////
-	/*
-	//내가쓴 글 - 글수정 처리
-	@RequestMapping(value="/myBoard_update.do", method=RequestMethod.POST)
-	public String free_Update(
-			@ModelAttribute("boardBean")  FreeBoard_Bean boardBean,
-			@RequestParam("idx_num") int idx_num,  HttpServletRequest request, 
-			@RequestParam("current_page") String current_page,
-			Model model) {
-		System.out.println(boardBean.toString());
-		MultipartFile file=boardBean.getFile();
-		
-		//파일 처리
-		if(file!=null) {
-			String fileName=file.getOriginalFilename();
-			long fileSize=file.getSize();
-			boardBean.setFilename(fileName);
-			boardBean.setFilesize(fileSize);
-			logger.info(boardBean.getFilename());
-			logger.info(boardBean.getFilesize()+"");
-			
-			try {
-				byte[] fileData=file.getBytes();
-				FileOutputStream output=new FileOutputStream("C:\\Users\\user\\Desktop\\OurBank\\src\\main\\webapp\\resources\\files\\"+fileName);
-				output.write(fileData);
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		//세션에서 얻어와야함
-		HttpSession session = request.getSession();
-		String id = (String)session.getAttribute("uid");
-		boardBean.setId(id);
-		logger.info(boardBean.getId()+" "+
-					boardBean.getContent()+" "+
-					boardBean.getSubject());
-		
-		boardBean.seBboard_idx(board_idx);
-		
-		boardService.updateBoard(boardBean);
-		boardBean=boardService.getSpecificRow(idx_num);
-		
-		model.addAttribute("idx_num", idx_num);
-		model.addAttribute("current_page", current_page);
-		model.addAttribute("searchStr", "None");
-		model.addAttribute("boardData", boardService.getSpecificRow(idx_num));
-		model.addAttribute("filename", boardBean.getFilename());
-		
-		return "board_community/free/freeViewMemo";
-	}
-	
-	//내가쓴 글 - 글 삭제*/
+
+
 
 }

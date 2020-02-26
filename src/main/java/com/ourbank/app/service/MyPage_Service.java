@@ -44,6 +44,46 @@ public ArrayList<FreeBoard_Bean> getUserBoardList(String id, int nStartPage, int
 public FreeBoard_Bean getSpecificRow(int board_idx) {
 	return this.boardMapper.getSpecificRow(board_idx);
 }
+//조회수 올리기
+//리뷰게시판
+public void updateReviewHits(int hits, int best_idx) {
+	System.out.println("조회수 올라감");
+	this.boardMapper.updateReviewHits(hits, best_idx);
+}
+//자유게시판 
+public void updateFreeHits(int hits, int best_idx) {
+	System.out.println("조회수 올라감");
+	this.boardMapper.updateFreeHits(hits, best_idx);
+}
+//모임방게시판 
+public void updateMeetingHits(int hits, int best_idx) {
+	System.out.println("조회수 올라감");
+	this.boardMapper.updateMeetingHits(hits, best_idx);
+}
+//토론방게시판 
+public void updateDebateHits(int hits, int best_idx) {
+	System.out.println("조회수 올라감");
+	this.boardMapper.updateDebateHits(hits, best_idx);
+}
+//제테크노하우게시판 
+public void updateInvestHits(int hits, int best_idx) {
+	System.out.println("조회수 올라감");
+	this.boardMapper.updateInvestHits(hits, best_idx);
+}
+//QnA게시판 
+public void updateQnaHits(int hits, int best_idx) {
+	System.out.println("조회수 올라감");
+	this.boardMapper.updateQnaHits(hits, best_idx);
+}
+
+
+//전체글 수
+public int getTotalCnt(String id) {
+	int nCnt=0;
+	nCnt=this.boardMapper.getTotalCnt(id);
+	return nCnt;
+	}
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 	

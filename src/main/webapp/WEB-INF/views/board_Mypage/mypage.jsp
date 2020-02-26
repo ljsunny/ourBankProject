@@ -13,12 +13,15 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/product.css" >
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>My Page</title>
+<%
+	String id=(String)session.getAttribute("uid");
+%>
 <script type="text/javascript">
 function goToMyInfo(){
 	location.href='myInfo.do';
 }
 function goToMyBoard() {
-	location.href='myBoardList.do';
+	location.href='myBoardList.do?current_page=1';
 }
 function goToMyProduct(){
 	location.href='myProductList.do';

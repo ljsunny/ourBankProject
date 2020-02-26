@@ -21,6 +21,8 @@ primary key (id_x) enable
  
 --qna db
 create table qna_board (
+	board_idx number(10,0) not null,
+	category_num number(10,0) default 6,
  	id_x number(10,0) not null,
  	id varchar2(20) not null,
  	subject varchar2(50),
@@ -36,6 +38,6 @@ primary key (id_x) enable
  
  
  
- drop table faq_board;
+ drop table qna_board;
  
  select * from faq_board;

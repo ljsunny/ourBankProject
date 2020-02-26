@@ -26,11 +26,11 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 	
 <div id="body_div">
 	<div id="side_menu">
-		<h4>My Page</a></h4>
+		<h4><a href="/app/myPage.do">My Page</a></h4>
 		<div id="side_div">
 			<ul id="side_submenu">
 				<li>- <a href="#"> 개인정보관리 </a></li>
-				<li>- <a href="myBoardList.do"> 내가 작성한 글 </a></li>
+				<li>- <a href="myBoardList.do?current_page=1"> 내가 작성한 글 </a></li>
 				<li>- <a href="#"> 가입한 상품 조회 </a></li>
 				<li>- <a href="#"> 관심상품 </a></li>
 			</ul>
@@ -38,7 +38,11 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 	</div>
 <!-- *********************** 내용 ****************************  -->
 
- <div id="site_div">	
+	<div id="line_div">
+ <div id="sub_logo">
+<h2>내가 작성한 글</h2>	
+  </div> 
+ <div id="site_div">		
 
 <div style="margin-top: 50px; font-weight: bold;">
 <table cellspacing=1 width=700>
@@ -87,12 +91,12 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 		</c:forEach>
 	</tbody>
 	</table>
+	<c:set var="total_cnt" value="${totalCnt}"/>
 	<%
-		int rowsPerPage = 10;
-		int total_cnt = ((Integer) (pageContext.getAttribute("total_cnt"))).intValue();
-
-		int total_pages = PageNumberingManager.getInstance().getTotalPage(total_cnt, rowsPerPage);
-		pageContext.setAttribute("t_pages", total_pages);
+	int rowsPerPage = 10;
+	int total_cnt = ((Integer) (pageContext.getAttribute("total_cnt"))).intValue();
+	int total_pages = PageNumberingManager.getInstance().getTotalPage(total_cnt, rowsPerPage);
+	pageContext.setAttribute("t_pages", total_pages);
 	%>
 
 <div style="margin-top: 50px; font-weight: bold;">
