@@ -21,6 +21,7 @@ public class Main_Controller {
 	@RequestMapping(value="/index.do", method = RequestMethod.GET)
 	public String showIndex(Model model) {
 		
+		model.addAttribute("bestDeposit", boardService.bestDeposit());
 		model.addAttribute("newNoticeBean", boardService.selectNewNotice());
 		model.addAttribute("bestBean", boardService.selectBest());
 		return "main";

@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ourbank.app.bean.DepositBoard_Bean;
 import com.ourbank.app.bean.FreeBoard_Bean;
+import com.ourbank.app.bean.SavingBoard_Bean;
 import com.ourbank.app.bean.UserBoard_Bean;
 import com.ourbank.app.service.MyPage_Service;
 
@@ -63,7 +66,7 @@ public String myPage(
 	
 	return "/board_Mypage/mypage";
 }
-
+////////////////수정//////////////////////////////////////////////////////////////////
 @RequestMapping(value = "/myInfo.do", method = RequestMethod.GET)
 public String myInfo(
 		HttpServletRequest request,
@@ -106,11 +109,17 @@ public String deleteId(
 	@RequestParam("id") String id,
 	Model model) {
 	
+	//아이디 삭제
 	boardService.deleteId(id);
+	//내 상품 데이터베이스에서 삭제하기
+	boardService.deleteProductData(id);
+	
 	HttpSession session=request.getSession();
 	session.invalidate();
-	return "writeboard";
+	return "index.do";
 }
+/////////////////////////////////////////////////////////////////////////////////
+
 
 	//내가 작성한글 -리스트 
 	@RequestMapping(value = "/myBoardList.do", method = RequestMethod.GET)
@@ -180,38 +189,68 @@ public String deleteId(
 /////////////////////////////////////////////////////////////////////////////////////////////////
 	//가입상품
 	@RequestMapping(value="/myProductDetail.do", method =RequestMethod.GET )
-	public String myProductDetail( Model model) {
+	public String myProductDetail(@RequestParam("ck") int ck, Model model) {
+		//예금상품
+		if(ck==0) {
+		//뿌릴거
 		ArrayList<DepositBoard_Bean> depositBankBean=boardService.getDepositBank();
+		//은행별로 담을 bean
 		ArrayList<DepositBoard_Bean> depositProductBean=boardService.getDepositProduct();
-		
-		
-		
-		model.addAttribute("de_bank_bean", depositBankBean);
-		model.addAttribute("de_product_bean", depositProductBean);
-		
-		//담을 빈빈
-		model.addAttribute("depositBean", new DepositBoard_Bean());
-		
+		model.addAttribute("bank_bean", depositBankBean);
+		model.addAttribute("product_bean", depositProductBean);
+		//담을 empty 빈
+		model.addAttribute("productBean", new DepositBoard_Bean());
+		}else {
+		ArrayList<SavingBoard_Bean> savingBankBean=boardService.getSavingBank();
+		ArrayList<SavingBoard_Bean> savingtProductBean=boardService.getSavingProduct();
+		model.addAttribute("bank_bean", savingBankBean);
+		model.addAttribute("product_bean", savingtProductBean);
+		model.addAttribute("productBean", new SavingBoard_Bean());
+		}
+		model.addAttribute("ck", ck);
 		return "/board_Mypage/myProduct";
 	}
 	
 	@RequestMapping(value="/myProduct.do", method =RequestMethod.POST)
 	public String myProduct(HttpServletRequest request,
+							HttpServletResponse response,
+							int ck,
 							String fin_prdt_cd, 
 							Model model) {
+		
+		//아무것도 선택하지 않을시 리스트로
+		if(fin_prdt_cd==null) {
+			return "redirect:myProductList.do";
+		}
 		HttpSession session = request.getSession();
 		String uid = (String)session.getAttribute("uid");
 		if(uid==null) {
 			return "redirect:loginForm.do";
 		}
 		logger.info(fin_prdt_cd);
+		
 		String fpn_array[]=fin_prdt_cd.split(",");
 		for(int i=0; i<fpn_array.length;i++) {
 			System.out.println(fpn_array[i]);
-			DepositBoard_Bean depositBean=boardService.getOneDeposit(fpn_array[i]);
-			depositBean.setId(uid);
-			//유저아이디 상품은행 상품은행코드 상품코드 상품이름 예금/적금insert 하기
-			boardService.insertMyDeposit(depositBean);
+			if(ck==0) {
+				DepositBoard_Bean depositBean=boardService.getOneDeposit(fpn_array[i]);
+				depositBean.setId(uid);
+				if(boardService.selectCntExist(uid,depositBean.getFin_prdt_cd())==0) {
+					//예금/적금을 ck 코드로 나눠 넣음
+						depositBean.setDep_or_sav("예금");
+						//유저아이디 상품은행 상품은행코드 상품코드 상품이름 예금/적금insert 하기
+						boardService.insertMyDeposit(depositBean);
+					}	
+			}else {
+				SavingBoard_Bean savingBean=boardService.getOneSaving(fpn_array[i]);
+				savingBean.setId(uid);
+				if(boardService.selectCntExist(uid,savingBean.getFin_prdt_cd())==0) {
+					//예금/적금을 ck 코드로 나눠 넣음
+					savingBean.setDep_or_sav("적금");
+						//유저아이디 상품은행 상품은행코드 상품코드 상품이름 예금/적금insert 하기
+					boardService.insertMySaving(savingBean);
+					}
+			}
 		}
 		
 		return "redirect:myProductList.do";
@@ -226,6 +265,85 @@ public String deleteId(
 		model.addAttribute("boardList", boardService.selectAllProduct(uid, 1, 10));	
 		model.addAttribute("uid",uid);
 		return "/board_Mypage/myProductList";
+	}
+	
+	@RequestMapping(value = "/myProductDelete.do", method=RequestMethod.GET)
+	public String myProductDelete(HttpServletResponse response,
+									@Param("id") String id, 
+									@Param("fin_prdt_cd") String fin_prdt_cd,
+									Model model) {
+		boardService.deleteProduct(id, fin_prdt_cd);
+		PrintWriter out;
+		try {
+			//자바에서 알림창 띄우기
+			out = response.getWriter();
+			out.println("<script>alert('삭제되었습니다.');location.href='myProductList.do'; </script>"); 
+	        out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "history.back();";
+		
+	}
+	
+	@RequestMapping(value="/myWant.do",method=RequestMethod.GET )
+	public String myWant(
+						HttpServletRequest request,
+						HttpServletResponse response,
+						@Param("current_page") int current_page,
+						@Param("fin_prdt_cd") String fin_prdt_cd,
+						Model model) {
+		HttpSession session=request.getSession();
+		String id=(String) session.getAttribute("uid");
+		String dep_or_sav="예금";
+		if(boardService.selectWantExist(id, fin_prdt_cd)==0) {
+		logger.info(fin_prdt_cd);
+		DepositBoard_Bean depositBean=boardService.getOneDeposit(fin_prdt_cd);
+		System.out.println(depositBean.getFin_prdt_cd());
+		boardService.insertMyWant(id,depositBean,dep_or_sav);
+		}else {
+			PrintWriter out;
+			try {
+				//자바에서 알림창 띄우기
+				out = response.getWriter();
+				out.println("<script>alert('이미 관심상품에 추가된 상품입니다.');history.back(); </script>"); 
+		        out.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return myWantList(request,1,model);
+	
+	}
+	@RequestMapping(value = "/myWantList.do",method = RequestMethod.GET)
+	public String myWantList(HttpServletRequest request,
+							@Param("current_page") int current_page,
+							Model model) {
+		HttpSession session = request.getSession();
+		String uid = (String)session.getAttribute("uid");
+		
+		
+		model.addAttribute("uid",uid);
+		model.addAttribute("totalCnt",boardService.selectCntWant(uid));
+		model.addAttribute("current_page", current_page);
+		//current_page 수정하기!!!
+		model.addAttribute("boardList",boardService.selectWantList(uid, current_page, 10));
+		return "/board_Mypage/myWant";
+	}
+	
+	@RequestMapping(value="deleteMyWant.do" ,method = RequestMethod.GET)
+	public String deleteMyWant(
+			HttpServletRequest request,
+			String fin_prdt_cd,
+			Model model) {
+		HttpSession session = request.getSession();
+		String uid = (String)session.getAttribute("uid");
+		boardService.deleteWant(uid, fin_prdt_cd);
+		return "redirect:myWantList.do";
 	}
 /////////////////////////////////////////////////////////////////////////////////////////////////
 	/*

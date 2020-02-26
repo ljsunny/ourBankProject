@@ -23,6 +23,9 @@ function goToMyBoard() {
 function goToMyProduct(){
 	location.href='myProductList.do';
 }
+function goToMyWant(){
+	location.href='myWantList.do?current_page=1';
+}
 </script>
 </head>
 <body>
@@ -61,7 +64,7 @@ function goToMyProduct(){
 			<td><input type="button" value="가입한 상품 조회"
 				 class="mybtn" onclick="goToMyProduct()"></td>
 			<td><input type="button" value="관심상품"
-				  class="mybtn"></td>
+				  class="mybtn" onclick="goToMyWant()"></td>
 		</tr>
 	</table>
 	<!-- *********************** 게시판 글쓰기 폼 ****************************  -->	

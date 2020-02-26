@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/product.css" >
 <script src="https://kit.fontawesome.com/9bbe6ae1b4.js" crossorigin="anonymous"></script>
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <meta charset="EUC-KR">
 <title>예금상품 리스트</title>
 <script type="text/javascript">
@@ -45,6 +47,14 @@ function searchProduct(){
 	var selectValue = searchStr.value;
 	var en_search= encodeURIComponent(selectValue);
 	location.href="depositSearch.do?current_page="+${current_page}+"&searchStr="+en_search;
+}
+
+function myWant(count){
+
+	var pc="prdt_cd"+count;
+	var prdt_cd=document.getElementById(pc).value;
+	
+	location.href='myWant.do?current_page=1&fin_prdt_cd='+prdt_cd;
 }
 </script>
 </head>
@@ -94,7 +104,9 @@ function searchProduct(){
 <hr width="65%">
 <!-- 상품 리스트 출력 -->
 	<table align="center" id="product_table" width="60%" >
-		<c:forEach var="boardList" items="${boardList}">
+		<c:forEach var="boardList" items="${boardList}" varStatus="status">
+	
+
 			<tr >
 				<td><a id="product_name" 
 				href="depositContent.do?current_page=${current_page}&fin_prdt_cd=${boardList.getFin_prdt_cd()}">
@@ -105,10 +117,11 @@ function searchProduct(){
 				<td>우대금리 ${boardList.getIntr_rate2()}%</td>
 				<td>${boardList.getIntr_rate_type_nm()}</td>
 				<td>( ${boardList.getSave_trm()} 개월)</td>
-				
-				<td><a href="#">
+				<c:set var="prdt_cd" value="prdt_cd"/>
+				<input id="${prdt_cd}${status.count}" type="hidden" value="${boardList.getFin_prdt_cd()}">
+				<td><span onclick="myWant(${status.count})">
 				<img src="${pageContext.request.contextPath}/resources/images/cart.png" 
-				width="30" height="30" ></a>&nbsp;&nbsp;&nbsp;</td>
+				width="30" height="30" ></span>&nbsp;&nbsp;&nbsp;</td>
 				<td><button><a href="${boardList.getHomp_url()}" target="blank">가입하기</a></button>
 				</td>
 			</tr>

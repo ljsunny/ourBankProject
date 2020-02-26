@@ -19,15 +19,18 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/h_script.js"></script>
 <meta http-equiv="Content-Type" content="text/html" ; charset="EUC-KR">
-<title>아워뱅크::내금융상품</title>
+<title>아워뱅크::장바구니</title>
 <script type="text/javascript">
-function productdelete(count){
+function wantdelete(count){
+	alert(count);
 	var id=document.getElementById("uid").value;
+	
 	var pc="prdt_cd"+count;
+	alert(pc);
 	var fin_co_cd=document.getElementById(pc).value;
-
+	alert(fin_co_cd);
 	if(confirm('정말 삭제하시겠습니까?')==true){
-		location.href='myProductDelete.do?id='+id+'&fin_prdt_cd='+fin_co_cd;
+		location.href='deleteMyWant.do?id='+id+'&fin_prdt_cd='+fin_co_cd;
 	}else {
 		return;
 	}
@@ -56,13 +59,13 @@ function productdelete(count){
  <div id="site_div">	
 <div id="my_list_wrap">
 <div style="margin-top: 50px; font-weight: bold;">
-<h1>${uid}님이 가입하신 상품입니다.
-<button class="mybtn" onclick="location.href='myProductDetail.do?ck=0'">+ 가입된 상품 정보 추가</button>
+<h1>${uid}님의 장바구니
+<button class="mybtn">장바구니 비우기</button>
 </h1>
 
 <table cellspacing=1 width=700>
 	<tr>
-		<td>가입된상품 수: <c:out value="${totalCnt}" /></td>
+		<td>관심있는 상품 수: <c:out value="${totalCnt}" /></td>
 		<td><p align="right">
 				페이지:
 				<c:out value="${current_page}" />
@@ -106,11 +109,13 @@ function productdelete(count){
 				${board.getKor_co_nm()}
 			</td>
 			<td width="100">
-			
 			<input id="uid" type="hidden" value="${board.getId()}">
 			<c:set var="prdt_cd" value="prdt_cd" />
 			<input id="${prdt_cd}${status.count}" type="hidden" value="${board.getFin_prdt_cd()}">
-			<span class="mi_back" onclick="productdelete(${status.count})">
+			
+			
+			
+			<span class="mi_back" onclick="wantdelete(${status.count})">
 			<i class="fas fa-minus-square"></i>
 			</span>'
 			</td>

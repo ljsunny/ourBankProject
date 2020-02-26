@@ -41,10 +41,19 @@
 		+"&bank=" + en_bank;
 
 	}
+	function show_depo() {
+
+		document.getElementById("depo").style.display = "block";
+		document.getElementById("sav").style.display = "none";
+	}
+	function show_sav() {
+		document.getElementById("sav").style.display = "block";
+		document.getElementById("depo").style.display = "none";
+	}
 	$(function() {
 		$( "#accordion" ).accordion({
 
-			  active: false,
+			  active: true,
 
 			  collapsible: true
 
@@ -81,36 +90,44 @@
 
 	<!-- *********************** 내용 ****************************  -->
 	<div id="my_product">
-	<div class="btn-group">
-				<button class="button">예금</button>
-				<button class="button">적금</button>
+	<!-- 가입된 예금 상품 선택 -->
+
+		<div id="depo">
+			<h2>가입된 상품 정보 등록</h2>
+			
+			
+			<div>
+			<button id="btn1" class="btn_btn" 
+			onclick="location.href='myProductDetail.do?ck=0'">예금</button>
+			<button id="btn2" class="btn_btn" 
+			onclick="location.href='myProductDetail.do?ck=1'">적금</button>
+			<hr>
+			<p></p>
 			</div>
-		<div class="main">
-			<h2>추가 정보 등록</h2>
-			<p>
-			<form method="post" action="myProduct.do">
-			<input type="submit" >
+		<form method="post" action="myProduct.do">
+		<input type="hidden" name="ck" value="${ck}">
 			<div class="wrap">
 				<div id="accordion">
-				<c:forEach var="deposit_bean" items="${de_bank_bean}">
-						<h3>${deposit_bean.getKor_co_nm()}&nbsp;&nbsp;</h3>
+				<c:forEach var="bank_bean" items="${bank_bean}">
+						<h3>${bank_bean.getKor_co_nm()}&nbsp;&nbsp;</h3>
 						<div class="div_dp">
-							<c:forEach var="deposit_product" items="${de_product_bean}">
+							<c:forEach var="product_bean" items="${product_bean}">
 								<!-- 은행으로 정렬 -->
-								<c:set var="dp_bk" value="${deposit_bean.getKor_co_nm()}" />
-								<c:set var="dp_pd_bk" value="${deposit_product.getKor_co_nm()}" />
-								<c:if test="${dp_bk==dp_pd_bk}">
+								<c:set var="bk" value="${bank_bean.getKor_co_nm()}" />
+								<c:set var="pd_bk" value="${product_bean.getKor_co_nm()}" />
+								<c:if test="${bk==pd_bk}">
 								
 								<input id="pdt_nm" type="checkbox" name="fin_prdt_cd"
-										value="${deposit_product.getFin_prdt_cd()}"
+										value="${product_bean.getFin_prdt_cd()}"
 										onselect="inject_info()"></input>
-										${deposit_product.getFin_prdt_nm()}&nbsp;&nbsp;	
+										${product_bean.getFin_prdt_nm()}&nbsp;&nbsp;	
 								</c:if>
 							</c:forEach>
 						</div>
 				</c:forEach>
 				</div>
 			</div>
+			<input class="btn" type="submit">
 			</form>
 		</div>
 	</div>

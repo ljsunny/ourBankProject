@@ -36,32 +36,32 @@
 	function numberWithCommas(x) {
 	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
-	function check_deposit(){
+	function check_saving(){
 		
-		var deposit_amount=document.getElementById("d_amount").value;
-		var deposit_period=document.getElementById("d_period").value;
-		var deposit_intr=document.getElementById("d_intr").value;
+		var saving_amount=document.getElementById("d_amount").value;
+		var saving_period=document.getElementById("d_period").value;
+		var saving_intr=document.getElementById("d_intr").value;
 		
 		
-		deposit_intr=Number(deposit_intr);
-		deposit_intr=deposit_intr/100;
-		deposit_period=Number(deposit_period);
-		deposit_amount=Number(deposit_amount);
-		alert(deposit_intr);
-		if(deposit_amount==""){
+		saving_intr=Number(saving_intr);
+		saving_intr=saving_intr/100;
+		saving_period=Number(saving_period);
+		saving_amount=Number(saving_amount);
+		alert(saving_intr);
+		if(saving_amount==""){
 			alert("예치금액을 입력해주세요");
 			return false;
 		}
-		if(deposit_period==""){
+		if(saving_period==""){
 			alert("예치기간을 입력해주세요");
 			return false;
 		}
-		if(deposit_period%6!=0||deposit_period>36){
+		if(saving_period%6!=0||saving_period>36){
 			alert("예치기간을 6개월단위로 입력해주세요");
 			return false;
 		}
-		alert(deposit_period/12);
-		var result=deposit_amount=deposit_amount+(deposit_amount*deposit_intr*(deposit_period/12));
+		alert(saving_period/12);
+		var result=saving_amount=saving_amount+(saving_amount*saving_intr*(saving_period/12));
 		result=numberWithCommas(result)+" 원";
 
 		document.getElementById("m3").style.display = "block";
@@ -189,7 +189,7 @@
 								<input id="d_intr" readonly="readonly" value="${savingBean.getIntr_rate2()}" 
 								type="text" placeholder="금리">%로 운용하면?  &nbsp;
 								<input class="button1" type="submit" 
-								value="결과" onclick="check_deposit()">
+								value="결과" onclick="check_saving()">
 							</dd>
 						</dl>
 						<div id="m3" style="display: none;">

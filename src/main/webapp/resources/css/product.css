@@ -44,7 +44,11 @@
 #home .row1 .area2 p{
 	padding: 10px;
 }
+#home .row2{
+	
+}
 #home .row2 .area3 {
+	background-color: #fff;
 	display: block;
 	float: left;
 	width: 340px;
@@ -62,12 +66,13 @@
 }
 
 #home .row2 .area4 {
+	background-color: #fff;
 	display: block;
 	float: left;
 	width: 340px;
 	height: 250px;
 	border: 2px solid #2A70E8;
-	margin-right: 40px;
+	
 	padding: 10px;
 }
 #home .row2 .area4:hover{
@@ -82,15 +87,41 @@
 	color:#2A70E8;
 }
 #home .row2 .area5 {
+	background-color: #fff;
 	display: block;
 	float: left;
 	width: 340px;
 	height: 250px;
+	margin-right: 40px;
 	border: 2px solid #2A70E8;
 	padding: 10px;
 }
 #home .row2 .area5:hover{
 	box-shadow: 1px 1px 20px #ddd;
+}
+#home .row2 .area5 .best_product{
+	margin: 50px auto 10px 0px;
+	
+}
+#home .row2 .area5 .best_product span{
+	color:#dbdbdb;
+}
+#home .row2 .area5 .best_product i{
+	float:left;
+	margin-top:15px;
+	margin-right: 15px;
+}
+#home .row2 .area5 .best_product .info{
+	margin-bottom:5px;
+	float:left;
+	font-weight: bold;
+}
+#home .row2 .area5 .best_product .info h1{
+	color: #EC5942;
+	text-align: center;
+}
+#home h3{
+	
 }
 /*********************************************************************************/
 /* Product                  o                                                     */
@@ -598,50 +629,66 @@
 /*********************************************************************************/
 
 #my_product{
-	margin:60px 300px 600px 300px;
-	min-width: 1000px;
+	margin:30px 50px 300px 300px;
 }
-#my_product h2{
-	display: table-caption;
-	text-align: center;
-	padding-bottom: 5px;
+#my_product .btn{
+	width: 770px;
+	height: 70px;
+	margin: 30px 0 0 0;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #2A70E8;
+	color:white;
+    border:0;
+}
+#my_product .btn_btn{
+	width: 60px;
+	height: 50x;
+	border:2px 2px 2px 2px;
+	border-color: #2A70E8;
+	border-bottom-color: white;
+	background-color: white;
+	margin-top: 30px;
+}
+#my_product .btn:hover{
+	background-color:#134fb3;
+	color: #fcfcfc; 
 }
 #my_product hr{
+	float:left;
+	margin-top:0;
+	margin-right:700px;
+	margin-bottom:20px;
 	width: 500px;
 	border: 2px solid #2A70E8;
 }
-#my_product .main{
-	display:table;
-	margin: 30px auto 0px auto;
+#clicked2{
+	background-color: #2A70E8;
+	color: white;
 }
-#my_product .btn-group .button {
-  background-color: #2A70E8; /* Blue */
-  border: 1px solid #2A70E8;
-  color: white;
-  padding: 30px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-  float: left;
+/*********************************************************************************/
+/* MyProductList                  o                                                    */
+/*********************************************************************************/
+#my_list_wrap{
+	margin: 0 50px 0 150px;
 }
 
-#my_product  .btn-group .button:not(:last-child) {
-  border-right: none; /* Prevent double borders */
+#my_list_wrap .mybtn{
+	margin-left: 300px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #2A70E8;
+	color:white;
+    border:0;
 }
-
-#my_product.btn-group .button:hover {
-  background-color: #1558c8;
+#my_list_wrap .mi_back
+{
+	color: #E8AB2A;
 }
-#my_product .main .area-cell{
-	display:inline-block;
-	width:30%;
-	height:100px;
-	margin: 30px auto 50px auto;
+#error{
+	margin-top: 80px;
 }
-
-#my_product .main .wrap{
-	margin-top: 130px;
-	margin-left: 50px;
+#error p{
+	font-size: 100px; 
+	text-align: center;
 }

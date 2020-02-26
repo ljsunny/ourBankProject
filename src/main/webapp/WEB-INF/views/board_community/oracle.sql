@@ -165,7 +165,7 @@ select * from myboardview;
 
 
 select * from (select service_num,id,fin_co_no,kor_co_nm,
-fin_prdt_cd, fin_prdt_nm, dep_or_sav, rownum/10 as page
+fin_prdt_cd, fin_prdt_nm, dep_or_sav, ceil(rownum/10) as page
 from 
 (select * from tlb_my_product 
 order by dep_or_sav asc, fin_co_no asc)

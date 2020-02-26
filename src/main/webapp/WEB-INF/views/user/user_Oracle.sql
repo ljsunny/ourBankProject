@@ -19,29 +19,31 @@ select * from tlb_user_board;
 select id from tlb_user_board where user_name='어드민' and user_birth='2020-11-31' and user_phone='010-5068-7058';
 
 
-/*my deposit*/
-create sequence my_product_seq minvalue 1 maxvalue 9999999999 increment by 1 start with 1 ;
+/*my product*/
 create table tlb_my_product(
-	service_num number(10,0) not null,
 	id varchar2(50) not null,
  	fin_co_no  varchar2(10) not null,
  	kor_co_nm varchar2(100) not null,
  	fin_prdt_cd varchar2(100) not null,
  	fin_prdt_nm varchar2(100) not null,
  	dep_or_sav char(6) check(dep_or_sav in('예금','적금')),
-	primary key(service_num) enable
+	primary key(id,fin_prdt_cd) enable
 );
 drop table tlb_my_product;
 select * from tlb_my_product;
-/*deposit view */
-create view view_my_deposit_product as (
-select u.id, p.fin_co_no,p.kor_co_nm,p.fin_prdt_cd,p.fin_prdt_nm
-from  tlb_user_board u,tlb_deposit_board p)
 
-select * from view_my_deposit_product;
-/*saving view */
-create view view_my_saving_product as (
-select u.id, p.fin_co_no,p.kor_co_nm,p.fin_prdt_cd,p.fin_prdt_nm
-from  tlb_user_board u,tlb_saving_board p)
+/*my want*/
+create table tlb_my_want(
+id varchar2(50) not null,
+ 	fin_co_no  varchar2(10) not null,
+ 	kor_co_nm varchar2(100) not null,
+ 	fin_prdt_cd varchar2(100) not null,
+ 	fin_prdt_nm varchar2(100) not null,
+ 	dep_or_sav char(6) check(dep_or_sav in('예금','적금')),
+	primary key(id,fin_prdt_cd) enable
+);
 
-drop view tlb_my_product;
+delete from tlb_my_want;
+select * from tlb_my_want;
+
+select fin_prdt_cd from tlb_deposit_board where fin_prdt_cd='1030500490002';

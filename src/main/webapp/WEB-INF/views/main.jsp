@@ -27,7 +27,7 @@
 	<div id="home">
 	<div class="row1">
 		<div class="area1"><h3>베스트 게시물<a href="best_listSpecificPageWork.do?current_page=1">
-		<i class="fas fa-plus-circle"></i></a></h3>
+		<i class="fas fa-plus-circle" style="float:right;"></i></a></h3>
 		<div>
 		<c:forEach var="bestBean" items="${bestBean}">
 		<p>
@@ -39,7 +39,7 @@
 		</div>
 		</div>
 		<div class="area2"><h3>최근 공지<a href="newnoticeList.do?current_page=1">
-		<i class="fas fa-plus-circle"></i></a></h3>
+		<i class="fas fa-plus-circle" style="float:right;"></i></a></h3>
 		<c:forEach var="newNoticeBean" items="${newNoticeBean}">
 		<p>
 			<a href="newnoticeView.do?idx=${newNoticeBean.getIdx()}&current_page=1&searchStr=None">
@@ -50,13 +50,31 @@
 		</div>
 	</div>	
 	<div class="row2">
-		<div class="area3"><h3>동영상 <i class="fas fa-plus-circle"></i></h3>
+		<div class="area3"><h3>동영상 
+		<i class="fas fa-plus-circle" style="float:right;"></i></h3>
 		
 		<iframe width="300" height="200" src="https://www.youtube.com/embed/T2Unam50vEc" 
 		frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 		</iframe>
 		</div>
-		<div class="area4"><h3>금융단어<i class="fas fa-plus-circle"></i></h3>
+		
+		<a href="depositContent.do?current_page=1&fin_prdt_cd=${bestDeposit.getFin_prdt_cd()}">
+		<div class="area5"><h3>추천상품<i class="fas fa-plus-circle" style="float:right;"></i></h3>
+			<div class="best_product">
+			<span>
+			<i class="far fa-credit-card fa-6x"></i>
+			</span>
+			<div class="info">
+			<ul>
+				<li>${bestDeposit.getKor_co_nm()}</li>
+				<li><h2>${bestDeposit.getFin_prdt_nm()}</h2></li>
+			</ul>
+			<h1>최대 ${bestDeposit.getIntr_rate2()}%</h1>
+			</div>
+			</div>
+		</div>
+		</a>
+		<div class="area4"><h3>금융단어<i class="fas fa-plus-circle" style="float:right;"></i></h3>
 		<a href="http://fine.fss.or.kr/main/fin_tip/dic/financedic.jsp" target="_blank">
 		<div class="book">
 		<span>
@@ -64,7 +82,6 @@
 		</span>
 		</div></a>
 		</div>
-		<div class="area5"><h3>계산기<i class="fas fa-plus-circle"></i></h3></div>
 	</div>	
 	</div>
 

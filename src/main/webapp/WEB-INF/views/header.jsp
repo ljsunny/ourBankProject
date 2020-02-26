@@ -43,7 +43,7 @@ String uid=(String)session.getAttribute("uid");
 				</c:if>
 
 				<c:if test="${uid !=null}">
-					<i class="icon icon-join"></i></i> 
+					<i class="icon icon-join fa-2x"></i></i> 
 					<c:out value="${uid}"></c:out>님의 방문을 환영합니다.
 					<a href="logOut.do">로그아웃</a>
 				 </c:if>
