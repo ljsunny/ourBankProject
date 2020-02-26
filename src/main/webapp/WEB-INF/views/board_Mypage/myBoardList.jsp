@@ -20,100 +20,104 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <title>자유게시판 글목록</title>
 </head>
 
-<!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
+<!-- *********************** 게시판 글쓰기 폼 ****************************  -->   
 <jsp:include page="../header.jsp"></jsp:include>
-<!-- *********************** 사이드 메뉴 ****************************  -->	
-	
+<!-- *********************** 사이드 메뉴 ****************************  -->   
+   
 <div id="body_div">
-	<div id="side_menu">
-		<h4>My Page</a></h4>
-		<div id="side_div">
-			<ul id="side_submenu">
-				<li>- <a href="#"> 개인정보관리 </a></li>
-				<li>- <a href="myBoardList.do"> 내가 작성한 글 </a></li>
-				<li>- <a href="#"> 가입한 상품 조회 </a></li>
-				<li>- <a href="#"> 관심상품 </a></li>
-			</ul>
-		</div>
-	</div>
+   <div id="side_menu">
+      <h4><a href="/app/myPage.do">My Page</a></h4>
+      <div id="side_div">
+         <ul id="side_submenu">
+            <li>- <a href="#"> 개인정보관리 </a></li>
+            <li>- <a href="myBoardList.do?current_page=1"> 내가 작성한 글 </a></li>
+            <li>- <a href="#"> 가입한 상품 조회 </a></li>
+            <li>- <a href="#"> 관심상품 </a></li>
+         </ul>
+      </div>
+   </div>
 <!-- *********************** 내용 ****************************  -->
 
- <div id="site_div">	
+   <div id="line_div">
+ <div id="sub_logo">
+<h2>내가 작성한 글</h2>   
+  </div> 
+ <div id="site_div">      
 
 <div style="margin-top: 50px; font-weight: bold;">
 <table cellspacing=1 width=700>
-	<tr>
-		<td>총 게시물수: <c:out value="${totalCnt}" /></td>
-		<td><p align="right">
-				페이지:
-				<c:out value="${current_page}" />
-			</td>
-	</tr>
+   <tr>
+      <td>총 게시물수: <c:out value="${totalCnt}" /></td>
+      <td><p align="right">
+            페이지:
+            <c:out value="${current_page}" />
+         </td>
+   </tr>
 
 </table>
 </div>
 
 <table cellspacing=1 width=700 >
-	<thead>
-	<tr>
-		<td width="50" class="tlb_board_top">글번호</td>
-		<td width="320" class="tlb_board_top">제목</td>
-		<td width="100" class="tlb_board_top">아이디</td>
-		<td width="100" class="tlb_board_top">등록일</td>
-		<td width="100" class="tlb_board_top">조회수</td>
-	</tr> </thead>
-	<tbody>
-	<c:set var="count" value="0" />
-	<c:forEach var="board" items="${boardList}">
-	<c:set var="count" value="${count+1}"/>
-		<tr class="tlb_board_bottom">
-			<td width="50">${count}</td>
-			<td width="320">
-				
-					<a href="myBoardView.do?board_idx=${board.getBoard_idx()}&current_page=<c:out value="${current_page}"/>"> 
-					<c:out value="${board.getSubject()}" /></a>
-					
-			</td>
-			<td width="100">
-				<c:out value="${board.getId()}"/>
-				</td>
-			<td width="100">
-					<c:out value="${board.getCreated_date()}" />
-				</td>
-			<td width="100">
-					<c:out value="${board.getHits()}" />
-				</td>
-		</tr>
-		</c:forEach>
-	</tbody>
-	</table>
-	<%
-		int rowsPerPage = 10;
-		int total_cnt = ((Integer) (pageContext.getAttribute("total_cnt"))).intValue();
-
-		int total_pages = PageNumberingManager.getInstance().getTotalPage(total_cnt, rowsPerPage);
-		pageContext.setAttribute("t_pages", total_pages);
-	%>
+   <thead>
+   <tr>
+      <td width="50" class="tlb_board_top">글번호</td>
+      <td width="320" class="tlb_board_top">제목</td>
+      <td width="100" class="tlb_board_top">아이디</td>
+      <td width="100" class="tlb_board_top">등록일</td>
+      <td width="100" class="tlb_board_top">조회수</td>
+   </tr> </thead>
+   <tbody>
+   <c:set var="count" value="0" />
+   <c:forEach var="board" items="${boardList}">
+   <c:set var="count" value="${count+1}"/>
+      <tr class="tlb_board_bottom">
+         <td width="50">${count}</td>
+         <td width="320">
+            
+               <a href="myBoardView.do?board_idx=${board.getBoard_idx()}&current_page=<c:out value="${current_page}"/>"> 
+               <c:out value="${board.getSubject()}" /></a>
+               
+         </td>
+         <td width="100">
+            <c:out value="${board.getId()}"/>
+            </td>
+         <td width="100">
+               <c:out value="${board.getCreated_date()}" />
+            </td>
+         <td width="100">
+               <c:out value="${board.getHits()}" />
+            </td>
+      </tr>
+      </c:forEach>
+   </tbody>
+   </table>
+   <c:set var="total_cnt" value="${totalCnt}"/>
+   <%
+   int rowsPerPage = 10;
+   int total_cnt = ((Integer) (pageContext.getAttribute("total_cnt"))).intValue();
+   int total_pages = PageNumberingManager.getInstance().getTotalPage(total_cnt, rowsPerPage);
+   pageContext.setAttribute("t_pages", total_pages);
+   %>
 
 <div style="margin-top: 50px; font-weight: bold;">
 <table cellspacing="1" width="700" class="page">
-	<tr>
-		<td><c:forEach var="i" begin="1" end="${t_pages}">
-				<a href="freeList.do?current_page=${i}"> [ <c:if
-						test="${i==c_page}">
-						<b>
-					</c:if> ${i} <c:if test="${i==c_page}">
-						<b>
-					</c:if> ]
-				</a>
-			</c:forEach></td>
-	</tr>
+   <tr>
+      <td><c:forEach var="i" begin="1" end="${t_pages}">
+            <a href="freeList.do?current_page=${i}"> [ <c:if
+                  test="${i==c_page}">
+                  <b>
+               </c:if> ${i} <c:if test="${i==c_page}">
+                  <b>
+               </c:if> ]
+            </a>
+         </c:forEach></td>
+   </tr>
 </table>
 </div>
 
 </div>
 </div>
-<!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
+<!-- *********************** 게시판 글쓰기 폼 ****************************  -->   
 
-	<jsp:include page="../footer.jsp"></jsp:include>
+   <jsp:include page="../footer.jsp"></jsp:include>
 </html>

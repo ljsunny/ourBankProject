@@ -18,7 +18,7 @@ function goToMyInfo(){
 	location.href='myInfo.do';
 }
 function goToMyBoard() {
-	location.href='myBoardList.do';
+	location.href='myBoardList.do?current_page=1';
 }
 function goToMyProduct(){
 	location.href='myProductList.do';
