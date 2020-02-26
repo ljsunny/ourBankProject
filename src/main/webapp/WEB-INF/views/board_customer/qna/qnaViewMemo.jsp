@@ -67,7 +67,7 @@ function boardreply(){
 			<ul id="side_submenu">
 				<li>- <a href="faqList.do?current_page=1"> 자주하는 질문 </a></li>
 				<li>- <a href="qnaList.do?current_page=1"> QnA </a></li>
-				<li>- <a href="#"> Contact </a></li>
+				<li>- <a href="email.do">Contact-email</a></li>
 			</ul>
 		</div>
 	</div>

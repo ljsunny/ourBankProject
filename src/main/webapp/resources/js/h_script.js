@@ -39,6 +39,18 @@ jQuery(function (){
 		if (content == '') { alert('내용을 입력하세요'); 
 		return false; 
 		}
+		var email = jQuery('#form #email').val(); 
+		if (email == '') { alert('이메일을 입력하세요'); 
+		return false; 
+		}
+		var name = jQuery('#form #name').val(); 
+		if (name == '') { alert('이름을 입력하세요'); 
+		return false; 
+		}
+		var message = jQuery('#form #message').val(); 
+		if (message == '') { alert('내용을 입력하세요'); 
+		return false; 
+		}
 		
 		jQuery('#save').submit(); 
 	}); 
@@ -53,3 +65,4 @@ jQuery(function (){
 		
 		
 	}); 
+

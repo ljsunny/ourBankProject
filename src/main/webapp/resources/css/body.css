@@ -272,4 +272,21 @@
 	}
 
 /*******/
+	.div_complete
+	{
+		margin: 100px 0 0 300px;
+		float: center;
+	}
+	
+	.div_complete p 
+	{
+		font-weight: bold;
+		font-size: 35px;
+	}
+	
+	.div_board_bnt
+	{
+		margin: 40px 0 0 60px;
+	}
+	
 

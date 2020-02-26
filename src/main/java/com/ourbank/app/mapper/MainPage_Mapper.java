@@ -132,7 +132,7 @@ public interface MainPage_Mapper {
 			"update news_board set hits=#{hits}+1 where board_idx=#{board_idx}";
 	@Update(UPDATE_NEWS_HITS)
 	void updateNewstHits(@Param("hits") int hits, @Param("board_idx") int board_idx);
-	//Qna게시판
+	//공지사항게시판
 	final String UPDATE_NEWNOTICE_HITS=
 			"update newnotice_board set hits=#{hits}+1 where board_idx=#{board_idx}";
 	@Update(UPDATE_QNA_HITS)
