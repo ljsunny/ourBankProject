@@ -23,15 +23,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fonts.css" >
 <meta charset="EUC-KR">
 <title>자주하는 질문</title>
-<script type="text/javascript">
-function email_idCheck() {
-	var loginUser = "${uid}";
-	if(!loginUser) {
-		alert('로그인 후 이용 가능합니다.');
-		return location.href = "loginForm.do";		
-	}
-}
-</script>
+
 </head>
 
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
@@ -45,13 +37,7 @@ function email_idCheck() {
 			<ul id="side_submenu">
 				<li>- <a href="faqList.do?current_page=1"> 자주하는 질문 </a></li>
 				<li>- <a href="qnaList.do?current_page=1"> QnA </a></li>
-				<c:if test="${uid!=null }"> <!--   (사용시 ${id != null }로바꾸기!!-->
-	              <li><a href="email.do">Contact-email</a></li>
-	            </c:if>
-	            <c:if test="${uid==null}">
-	              <li><a onclick="email_idCheck(this.href);return false;" onkeypress="this.onclick;"
-						href="email.do">Contact-email</a></li>
-	            </c:if>
+				<li>- <a href="email.do">Contact-email</a></li>
 			</ul>
 		</div>
 	</div>

@@ -31,7 +31,7 @@ public String show_emailForm(Email_Bean emailBean, HttpServletRequest request, M
 	logger.info("mail_form called!!");
 	
 	HttpSession session = request.getSession();
-	String uid = (String)session.getAttribute("id");
+	String uid = (String)session.getAttribute("uid");
 
 	model.addAttribute("uid", uid);
 	model.addAttribute("emailBean", new Email_Bean());
@@ -49,6 +49,12 @@ public String email_send(@ModelAttribute("emailBean") Email_Bean emailBean,
 	System.out.println("-----------------------------------------");
 	logger.info("email_send called");
 	
+	HttpSession session = request.getSession();
+	String uid = (String)session.getAttribute("uid");
+	
+	String content = "이 름 : " + emailBean.getName() + "\n" + "이메일 : " + emailBean.getSender() + "\n\n" + emailBean.getMessage();
+	emailBean.setMessage(content);
+	logger.info("content:"+content);
 	
 	emailBean.setReceiver("gmlwl2121@gmail.com");//실제 Admin 이메일 계정 넣어주기
 	boardService.sendMail(emailBean);

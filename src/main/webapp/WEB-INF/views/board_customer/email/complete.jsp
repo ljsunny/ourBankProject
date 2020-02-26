@@ -44,7 +44,7 @@ function email() {
 			<ul id="side_submenu">
 				<li>- <a href="faqList.do?current_page=1"> 자주하는 질문 </a></li>
 				<li>- <a href="qnaList.do?current_page=1"> QnA </a></li>
-				<li>- <a href="email.do"> Contact-email </a></li>
+				<li>- <a href="email.do"> Contact-Email </a></li>
 			</ul>
 		</div>
 	</div>
@@ -56,12 +56,13 @@ function email() {
   </div> 
  <div id="site_div">	
 <c:url var="insertUrl" value="/email_send.do" />
-
-	<h2>전송이 완료되었습니다.	</h2>
+	<div class="div_complete">
+	<p>전송이 완료되었습니다.	</p>
 	<div class="div_board_bnt">
 				<input type="button" value="메인 화면"  onclick="javascript:main()" class="bnt_view"/>
 				<input type="button" value="메일보내기" onclick="javascript:email()" class="bnt_view"/>
 		</div>
+	</div>	
 </div>
 </div>
 </div>	
