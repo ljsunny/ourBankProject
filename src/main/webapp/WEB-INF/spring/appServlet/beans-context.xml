@@ -6,7 +6,7 @@
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd">
-	
+
            <!-- base-package=’컨트롤러 있는 패키지’ -->
 	<context:component-scan base-package="com.ourbank.app.*" />
 	<!--  <context:component-scan base-package="controller.file.up.load"/>-->
@@ -17,4 +17,7 @@
 	
 	<bean id="multipartResolver"
 	class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
-</beans>
+	</beans>
+	
+	
+

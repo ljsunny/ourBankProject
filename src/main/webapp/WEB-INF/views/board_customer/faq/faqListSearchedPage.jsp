@@ -23,6 +23,15 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fonts.css" >
 <meta charset="EUC-KR">
 <title>자주하는 질문</title>
+<script type="text/javascript">
+function email_idCheck() {
+	var loginUser = "${uid}";
+	if(!loginUser) {
+		alert('로그인 후 이용 가능합니다.');
+		return location.href = "loginForm.do";		
+	}
+}
+</script>
 </head>
 
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
@@ -36,7 +45,13 @@
 			<ul id="side_submenu">
 				<li>- <a href="faqList.do?current_page=1"> 자주하는 질문 </a></li>
 				<li>- <a href="qnaList.do?current_page=1"> QnA </a></li>
-				<li>- <a href="#"> Contact </a></li>
+				<c:if test="${uid!=null }"> <!--   (사용시 ${id != null }로바꾸기!!-->
+	              <li><a href="email.do">Contact-email</a></li>
+	            </c:if>
+	            <c:if test="${uid==null}">
+	              <li><a onclick="email_idCheck(this.href);return false;" onkeypress="this.onclick;"
+						href="email.do">Contact-email</a></li>
+	            </c:if>
 			</ul>
 		</div>
 	</div>
@@ -52,6 +67,8 @@
 	int total_pages=PageNumberingManager.getInstance().getTotalPage(total_cnt, rowsPerPage);
 	//el로 꺼내쓸 수 있는 방법
 	pageContext.setAttribute("t_pages", total_pages);
+	HttpSession session=request.getSession();
+	String uid=(String) session.getAttribute("uid"); 
 %>
 
 <table cellspacing="1" width="700" border="0">

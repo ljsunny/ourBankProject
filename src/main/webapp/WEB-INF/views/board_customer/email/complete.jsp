@@ -20,7 +20,13 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <title>Email</title>
 
 <script type="text/javascript">
-	
+function main() {
+	location.href='main.do';
+}	
+
+function email() {
+	location.href='email.do'
+}
 </script>
 
 
@@ -38,7 +44,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 			<ul id="side_submenu">
 				<li>- <a href="faqList.do?current_page=1"> 자주하는 질문 </a></li>
 				<li>- <a href="qnaList.do?current_page=1"> QnA </a></li>
-				<li>- <a href="email.do"> Contact </a></li>
+				<li>- <a href="email.do"> Contact-email </a></li>
 			</ul>
 		</div>
 	</div>
@@ -46,48 +52,16 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
 <div id="line_div">
 <div id="sub_logo">
-<h2>자유게시판</h2>
+<h2>Contact-email</h2>
   </div> 
  <div id="site_div">	
 <c:url var="insertUrl" value="/email_send.do" />
-<sf:form modelAttribute="emailBean" commandName="emailBean" id="form" 
-	method="POST" action="${insertUrl}" enctype="multipart/form-data"  >
-	
 
-	<table class="tlb_board">
-		<tr>
-			<td style="background-color: #f2f2f2"><b>제목</b></td>
-			<td style="float: left; margin-left: 10px;">
-				<sf:input path="subject" size="50" maxlength="50" id="subject"  />
-				<sf:errors path="subject" cssClass="error" /></td>
-		</tr>
-		<tr>
-			<th style="background-color: #f2f2f2"><b>아아디</b></th>
-			 <td style="float: left; margin-left: 10px;">
-			 <sf:input readonly="true" path="id" value="${uid}" size="50" cssStyle="width:450px;"/></td>
-		</tr>
-		<tr>
-			<td style="background-color: #f2f2f2"><b>내용</b></td>
-			<td><sf:textarea path="message" size="200" id="message" 
-					Style="width:550px;height:250px; float: left; margin-left: 10px;" maxlength="200" /><br /> 
-				<sf:errors path="message" cssClass="error" /></td>
-		</tr>
-		<tr>
-			<td style="background-color: #f2f2f2"><b>메일형태</b></td>
-			<td style="float: left; margin-left: 10px;">
-			<sf:radiobutton name="mailtype" value="text"/>Text형태</td>
-		</tr>
-		<tr>
-			<td style="background-color: #f2f2f2"><b>파일</b></td>
-			<td style="float: left; margin-left: 10px;">
-			<input type="file" name="file"></td>
-		</tr>
-	</table>
+	<h2>전송이 완료되었습니다.	</h2>
 	<div class="div_board_bnt">
-				<input type="submit" value="메일전송" id="save" class="bnt_view"/>
-				<input type="reset" value="다시작성" class="bnt_view"/>
+				<input type="button" value="메인 화면"  onclick="javascript:main()" class="bnt_view"/>
+				<input type="button" value="메일보내기" onclick="javascript:email()" class="bnt_view"/>
 		</div>
-</sf:form>
 </div>
 </div>
 </div>	

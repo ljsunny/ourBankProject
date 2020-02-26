@@ -24,6 +24,7 @@
     </repositories>
     
 	<dependencies>
+		
 		  <!-- https://mvnrepository.com/artifact/com.oracle.jdbc/ojdbc6 -->
 		<dependency>
     	 	<groupId>com.oracle.jdbc</groupId>
@@ -101,7 +102,12 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-				
+		<!-- 메일  -->
+		<dependency>
+	        <groupId>javax.mail</groupId>
+	        <artifactId>mail</artifactId>
+	        <version>1.4</version>
+	    </dependency>		
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>

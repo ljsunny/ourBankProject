@@ -49,9 +49,9 @@ String uid=(String)session.getAttribute("uid");
 				 </c:if>
 			</ul>
 	 <ul class="contact">
-			 <li><form action="" method=post name="sform">
-		 	   <input type=text name=search size=25>
-			   <input type=button value="검 색" class="bnt_search" onclick="send(this.form);">
+			 <li><form action="indexSearch.do" method=post name="sform">
+		 	   <input type=text name=searchStr size=25>
+			   <input type=submit value="검 색" class="bnt_search" onclick="send(this.form);">
 			 </form></li>
 			 <li><a href="https://www.facebook.com/" class="icon icon-facebook"><span>Facebook</span></a></li>
 			 <li><a href="https://www.instagram.com/?hl=ko" class="icon icon-Instagram"><span>Instagram</span></a></li>
