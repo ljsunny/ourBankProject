@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.ourbank.app.bean.FAQBoard_Bean;
+
 import com.ourbank.app.bean.NewsBoard_Bean;
+
 import com.ourbank.app.mapper.NewsBoard_Mapper;
 
 @Component
@@ -32,7 +33,7 @@ public class NewsBoard_Service {
 		return nCnt;
 	}
 
-	//인덱스, 제목, 작성자, 날짜, 내용, 조회수  arraylist 얻어옴
+	//List에 뿌릴 arraylist 얻어옴
 	public ArrayList<NewsBoard_Bean> getList(int nStartPage, int list_num){
 		return this.boardMapper.getList(nStartPage, list_num);
 	}
@@ -56,16 +57,7 @@ public class NewsBoard_Service {
 	public ArrayList<NewsBoard_Bean> getSavingsList(int nStartPage, int list_num){
 		return this.boardMapper.getSavingsList(nStartPage, list_num);
 	}
-	//기타
-	public int getEtcCnt() {
-		int nCnt=0;
-		nCnt=this.boardMapper.getEtcCnt();
-		return nCnt;
-	}
-	//기타 arraylist
-	public ArrayList<NewsBoard_Bean> getEtcList(int nStartPage, int list_num){
-		return this.boardMapper.getEtcList(nStartPage, list_num);
-	}
+	
 	
 	//글보기에 뿌릴 bean
 	public NewsBoard_Bean getSpecificRow(int idx) {
@@ -75,7 +67,7 @@ public class NewsBoard_Service {
 	//글 수정하기
 	public void updateBoard(NewsBoard_Bean boardBean) {
 		boardMapper.updateBoard(boardBean.getIdx(), boardBean.getSubject(), 
-				boardBean.getCategory(), boardBean.getContent());
+				boardBean.getNews_case(), boardBean.getContent());
 	}
 	//글삭제하기
 	public void deleteRow(int idx) {
@@ -91,5 +83,9 @@ public class NewsBoard_Service {
 	public ArrayList<NewsBoard_Bean> getSearchedList(int nStartPage, int list_num, String strSearchThis){
 		return this.boardMapper.getSearchedList(nStartPage, list_num, strSearchThis);
 	}
+	
+	//답글
+	
+	
 
 }

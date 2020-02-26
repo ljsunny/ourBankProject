@@ -617,13 +617,20 @@
 /*********************************************************************************/
 
 #my_wrap{
-	margin:30px auto 300px auto;
+	position:relative;
+	margin: 30px auto 300px 500px;
 }
 #my_wrap .mybtn{
 	width:200px;
 	height:160px;
 }
 
+#my_wrap2{
+	margin: 30px 300px;
+	margin-bottom:50px;
+	padding-left:20px;
+    padding-bottom: 100px;
+}
 /*********************************************************************************/
 /* MyProduct                  o                                                    */
 /*********************************************************************************/
@@ -680,6 +687,14 @@
     background-color: #2A70E8;
 	color:white;
     border:0;
+}
+#my_list_wrap .mybtn2 {
+    margin-left: 500px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #2A70E8;
+    color: white;
+    border: 0;
 }
 #my_list_wrap .mi_back
 {

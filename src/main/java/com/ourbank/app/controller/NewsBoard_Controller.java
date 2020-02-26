@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import com.ourbank.app.bean.NewsBoard_Bean;
+
 import com.ourbank.app.service.NewsBoard_Service;
 
 @Controller
@@ -41,9 +42,20 @@ public class NewsBoard_Controller {
 	public String showWriteForm(Model model) {
 		logger.info("show_write_form called!!");
 		
-		int id=0;
+		int ref=0;  //그룹(원글의 글번호 참조)
+		int step=0;  //그룹내 순서
+		int depth=0; //계층
+		int re_idx=0;
+		logger.info("ref:"+ref+" step: "+step+"depth: "+depth+" "+"re_idx: "+re_idx);
+
+		//임시로 넣어둠
+		String id = "exId";
 		
 		model.addAttribute("id", id);
+		model.addAttribute("re_idx", re_idx);
+		model.addAttribute("step", step);
+		model.addAttribute("ref", ref);
+		model.addAttribute("depth", depth);
 		model.addAttribute("boardBean", new NewsBoard_Bean());
 		return "board_news/newsWriteForm";
 		
@@ -77,20 +89,22 @@ public class NewsBoard_Controller {
 			
 			try {
 				byte[] fileData=file.getBytes();
-				FileOutputStream output=new FileOutputStream("C:\\eclipse_ourBank\\OurBank\\src\\main\\resources\\files\\"+fileName);
+				FileOutputStream output=new FileOutputStream("C:\\Users\\soldesk\\Desktop\\workspace_ourbank\\Ourbank\\src\\main\\webapp\\resources\\files\\"+fileName);
 				output.write(fileData);
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		String id="admin";
+		String id = "exId";
 		boardBean.setId(id);
-		logger.info(boardBean.getCategory()+" "+
-					boardBean.getId()+" "+
-					boardBean.getContent()+" "+
-					boardBean.getSubject());
-		boardService.insertBoard(boardBean);
+		logger.info(boardBean.getNews_case()+" "+
+				boardBean.getId()+" "+
+				boardBean.getContent()+" "+
+				boardBean.getRe_idx()+" "+
+				boardBean.getSubject());
 		
+		
+		boardService.insertBoard(boardBean);
 		model.addAttribute("totalCnt", new Integer(boardService.getTotalCnt()));
 		model.addAttribute("current_page", 1);
 		model.addAttribute("boardList", boardService.getList(1, 10));
@@ -108,7 +122,7 @@ public class NewsBoard_Controller {
 		model.addAttribute("boardList", boardService.getList(Integer.parseInt(pageForView), 10)); //리스트뿌릴 ArrayList 받아와서 저장
 		return "board_news/newsListSpecificPage";
 	}
-	//회원가입 리스트 뿌리기
+	//금융회사정보 리스트 뿌리기
 	@RequestMapping(value="/financeCompanyList.do", method=RequestMethod.GET)
 	public String newsSignUpList(
 			@RequestParam("current_page") String pageForView, Model model
@@ -119,7 +133,7 @@ public class NewsBoard_Controller {
 		model.addAttribute("boardList", boardService.getSignUpList(Integer.parseInt(pageForView), 10)); //리스트뿌릴 ArrayList 받아와서 저장
 		return "board_news/newsListSpecificPage";
 	}
-	//예적금 리스트 뿌리기
+	//관련뉴스 리스트 뿌리기
 	@RequestMapping(value="/relatedNewsList.do", method=RequestMethod.GET)
 	public String newsSavingList(
 			@RequestParam("current_page") String pageForView, Model model
@@ -256,7 +270,7 @@ public class NewsBoard_Controller {
 	}
 	
 	//글 삭제
-	@RequestMapping(value="/newsDeleteSpecificRow.do", method=RequestMethod.GET)
+	@RequestMapping(value="/news_DeleteSpecificRow.do", method=RequestMethod.GET)
 	public String deleteSpecificRow(@RequestParam("idx") int idx,
 									@RequestParam("current_page") int current_page,
 									Model model) {

@@ -15,13 +15,13 @@ import com.ourbank.app.bean.NewsBoard_Bean;
 
 @Repository
 public interface MainPage_Mapper {
-	final String SELECT_NOTICE_NEW="select id_x, substr(subject,7,16) subject, to_char(created_date,'YYYY-MM-DD') created_date "
+	final String SELECT_NOTICE_NEW="select idx, substr(subject,7,16) subject, to_char(created_date,'YYYY-MM-DD') created_date "
 			+ " from (select * from newnotice_board order by created_date desc)"
 			+ " where rownum<=5 ";
 	
 	@Select(SELECT_NOTICE_NEW)
 	@Results(value= {
-			@Result(property = "idx",column = "id_x"),
+			@Result(property = "idx",column = "idx"),
 			@Result(property = "subject",column = "subject"),
 			@Result(property = "created_date" , column = "created_date")
 	})
@@ -29,8 +29,8 @@ public interface MainPage_Mapper {
 	
 	final String BEST_HITS_COMMUNITY=
 			"select category, category_num, best_idx, id, subject, to_char(created_date,'YYYY-MM-DD') created_date, hits " 
-			+"from commuboardview "
-			+"where rownum <=5 and hits is not null order by hits desc ";
+			+"from (select * from commuboardview order by hits desc)"
+			+"where rownum <=5 and hits is not null ";
 	@Select(BEST_HITS_COMMUNITY)
 	@Results(value = {
 			@Result(property = "category",column = "category"),

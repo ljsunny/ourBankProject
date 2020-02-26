@@ -58,7 +58,7 @@ function wantdelete(count){
 <div id="my_list_wrap">
 <div style="margin-top: 50px; font-weight: bold;">
 <h1>${uid}님의 장바구니
-<button class="mybtn">장바구니 비우기</button>
+<button class="mybtn2">장바구니 비우기</button>
 </h1>
 
 <table cellspacing=1 width=700>

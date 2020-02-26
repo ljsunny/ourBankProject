@@ -52,7 +52,7 @@ function deleteId(){
 	
 	
 <!-- *********************** ³»¿ë ****************************  -->
-<div id="my_wrap">
+<div id="my_product">
 	<table border="1" cellpadding="10px" c>
 		<tr>
 		<td>

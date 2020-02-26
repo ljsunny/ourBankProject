@@ -58,7 +58,7 @@
 	pageContext.setAttribute("c_page", c_page);
 	
 	HttpSession session=request.getSession();
-	String id=(String) session.getAttribute("uid");
+	String id=(String) session.getAttribute("id");
 %>
 <c:set var="id" value="<%=id%>"/>
 <script type="text/javascript">

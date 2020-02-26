@@ -95,7 +95,7 @@ int c_page = Integer.parseInt((String) (pageContext.getAttribute("current_page")
 pageContext.setAttribute("c_page", c_page);
 
 HttpSession session=request.getSession();
-String id=(String) session.getAttribute("uid");
+String id=(String) session.getAttribute("id");
 %>
 
 <c:set var="id" value="<%=id%>"/>
@@ -146,14 +146,14 @@ String id=(String) session.getAttribute("uid");
 			<td width="320">
 				
 				<!-- 로그인 o -->
-					<c:if test="${id != null }"> <!--   (사용시 ${id != null }로바꾸기!!-->
+					<c:if test="${id == null }"> <!--   (사용시 ${id != null }로바꾸기!!-->
 					<a href="reviewView.do?idx=${board.getIdx()}
 							&current_page=<c:out value="${current_page}"/>&searchStr=None"
 							title="${board.getContent()}"> <c:out value="${board.getSubject()}" /></a>
 							</c:if>
 						
 					<!-- 로그인 x -->
-					<c:if test="${id ==null}"><!--  Id없음 -->
+					<c:if test="${id !=null}"><!--  Id없음 -->
 					<a onclick="boardView_idCheck(this.href);return false;" onkeypress="this.onclick;"
 						href="reviewView.do" > <c:out value="${board.getSubject()}" /></a>
 					</c:if>
@@ -195,10 +195,10 @@ String id=(String) session.getAttribute("uid");
 </table>
 </div>
 <!-- 로그인 안 할 시 '글쓰기' 안 됨  (사용시 ${id != null }로바꾸기!! -->
-<c:if test="${id!=null}">
+<c:if test="${id==null}">
 	<div>
 			<input type="button" value="글쓰기" class="bnt_comu"
-			onclick="window.location='review_show_write_form.do'">
+			onclick="window.location='review_show_write_form.do'"></td>
 	</div>
 </c:if>
 </div>

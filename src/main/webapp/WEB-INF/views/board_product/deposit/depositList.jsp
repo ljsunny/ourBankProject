@@ -142,11 +142,11 @@ function myWant(count){
 			pageContext.setAttribute("t_pages", total_pages);
 		%>
 
-<div style="margin-top: 50px; font-weight: bold;">
+<div style="margin-top: 10px; font-weight: bold;">
 <table align="center" cellspacing="1" width="700" class="page">
 	<tr>
 
-		<td><c:forEach var="i" begin="1" end="${t_pages}">
+		<td align="center"><c:forEach var="i" begin="1" end="${t_pages}">
 				<a href="depositList.do?current_page=${i}"> <button>
 					<c:if test="${i==c_page}">
 						<b>

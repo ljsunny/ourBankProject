@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -38,20 +37,19 @@ public class ReviewBoard_Controller {
 	
 	//글쓰기폼
 	@RequestMapping(value="/review_show_write_form.do", method=RequestMethod.GET)
-	public String showWriteForm( HttpServletRequest request, Model model) {
+	public String showWriteForm(Model model) {
 		logger.info("show_write_form called!!");
 		
 		int ref=0;  //그룹(원글의 글번호 참조)
 		int step=0;  //그룹내 순서
 		int depth=0; //계층
 		int re_idx=0;
-		HttpSession session = request.getSession();
-		String uid = (String)session.getAttribute("id");
-		
-		logger.info("ref:"+ref+" step: "+step+"depth: "+depth+" " + "id:"+uid);
+		logger.info("ref:"+ref+" step: "+step+"depth: "+depth+" "+"re_idx: "+re_idx);
 
+		//임시로 넣어둠
+		String id = "exId";
 		
-		model.addAttribute("uid", uid);
+		model.addAttribute("id", id);
 		model.addAttribute("re_idx", re_idx);
 		model.addAttribute("step", step);
 		model.addAttribute("ref", ref);
@@ -64,7 +62,7 @@ public class ReviewBoard_Controller {
 	@RequestMapping(value="/review_write_form.do", method=RequestMethod.POST)
 	public String DoreviewWriteBoard(@ModelAttribute("boardBean") @Valid ReviewBoard_Bean boardBean,
 			BindingResult bindingResult,
-			 HttpServletRequest request, Model model) {
+			Model model) {
 		logger.info("review_write_form called!!");
 		MultipartFile file=boardBean.getFile();
 		
@@ -96,11 +94,14 @@ public class ReviewBoard_Controller {
 			}
 		}
 		
-		HttpSession session = request.getSession();
-		String id = (String)session.getAttribute("uid");
+		String id = "exId";
 		boardBean.setId(id);
-		logger.info(boardBean.getId());
-
+		logger.info(boardBean.getReview_case()+" "+
+					boardBean.getId()+" "+
+					boardBean.getContent()+" "+
+					boardBean.getRe_idx()+" "+
+					boardBean.getSubject());
+		
 		//본글인 경우
 		if(boardBean.getRe_idx()==0) {
 			boardService.insertBoard(boardBean);
@@ -184,14 +185,10 @@ public class ReviewBoard_Controller {
 	
 	//전체리뷰리스트 뿌리기
 	@RequestMapping(value="/reviewList.do", method=RequestMethod.GET)
-	public String investList(HttpServletRequest request,
+	public String investList(
 			@RequestParam("current_page") String pageForView, Model model
 			) {
 		logger.info("reviewList called !!");
-		HttpSession session=request.getSession();
-		String uid=(String)session.getAttribute("uid");
-		logger.info(uid);
-		model.addAttribute("uid", uid);
 		model.addAttribute("totalCnt", new Integer(boardService.getTotalCnt()));//전체 글수
 		model.addAttribute("current_page",pageForView);
 		model.addAttribute("boardList", boardService.getList(Integer.parseInt(pageForView), 10)); //리스트뿌릴 ArrayList 받아와서 저장

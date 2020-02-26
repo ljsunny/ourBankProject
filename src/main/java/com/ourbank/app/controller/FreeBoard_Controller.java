@@ -10,9 +10,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.sound.sampled.LineListener;
 
 import org.apache.ibatis.annotations.Param;
@@ -53,22 +51,19 @@ public class FreeBoard_Controller {
 	
 	//글쓰기 폼으로
 	@RequestMapping(value = "/free_show_write_fome.do", method = RequestMethod.GET)
-	public String free_show_write_form(FreeBoard_Bean boardBean, HttpServletRequest request, Model model) {
+	public String free_show_write_form(FreeBoard_Bean boardBean, Model model) {
 		logger.info("free_write_form called");
 		
 		int ref=0;  //그룹(원글의 글번호 참조)
 		int step=0;  //그룹내 순서
 		int depth=0; //계층
 		int re_idx=0;
-		HttpSession session = request.getSession();
-		String uid = (String)session.getAttribute("id");
-		
-		logger.info("ref:"+ref+" step: "+step+"depth: "+depth+" " + "id:"+uid);
+		logger.info("ref:"+ref+" step: "+step+"depth: "+depth+" ");
 
+		//임시로 넣어둠
+		String id = "exId";
 		
-		
-		
-		model.addAttribute("uid", uid);
+		model.addAttribute("id", id);
 		model.addAttribute("re_idx", re_idx);
 		model.addAttribute("step", step);
 		model.addAttribute("ref", ref);
@@ -79,7 +74,7 @@ public class FreeBoard_Controller {
 	
 	//글쓰기처리
 	@RequestMapping(value="/free_write_form.do" , method = RequestMethod.POST)
-	public String DofreeWriteBoard(@ModelAttribute("boardBean") FreeBoard_Bean boardBean, HttpServletRequest request,
+	public String DofreeWriteBoard(@ModelAttribute("boardBean") FreeBoard_Bean boardBean, 
 			Model model) {
 		System.out.println("-----------------------------------------");
 		logger.info("free_DoWriteBoard.do called");
@@ -106,8 +101,7 @@ public class FreeBoard_Controller {
 			}
 		}
 		
-		HttpSession session = request.getSession();
-		String id = (String)session.getAttribute("uid");
+		String id = "exId";
 		boardBean.setId(id);
 		logger.info(boardBean.getId());
 
@@ -183,15 +177,11 @@ public class FreeBoard_Controller {
 	
 	//리스트로
 	@RequestMapping(value = "/freeList.do", method=RequestMethod.GET)
-	public String free_listSpecificPageWork(HttpServletRequest request,
+	public String free_listSpecificPageWork(
 			@RequestParam("current_page") String pageForView, Model model) {
 		System.out.println("-------------------------------");
 		logger.info("freeList called");
 		logger.info("current_page=["+pageForView+"]");
-		HttpSession session=request.getSession();
-		String uid=(String)session.getAttribute("uid");
-		logger.info(uid);
-		model.addAttribute("uid", uid);
 		model.addAttribute("totalCnt", new Integer(boardService.getTotalCnt()));
 		model.addAttribute("current_page", pageForView);
 		model.addAttribute("boardList", boardService.getList(Integer.parseInt(pageForView),10));

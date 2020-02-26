@@ -60,7 +60,7 @@
 	//el로 꺼내쓸 수 있는 방법
 	pageContext.setAttribute("t_pages", total_pages);
 	HttpSession session=request.getSession();
-	String id=(String) session.getAttribute("uid");
+	String id=(String) session.getAttribute("id");
 %>
 <c:set var="id" value="<%=id%>"/>
 <script type="text/javascript">
@@ -105,14 +105,14 @@
 			<td width="320">
 				
 				<!-- 로그인 o -->
-				<c:if test="${id != null }"> <!--   (사용시 ${id != null }로바꾸기!!-->
+				<c:if test="${id == null }"> <!--   (사용시 ${id != null }로바꾸기!!-->
 					<a href="investView.do?idx=${board.getIdx()}
 						&current_page=<c:out value="${current_page}"/>&searchStr=None"
 						title="${board.getContent()}"> <c:out value="${board.getSubject()}" /></a>
 						</c:if>
 				
 				<!-- 로그인 x -->
-				<c:if test="${id ==null}">
+				<c:if test="${id !=null}">
 				<a onclick="boardView_idCheck(this.href);return false;" onkeypress="this.onclick;"
 					href="investView.do" > <c:out value="${board.getSubject()}" /></a>
 				</c:if>

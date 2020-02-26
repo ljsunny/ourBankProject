@@ -43,7 +43,7 @@ jQuery(function (){
 		jQuery('#save').submit(); 
 	}); 
 		
-	jQuery('#find').click(function() { 
+	jQuery('#search').click(function() { 
 		var searchStr = jQuery('#searchf #searchStr').val(); 
 		if (searchStr == '') { alert('검색어를 입력하세요'); 
 		return false; 

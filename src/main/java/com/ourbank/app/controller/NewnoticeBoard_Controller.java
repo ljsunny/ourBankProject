@@ -1,75 +1,90 @@
 package com.ourbank.app.controller;
 
-
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import javax.sound.sampled.LineListener;
 
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.javassist.expr.NewArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import com.ourbank.app.bean.NewnoticeBoard_Bean;
 import com.ourbank.app.service.NewnoticeBoard_Service;
 
+
 @Controller
 public class NewnoticeBoard_Controller {
+	
 	@Autowired
-	private NewnoticeBoard_Service boardService;
+	NewnoticeBoard_Service boardService;
 	
-	private static final Logger logger=LoggerFactory.getLogger(NewnoticeBoard_Controller.class);
+	private static final Logger logger = 
+			LoggerFactory.getLogger(NewnoticeBoard_Controller.class); 
 	
-	//글쓰기폼
-	@RequestMapping(value="/newnotice_show_write_form.do", method=RequestMethod.GET)
-	public String showWriteForm(Model model) {
-		logger.info("show_write_form called!!");
+	
+	//글쓰기 폼으로
+	@RequestMapping(value = "/newnotice_show_write_form.do", method = RequestMethod.GET)
+	public String newnotice_show_write_form(NewnoticeBoard_Bean boardBean, Model model) {
+		logger.info("newnotice_write_form called");
 		
-		int id=0;
+		int ref=0;  //그룹(원글의 글번호 참조)
+		int step=0;  //그룹내 순서
+		int depth=0; //계층
+		int re_idx=0;
+		logger.info("ref:"+ref+" step: "+step+"depth: "+depth+" ");
+
+		//임시로 넣어둠
+		String id = "admin";
 		
 		model.addAttribute("id", id);
+		model.addAttribute("re_idx", re_idx);
+		model.addAttribute("step", step);
+		model.addAttribute("ref", ref);
+		model.addAttribute("depth", depth);
 		model.addAttribute("boardBean", new NewnoticeBoard_Bean());
 		return "board_notice/newnotice/newnoticeWriteForm";
-		
 	}
-	//글쓰기
-	@RequestMapping(value="/newnotice_write_form.do", method=RequestMethod.POST)
-	public String DonewnoticeWriteBoard(@ModelAttribute("boardBean") @Valid NewnoticeBoard_Bean boardBean,
-			BindingResult bindingResult,
+	
+	//글쓰기처리
+	@RequestMapping(value="/newnotice_write_form.do" , method = RequestMethod.POST)
+	public String DonewnoticeWriteBoard(@ModelAttribute("boardBean") NewnoticeBoard_Bean boardBean, 
 			Model model) {
-		System.out.println(boardBean.toString());
+		System.out.println("-----------------------------------------");
+		logger.info("newnotice_DoWriteBoard.do called");
+		
 		MultipartFile file=boardBean.getFile();
-		
-		//유효성 검사
-		if(bindingResult.hasErrors()) {
-			List<ObjectError> list=bindingResult.getAllErrors();
-			for(ObjectError e:list) {
-				logger.error("ObjectError"+e+"\n");
-			}
-			model.addAttribute("boardBean",boardBean);
-			return "board_notice/newnotice/newnoticeWriteForm";
-		}
-		
-		//파일 처리
+
+		// 자료실에 file 올리기
 		if(file!=null) {
 			String fileName=file.getOriginalFilename();
-			long fileSize=file.getSize();
+			long fileSize= file.getSize();
 			boardBean.setFilename(fileName);
 			boardBean.setFilesize(fileSize);
 			logger.info(boardBean.getFilename());
@@ -77,144 +92,210 @@ public class NewnoticeBoard_Controller {
 			
 			try {
 				byte[] fileData=file.getBytes();
-				FileOutputStream output=new FileOutputStream("C:\\eclipse_ourBank\\OurBank\\src\\main\\resources\\files\\"+fileName);
+				FileOutputStream output=
+						new FileOutputStream("C:\\Users\\user\\Desktop\\OurBank\\src\\main\\webapp\\resources\\files\\"+fileName);
+			
 				output.write(fileData);
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		String id="admin";
-		boardBean.setId(id);
-		logger.info(boardBean.getCategory()+" "+
-					boardBean.getId()+" "+
-					boardBean.getContent()+" "+
-					boardBean.getSubject());
-		boardService.insertBoard(boardBean);
 		
-		model.addAttribute("totalCnt", new Integer(boardService.getTotalCnt()));
-		model.addAttribute("current_page", 1);
-		model.addAttribute("boardList", boardService.getList(1, 10));
-		return "redirect:newnoticeList.do";
+		String id = "exId";
+		boardBean.setId(id);
+		logger.info(boardBean.getNewnotice_case()+" "+
+				boardBean.getId()+" "+
+				boardBean.getContent()+" "+
+				boardBean.getRe_idx()+" "+
+				boardBean.getSubject());
+
+		//본글인 경우
+		if(boardBean.getRe_idx()==0) {
+			boardService.insertBoard(boardBean);
+			int recent_id=boardService.recentID(); //가장최근값가져옴
+			logger.info("reid :"+recent_id);
+			boardService.updateRewrite(recent_id);
+			System.out.println("본글작성");
+		}
+		else {//답글인 경우
+			int ref=boardBean.getRef();
+			System.out.println("ref"+ref);
+			boardBean.setRef(ref); //원글의 글번호로 묶음
+			boardService.updateGroupStep(ref, boardBean.getStep());
+			boardBean.setStep(boardBean.getStep()+1);
+			boardBean.setDepth(boardBean.getDepth()+1);
+			boardBean.setRe_idx(0);
+			boardService.insertBoard(boardBean);
+			System.out.println("답글작성");
+		} 
+		
+		 
+		  model.addAttribute("subject", boardBean.getSubject());
+		  model.addAttribute("totalCnt", new Integer(boardService.getTotalCnt()));
+		  model.addAttribute("current_page", "1");
+		  model.addAttribute("boardList",boardService.getList(1, 10));
+		  System.out.println("ok");
+		return "redirect:newnoticeList.do"; 
 	}
 	
-	//리스트 뿌리기
-	@RequestMapping(value="/newnoticeList.do", method=RequestMethod.GET)
-	public String newnoticeList(
-			@RequestParam("current_page") String pageForView, Model model
-			) {
-		logger.info("newnoticeList called !!");
-		model.addAttribute("totalCnt", new Integer(boardService.getTotalCnt()));//전체 글수
-		model.addAttribute("current_page",pageForView);
-		model.addAttribute("boardList", boardService.getList(Integer.parseInt(pageForView), 10)); //리스트뿌릴 ArrayList 받아와서 저장
+	//답글
+	@RequestMapping(value = "/newnotice_show_rewrite_form.do", method = RequestMethod.GET)
+	public String newnotice_show_rewrite_from(
+			@RequestParam("idx") String idx,
+			@RequestParam("current_page") String current_page, 
+			Model model) {
+		logger.info("newnotice_how_rewrite_form called!!");
+		
+		//해당 idx에 대한 정보 
+		NewnoticeBoard_Bean boardBean=boardService.stairBoard(Integer.parseInt(idx));
+		
+		logger.info("idx :"+boardBean.getIdx());
+		logger.info("ref :"+boardBean.getRef()); //그룹(원글의 글번호 참조)
+		logger.info("step :"+boardBean.getStep()); //그룹내부순서
+		logger.info("depth"+boardBean.getDepth()); //계층
+		boardBean.setRe_idx(1); //답글
+		logger.info("re_idx :"+boardBean.getRe_idx());
+		logger.info("subject :"+boardBean.getSubject());
+		
+		
+		//ref=0인경우 (답글그룹)
+		if(boardBean.getDepth()==0) {
+			model.addAttribute("ref", boardBean.getIdx());
+			String re_subject = "Re:"+boardBean.getSubject()+"_답변";
+			logger.info("subject :"+re_subject);
+			model.addAttribute("subject", re_subject);
+		}
+		else {
+			model.addAttribute("ref", boardBean.getRef());
+			String re_subject = "Re:"+boardBean.getSubject();
+			logger.info("subject :"+re_subject);
+			model.addAttribute("subject", re_subject);
+		}
+		model.addAttribute("idx", idx);
+		model.addAttribute("re_idx", boardBean.getRe_idx());
+		model.addAttribute("step", boardBean.getStep());
+		model.addAttribute("depth", boardBean.getDepth());
+		model.addAttribute("boardBean", new NewnoticeBoard_Bean());
+		
+		return "board_notice/newnotice/newnoticeWriteForm";
+	} 
+	
+	//전체리스트로
+	@RequestMapping(value = "/newnoticeList.do", method=RequestMethod.GET)
+	public String newnotice_listSpecificPageWork(
+			@RequestParam("current_page") String pageForView, Model model) {
+		System.out.println("-------------------------------");
+		logger.info("newnoticeList called");
+		logger.info("current_page=["+pageForView+"]");
+		model.addAttribute("totalCnt", new Integer(boardService.getTotalCnt()));
+		model.addAttribute("current_page", pageForView);
+		model.addAttribute("boardList", boardService.getList(Integer.parseInt(pageForView),10));
+		System.out.println("-------------------------------");
+		
 		return "board_notice/newnotice/newnoticeListSpecificPage";
 	}
-	//회원가입 리스트 뿌리기
-	@RequestMapping(value="/newnoticeSignUpList.do", method=RequestMethod.GET)
-	public String newnoticeSignUpList(
-			@RequestParam("current_page") String pageForView, Model model
-			) {
-		logger.info("newnotice signup List called !!");
-		model.addAttribute("totalCnt", new Integer(boardService.getSignUpCnt()));//회원가입 글수
-		model.addAttribute("current_page",pageForView);
-		model.addAttribute("boardList", boardService.getSignUpList(Integer.parseInt(pageForView), 10)); //리스트뿌릴 ArrayList 받아와서 저장
-		return "board_notice/newnotice/newnoticeListSpecificPage";
-	}
-	//예적금 리스트 뿌리기
-	@RequestMapping(value="/newnoticeSavingsList.do", method=RequestMethod.GET)
-	public String newnoticeSavingList(
-			@RequestParam("current_page") String pageForView, Model model
-			) {
-		logger.info("newnotice saving List called !!");
-		model.addAttribute("totalCnt", new Integer(boardService.getSavingsCnt()));//회원가입 글수
-		model.addAttribute("current_page",pageForView);
-		model.addAttribute("boardList", boardService.getSavingsList(Integer.parseInt(pageForView), 10)); //리스트뿌릴 ArrayList 받아와서 저장
-		return "board_notice/newnotice/newnoticeListSpecificPage";
-	}
-	//기타 리스트 뿌리기
-	@RequestMapping(value="/newnoticeEtcList.do", method=RequestMethod.GET)
-	public String newnoticeEtcList(
-			@RequestParam("current_page") String pageForView, Model model
-			) {
-		logger.info("newnotice etc List called !!");
-		model.addAttribute("totalCnt", new Integer(boardService.getEtcCnt()));//회원가입 글수
-		model.addAttribute("current_page",pageForView);
-		model.addAttribute("boardList", boardService.getEtcList(Integer.parseInt(pageForView), 10)); //리스트뿌릴 ArrayList 받아와서 저장
-		return "board_notice/newnotice/newnoticeListSpecificPage";
-	}
-
+	//예금공지 리스트 뿌리기
+		@RequestMapping(value="/newnoticeBankList.do", method=RequestMethod.GET)
+		public String BankNoticeList(
+				@RequestParam("current_page") String pageForView, Model model
+				) {
+			logger.info("newnotice signup List called !!");
+			model.addAttribute("totalCnt", new Integer(boardService.getBankNoticeCnt()));
+			model.addAttribute("current_page",pageForView);
+			model.addAttribute("boardList", boardService.getBankNoticeList(Integer.parseInt(pageForView), 10)); 
+			return "board_notice/newnotice/newnoticeListSpecificPage";
+		}
+		//적금공지 리스트 뿌리기
+		@RequestMapping(value="/newnoticeProductList.do", method=RequestMethod.GET)
+		public String ProductNoticeList(
+				@RequestParam("current_page") String pageForView, Model model
+				) {
+			logger.info("newnotice saving List called !!");
+			model.addAttribute("totalCnt", new Integer(boardService.getProductNoticeCnt()));
+			model.addAttribute("current_page",pageForView);
+			model.addAttribute("boardList", boardService.getProductNoticeList(Integer.parseInt(pageForView), 10)); //리스트뿌릴 ArrayList 받아와서 저장
+			return "board_notice/newnotice/newnoticeListSpecificPage";
+		}
+		//기타 리스트 뿌리기
+		@RequestMapping(value="/newnoticeEtcList.do", method=RequestMethod.GET)
+		public String newnoticeEtcList(
+				@RequestParam("current_page") String pageForView, Model model
+				) {
+			logger.info("newnotice etc List called !!");
+			model.addAttribute("totalCnt", new Integer(boardService.getEtcCnt()));//회원가입 글수
+			model.addAttribute("current_page",pageForView);
+			model.addAttribute("boardList", boardService.getEtcList(Integer.parseInt(pageForView), 10)); //리스트뿌릴 ArrayList 받아와서 저장
+			return "board_notice/newnotice/newnoticeListSpecificPage";
+		}
+	
 	//글보기
 	@RequestMapping(value="/newnoticeView.do", method=RequestMethod.GET)
-	public String viewWork(@RequestParam("idx") int idx,
+	public String newnotice_viewWork(@RequestParam("idx") int idx,
 						   @RequestParam("current_page") String current_page,
 						   @RequestParam("searchStr") String searchStr,
 						   Model model) {
-		logger.info("viewWork called");
+		logger.info("newnoticeView called");
 		logger.info("idx=["+idx+"] current_page=["+current_page+"] "
-				+ "searchStr=["+searchStr+"]");
+		+ "searchStr=["+searchStr+"]");
+			
 		NewnoticeBoard_Bean boardData=boardService.getSpecificRow(idx);
 		logger.info(boardData.getContent());
-		boardService.updateHits(boardData.getHits(), boardData.getIdx());
-		model.addAttribute("hits", boardData.getHits());
-		logger.info(boardData.getCategory());
-		
+		logger.info("hits: "+boardData.getHits());
+		//조회수 증가
+		boardService.updateHits(boardData.getHits(),boardData.getIdx());
+		boardData.setHits(boardService.getSpecificRow(idx).getHits());		
+			
 		model.addAttribute("idx", idx);
 		model.addAttribute("current_page", current_page);
 		model.addAttribute("searchStr", searchStr);
-		model.addAttribute("boardData", boardService.getSpecificRow(idx));
+		model.addAttribute("boardData", boardData);
 		model.addAttribute("filename", boardData.getFilename());
+		System.out.println("zzzzzz");
+		logger.info(boardData.getFilename());
+		
+			
 		return "board_notice/newnotice/newnoticeViewMemo";
 	}
 	
-	//다운로드
-	@RequestMapping(value = "/newnotice_download.do", 
-	         method=RequestMethod.GET)
-	   @ResponseBody
-	   public byte[] downProcess(HttpServletResponse response, @RequestParam String filename) throws IOException{
-	      File file = new File("C:\\eclipse_ourBank\\OurBank\\src\\main\\resources\\files\\" + filename);
-	      byte[] bytes = FileCopyUtils.copyToByteArray(file);
-	      String fn = new String(file.getName().getBytes(),"iso_8859_1");
+	//파일 다운로드
+	@RequestMapping(value = "/newnotice_download.do", method=RequestMethod.GET)
+	@ResponseBody
+	public byte[] newnotice_downProcess(HttpServletResponse response, @RequestParam String filename) 
+			   throws IOException{
+		System.out.println("다운로드");
+		String fn2=new String(filename);
+		System.out.println(fn2);
+	    File file = new File("C:\\Users\\user\\Desktop\\OurBank\\src\\main\\webapp\\resources\\files\\" + filename);
+	    byte[] bytes = FileCopyUtils.copyToByteArray(file);
+	    String fn = new String(file.getName().getBytes(),"iso_8859_1");
 	      
-	      response.setHeader("Content-Disposition",
-	                "attachment;filename=\"" + fn + "\"");
-	        response.setContentLength(bytes.length);
-	        return bytes;
-	   }
-	//글수정폼
+	    response.setHeader("Content-Disposition", "attachment;filename=\"" + fn + "\"");
+	    response.setContentLength(bytes.length);
+	    return bytes;
+	    }
+
+	//글수정 페이지
 	@RequestMapping(value="newnotice_show_update_form.do",method=RequestMethod.GET)
-	public String showUpdateForm(
-			@RequestParam("idx") int idx,
-			@RequestParam("current_page") String current_page,
-			Model model
-			) {
-		
-		logger.info("update form!!");
-		logger.info(idx+"");
+	public String newnotice_showUpdateForm(@RequestParam("idx") int idx,
+								 @RequestParam("current_page") String current_page,
+								 Model model) {
+		logger.info("newnotice_show_update_form called");
+		logger.info("idx="+idx);
 		model.addAttribute("idx", idx);
 		model.addAttribute("current_page", current_page);
 		model.addAttribute("boardData", boardService.getSpecificRow(idx));
 		
 		return "board_notice/newnotice/newnoticeViewMemoForUpdate";
 	}
-	//글수정
+	//글수정 처리
 	@RequestMapping(value="/newnotice_update.do", method=RequestMethod.POST)
-	public String newnoticeUpdate(
-			@ModelAttribute("boardBean") @Valid NewnoticeBoard_Bean boardBean,
-			BindingResult bindingResult,
+	public String newnotice_Update(
+			@ModelAttribute("boardBean")  NewnoticeBoard_Bean boardBean,
 			@RequestParam("idx") int idx,
 			@RequestParam("current_page") String current_page,
 			Model model) {
 		System.out.println(boardBean.toString());
 		MultipartFile file=boardBean.getFile();
-		
-		//유효성 검사
-		if(bindingResult.hasErrors()) {
-			List<ObjectError> list=bindingResult.getAllErrors();
-			for(ObjectError e:list) {
-				logger.error("ObjectError"+e+"\n");
-			}
-			model.addAttribute("boardBean",boardBean);
-			return "board_notice/newnotice/newnoticeWriteForm";
-		}
 		
 		//파일 처리
 		if(file!=null) {
@@ -227,17 +308,17 @@ public class NewnoticeBoard_Controller {
 			
 			try {
 				byte[] fileData=file.getBytes();
-				FileOutputStream output=new FileOutputStream("C:\\eclipse_ourBank\\OurBank\\src\\main\\resources\\files\\"+fileName);
+				FileOutputStream output=new FileOutputStream("C:\\Users\\user\\Desktop\\OurBank\\src\\main\\webapp\\resources\\files\\"+fileName);
 				output.write(fileData);
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+		
 		//세션에서 얻어와야함
-		String id="admin";
+		String id="exId";
 		boardBean.setId(id);
-		logger.info(boardBean.getCategory()+" "+
-					boardBean.getId()+" "+
+		logger.info(boardBean.getId()+" "+
 					boardBean.getContent()+" "+
 					boardBean.getSubject());
 		
@@ -256,12 +337,12 @@ public class NewnoticeBoard_Controller {
 	}
 	
 	//글 삭제
-	@RequestMapping(value="/newnoticeDeleteSpecificRow.do", method=RequestMethod.GET)
+	@RequestMapping(value="/newnotice_DeleteSpecificRow.do", method=RequestMethod.GET)
 	public String deleteSpecificRow(@RequestParam("idx") int idx,
 									@RequestParam("current_page") int current_page,
 									Model model) {
-		logger.info("DeleteSpecificRow called!!");
-		logger.info("memo_id=["+idx+"]  current_page=["+current_page+"]");
+		logger.info("newnotice_DeleteSpecificRow called!!");
+		logger.info("idx=["+idx+"]  current_page=["+current_page+"]");
 		boardService.deleteRow(idx);
 		//다시 페이지를 조회한다.
 		model.addAttribute("totalCnt", new Integer(boardService.getTotalCnt()));
@@ -273,8 +354,9 @@ public class NewnoticeBoard_Controller {
 	
 	//글검색
 	@RequestMapping(value="/newnoticeSearch.do", method=RequestMethod.POST)
-	public String searchWithSubject (@RequestParam("searchStr") String searchStr, 
+	public String newnoticesearch (@RequestParam("searchStr") String searchStr, 
 									Model model) {
+		logger.info("newnoticeSearch.do called");
 		
 		
 		return searchedList(1, searchStr,model);
@@ -287,7 +369,7 @@ public class NewnoticeBoard_Controller {
 			@RequestParam("searchStr") String searchStr,
 			Model model
 			) {
-		logger.info("listSearchedSpecificPageWork called");
+		logger.info("newnoticeSearchedList called");
 		logger.info("pageForView=["+pageForView+"]");
 		logger.info("searchStr=["+searchStr+"]");
 		
@@ -298,5 +380,8 @@ public class NewnoticeBoard_Controller {
 
 		return "board_notice/newnotice/newnoticeListSearchedPage";
 	}
-
+	
+	
+	
+		
 }

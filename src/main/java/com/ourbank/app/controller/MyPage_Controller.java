@@ -66,7 +66,7 @@ public String myPage(
 	
 	return "/board_Mypage/mypage";
 }
-
+////////////////수정//////////////////////////////////////////////////////////////////
 @RequestMapping(value = "/myInfo.do", method = RequestMethod.GET)
 public String myInfo(
 		HttpServletRequest request,
@@ -118,7 +118,7 @@ public String deleteId(
 	session.invalidate();
 	return "index.do";
 }
-
+/////////////////////////////////////////////////////////////////////////////////
 
 //내가 작성한글 -리스트 
 	@RequestMapping(value = "/myBoardList.do", method = RequestMethod.GET)
@@ -211,7 +211,7 @@ public String deleteId(
 	    return bytes;
 	    }
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////
 	//가입상품
 	@RequestMapping(value="/myProductDetail.do", method =RequestMethod.GET )
 	public String myProductDetail(@RequestParam("ck") int ck, Model model) {
@@ -383,7 +383,7 @@ public String deleteId(
 		model.addAttribute("current_page", 1);
 		return "redirect:myWantList.do";
 	}
-
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 }

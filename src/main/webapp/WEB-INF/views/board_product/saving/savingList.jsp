@@ -142,31 +142,62 @@
 		<!-- 페이징 -->
 		<c:set var="total_cnt" value="${totalCnt}"></c:set>
 		<c:set var="total_page" value="${total_page}"></c:set>
+		<c:set var="current_page" value="${current_page}"></c:set>
 		<%
 			int rowsPerPage = 10;
 			int total_cnt = ((Integer) (pageContext.getAttribute("total_cnt"))).intValue();
-
-			int total_pages = ((Integer) (pageContext.getAttribute("total_page"))).intValue();;
+			int total_pages = ((Integer) (pageContext.getAttribute("total_page"))).intValue();
+			int c_page = ((Integer)(pageContext.getAttribute("current_page"))).intValue();;
+			int tot_ten=(c_page/10)+1;
+			int end_page=0;//마지막 페이지 0~9
+			if (end_page%10==0){
+				end_page=10;
+			}else{
+				end_page=c_page%10;
+			}
 			pageContext.setAttribute("t_pages", total_pages);
+			pageContext.setAttribute("tot_ten",tot_ten);
+			pageContext.setAttribute("end_page", end_page);
+			
+			
 		%>
 
-		<div style="margin-top: 50px; font-weight: bold;">
+		<div style="margin-top: 10px; font-weight: bold;">
 			<table align="center" cellspacing="1" width="700" class="page">
 				<tr>
 
-					<td><c:forEach var="i" begin="1" end="${t_pages}">
-							<a href="savingList.do?current_page=${i}">
+					<td align="center"><c:forEach var="i" begin="1" end="${end_page}">
+					<%
+					int s_page=((Integer) (pageContext.getAttribute("i"))).intValue();
+						if(c_page>10){
+							s_page=(end_page-1)*10+s_page;
+						}
+						pageContext.setAttribute("s_page", s_page);	
+					%>
+							<a href="savingList.do?current_page=${s_page}">
 								<button>
 									<c:if test="${i==c_page}">
 										<b>
 									</c:if>
-									${i}
+									${s_page}
 									<c:if test="${i==c_page}">
 										<b>
 									</c:if>
 								</button>
 							</a>
-						</c:forEach></td>
+						
+						</c:forEach>
+							<button>
+							<%
+							int next_page=0;
+							next_page=(end_page-1)*10;
+							pageContext.setAttribute("next_page", next_page);	
+							%>
+							<a href="savingList.do?current_page=${next_page}">
+							>>
+							</a>
+							</button>
+						</td>
 				</tr>
 			</table>
 

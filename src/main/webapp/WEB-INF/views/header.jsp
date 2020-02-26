@@ -49,7 +49,7 @@ String uid=(String)session.getAttribute("uid");
 				 </c:if>
 			</ul>
 	 <ul class="contact">
-			 <li><form action="indexSearch.do" method=post name="sform">
+			 <li><form action="" method=post name="sform">
 		 	   <input type=text name=search size=25>
 			   <input type=button value="검 색" class="bnt_search" onclick="send(this.form);">
 			 </form></li>
@@ -64,10 +64,10 @@ String uid=(String)session.getAttribute("uid");
 <div id="header">
 	<div id="menu" class="container">
 		<ul>
-			<li><a href="introductionList.do?current_page=1" accesskey="1" title="">공지사항</a>
+			<li><a href="introduction_show.do?current_page=1" accesskey="1" title="">공지사항</a>
 			  <div class="sub_menu"> 
 			    <ul>
-	              <li><a href="introductionList.do?current_page=1">사이트소개</a></li>
+	              <li><a href="introduction_show.do?current_page=1">사이트소개</a></li>
 	              <li><a href="newnoticeList.do?current_page=1">새 소식</a></li>
 	            </ul>
 	          </div> 
