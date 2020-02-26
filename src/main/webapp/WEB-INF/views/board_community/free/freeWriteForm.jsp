@@ -29,8 +29,9 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 	
 </script>
 
+
 </style>
-<c:url var="insertUrl" value="/free_write_form.do" />
+
 </head>
 
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
@@ -57,7 +58,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <h2>자유게시판</h2>
   </div> 
  <div id="site_div">	
-
+<c:url var="insertUrl" value="/free_write_form.do" />
 <sf:form modelAttribute="boardBean" commandName="boardBean" id="form" 
 	method="POST" action="${insertUrl}" enctype="multipart/form-data"  >
 
@@ -83,7 +84,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 		<tr>
 			<th style="background-color: #f2f2f2"><b>아아디</b></th>
 			 <td style="float: left; margin-left: 10px;">
-			 <sf:input path="id" value="${id}" size="50" cssStyle="width:450px;"/></td>
+			 <sf:input readonly="true" path="id" value="${uid}" size="50" cssStyle="width:450px;"/></td>
 		</tr>
 		<tr>
 			<td style="background-color: #f2f2f2"><b>내용</b></td>
@@ -98,8 +99,8 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 		</tr>
 	</table>
 	<div class="div_board_bnt">
-				<input type="submit" value="재등록" id="save" class="bnt_view"/>
-				<input type="button" value="목록" onclick="javascript:boardlist()" class="bnt_view"/>
+				<input type="submit" value="등 록" id="save" class="bnt_view"/>
+				<input type="button" value="목 록" onclick="javascript:boardlist()" class="bnt_view"/>
 		</div>
 </sf:form>
 </div>

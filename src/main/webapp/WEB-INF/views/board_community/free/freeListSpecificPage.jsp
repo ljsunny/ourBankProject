@@ -56,7 +56,7 @@
 	pageContext.setAttribute("c_page", c_page);
 	
 	HttpSession session=request.getSession();
-	String id=(String) session.getAttribute("id");
+	String id=(String) session.getAttribute("uid");
 %>
 
 <c:set var="id" value="<%=id%>"/>
@@ -83,8 +83,8 @@
 	<div class="comunity_top_menu" >
 	<div style="float: right; width: 50%; vertical-align: center">
 					<form name=searchf method=post action="freeSearch.do" id="searchf">
-						<input type="text" name="searchStr" size="30" maxlenght="50">
-						<input type="submit" value="글찾기">
+						<input type="text" name="searchStr" size="30" maxlenght="50" id="searchStr">
+						<input type="submit" value="글찾기" class="bnt_comu" id="find" name="find">
 					</form>
 		</div>
 	</div>
@@ -117,13 +117,13 @@
 			<td width="320">
 				
 					<!-- 로그인 o -->
-					<c:if test="${id == null }"> <!--   (사용시 ${id != null }로바꾸기!!-->
+					<c:if test="${id != null }"> <!--   (사용시 ${id != null }로바꾸기!!-->
 					<a href="freeView.do?idx_num=${board.getIdx_num()}&current_page=<c:out value="${current_page}"/>&searchStr=None"
 						title="${board.getContent()}" > <c:out value="${board.getSubject()}" /></a>
 					</c:if>
 						
 					<!-- 로그인 x -->
-					<c:if test="${id !=null}">
+					<c:if test="${id ==null}">
 					<a onclick="boardView_idCheck(this.href);return false;" onkeypress="this.onclick;"
 						href="freeView.do" > <c:out value="${board.getSubject()}" /></a>
 					</c:if>
@@ -166,7 +166,7 @@
 </div>
 
 <!-- 로그인 안 할 시 '글쓰기' 안 됨 (사용시 ${id != null }로바꾸기!! -->
-<c:if test="${id==null}">
+<c:if test="${id!=null}">
 	<div>
 			<input type="button" value="글쓰기" class="bnt_comu"
 			onclick="window.location='free_show_write_fome.do'"></td>

@@ -83,7 +83,7 @@ function boardlist(){
 		<tr>
 			<th style="background-color: #f2f2f2"><b>아아디</b></th>
 			 <td style="float: left; margin-left: 10px;">
-			 <sf:input path="id" value="${id}" size="50" cssStyle="width:450px;"/></td>
+			 <sf:input path="id" value="${uid}" size="50" cssStyle="width:450px;"/></td>
 		</tr>
 		<tr>
 			<td style="background-color: #f2f2f2"><b>내용</b></td>
@@ -98,8 +98,8 @@ function boardlist(){
 		</tr>
 	</table>
 	<div class="div_board_bnt">
-				<input type="submit" value="재등록" id="save" class="bnt_view"/>
-				<input type="button" value="목록" onclick="javascript:boardlist()" class="bnt_view"/>
+				<input type="submit" value="등 록" id="save" class="bnt_view"/>
+				<input type="button" value="목 록" onclick="javascript:boardlist()" class="bnt_view"/>
 		</div>
 </sf:form>
 </div>

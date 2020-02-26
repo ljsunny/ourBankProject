@@ -143,12 +143,9 @@ drop table invest_board;
  
  delete invest_board 
  
- 
- 
- 
  /***************************************/
  
-/* Best 게시판 View */
+ /* Best 게시판 View */
  create view best_boardView as select * from (
  					(select category, category_num, best_idx, id, subject, content, created_date, hits, filename, depth from review_board) union
  					(select category, category_num, best_idx, id, subject, content, created_date, hits, filename, depth from tlb_free_board) union 
@@ -157,12 +154,12 @@ drop table invest_board;
  					(select category, category_num, best_idx, id, subject, content, created_date, hits, filename, depth from invest_board)
  					);
  drop view best_boardView ;	
+ 
  select * from best_boardView where rownum <=5 and hits is not null order by hits desc;
  select category, category_num, best_idx, id, subject, created_date, hits, 
  from best_boardView where rownum <=5 and hits is not null order by hits desc;
 
-* 내가 작성한 글 게시판 View */
-
+/* 내가 작성한 글 게시판 View */
 create view myboardview as select * from (
 					(select board_idx, id, subject, content, created_date, hits, filename, filesize, category_num from review_board) union
 					(select board_idx, id, subject, content, created_date, hits, filename, filesize, category_num from TLB_free_BOARD) union 
@@ -175,7 +172,6 @@ create view myboardview as select * from (
 
 drop view myboardview;		
 select * from myboardview;
-
 
 
 /* 검색용 전체 게시판 View */
@@ -193,6 +189,19 @@ select * from myboardview;
 					(select board_idx, category_num, id, subject, content, created_date, hits, filename, filesize from news_board) union
 					(select board_idx, category_num, id, subject, content, created_date, hits, filename, filesize from newnotice_board)
 					) ;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

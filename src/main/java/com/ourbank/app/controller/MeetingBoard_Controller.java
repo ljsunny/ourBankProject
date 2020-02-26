@@ -10,7 +10,9 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sound.sampled.LineListener;
 
 import org.apache.ibatis.annotations.Param;
@@ -50,19 +52,20 @@ public class MeetingBoard_Controller {
 	
 	//글쓰기 폼으로
 	@RequestMapping(value = "/meeting_show_write_form.do", method = RequestMethod.GET)
-	public String meeting_show_write_form(MeetingBoard_Bean boardBean, Model model) {
+	public String meeting_show_write_form(MeetingBoard_Bean boardBean, HttpServletRequest request,
+			Model model) {
 		logger.info("meeting_show_write_form called");
 		
 		int ref=0;  //그룹(원글의 글번호 참조)
 		int step=0;  //그룹내 순서
 		int depth=0; //계층
 		int re_idx=0;
-		logger.info("ref:"+ref+" step: "+step+"depth: "+depth+" ");
+		HttpSession session = request.getSession();
+		String uid = (String)session.getAttribute("id");
 		
-		//임시로 넣어둠
-		String id = "exId";
+		logger.info("ref:"+ref+" step: "+step+"depth: "+depth+" " + "id:"+uid);
 		
-		model.addAttribute("id", id);
+		model.addAttribute("uid", uid);
 		model.addAttribute("re_idx", re_idx);
 		model.addAttribute("step", step);
 		model.addAttribute("ref", ref);
@@ -74,7 +77,7 @@ public class MeetingBoard_Controller {
 	//글쓰기처리 + 유효성검사
 	@RequestMapping(value="/meeting_write_form.do" , method = RequestMethod.POST)
 	public String DomeetingWriteBoard(@ModelAttribute("boardBean") MeetingBoard_Bean boardBean, 
-			 Model model) {
+			HttpServletRequest request, Model model) {
 		System.out.println("-----------------------------------------");
 		logger.info("fre_write_form called");
 		
@@ -100,9 +103,11 @@ public class MeetingBoard_Controller {
 			}
 		}
 		
-		String id = "exId";
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("uid");
 		boardBean.setId(id);
 		logger.info(boardBean.getId());
+
 		
 		//본글인 경우
 		if(boardBean.getRe_idx()==0) {
@@ -175,11 +180,15 @@ public class MeetingBoard_Controller {
 	
 	//리스트로
 	@RequestMapping(value = "/meetingList.do", method=RequestMethod.GET)
-	public String meeting_listSpecificPageWork(
+	public String meeting_listSpecificPageWork(HttpServletRequest request,
 			@RequestParam("current_page") String pageForView, Model model) {
 		System.out.println("-------------------------------");
 		logger.info("meetingList called");
 		logger.info("current_page=["+pageForView+"]");
+		HttpSession session=request.getSession();
+		String uid=(String)session.getAttribute("uid");
+		logger.info(uid);
+		model.addAttribute("uid", uid);
 		model.addAttribute("totalCnt", new Integer(boardService.getTotalCnt()));
 		model.addAttribute("current_page", pageForView);
 		model.addAttribute("boardList", boardService.getList(Integer.parseInt(pageForView),10));
