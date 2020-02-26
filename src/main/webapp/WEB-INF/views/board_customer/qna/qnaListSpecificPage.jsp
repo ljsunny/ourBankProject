@@ -38,7 +38,18 @@ function savingslist(){
 function etclist(){
 	location.href='qnaEtcList.do?current_page=1';
 }
+function email_idCheck() {
+	var loginUser = "${uid}";
+	if(!loginUser) {
+		alert('로그인 후 이용 가능합니다.');
+		return location.href = "loginForm.do";		
+	}
+}
 </script>
+<%
+HttpSession session = request.getSession();
+String uid=(String) session.getAttribute("uid"); 
+%>
 </head>
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 	<jsp:include page="../../header.jsp"></jsp:include>
@@ -52,7 +63,13 @@ function etclist(){
 			<ul id="side_submenu">
 				<li>- <a href="faqList.do?current_page=1"> 자주하는 질문 </a></li>
 				<li>- <a href="qnaList.do?current_page=1"> QnA </a></li>
-				<li>- <a href="#"> Contact </a></li>
+				<c:if test="${uid!=null }"> <!--   (사용시 ${id != null }로바꾸기!!-->
+	              <li><a href="email.do">Contact-email</a></li>
+	            </c:if>
+	            <c:if test="${uid==null}">
+	              <li><a onclick="email_idCheck(this.href);return false;" onkeypress="this.onclick;"
+						href="email.do">Contact-email</a></li>
+	            </c:if>
 			</ul>
 		</div>
 	</div>

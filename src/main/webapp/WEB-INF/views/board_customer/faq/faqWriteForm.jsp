@@ -21,7 +21,9 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 function boardlist(){
 	location.href='faqList.do?current_page=1';
 }
+
 </script>
+
 
 </head>
 
@@ -38,7 +40,8 @@ function boardlist(){
 			<ul id="side_submenu">
 				<li>- <a href="faqList.do?current_page=1"> 자주하는 질문 </a></li>
 				<li>- <a href="qnaList.do?current_page=1"> QnA </a></li>
-				<li>- <a href="contact_write_fome.do"> Contact </a></li>
+ 				<li><a href="email.do">Contact-email</a></li>
+	            
 			</ul>
 		</div>
 	</div>

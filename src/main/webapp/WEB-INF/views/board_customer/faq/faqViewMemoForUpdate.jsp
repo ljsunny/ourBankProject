@@ -13,6 +13,8 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fonts.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/body.css" >
+
+
 <script language="javascript">
 	function writeCheck(){
 		var form=document.modifyform;
@@ -32,7 +34,15 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 		location.href='faqList.do?current_page=${current_page}';
 		
 	}
+	function email_idCheck() {
+		var loginUser = "${uid}";
+		if(!loginUser) {
+			alert('로그인 후 이용 가능합니다.');
+			return location.href = "loginForm.do";		
+		}
+	}
 </script>
+<%String uid=(String) session.getAttribute("uid"); %>
 <title>자주하는 질문</title>
 </head>
 <body>
@@ -48,7 +58,13 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 			<ul id="side_submenu">
 				<li>- <a href="faqList.do?current_page=1"> 자주하는 질문 </a></li>
 				<li>- <a href="qnaList.do?current_page=1"> QnA </a></li>
-				<li>- <a href="contact_write_fome.do"> Contact </a></li>
+				<c:if test="${uid!=null }"> <!--   (사용시 ${id != null }로바꾸기!!-->
+	              <li><a href="email.do">Contact-email</a></li>
+	            </c:if>
+	            <c:if test="${uid==null}">
+	              <li><a onclick="email_idCheck(this.href);return false;" onkeypress="this.onclick;"
+						href="email.do">Contact-email</a></li>
+	            </c:if>
 			</ul>
 		</div>
 	</div>
