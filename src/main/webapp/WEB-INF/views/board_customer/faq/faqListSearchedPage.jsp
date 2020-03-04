@@ -60,7 +60,7 @@
 	String uid=(String) session.getAttribute("uid"); 
 %>
 <div id="line_div">
-	<div id="sub_logo">
+<div id="sub_logo">
 		<h2>FAQ</h2>
     </div> 
  <div id="site_div">

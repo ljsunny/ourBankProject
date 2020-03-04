@@ -35,10 +35,8 @@ public class DepositProduct_Controller {
 								Model model) {
 		
 		int total_cnt = new Integer(boardService.nDepositProduct());
-		logger.info(total_cnt+"");
-
 		int total_page = PageNumberingManager.getInstance().getTotalPage(total_cnt, 3);
-		logger.info(total_page+"!!!!!!!!!!!");
+	
 		
 
 		model.addAttribute("total_page", total_page);
@@ -56,8 +54,6 @@ public class DepositProduct_Controller {
 								@RequestParam("bank") String kor_co_nm ,
 								Model model) {
 		
-		logger.info("depositByBank called");
-		logger.info("bank: "+kor_co_nm);
 		int total_cnt = new Integer(boardService.nDepositProduct(kor_co_nm));
 
 		int total_page = PageNumberingManager.getInstance().getTotalPage(total_cnt, 3);
@@ -79,8 +75,6 @@ public class DepositProduct_Controller {
 			@RequestParam("current_page") String currentPage,
 			@RequestParam("searchStr") String searchStr,
 			Model model) {
-		logger.info("depositSearch called");
-		logger.info("bank: "+searchStr);
 		int total_cnt = new Integer(boardService.nDepositSearched(searchStr));
 
 		int total_page = PageNumberingManager.getInstance().getTotalPage(total_cnt, 3);
@@ -102,7 +96,6 @@ public class DepositProduct_Controller {
 	public String depositContent(@RequestParam("current_page") int currentPage,
 			@RequestParam("fin_prdt_cd") String fin_prdt_cd, Model model) {
 
-		logger.info("depositContent called");
 		DepositBoard_Bean depositBean = boardService.selectDepositContent(fin_prdt_cd);
 
 		// 금융회사 최종 제출일
@@ -110,7 +103,7 @@ public class DepositProduct_Controller {
 		String month = depositBean.getFin_co_subm_day().substring(4, 6);
 		String day = depositBean.getFin_co_subm_day().substring(6, 8);
 		String submitDay = (year + "-" + month + "-" + day).toString();
-		logger.info(submitDay);
+
 		
 		//가입방법
 		String[] joinWay_part=depositBean.getJoin_way().split(",");
@@ -142,11 +135,14 @@ public class DepositProduct_Controller {
 		//우대조건 줄바꿈 처리
 		depositBean.setSpcl_cnd(depositBean.getSpcl_cnd().replace("\n", "<br>"));
 		
+		//홈페이지 주소가져오기
+		String url=boardService.selectBankUrl(depositBean.getFin_co_no());
+		logger.info(url);
 		model.addAttribute("depositBean", depositBean);
 		model.addAttribute("submitDay", submitDay);
 		model.addAttribute("joinWay",joinWay);
 		model.addAttribute("join_deny", join_deny);
-		
+		model.addAttribute("url", url);
 
 		return "/board_product/deposit/depositContent";
 	}

@@ -5,11 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet"
-	href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link
-	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900"
-	rel="stylesheet" />
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/default.css">
 <link rel="stylesheet"
@@ -17,8 +14,8 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/product.css">
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script src="https://kit.fontawesome.com/9bbe6ae1b4.js"
-	crossorigin="anonymous"></script>
+<!-- <script src="https://kit.fontawesome.com/9bbe6ae1b4.js"
+	crossorigin="anonymous"></script> -->
 <meta charset="EUC-KR">
 <title>적금상품 리스트</title>
 <script type="text/javascript">

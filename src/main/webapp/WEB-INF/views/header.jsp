@@ -43,8 +43,8 @@ String uid=(String)session.getAttribute("uid");
 				</c:if>
 
 				<c:if test="${uid !=null}">
-					<i class="icon icon-join fa-2x"></i></i> 
-					<c:out value="${uid}"></c:out>님의 방문을 환영합니다.
+					<i class="icon icon-join "></i>
+				<span>	<c:out value="${uid}"></c:out>님의 방문을 환영합니다.</span>
 					<a href="logOut.do">로그아웃</a>
 				 </c:if>
 			</ul>
@@ -84,11 +84,11 @@ String uid=(String)session.getAttribute("uid");
 			  <div class="sub_menu"> 
 				<ul id="side_submenu">
 				 <li>- <a href="reviewList.do?current_page=1"> 리 뷰</a></li>
-				 <li>- <a href="/app/free_listSpecificPageWork.do?current_page=1"> 자유게시판</a></li>
-				 <li>- <a href="/app/meeting_listSpecificPageWork.do?current_page=1"> 모임방</a></li>
-				 <li>- <a href="/app/debate_listSpecificPageWork.do?current_page=1"> 토론방</a></li>
+				 <li>- <a href="/app/freeList.do?current_page=1"> 자유게시판</a></li>
+				 <li>- <a href="/app/meetingList.do?current_page=1"> 모임방</a></li>
+				 <li>- <a href="/app/debateList.do?current_page=1"> 토론방</a></li>
 				 <li>- <a href="investList.do?current_page=1"> 제태크노하우</a></li>
-				 <li>- <a href="best_listSpecificPageWork.do?current_page=1"> BEST게시물</a></li>
+				 <li>- <a href="bestList.do?current_page=1"> BEST게시물</a></li>
 				</ul>
 	          </div>
 	        </li>
@@ -97,7 +97,7 @@ String uid=(String)session.getAttribute("uid");
 			    <ul>
 	              <li><a href="faqList.do?current_page=1">자주하는 질문</a></li>
 	              <li><a href="qnaList.do?current_page=1">QnA</a></li>
-	              <li><a href="#">Contact-email</a></li>
+	              <li><a href="email.do">Contact-email</a></li>
 	            </ul>
 	          </div>
 	        </li>
@@ -112,10 +112,10 @@ String uid=(String)session.getAttribute("uid");
 			<li><a href="myPage.do" accesskey="5" title="">MyPage</a>
 		  	  <div class="sub_menu"> 
 			    <ul>
-	              <li><a href="#">개인정보관리</a></li>
-	              <li><a href="#">내가 작성한 글</a></li>
-	              <li><a href="#">가입상품</a></li>
-	              <li><a href="#">관심상품</a></li>
+	              <li><a href="myInfo.do">개인정보관리</a></li>
+	              <li><a href="myBoardList.do?current_page=1">내가 작성한 글</a></li>
+	              <li><a href="myProductList.do">가입상품</a></li>
+	              <li><a href="myWantList.do?current_page=1">관심상품</a></li>
 	            </ul>
 	          </div>
 			</li>

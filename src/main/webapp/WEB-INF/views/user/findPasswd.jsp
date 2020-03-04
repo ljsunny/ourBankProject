@@ -8,7 +8,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <html>
 <head>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
-<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fonts.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/product.css" >
@@ -30,7 +30,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
 <c:set var="ck" value="${ck}"></c:set>
 
-
+ <div id="site_div">
 <div id="find">
 <c:if test="${ck==1||ck==0}">
 		<table class="top">
@@ -119,7 +119,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 </div>
 </c:if>
 </div>
-
+</div>
 
 <!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 

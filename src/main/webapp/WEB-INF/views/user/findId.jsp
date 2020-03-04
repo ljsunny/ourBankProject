@@ -8,11 +8,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<link rel="stylesheet"
-	href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link
-	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900"
-	rel="stylesheet" />
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/default.css">
 <link rel="stylesheet"
@@ -41,7 +38,7 @@
 
 	<!-- *********************** 내용 ****************************  -->
 	<c:set var="ck" value="${ck}"></c:set>
-
+ <div id="site_div">
 	<div id="find">
 		<c:if test="${user_id==null}">
 			<table class="top">
@@ -95,7 +92,7 @@
 			</div>
 		</c:if>
 	</div>
-
+</div>
 	<!-- *********************** 게시판 글쓰기 폼 ****************************  -->
 
 	<jsp:include page="../footer.jsp"></jsp:include>

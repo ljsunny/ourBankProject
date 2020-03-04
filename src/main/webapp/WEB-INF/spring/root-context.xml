@@ -41,7 +41,7 @@
                 <property name="host" value="smtp.gmail.com"/> <!-- smtp 서버명 -->
                 <property name="port" value="587"/> <!-- 포트 번호 -->
                 <property name="username" value="gmlwl2121"/> <!-- 실제 Admin계정 이메일 아이디 넣기 -->
-                <property name="password" value="7735Gnlfks!"/> <!-- 비밀번호 -->
+                <property name="password" value="1234"/> <!-- 비밀번호 -->
                 <property name="javaMailProperties">
                     <props>
                         <prop key="mail.smtp.starttls.enable">true</prop>
@@ -88,12 +88,7 @@
 			value="com.ourbank.app.mapper.MyPage_Mapper"></property>
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
-	<bean id="Introduction_Mapper"
-		class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface"
-			value="com.ourbank.app.mapper.IntroductionBoard_Mapper"></property>
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
+	
 	<bean id="Invest_Mapper"
 		class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface"

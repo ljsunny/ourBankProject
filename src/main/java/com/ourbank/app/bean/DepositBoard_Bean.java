@@ -28,18 +28,11 @@ public class DepositBoard_Bean {
 	
 	//내 상품 view 용 /////////////////////////////////////////////
 	String id;
-	int service_num;
 	String dep_or_sav;
 	
 	
 	
-	
-	public int getService_num() {
-		return service_num;
-	}
-	public void setService_num(int service_num) {
-		this.service_num = service_num;
-	}
+
 	public String getDep_or_sav() {
 		return dep_or_sav;
 	}

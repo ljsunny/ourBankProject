@@ -11,8 +11,8 @@ import com.ourbank.app.bean.QNABoard_Bean;
 @Repository
 public interface QNABoard_Mapper {
 	//글입력처리
-		final String INSERT="insert into qna_board(id_x, id, subject, created_date, reply,category, content, filename, filesize)"
-				+ " values(faq_seq.nextval,#{id},#{subject},SYSDATE,#{reply}, #{category},#{content},#{filename},#{filesize})";
+		final String INSERT="insert into qna_board(board_idx,id_x, id, subject, created_date, reply,category, content, filename, filesize)"
+				+ " values(board_seq_idx.nextval, qna_seq.nextval,#{id},#{subject},SYSDATE,#{reply}, #{category},#{content},#{filename},#{filesize})";
 		
 		@Insert(INSERT)
 		void insertBoard(QNABoard_Bean boardBean);

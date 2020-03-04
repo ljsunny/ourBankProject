@@ -126,12 +126,13 @@ public class SavingProduct_Controller {
 		
 		//우대조건 줄바꿈 처리
 		savingBean.setSpcl_cnd(savingBean.getSpcl_cnd().replace("\n", "<br>"));
-		
+		//홈페이지 주소가져오기
+		String url=boardService.selectBankUrl(savingBean.getFin_co_no());
 		model.addAttribute("savingBean", savingBean);
 		model.addAttribute("submitDay", submitDay);
 		model.addAttribute("joinWay",joinWay);
 		model.addAttribute("join_deny", join_deny);
-		
+		model.addAttribute("url", url);
 
 		return "/board_product/saving/savingContent";
 	}

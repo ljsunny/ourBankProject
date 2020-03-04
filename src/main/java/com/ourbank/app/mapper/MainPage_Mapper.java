@@ -17,13 +17,13 @@ import com.ourbank.app.bean.NewsBoard_Bean;
 
 @Repository
 public interface MainPage_Mapper {
-	final String SELECT_NOTICE_NEW="select idx, substr(subject,7,16) subject, to_char(created_date,'YYYY-MM-DD') created_date "
+	final String SELECT_NOTICE_NEW="select idx, substr(subject,6,16) subject, to_char(created_date,'YYYY-MM-DD') created_date "
 			+ " from (select * from newnotice_board order by created_date desc)"
 			+ " where rownum<=5 ";
 	
 	@Select(SELECT_NOTICE_NEW)
 	@Results(value= {
-			@Result(property = "id_x",column = "idx"),
+			@Result(property = "idx",column = "idx"),
 			@Result(property = "subject",column = "subject"),
 			@Result(property = "created_date" , column = "created_date")
 	})

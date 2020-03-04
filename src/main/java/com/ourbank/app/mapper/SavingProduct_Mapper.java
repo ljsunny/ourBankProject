@@ -13,6 +13,12 @@ import com.ourbank.app.bean.SavingBoard_Bean;
 
 @Repository
 public interface SavingProduct_Mapper {
+	//은행 url 가져오기
+		final String SELECT_BANK_URL="select homp_url from TLB_BANK_BOARD where fin_co_no=#{fin_co_no}";
+		
+		@Select(SELECT_BANK_URL)
+		public String selectBankUrl(@Param("fin_co_no") String fin_co_no);
+	
 	final String SELECT_SAVING_LIST="select * from(" + 
 			" select s.fin_prdt_cd, s.fin_prdt_nm, s.kor_co_nm, s.intr_rate_type_nm, " + 
 			" s.save_trm, s.intr_rate, s.intr_rate2, b.homp_url,ceil(rownum/#{rowPerPage}) "+
@@ -46,7 +52,7 @@ public interface SavingProduct_Mapper {
 	
 
 	
-	final String SELECT_SAVING_CONTENT="select rsrv_type_nm, mtrt_int, fin_co_subm_day, kor_co_nm, fin_prdt_nm, join_way, "
+	final String SELECT_SAVING_CONTENT="select rsrv_type_nm, mtrt_int, fin_co_subm_day,fin_co_no, kor_co_nm, fin_prdt_nm, join_way, "
 			+ " spcl_cnd, join_deny, join_member, etc_note, intr_rate_type_nm, save_trm, intr_rate, intr_rate2 "
 			+ " from tlb_saving_board where fin_prdt_cd=#{fin_prdt_cd}";
 	
@@ -55,6 +61,7 @@ public interface SavingProduct_Mapper {
 			@Result(property="rsrv_type_nm", column="rsrv_type_nm"),
 			@Result(property="mtrt_int", column="mtrt_int"),
 			@Result(property="fin_co_subm_day", column="fin_co_subm_day"),
+			@Result(property="fin_co_no", column="fin_co_no"),
 			@Result(property="kor_co_nm", column="kor_co_nm"),
 			@Result(property="fin_prdt_nm", column="fin_prdt_nm"),
 			@Result(property="join_way", column="join_way"),

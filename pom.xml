@@ -4,7 +4,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/m
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ourbank</groupId>
 	<artifactId>app</artifactId>
-	<name>OurBank3_1_4</name>
+	<name>Ourbank (4)</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>

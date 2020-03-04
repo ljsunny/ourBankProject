@@ -1,9 +1,32 @@
 @charset "EUC-KR";
 
+	{
+  		margin: 0;
+  		
+	}
+	
+	table, button, a, div
+	{
+		font-family: 'Nanum Gothic', sans-serif;
+		
+	}
+
+
 /*********************************************************************************/
 /* Home                  o                                                     */
 /*********************************************************************************/
+#site_div
+{
+	border-top: 1px solid #1B3280;
+    margin-top: 50px;
+    
+    padding-bottom: 200px;
+    margin-bottom: 300px;
+	
+}
+
 #home {
+	margin-top:100px;
 	min-width: 1400px;
 	margin-bottom: 300px;
 }
@@ -79,7 +102,7 @@
 	box-shadow: 1px 1px 20px #ddd;
 }
 #home .row2 .area4 .book {
-	margin: 10px 60px 20px 60px;
+	margin: 20px 60px 20px 100px;
     padding: 30px;
 	
 }
@@ -587,7 +610,7 @@
 }
 #welcome .main1{
 	position:absolute;
-	margin: 30px auto 0px 340px;
+	margin: 30px auto 0px 430px;
 	min-width: 944px;
 }
 

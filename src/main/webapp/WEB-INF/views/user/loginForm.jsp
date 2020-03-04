@@ -8,6 +8,8 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
 <html>
 <head>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/product.css" >
 <title>로그인</title>
@@ -25,7 +27,7 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 	
 <!-- *********************** 내용 ****************************  -->
 
-
+ <div id="site_div">
 <div id="login_form">
 <h1 >로그인</h1>
 <form  name="form" method="post" onSubmit="return blankCheck();" action="loginPro.do">
@@ -52,5 +54,5 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
-
+</div>
 </html>

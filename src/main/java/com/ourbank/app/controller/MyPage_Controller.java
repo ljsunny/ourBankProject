@@ -70,9 +70,32 @@ public String myPage(
 @RequestMapping(value = "/myInfo.do", method = RequestMethod.GET)
 public String myInfo(
 		HttpServletRequest request,
+		HttpServletResponse response,
 		Model model) {
 	HttpSession session=request.getSession();
 	String uid=(String)session.getAttribute("uid");
+	if(uid==null) {
+		PrintWriter out;
+		try {
+			//자바에서 알림창 띄우기
+			out = response.getWriter();
+			out.println("<script>alert('권한이 없습니다.'); location.href='loginForm.do';</script>"); 
+	        out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+     
+		return "writeboard";
+	
+	}else if(uid.equals("admin")) {
+		UserBoard_Bean userBean= boardService.getUserInfo(uid);
+		
+		model.addAttribute("uid", uid );
+		model.addAttribute("userBean", userBean);
+		
+		return "board_Adminpage/myInfo";
+	}
 	
 	UserBoard_Bean userBean= boardService.getUserInfo(uid);
 	
@@ -116,19 +139,43 @@ public String deleteId(
 	
 	HttpSession session=request.getSession();
 	session.invalidate();
-	return "index.do";
+	return "redirect:index.do";
 }
 /////////////////////////////////////////////////////////////////////////////////
 
 //내가 작성한글 -리스트 
 	@RequestMapping(value = "/myBoardList.do", method = RequestMethod.GET)
 	public String myBoardList(HttpServletRequest request,
+							HttpServletResponse response,
 							@RequestParam("current_page") String pageForView, 
 							Model model) {
 		
 		HttpSession session=request.getSession();
 		String uid=(String)session.getAttribute("uid");
+		
+		if(uid==null) {
+			PrintWriter out;
+			try {
+				//자바에서 알림창 띄우기
+				out = response.getWriter();
+				out.println("<script>alert('권한이 없습니다.'); location.href='loginForm.do';</script>"); 
+		        out.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	     
+			return "writeboard";
+		
+		}else if(uid.equals("admin")) {
+			model.addAttribute("totalCnt", new Integer(boardService.getTotalCnt(uid)));
+			model.addAttribute("current_page", pageForView);
+			model.addAttribute("boardList", boardService.getUserBoardList(uid, Integer.parseInt(pageForView),10));	
+			model.addAttribute("id",uid);
 			
+			return "board_Adminpage/myBoardList";
+		}
+		
 		logger.info("best_listSpecificPageWork called");
 		logger.info("current_page=["+pageForView+"]");
 		
@@ -233,6 +280,7 @@ public String deleteId(
 		model.addAttribute("productBean", new SavingBoard_Bean());
 		}
 		model.addAttribute("ck", ck);
+		
 		return "/board_Mypage/myProduct";
 	}
 	
@@ -281,9 +329,34 @@ public String deleteId(
 		return "redirect:myProductList.do";
 	}
 	@RequestMapping(value = "/myProductList.do",method = RequestMethod.GET)
-	public String myProductList(HttpServletRequest request,Model model) {
+	public String myProductList(HttpServletRequest request,
+			HttpServletResponse response,
+			Model model) {
 		HttpSession session = request.getSession();
 		String uid = (String)session.getAttribute("uid");
+		
+		if(uid==null) {
+			PrintWriter out;
+			try {
+				//자바에서 알림창 띄우기
+				out = response.getWriter();
+				out.println("<script>alert('권한이 없습니다.'); location.href='loginForm.do';</script>"); 
+		        out.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	     
+			return "writeboard";
+		
+		}else if(uid.equals("admin")) {
+			model.addAttribute("totalCnt",boardService.selectCntMYProduct(uid));
+			model.addAttribute("current_page", 1);
+			model.addAttribute("boardList", boardService.selectAllProduct(uid, 1, 10));	
+			model.addAttribute("uid",uid);
+			return "board_Adminpage/myProductList";
+		}
+		
 		
 		model.addAttribute("totalCnt",boardService.selectCntMYProduct(uid));
 		model.addAttribute("current_page", 1);
@@ -322,6 +395,22 @@ public String deleteId(
 						Model model) {
 		HttpSession session=request.getSession();
 		String id=(String) session.getAttribute("uid");
+	
+		if(id==null) {
+			PrintWriter out;
+			try {
+				//자바에서 알림창 띄우기
+				out = response.getWriter();
+				out.println("<script>alert('권한이 없습니다.'); location.href='loginForm.do';</script>"); 
+		        out.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	     
+			return "writeboard";
+		
+		}
 		
 		//관심상품에 이미 상품이 존재하는지 확인
 		if(boardService.selectWantExist(id, fin_prdt_cd)==0) {
@@ -352,17 +441,43 @@ public String deleteId(
 				e.printStackTrace();
 			}
 		}
-			
-		return myWantList(request,1,model);
+		if(id.equals("admin")) {
+			return "board_Adminpage/myWant";
+		}	
+		return myWantList(request,response,1,model);
 	
 	}
 	@RequestMapping(value = "/myWantList.do",method = RequestMethod.GET)
 	public String myWantList(HttpServletRequest request,
+							HttpServletResponse response,
 							@Param("current_page") int current_page,
 							Model model) {
 		HttpSession session = request.getSession();
 		String uid = (String)session.getAttribute("uid");
 		
+		
+		if(uid==null) {
+			PrintWriter out;
+			try {
+				//자바에서 알림창 띄우기
+				out = response.getWriter();
+				out.println("<script>alert('권한이 없습니다.'); location.href='loginForm.do';</script>"); 
+		        out.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	     
+			return "writeboard";
+		
+		}else if(uid.equals("admin")) {
+			model.addAttribute("uid",uid);
+			model.addAttribute("totalCnt",boardService.selectCntWant(uid));
+			model.addAttribute("current_page", current_page);
+			model.addAttribute("boardList",boardService.selectWantList(uid, current_page, 10));
+			
+			return "board_Adminpage/myWant";
+		}
 		
 		model.addAttribute("uid",uid);
 		model.addAttribute("totalCnt",boardService.selectCntWant(uid));

@@ -61,7 +61,7 @@
 	#list_div
 	{
 		
-		padding-right: 60px;
+		padding-right: 100px;
 
 	}
 	
@@ -252,7 +252,8 @@
 	{
 		text-align: center;
 		padding: 7px 0 7px 0;
-	}
+		min-width :70px;
+			}
   
 	.div_board_bnt
 	{

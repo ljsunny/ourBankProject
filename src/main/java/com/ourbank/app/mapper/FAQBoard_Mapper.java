@@ -8,8 +8,8 @@ import com.ourbank.app.bean.FAQBoard_Bean;
 @Repository
 public interface FAQBoard_Mapper {
 	//글입력처리
-			final String INSERT="insert into faq_board(id_x, id, subject, created_date, category, content, filename, filesize)"
-					+ " values(faq_seq.nextval,#{id},#{subject},SYSDATE, #{category},#{content},#{filename},#{filesize})";
+			final String INSERT="insert into faq_board(board_idx, id_x, id, subject, created_date, category, content, filename, filesize)"
+					+ " values(board_seq_idx.nextval, faq_seq.nextval,#{id},#{subject},SYSDATE, #{category},#{content},#{filename},#{filesize})";
 			
 			@Insert(INSERT)
 			void insertBoard(FAQBoard_Bean boardBean);

@@ -31,6 +31,10 @@ public SavingBoard_Bean selectSavingContent(String fin_prdt_cd) {
 	System.out.println(saving_bean.getFin_co_subm_day());
 	return saving_bean;
 }
+//은행 주소 가져오기
+	public String selectBankUrl(String fin_co_no) {
+		return boardMapper.selectBankUrl(fin_co_no);
+	}
 //리스트에서 은행별로 정렬할때(셀렉트 태그)
 public int nSavingProduct(String kor_co_nm) {
 	return boardMapper.nSavingProductBank(kor_co_nm);

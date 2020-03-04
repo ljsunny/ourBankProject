@@ -8,6 +8,8 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
 <html>
 <head>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/product.css" >
 <title>아워뱅크::WELCOME</title>
@@ -39,7 +41,7 @@ function go_to_loginform(){
 	<hr>
 	<h1>회원가입이 완료되었습니다.</h1>
 	<div class="main1">
-	<input class="btn" type="button" onclick="go_to_myproduct()" value="추가정보 입력">
+
 	<input class="btn" type="button" onclick="go_to_loginform()" value="로그인 창으로">
 	
 	</div><hr>

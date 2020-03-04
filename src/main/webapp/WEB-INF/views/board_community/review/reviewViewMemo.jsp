@@ -127,6 +127,7 @@ function download(){
 			<td  colspan="3" height="300" style="text-align: left; padding-left: 15px;">
 			<c:if test="${boardData.getDepth()==0}">
 			<c:out value="[${boardData.getReview_case()}]"/><br><br>
+			<c:out value="${boardData.getContent()}" /></td>
 			</c:if>
 			<c:if test="${boardData.getDepth()!=0}">
 			<c:out value="[${boardData.getReview_case()}_´ä±Û]"/><br><br>

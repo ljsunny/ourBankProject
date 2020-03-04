@@ -34,10 +34,10 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 		<h4><a>My Page</a></h4>
 		<div id="side_div">
 			<ul id="side_submenu">
-				<li>- <a href="#"> 개인정보관리 </a></li>
-				<li>- <a href="myBoardList.do"> 내가 작성한 글 </a></li>
-				<li>- <a href="#"> 가입한 상품 조회 </a></li>
-				<li>- <a href="#"> 관심상품 </a></li>
+				<li>- <a href="myInfo.do"> 개인정보관리 </a></li>
+				<li>- <a href="myBoardList.do?current_page=1"> 내가 작성한 글 </a></li>
+				<li>- <a href="myProductList.do"> 가입한 상품 조회 </a></li>
+				<li>- <a href="myWantList.do?current_page=1"> 관심상품 </a></li>
 			</ul>
 		</div>
 	</div>

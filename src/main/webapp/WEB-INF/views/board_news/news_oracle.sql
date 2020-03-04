@@ -11,7 +11,7 @@ create table tlb_news_board (
  	idx_num number(10,0) not null,
  	id varchar2(20) not null,
  	subject varchar2(100),
- 	content varchar2(200),
+ 	content varchar2(700),
  	created_date date,
  	hits number(10,0),
  	filename varchar2(50) default null,
@@ -37,10 +37,3 @@ insert into tlb_news_board(
  		board_idx, best_idx, idx_num, id, subject, created_date, news_case, content, filename, filesize, step, ref, depth)
 values (119, 1210, 1115, 'exid', '관련뉴스11', sysdate, '관련뉴스','ㅇㅇ',null,null, 0, 0, 0)	
 
-
-		
-		
-		
-		
-		
-		

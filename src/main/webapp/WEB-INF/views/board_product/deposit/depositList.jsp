@@ -6,11 +6,13 @@
 <html>
 <head>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
-<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fonts.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/product.css" >
-<script src="https://kit.fontawesome.com/9bbe6ae1b4.js" crossorigin="anonymous"></script>
+<!-- <script src="https://kit.fontawesome.com/9bbe6ae1b4.js" crossorigin="anonymous"></script> -->
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
@@ -77,6 +79,7 @@ function myWant(count){
 	</div>
 	
 <!-- *********************** 내용 ****************************  -->
+<div id="site_div">
 <div id="product_list">
 <table id="product_search" >
 
@@ -125,6 +128,7 @@ function myWant(count){
 					width="30" height="30" ></span>&nbsp;&nbsp;&nbsp;</td>
 				<td><button>
 					<a href="${boardList.getHomp_url()}" target="blank">가입하기</a>
+					
 					</button>
 				</td>
 			</tr>
@@ -163,7 +167,7 @@ function myWant(count){
 </div>
 
 	<hr width="65%">
-	</div>
+	</div></div>
 	<!-- *********************** 게시판 글쓰기 폼 ****************************  -->	
 
 	<jsp:include page="../../footer.jsp"></jsp:include>

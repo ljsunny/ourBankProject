@@ -26,16 +26,16 @@ function input_saving(){
 	
 <!-- *********************** 사이드 메뉴 ****************************  -->	
 	
-		<div id="side_menu">
+	<div id="side_menu">
 		<h4><a href="#">My Page</a></h4>
 		<div id="side_div">
 			<ul id="side_submenu">
-				<li>- <a href="#"> 개인정보관리 </a></li>
-				<li>- <a href="#"> 내가 작성한 글 </a></li>
-				<li>- <a href="#"> 가입한 상품 조회 </a></li>
-				<li>- <a href="#"> 관심상품 </a></li>
-				<li>- <a href="manageDeposit.do"> 예금 상품 데이터 관리 </a></li>
-				<li>- <a href="manageSaving.do"> 적금 상품 데이터 관리 </a></li>
+				<li>- <a href="myInfo.do"> 개인정보관리 </a></li>
+				<li>- <a href="myBoardList.do?current_page=1"> 내가 작성한 글 </a></li>
+				<li>- <a href="myProductList.do"> 가입한 상품 조회 </a></li>
+				<li>- <a href="myWantList.do?current_page=1"> 관심상품 </a></li>
+				<li>- <a href="manageDeposit.do"> 예금상품 관리 </a></li>
+				<li>- <a href="manageSaving.do"> 적금상품 관리 </a></li>
 			</ul>
 		</div>
 	</div>

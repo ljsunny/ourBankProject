@@ -129,7 +129,7 @@ public class User_Controller {
 		HttpSession session=request.getSession();
 		session.invalidate();
 		
-		return "writeboard";
+		return "redirect:index.do";
 	}
 	
 	//아이디 찾는 창으로

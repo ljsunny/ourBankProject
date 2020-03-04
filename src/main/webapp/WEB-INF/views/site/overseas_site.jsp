@@ -26,10 +26,11 @@
 		</div>
 	</div>
 <!-- *********************** 내용 ****************************  -->	
-<div id="body_div">
+<div id="line_div">
+ <div id="sub_logo">
  <h2>해외사이트</h2>
+ </div> 
  <div id="site_div">
- <div id="overseas_div">
   <h4 id="subtitle" class="icon icon-subtitle">  주요국가금융감독원</h4>	
   <div class="sitelist_area">
   <h5 class="sub_subtitle">* 미국(U.S.A)</h5>

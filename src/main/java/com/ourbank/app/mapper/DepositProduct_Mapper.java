@@ -13,6 +13,12 @@ import com.ourbank.app.bean.DepositBoard_Bean;
 
 @Repository
 public interface DepositProduct_Mapper {
+	//은행 url 가져오기
+	final String SELECT_BANK_URL="select homp_url from TLB_BANK_BOARD where fin_co_no=#{fin_co_no}";
+	
+	@Select(SELECT_BANK_URL)
+	public String selectBankUrl(@Param("fin_co_no") String fin_co_no);
+	
 	final String SELECT_DEPOSIT_LIST = "select * from("
 			+ " select d.fin_prdt_nm, d.fin_prdt_cd, d.kor_co_nm, d.intr_rate_type_nm, "
 			+ " d.save_trm, d.intr_rate, d.intr_rate2, b.homp_url,ceil(rownum/#{rowPerPage}) "
@@ -38,13 +44,14 @@ public interface DepositProduct_Mapper {
 	@Select(SELECT_DEPOSIT_BANK)
 	ArrayList<DepositBoard_Bean> all_bank();
 
-	final String SELECT_DEPOSIT_CONTENT = "select mtrt_int, fin_co_subm_day, kor_co_nm, fin_prdt_nm, join_way, "
+	final String SELECT_DEPOSIT_CONTENT = "select mtrt_int, fin_co_subm_day,fin_co_no, kor_co_nm, fin_prdt_nm, join_way, "
 			+ " spcl_cnd, join_deny, join_member, etc_note, intr_rate_type_nm, save_trm, intr_rate, intr_rate2 "
 			+ " from tlb_deposit_board where fin_prdt_cd=#{fin_prdt_cd}";
 
 	@Select(SELECT_DEPOSIT_CONTENT)
 	@Results(value = { @Result(property = "mtrt_int", column = "mtrt_int"),
 			@Result(property = "fin_co_subm_day", column = "fin_co_subm_day"),
+			@Result(property = "fin_co_no", column = "fin_co_no"),
 			@Result(property = "kor_co_nm", column = "kor_co_nm"),
 			@Result(property = "fin_prdt_nm", column = "fin_prdt_nm"),
 			@Result(property = "join_way", column = "join_way"), @Result(property = "spcl_cnd", column = "spcl_cnd"),
@@ -52,8 +59,10 @@ public interface DepositProduct_Mapper {
 			@Result(property = "join_member", column = "join_member"),
 			@Result(property = "etc_note", column = "etc_note"),
 			@Result(property = "intr_rate_type_nm", column = "intr_rate_type_nm"),
-			@Result(property = "save_trm", column = "save_trm"), @Result(property = "intr_rate", column = "intr_rate"),
-			@Result(property = "intr_rate2", column = "intr_rate2"), })
+			@Result(property = "save_trm", column = "save_trm"), 
+			@Result(property = "intr_rate", column = "intr_rate"),
+			@Result(property = "intr_rate2", column = "intr_rate2")
+			})
 	DepositBoard_Bean selectDepositContent(@Param("fin_prdt_cd") String fin_prdt_cd);
 
 	final String SELECT_DEPOSIT_NBank = "select count(*) from tlb_deposit_board where kor_co_nm=#{kor_co_nm}";

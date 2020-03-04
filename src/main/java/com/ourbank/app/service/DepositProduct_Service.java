@@ -33,6 +33,10 @@ public class DepositProduct_Service {
 		return deposit_bean;
 	}
 
+	//은행 주소 가져오기
+	public String selectBankUrl(String fin_co_no) {
+		return boardMapper.selectBankUrl(fin_co_no);
+	}
 //리스트에서 은행별로 정렬할때(셀렉트 태그)
 	public int nDepositProduct(String kor_co_nm) {
 		return boardMapper.nDepositProductBank(kor_co_nm);

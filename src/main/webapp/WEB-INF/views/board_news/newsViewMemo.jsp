@@ -15,7 +15,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
-<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fonts.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/body.css" >
@@ -88,24 +88,24 @@ function download(){
 	<div id="site_div">	
 <table  class="tlb_board">
 		<tr>
-			<td style="background-color: #f2f2f2"><b>제목</b></td>
+			<td style="background-color: #f2f2f2; min-width :70px;"><b>제목</b></td>
 			<td><c:out value="${boardData.getSubject()}" /></td>
 			<td style="background-color: #f2f2f2"><b>조회수</b></td>
 			<td><c:out value="${boardData.getHits()}" /></td>
 		</tr>
 		<tr>
-			<td style="background-color: #f2f2f2"><b>이름</b></td>
+			<td style="background-color: #f2f2f2; min-width :70px;"><b>이름</b></td>
 			<td><c:out value="${boardData.getId()}" /></td>
 			<td style="background-color: #f2f2f2"><b>작성일</b></td>
 			<td><c:out value="${boardData.getCreated_date()}"></c:out></td>
 		</tr>
 		<tr>
-			<td style="background-color: #f2f2f2"><b>내용</b></td>
+			<td style="background-color: #f2f2f2; min-width :70px;"><b>내용</b></td>
 			<td  colspan="3" height="300" style="text-align: left; padding-left: 15px;">
 			<c:out value="${boardData.getContent()}" /></td>
 		</tr>
 		<tr>
-			<td style="background-color: #f2f2f2"><b>파일첨부</b></td>
+			<td style="background-color: #f2f2f2; min-width :70px;;"><b>파일첨부</b></td>
 			<td colspan="3" style="text-align: left; padding-left: 15px; ">
 			<input type="button" onclick="download()"
 			value="${boardData.getFilename()}">

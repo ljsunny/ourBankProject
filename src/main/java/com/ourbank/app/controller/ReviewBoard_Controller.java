@@ -89,7 +89,7 @@ public class ReviewBoard_Controller {
 			
 			try {
 				byte[] fileData=file.getBytes();
-				FileOutputStream output=new FileOutputStream("C:\\mystudy\\myspring\\OurBank3_1\\src\\main\\webapp\\resources\\files\\"+fileName);
+				FileOutputStream output=new FileOutputStream("C:\\mystudy\\myspring\\Ourbank (4)\\src\\main\\webapp\\resources\\files"+fileName);
 				output.write(fileData);
 			}catch (Exception e) {
 				e.printStackTrace();
@@ -259,7 +259,7 @@ public class ReviewBoard_Controller {
 	         method=RequestMethod.GET)
 	   @ResponseBody
 	   public byte[] downProcess(HttpServletResponse response, @RequestParam String filename) throws IOException{
-	      File file = new File("C:\\eclipse_ourBank\\OurBank\\src\\main\\resources\\files\\" + filename);
+	      File file = new File("C:\\mystudy\\myspring\\Ourbank (4)\\src\\main\\webapp\\resources\\files" + filename);
 	      byte[] bytes = FileCopyUtils.copyToByteArray(file);
 	      String fn = new String(file.getName().getBytes(),"iso_8859_1");
 	      
@@ -316,7 +316,7 @@ public class ReviewBoard_Controller {
 			
 			try {
 				byte[] fileData=file.getBytes();
-				FileOutputStream output=new FileOutputStream("C:\\eclipse_ourBank\\OurBank\\src\\main\\resources\\files\\"+fileName);
+				FileOutputStream output=new FileOutputStream("C:\\mystudy\\myspring\\Ourbank (4)\\src\\main\\webapp\\resources\\files"+fileName);
 				output.write(fileData);
 			}catch (Exception e) {
 				e.printStackTrace();

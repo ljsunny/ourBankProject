@@ -82,26 +82,7 @@ public class AdminPage_Controller {
 					// arraylist(bean(데이터))로 만들어서 DB에 넣기
 					Element eElement = (Element) nNode1;
 					/////////////// 출력해봄
-					/*
-					 * System.out.println("##########BaseInfo############"); //
-					 * System.out.println(eElement.getTextContent());
-					 * System.out.println("공시 제출월 [yyyymm] : " + getTagValue("dcls_month",
-					 * eElement)); System.out.println("금융회사 코드 : " + getTagValue("fin_co_no",
-					 * eElement)); System.out.println("금융회사  : " + getTagValue("kor_co_nm",
-					 * eElement)); System.out.println("금융 상품 코드  : " + getTagValue("fin_prdt_cd",
-					 * eElement)); System.out.println("금융 상품명 : " + getTagValue("fin_prdt_nm",
-					 * eElement)); System.out.println("가입 방법 : " + getTagValue("join_way",
-					 * eElement)); System.out.println("만기후 이자율  : " + getTagValue("mtrt_int",
-					 * eElement)); System.out.println("우대 조건 : " + getTagValue("spcl_cnd",
-					 * eElement)); System.out.println("가입 제한 : " + getTagValue("join_deny",
-					 * eElement)); System.out.println("가입 대상 : " + getTagValue("join_member",
-					 * eElement)); System.out.println("기타 유의사항 : " + getTagValue("etc_note",
-					 * eElement)); System.out.println("최고 한도 : " + getTagValue("max_limit",
-					 * eElement)); System.out.println("공시 시작일 : " + getTagValue("dcls_strt_day",
-					 * eElement)); System.out.println("공시 종료일 : " + getTagValue("dcls_end_day",
-					 * eElement)); System.out.println("금융 회사 제출일[yyyymmddhh24mi] : " +
-					 * getTagValue("fin_co_subm_day", eElement));
-					 */
+					
 
 					//////////// 빈에 넣음
 					depositBean.setDcls_month(getTagValue("dcls_month", eElement).toString());
@@ -125,18 +106,7 @@ public class AdminPage_Controller {
 				if (nNode2.getNodeType() == Node.ELEMENT_NODE) {// option info
 					// arraylist(bean(데이터))로 만들어서 DB에 넣기
 					Element eElement = (Element) nNode2;
-					/*
-					 * System.out.println("--------Option-------"); //
-					 * System.out.println(eElement.getTextContent());
-					 * System.out.println("저축 금리 유형  : " + getTagValue("intr_rate_type", eElement));
-					 * System.out.println("저축 금리 유형명  : " + getTagValue("intr_rate_type_nm",
-					 * eElement)); System.out.println("저축 기간 [단위: 개월] : " + getTagValue("save_trm",
-					 * eElement)); System.out.println("저축 금리 [소수점 2자리] : " +
-					 * getTagValue("intr_rate", eElement));
-					 * System.out.println("최고 우대금리 [소수점 2자리] : " + getTagValue("intr_rate2",
-					 * eElement));
-					 */
-
+					
 					//////////// 빈에 넣음
 					depositBean.setIntr_rate_type(getTagValue("intr_rate_type", eElement).toString());
 					depositBean.setIntr_rate_type_nm(getTagValue("intr_rate_type_nm", eElement).toString());
@@ -198,26 +168,7 @@ public class AdminPage_Controller {
 					// arraylist(bean(데이터))로 만들어서 DB에 넣기
 					Element eElement = (Element) nNode1;
 					/////////////// 출력해봄
-					/*
-					 * System.out.println("##########BaseInfo############"); //
-					 * System.out.println(eElement.getTextContent());
-					 * System.out.println("공시 제출월 [yyyymm] : " + getTagValue("dcls_month",
-					 * eElement)); System.out.println("금융회사 코드 : " + getTagValue("fin_co_no",
-					 * eElement)); System.out.println("금융회사  : " + getTagValue("kor_co_nm",
-					 * eElement)); System.out.println("금융 상품 코드  : " + getTagValue("fin_prdt_cd",
-					 * eElement)); System.out.println("금융 상품명 : " + getTagValue("fin_prdt_nm",
-					 * eElement)); System.out.println("가입 방법 : " + getTagValue("join_way",
-					 * eElement)); System.out.println("만기후 이자율  : " + getTagValue("mtrt_int",
-					 * eElement)); System.out.println("우대 조건 : " + getTagValue("spcl_cnd",
-					 * eElement)); System.out.println("가입 제한 : " + getTagValue("join_deny",
-					 * eElement)); System.out.println("가입 대상 : " + getTagValue("join_member",
-					 * eElement)); System.out.println("기타 유의사항 : " + getTagValue("etc_note",
-					 * eElement)); System.out.println("최고 한도 : " + getTagValue("max_limit",
-					 * eElement)); System.out.println("공시 시작일 : " + getTagValue("dcls_strt_day",
-					 * eElement)); System.out.println("공시 종료일 : " + getTagValue("dcls_end_day",
-					 * eElement)); System.out.println("금융 회사 제출일[yyyymmddhh24mi] : " +
-					 * getTagValue("fin_co_subm_day", eElement));
-					 */
+					
 
 					//////////// 빈에 넣음
 					savingBean.setDcls_month(getTagValue("dcls_month", eElement).toString());
@@ -241,17 +192,7 @@ public class AdminPage_Controller {
 				if (nNode2.getNodeType() == Node.ELEMENT_NODE) {// option info
 					// arraylist(bean(데이터))로 만들어서 DB에 넣기
 					Element eElement = (Element) nNode2;
-					/*
-					 * System.out.println("--------Option-------"); //
-					 * System.out.println(eElement.getTextContent());
-					 * System.out.println("저축 금리 유형  : " + getTagValue("intr_rate_type", eElement));
-					 * System.out.println("저축 금리 유형명  : " + getTagValue("intr_rate_type_nm",
-					 * eElement)); System.out.println("저축 기간 [단위: 개월] : " + getTagValue("save_trm",
-					 * eElement)); System.out.println("저축 금리 [소수점 2자리] : " +
-					 * getTagValue("intr_rate", eElement));
-					 * System.out.println("최고 우대금리 [소수점 2자리] : " + getTagValue("intr_rate2",
-					 * eElement));
-					 */
+					
 
 					//////////// 빈에 넣음
 					savingBean.setIntr_rate_type(getTagValue("intr_rate_type", eElement).toString());

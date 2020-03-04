@@ -4,11 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet"
-	href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link
-	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900"
-	rel="stylesheet" />
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Noto+Sans+KR&display=swap" rel="stylesheet">
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/fonts.css">
@@ -67,6 +64,14 @@
 		
 		return true;
 	}
+	function myWant(prdt_cd){
+
+		location.href='myWant.do?current_page=1&dep_or_sav=0&fin_prdt_cd='+prdt_cd;
+	}
+	function go_to_site(){
+		var url=document.getElementById("bank_url").value;
+		location.href=url;
+	}
 </script>
 </head>
 <body>
@@ -120,8 +125,8 @@
 					</dl>
 				</div>
 				<div class="product-info3">
-					<input type="button" value="장바구니"> <input type="button"
-						value="가입하기">
+					<input type="button" value="장바구니" onclick="myWant(${depositBean.getFin_prdt_cd()})"> 
+					<input type="button" value="가입하기" onclick="go_to_site()">
 				</div>
 			</div>
 			<!-- 상세설명/예금계산기 선택 -->
@@ -184,6 +189,7 @@
 								type="text" placeholder="금리">%로 운용하면?  &nbsp;
 								<input class="button1" type="submit" 
 								value="결과" onclick="check_deposit()">
+								<input id="bank_url" type="hidden" value="${url}">
 							</dd>
 						</dl>
 						<div id="m3" style="display: none;">

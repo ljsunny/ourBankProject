@@ -13,9 +13,9 @@
 
  <div id="footer">
       <ul class="foot_sns">
-			 <li><a href="#" class="icon icon-facebook"><span>Facebook</span></a></li>
-			 <li><a href="#" class="icon icon-Instagram"><span>Instagram</span></a></li>
-			 <li><a href="#" class="icon icon-twitter"><span>Twitter</span></a></li>
+			 <li><a href="https://www.facebook.com/" class="icon icon-facebook"><span>Facebook</span></a></li>
+			 <li><a href="https://www.instagram.com/?hl=ko" class="icon icon-Instagram"><span>Instagram</span></a></li>
+			 <li><a href="https://twitter.com/?lang=ko" class="icon icon-twitter"><span>Twitter</span></a></li>
 	 </ul>
    <div id="copyright" class="container">
     <p>서울특별시 종로구 종로12길 15   (주)솔데스크      |   민원상담전화  1688-0000    |   대표전화 02-000-0000   |   <a href="#">Mail To Webmaster</a> </p>

@@ -11,8 +11,9 @@ contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/default.css" >
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fonts.css" >
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/product.css" >
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>아워뱅크::내정보</title>
 <script>
 function goToMyInfoUpdate(){
 	location.href='myInfoUpdateForm.do?id=${userBean.getId()}';
@@ -21,8 +22,14 @@ function goToMyPge(){
 	location.href='myPage.do';
 }
 function deleteId(){
-	location.href='deleteId.do?id=${userBean.getId()}';
+	if(confirm('정말 삭제하시겠습니까?')==true){
+		location.href='deleteId.do?id=${userBean.getId()}';
+	}else {
+		return;
+	}
+	
 }
+
 </script>
 </head>
 
@@ -31,24 +38,24 @@ function deleteId(){
 	<jsp:include page="../header.jsp"></jsp:include>
 	
 <!-- *********************** 사이드 메뉴 ****************************  -->	
-		<div id="side_menu">
+	<div id="side_menu">
 		<h4><a href="#">My Page</a></h4>
 		<div id="side_div">
 			<ul id="side_submenu">
-				<li>- <a href="#"> 개인정보관리 </a></li>
-				<li>- <a href="#"> 내가 작성한 글 </a></li>
-				<li>- <a href="#"> 가입한 상품 조회 </a></li>
-				<li>- <a href="#"> 관심상품 </a></li>
-				<li>- <a href="manageDeposit.do"> 예금 상품 데이터 관리 </a></li>
-				<li>- <a href="manageSaving.do"> 적금 상품 데이터 관리 </a></li>
+				<li>- <a href="myInfo.do"> 개인정보관리 </a></li>
+				<li>- <a href="myBoardList.do?current_page=1"> 내가 작성한 글 </a></li>
+				<li>- <a href="myProductList.do"> 가입한 상품 조회 </a></li>
+				<li>- <a href="myWantList.do?current_page=1"> 관심상품 </a></li>
+				<li>- <a href="manageDeposit.do"> 예금상품 관리 </a></li>
+				<li>- <a href="manageSaving.do"> 적금상품 관리 </a></li>
 			</ul>
 		</div>
 	</div>
 	
 	
 <!-- *********************** 내용 ****************************  -->
-<div style="padding: 10px;">
-	<table border="1" cellpadding="10px" >
+<div id="my_product">
+	<table border="1" cellpadding="10px" c>
 		<tr>
 		<td>
 			<ul>
